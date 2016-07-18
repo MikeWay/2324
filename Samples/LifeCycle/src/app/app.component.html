@@ -1,0 +1,4 @@
+<h1>
+  <button (click)="toggleChild()">Toggle Child</button>
+  <app-cycle-reporter *ngIf="hasChild" [count]="counter"></app-cycle-reporter>
+</h1>

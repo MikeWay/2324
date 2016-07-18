@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: course.lt2324.flightserver.FlightDAOTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.549 sec - in course.lt2324.flightserver.FlightDAOTest

@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Passengers</h1>
+<ul class="list-group">
+  <li ng-repeat="passenger in $ctrl.passengers" class="list-group-item">
+    <ul>
+    <li class="list-group-item">{{passenger.firstName}}</li>
+    <li class="list-group-item">{{passenger.familyName}}</li>
+    <li class="list-group-item">{{passenger.seat}}</li>
+    </ul>
+  </li>
+</ul>
+</div>

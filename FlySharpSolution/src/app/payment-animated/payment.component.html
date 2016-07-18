@@ -1,0 +1,45 @@
+<div id="paymenttWrapper" @animate="animate">
+<span class="dev-note">This data should / could be pulled from the account information</span>
+<h3>Purchase this flight</h3>
+<div class="row">
+  <div class="col-md-2 col-xs-4 form-label">Flight Number : </div>
+  <div class="col-md-1 col-xs-8">{{selectedFlight.flightNumber}}</div>
+  <div class="col-md-1 col-xs-4 form-label">Origin : </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.origin}}</div>
+  <div class="col-md-1 col-xs-4 form-label">Destination : </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.destination}}</div>
+</div>
+<div class="row">
+  <h4 class="col-md-1 col-xs-4 form-label">Departure: </h4>
+</div>
+<div class="row">
+  <div class="col-md-1 col-xs-4 form-label">Day: </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.departDay}}</div>
+  <div class="col-md-1 col-xs-4 form-label">Time: </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.departTime}}</div>
+</div>
+<div class="row">
+<h4 class="col-md-1 col-xs-4 form-label">Arrive: </h4>
+</div>
+<div class="row">
+  <div class="col-md-1 col-xs-4 form-label">Day: </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.arriveDay}}</div>
+  <div class="col-md-1 col-xs-4 form-label">Time: </div>
+  <div class="col-md-1  col-xs-8">{{selectedFlight.arriveTime}}</div>
+</div>
+<div class="row" >
+  <div class="form-outline col-md-12">
+    <form (ngSubmit)="onSubmit()" #payment="ngForm" class="form-outline">
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" required [(ngModel)]="selectedFlight.destination" ngControl="address" #address="ngForm">
+        <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+          Address is required
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="!payment.form.valid">Submit</button>
+    </form>
+  </div>
+</div>
+
+</div>

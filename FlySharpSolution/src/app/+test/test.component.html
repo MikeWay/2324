@@ -1,0 +1,5 @@
+<form [ngFormModel]="loginForm" (submit)="doLogin($event)">
+    <input ngControl="email" type="email" placeholder="Your email">
+    <input ngControl="password" type="password" placeholder="Your password">
+  <button type="submit" [disabled]="!loginForm.valid">Log in</button>
+</form>
