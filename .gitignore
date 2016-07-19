@@ -1,7 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+/Exercises/FlySharp
 /temp
 **/node_modules
+**/*.war
+**/*.jar
 #System Files
 .DS_Store
 Thumbs.db
