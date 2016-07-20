@@ -37,6 +37,7 @@ const barrels: string[] = [
   'app/warnings',
   'app/home',
   'app/preferences-form',
+  'app/flight-weather',
   /** @cli-barrel */
 ];
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 
-import {ActivatedRoute, Router} from "@angular/router";
-import {WeatherService} from "../services/weather.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import {WeatherServiceIF, WeatherService} from "../services/weather.service";
 import { MakeItBold } from '../directives/make-it-bold.directive';
 
 @Component({
@@ -20,10 +20,12 @@ export class ForecastComponent implements OnInit, OnDestroy  {
   private mylocation : string = "Netherland";
   private unit : string;
 
-  constructor(private router : Router, private route: ActivatedRoute, private weatherService : WeatherService ){
+  // constructor(private router : Router, private route: ActivatedRoute, private weatherService : WeatherService ){
+  //
+  // }
 
-  }
 
+  constructor(private weatherService : WeatherService){}
   ngOnInit(){
     // this.sub = this.route.params.subscribe(params => {
     //   this.mylocation = params['location'];
@@ -32,12 +34,12 @@ export class ForecastComponent implements OnInit, OnDestroy  {
     //   this.forecast = this.weatherService.getForecast(this.mylocation);
     // });
 
-    this.sub2 = this.router.routerState.queryParams.subscribe(params => {
-      this.mylocation = params['location'];
-      this.unit = params['units'];
-      console.log("Location is now (set by query parameters) : " + this.mylocation + " Units " + this.unit )
-      this.forecast = this.weatherService.getForecast(this.mylocation);
-    });
+    // this.sub2 = this.router.routerState.queryParams.subscribe(params => {
+    //   this.mylocation = params['location'];
+    //   this.unit = params['units'];
+    //   console.log("Location is now (set by query parameters) : " + this.mylocation + " Units " + this.unit )
+    //   this.forecast = this.weatherService.getForecast(this.mylocation);
+    // });
   }
 
   ngOnDestroy(){

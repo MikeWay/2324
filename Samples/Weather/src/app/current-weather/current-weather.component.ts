@@ -1,10 +1,11 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
-import { WindComponent } from '../wind/wind.component';
-import {Router} from "@angular/router";
+//import { WindComponent } from '../wind/wind.component';
+//import {Router} from "@angular/router";
 //import {WeatherService} from "../services/weather.service";
 import {Weather} from "../entities/weather";
-import {WeatherService} from "../services/weather.service";
+import {WeatherService, WeatherServiceIF} from "../services/weather.service";
+import {WindComponent} from "../wind/wind.component";
 
 @Component({
   moduleId: module.id,
@@ -32,8 +33,9 @@ export class CurrentWeatherComponent implements OnInit {
   @Output()
   weatherUpdated : EventEmitter<string>;
 
-  constructor( private router : Router, private weatherService : WeatherService ) {
-    this.weatherUpdated = new EventEmitter<string>();
+  //constructor( private router : Router, private weatherService : WeatherService ) {
+  constructor( private weatherService : WeatherService ) {
+     this.weatherUpdated = new EventEmitter<string>();
   }
 
   set preferedUnits(preferedUnits : string) {
@@ -57,7 +59,7 @@ export class CurrentWeatherComponent implements OnInit {
   }
 
   onClickWarnings(){
-    this.router.navigate(['/warnings'])
+    //this.router.navigate(['/warnings'])
 
   }
 
