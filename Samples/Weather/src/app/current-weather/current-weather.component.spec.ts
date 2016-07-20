@@ -28,9 +28,9 @@ describe('Component: CurrentWeatherComponent', () => {
 
   beforeEach(() => addProviders([MockWeatherService ]));
 
-  beforeEach(inject([TestComponentBuilder], function (tcb:TestComponentBuilder) {
-    builder = tcb;
-  }));
+  beforeEach(inject([TestComponentBuilder], (tcb:TestComponentBuilder) =>
+    builder = tcb
+  ));
 
 
   it('should create the TEST component', (done:() => void) => {

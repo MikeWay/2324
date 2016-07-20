@@ -24,7 +24,6 @@ const barrels: string[] = [
   '@angular/compiler',
   '@angular/http',
   '@angular/router',
-  '@angular/forms',
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
 
@@ -34,12 +33,11 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
-  'app/warnings',
-  'app/home',
-  'app/preferences-form',
-  'app/flight-weather',
-  'app/account',
+  'app/buy-flight',
+  'app/payment',
+  'app/flight-filter',
   'app/my-flights',
+  'app/account',
   /** @cli-barrel */
 ];
 
@@ -52,9 +50,6 @@ barrels.forEach((barrelName: string) => {
 declare var System: any;
 
 // Apply the CLI SystemJS configuration.
-
-console.log(JSON.stringify(cliSystemConfigPackages));
-
 System.config({
   map: {
     '@angular': 'vendor/@angular',
@@ -63,8 +58,6 @@ System.config({
   },
   packages: cliSystemConfigPackages
 });
-
-
 
 // Apply the user's configuration.
 System.config({ map, packages });
