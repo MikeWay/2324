@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" [class.collapsed]="menuCollapsed" class="navbar-toggle" (click)="menuButtonClick()" >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li (click)="onTabClick('/home')" [class.active]="tabIndex==='/home'"><a [routerLink]="['/home']" >Home</a></li>
+        <li (click)="onTabClick('/buy')" [class.active]="tabIndex==='/buy'"><a [routerLink]="['/buy']"  >Buy Flights</a></li>
+        <li (click)="onTabClick('/myflights')" [class.active]="tabIndex==='/myflights'"><a [routerLink]="['/myflights']"  >My Flights</a></li>
+        <li (click)="onTabClick('/account')" [class.active]="tabIndex==='/account'"><a [routerLink]="['/account']"  >Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>
