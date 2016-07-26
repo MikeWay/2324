@@ -1,5 +1,5 @@
+#!/usr/bin/env node
 "use strict";
-/// <reference path="../typings/index.d.ts" />
 var fs = require("fs-extra");
 var SRC_DIR_ROOT = "C:\\Course2324\\DoNows\\";
 var TARGET_DIR_ROOT = "C:\\Course2324\\DoNow_Solutions\\";

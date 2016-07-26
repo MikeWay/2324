@@ -1,0 +1,11 @@
+<header><h1>Pseudo Keys Example</h1></header>
+
+<input #userInput
+
+       (keyup)="allKeys=userInput.value"
+       placeholder="Type in here and hit enter"
+       class="form-control">
+<p class="text-primary">Value when enter pressed appears here here: [{{user}}]</p>
+<p class="text-primary">Every key pressed appears here [{{userInput.value}}]</p>
+
+

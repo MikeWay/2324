@@ -1,6 +1,9 @@
+/// <reference path="./typings/index.d.ts" />
+// #!/usr/bin/env node
+// Edit JS: remove the <reference make the shenbang the top line in the file
 // Copies files rrom the AddIns directory (identified by the command line argument)
 // To the exercises/FlySharp directory
-/// <reference path="../typings/index.d.ts" />
+
 import * as fs from "fs-extra";
 
 
