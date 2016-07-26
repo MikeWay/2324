@@ -1,12 +1,14 @@
+// TODO 1 -- Add the MYFLIGHTS array here
+
+// TODO 3 --
+
+// TODO 2 -- create the FlightInfo class here
 
 
 
-// TODO 3 - define a Flight interface
-
-// TODO 1 - add a flight to this declaration
 
 
-// TODO 2 -- create this class
+// TODO - end the class before here
 
 // TODO get a flight
 
