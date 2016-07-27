@@ -11,7 +11,8 @@
   "bin": {
    "cpAddIns": "./copyAddIns.js",
    "cpToDNSolution": "./copyToDNSolution.js",
-   "cpToSolution": "./copyToSolution.js"
+   "cpToSolution": "./copyToSolution.js",
+   "exStart": "./exerciseStart.js"
  },
  "dependencies": {
     "fs-extra": "0.30.0"
