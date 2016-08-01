@@ -9,17 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class BuyFlightComponent implements OnInit {
 
   flights = FLIGHTS;
-  showBuyFlights = false;
+  showBuyFlights = true;
 
-  constructor() {}
+  constructor() { }
+
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
+  }
 
   ngOnInit() {
   }
 
-
-  onClickBuyFlights(){
-    this.showBuyFlights = ! this.showBuyFlights;
-  }
 }
 
 

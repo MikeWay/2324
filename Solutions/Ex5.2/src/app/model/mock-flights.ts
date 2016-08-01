@@ -9,7 +9,7 @@ export var FLIGHTS: Flight[] = [
   {"id": 13, "flightNumber" : "FS2211", "origin": "LHR", "destination" : "NRT", "departDay" : "Wednesday",
     departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 999.99},
   {"id": 13, "flightNumber" : "FS2211", "origin": "NRT", "destination" : "LHR", "departDay" : "Thursday",
-    departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 699.99},
+    departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 699.99},  
 ];
 
 

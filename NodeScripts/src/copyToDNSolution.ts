@@ -21,4 +21,7 @@ if(process.argv.length < 3){
 
 fs.copy(srcDir, targetDir);
 
+targetDir = TARGET_DIR_ROOT + exercise + "\\e2e";
+srcDir = SRC_DIR_ROOT + exercise + "\\e2e";
+
 console.log("Copy to solution " + exercise + " complete");

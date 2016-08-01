@@ -6,14 +6,13 @@ import {Flight} from "../model/flight";
 @Injectable()
 export class FlightsService {
 
-  constructor() {}
+  constructor() { }
 
   public getFlights() : Flight[]{
     return FLIGHTS;
   }
 
-
   public getMyFlights() : Flight[]{
-    return FLIGHTS;
+    return MYFLIGHTS;
   }
 }

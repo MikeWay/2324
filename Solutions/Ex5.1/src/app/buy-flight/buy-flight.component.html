@@ -1,5 +1,6 @@
-<table *ngIf="showBuyFlights" class="table, table-bordered, table-condensed, table-responsive">
-  <thead><tr><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
+<table *ngIf="showBuyFlights" class="table table-bordered table-condensed table-responsive">
+  <thead><tr><th></th><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
+
   <tbody>
   <tr *ngFor="let flight of flights">
     <td><button (click)="onFlightClick(flight)" class="btn btn-primary btn-sm">Buy</button></td>

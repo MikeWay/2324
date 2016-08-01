@@ -9,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class BuyFlightComponent implements OnInit {
 
   flights = FLIGHTS;
-  showBuyFlights = false;
+  showBuyFlights = true;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
   }

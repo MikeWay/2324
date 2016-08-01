@@ -6,7 +6,17 @@
 const fs = require("fs-extra");
 const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
-    "Ex3.1": "Ex2.2_Bonus_2"
+    "Ex3.1": "Ex2.2_Bonus_2",
+    "Ex4.1": "Ex3.1",
+    "Ex4.2": "Ex4.1_Bonus_2",
+    "Ex5.1": "Ex4.2",
+    "Ex5.2": "Ex5.1",
+    "Ex6.1": "Ex5.2_Bonus_3",
+    "Ex6.2": "Ex6.1_Bonus_2",
+    "Ex7.1": "Ex6.2_Bonus",
+    "Ex7.2": "Ex7.1_Bonus",
+    "Ex8.1": "Ex7.2_Bonus",
+    "Ex9.1": "Ex8.1_Bonus_1"
 };
 /*
 Ex2.1_Bonus
@@ -21,9 +31,40 @@ Ex7.2_Bonus
 Ex8.1
 Ex9.1
 */
-var SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
-var TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+const SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
+const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
+const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+const SRC_DIR = "\\src";
+const E2E_DIR = "\\e2e";
 let exercise = process.argv[2];
+function doBackup(exercise) {
+    // Backup src
+    let destDir = BACKUP_DIR_ROOT + exercise + SRC_DIR;
+    let srcDir = TARGET_DIR_ROOT + SRC_DIR;
+    console.log("About to copy " + srcDir + " to " + destDir);
+    fs.mkdirs(destDir, function (err) {
+        if (err)
+            return console.error(err);
+        console.log("success!");
+    });
+    fs.copy(srcDir, destDir, 'clobber', (err) => {
+        if (err)
+            console.log("Failure" + err);
+    });
+    // Backup e2e
+    destDir = BACKUP_DIR_ROOT + exercise + E2E_DIR;
+    srcDir = TARGET_DIR_ROOT + E2E_DIR;
+    console.log("About to copy " + srcDir + " to " + destDir);
+    fs.mkdirs(destDir, function (err) {
+        if (err)
+            return console.error(err);
+        console.log("success!");
+    });
+    fs.copy(srcDir, destDir, 'clobber', (err) => {
+        if (err)
+            console.log("Failure" + err);
+    });
+}
 if (process.argv.length < 3) {
     console.log("Initialises an exercise to a standard start point");
     console.log("Usage exStart [Exercise Number].");
@@ -36,8 +77,10 @@ if (exSource == null) {
     console.log("Unknown exercise name [" + exercise + "]. Did you type it correctly?");
     process.exit(1);
 }
+doBackup(exercise);
+// Set up the srcDir based on the lookup of the solutions directory
 let srcDir = SRC_DIR_ROOT + exSource;
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
-fs.copy(srcDir, TARGET_DIR_ROOT, (err) => { if (err)
+fs.copy(srcDir, TARGET_DIR_ROOT, 'clobber', (err) => { if (err)
     console.log("Failure" + err); });
 console.log("Setting up " + exercise + " complete");

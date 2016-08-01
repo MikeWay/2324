@@ -8,11 +8,8 @@ import {Flight} from "../model/flight";
   styleUrls: ['payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-
-  @Input()
-  selectedFlight : Flight;
-
-  constructor() {}
+  @Input() selectedFlight: Flight;
+  constructor() { }
 
   ngOnInit() {
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {HomeComponent} from "./+Home/home.component";
+import {HomeComponent} from "./home/home.component";
 
 @Component({
   moduleId: module.id,

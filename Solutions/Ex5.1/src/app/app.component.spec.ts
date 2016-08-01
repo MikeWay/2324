@@ -18,6 +18,6 @@ describe('App: FlySharp', () => {
 
   it('should have as title \'Welcome to Fly Sharp\'',
       inject([AppComponent], (app: AppComponent) => {
-    expect(app.title).toEqual('aWelcome to Fly Sharp');
+    expect(app.title).toEqual('Welcome to Fly Sharp');
   }));
 });

@@ -13,30 +13,24 @@ import {PaymentComponent} from "../payment/payment.component";
 export class BuyFlightComponent implements OnInit {
 
   flights : Flight[];
-  showBuyFlights = false;
+  showBuyFlights = true;
   selectedFlight : Flight;
 
-  constructor( private flightsService : FlightsService ) {}
+  constructor(private flightsService : FlightsService ){}
+
+
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
+  }
+
+  private onFlightClick(flight : Flight){
+    this.selectedFlight = flight;
+
+  }
 
   ngOnInit() {
     this.flights = this.flightsService.getFlights();
   }
 
-  onFlightClick(flight : Flight ){
-    this.selectedFlight = flight;
-  }
-
-  onClickBuyFlights(){
-    this.showBuyFlights = ! this.showBuyFlights;
-  }
 }
 
-
-var FLIGHTS = [
-  {"id": 11, "flightNumber" : "FS1298", "origin": "LAX", "destination" : "LHR", "departDay" : "Monday",
-    departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 99.99},
-  {"id": 12, "flightNumber" : "FS1201", "origin": "LAX", "destination" : "LHR", "departDay" : "Tuesday",
-    departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 99.99},
-  {"id": 13, "flightNumber" : "FS1211", "origin": "LHR", "destination" : "ARN", "departDay" : "Wednesday",
-    departTime : "09:00", "arriveDay" : "Monday", arriveTime : "09:00", "price" : 99.99},
-];

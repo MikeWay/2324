@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {HomeComponent} from "./+Home/home.component";
+import {HomeComponent} from "./home/home.component";
 import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
 import { FlightsService } from './services/flights.service';
 
@@ -8,7 +8,7 @@ import { FlightsService } from './services/flights.service';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [HomeComponent, BuyFlightComponent],
+  directives: [HomeComponent,BuyFlightComponent ],
   providers: [FlightsService]
 })
 export class AppComponent {
