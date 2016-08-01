@@ -33,7 +33,7 @@ Ex9.1
 */
 const SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
 const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
-const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp";
 const SRC_DIR = "\\src";
 const E2E_DIR = "\\e2e";
 let exercise = process.argv[2];
@@ -42,28 +42,34 @@ function doBackup(exercise) {
     let destDir = BACKUP_DIR_ROOT + exercise + SRC_DIR;
     let srcDir = TARGET_DIR_ROOT + SRC_DIR;
     console.log("About to copy " + srcDir + " to " + destDir);
-    fs.mkdirs(destDir, function (err) {
-        if (err)
-            return console.error(err);
-        console.log("success!");
-    });
-    fs.copy(srcDir, destDir, 'clobber', (err) => {
-        if (err)
-            console.log("Failure" + err);
-    });
+    try {
+        fs.mkdirsSync(destDir);
+    }
+    catch (err) {
+        console.log("Failed to create backup directories");
+    }
+    try {
+        fs.copySync(srcDir, destDir);
+    }
+    catch (err) {
+        console.log("Failure" + err);
+    }
     // Backup e2e
     destDir = BACKUP_DIR_ROOT + exercise + E2E_DIR;
     srcDir = TARGET_DIR_ROOT + E2E_DIR;
     console.log("About to copy " + srcDir + " to " + destDir);
-    fs.mkdirs(destDir, function (err) {
-        if (err)
-            return console.error(err);
-        console.log("success!");
-    });
-    fs.copy(srcDir, destDir, 'clobber', (err) => {
-        if (err)
-            console.log("Failure" + err);
-    });
+    try {
+        fs.mkdirsSync(destDir);
+    }
+    catch (err) {
+        console.log("Failed to create directories");
+    }
+    try {
+        fs.copySync(srcDir, destDir);
+    }
+    catch (err) {
+        console.log("Failure backing up" + err);
+    }
 }
 if (process.argv.length < 3) {
     console.log("Initialises an exercise to a standard start point");
@@ -81,6 +87,10 @@ doBackup(exercise);
 // Set up the srcDir based on the lookup of the solutions directory
 let srcDir = SRC_DIR_ROOT + exSource;
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
-fs.copy(srcDir, TARGET_DIR_ROOT, 'clobber', (err) => { if (err)
-    console.log("Failure" + err); });
+try {
+    fs.copy(srcDir, TARGET_DIR_ROOT, 'clobber');
+}
+catch (err) {
+    console.log("Failure copying to ex dir" + err);
+}
 console.log("Setting up " + exercise + " complete");
