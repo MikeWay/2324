@@ -10,10 +10,9 @@
     ],
 
     "files": [
-	  "exerciseStart.ts"
-      //"copyToSolution.ts",
-      //"node.d.ts",
-      //"copyAddIns.ts",
-	  //"copyToDNSolution.ts"
+	  "exerciseStart.ts",
+      "copyToSolution.ts",
+      "copyAddIns.ts",
+	  "copyToDNSolution.ts"
     ]
 }

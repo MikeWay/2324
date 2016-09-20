@@ -1,0 +1,17 @@
+NodeJS 4.4.5
+Python 3.4.4
+Cygwin
+Java 8 SE Development Kit
+Eclipse-Mars JEE
+Atom Editor
+NSSM https://www.nssm.cc
+Git https://git-scm.com
+MySql 5.7.13
+
+Node packages: angular-cli
+
+
+
+Passwordy stuff
+
+MySql: root / rootpw
