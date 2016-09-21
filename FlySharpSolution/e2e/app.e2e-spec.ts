@@ -1,10 +1,10 @@
-import { FlySharpSolutionPage } from './app.po';
+import { ReleasePage } from './app.po';
 
-describe('fly-sharp-solution App', function() {
-  let page: FlySharpSolutionPage;
+describe('release App', function() {
+  let page: ReleasePage;
 
   beforeEach(() => {
-    page = new FlySharpSolutionPage();
+    page = new ReleasePage();
   });
 
   it('should display message saying app works', () => {

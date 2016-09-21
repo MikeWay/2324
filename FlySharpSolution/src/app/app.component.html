@@ -11,18 +11,20 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div [class.collapse]="menuCollapsed" class="navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li [class.active]="tabIndex === 'home'" (click)="onTabClick('home')"><a [routerLink]="['home']">Home</a></li>
-        <li [class.active]="tabIndex === 'buy'" (click)="onTabClick('buy')"><a [routerLink]="['buy']">Buy Flights</a></li>
-        <li [class.active]="tabIndex === 'myflights'" (click)="onTabClick('myflights')"><a [routerLink]="['myflights']">My Flights</a></li>
-        <li [class.active]="tabIndex === 'account'" (click)="onTabClick('account')"><a [routerLink]="['account']">Account</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/home']">Home</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/buy']">Buy Flights</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/myflights']">My Flights</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/account']">Account</a></li>
 
       </ul>
+
+      <span class="label label-primary" time></span>
     </div>
   </div>
 </nav>
 
-
 <router-outlet></router-outlet>
+

@@ -1,4 +1,6 @@
-export class FlySharpSolutionPage {
+import { browser, element, by } from 'protractor/globals';
+
+export class ReleasePage {
   navigateTo() {
     return browser.get('/');
   }

@@ -1,1 +1,1 @@
-export { PaymentComponent } from './payment.component';
+export * from './payment.component';

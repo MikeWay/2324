@@ -1,46 +1,13 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
+/* tslint:disable:no-unused-variable */
+
+import { By }           from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { addProviders, async, inject } from '@angular/core/testing';
 import { PaymentComponent } from './payment.component';
 
-describe('Component: Payment', () => {
-  let builder: TestComponentBuilder;
-
-  beforeEachProviders(() => [PaymentComponent]);
-  beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
-    builder = tcb;
-  }));
-
-  it('should inject the component', inject([PaymentComponent],
-      (component: PaymentComponent) => {
-    expect(component).toBeTruthy();
-  }));
-
-  it('should create the component', inject([], () => {
-    return builder.createAsync(PaymentComponentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(PaymentComponent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
-  }));
-});
-
-@Component({
-  selector: 'test',
-  template: `
-    <app-payment></app-payment>
-  `,
-  directives: [PaymentComponent]
-})
-class PaymentComponentTestController {
-}
-
+// describe('Component: Payment', () => {
+//   it('should create an instance', () => {
+//     let component = new PaymentComponent();
+//     expect(component).toBeTruthy();
+//   });
+// });
