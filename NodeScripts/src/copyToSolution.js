@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-"use strict";
-const fs = require("fs-extra");
+import * as fs from "fs-extra";
 var SRC_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
 var TARGET_DIR_ROOT = "C:\\Course2324\\Solutions\\";
 console.log(process.argv);
