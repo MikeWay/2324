@@ -8,11 +8,9 @@ import {WeatherService, WeatherServiceIF} from "../services/weather.service";
 import {WindComponent} from "../wind/wind.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-current-weather',
   templateUrl: 'current-weather.component.html',
   styleUrls: ['current-weather.component.css'],
-  directives: [WindComponent]
 })
 
 export class CurrentWeatherComponent implements OnInit {
@@ -64,9 +62,9 @@ export class CurrentWeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.weatherService.getWeather().subscribe(
-      (weather : Weather[])=>this.weather = weather,
-      (error : any)=>this.error = error);
+    // this.weatherService.getWeather().subscribe(
+    //   (weather : Weather[])=>this.weather = weather,
+    //   (error : any)=>this.error = error);
 
   }
 

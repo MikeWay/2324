@@ -1,24 +1,20 @@
-import { provideRouter, RouterConfig } from '@angular/router';
-
-
 import {ForecastComponent} from "./forecast/forecast.component";
 import {HomeComponent} from "./home/home.component";
 import {WarningsComponent} from "./warnings/warnings.component";
 import {CurrentWeatherComponent} from "./current-weather/current-weather.component";
 import {PreferencesFormComponent} from "./preferences-form/preferences-form.component";
+import { Routes, RouterModule } from '@angular/router';
+import {ModuleWithProviders} from "@angular/core";
 
-export const routes: RouterConfig = [
+const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'forecast/:location/:units', component: ForecastComponent },
-  { path: 'forecastq', component: ForecastComponent },
+  { path: 'forecastQ/:location/:units', component: ForecastComponent },
+  { path: 'forecast', component: ForecastComponent },
   { path: 'warnings', component: WarningsComponent },
   { path: 'current', component: CurrentWeatherComponent },
   { path: 'preferences', component: PreferencesFormComponent }
 ];
 
 
-export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
-];
-
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

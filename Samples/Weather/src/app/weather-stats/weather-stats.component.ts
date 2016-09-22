@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Stats } from '../entities/stats'
 
 @Component({
-  moduleId: module.id,
   selector: 'app-weather-stats',
   templateUrl: 'weather-stats.component.html',
   styleUrls: ['weather-stats.component.css']

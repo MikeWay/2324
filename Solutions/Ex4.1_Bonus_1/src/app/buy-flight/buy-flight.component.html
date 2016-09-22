@@ -1,0 +1,16 @@
+<table *ngIf="showBuyFlights" class="table table-bordered table-condensed table-responsive">
+  <tbody>
+  <tr *ngFor="let flight of flights">
+    <td>{{flight.flightNumber}}</td>
+    <td>{{flight.origin}}</td>
+    <td>{{flight.destination}}</td>
+    <td>{{flight.departDay}}</td>
+    <td>{{flight.departTime}}</td>
+    <td>{{flight.arriveDay}}</td>
+    <td>{{flight.arriveTime}}</td>
+    <td>{{flight.price}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<a (click)="onClickBuyFlights()">Toggle Flights</a>

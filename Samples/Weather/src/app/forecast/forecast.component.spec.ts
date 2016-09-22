@@ -1,19 +1,18 @@
-import {
-  addProviders,
-  async, inject
-} from '@angular/core/testing';
 
 import {
-  provide
+  DebugElement
 } from '@angular/core';
 
-import {Http, Response, Headers, RequestOptions, URLSearchParams, BaseRequestOptions } from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+
 import { ForecastComponent } from './forecast.component';
 import {WeatherService, WeatherServiceIF} from "../services/weather.service";
 import {Observable} from "rxjs/Rx";
 import {Weather} from "../entities/weather";
 import {Preferences} from "../entities/preferences";
+import {AppComponent} from "../app.component";
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {MakeItBold} from "../directives/make-it-bold.directive";
+import {HttpModule} from "@angular/http";
 
 class MockWeatherService implements WeatherServiceIF {
   getWeather() : Observable<Weather[]>{
@@ -30,57 +29,36 @@ class MockWeatherService implements WeatherServiceIF {
 
 describe('Component: Forecast', () => {
 
-  beforeEach(() => addProviders([MockWeatherService]));
+  //beforeEach(() => addProviders([MockWeatherService]));
 
-  it('should create an instance', inject([MockWeatherService],( weatherService: WeatherServiceIF) => {
-    let component = new ForecastComponent(weatherService);
-    expect(component).toBeTruthy();
-  }));
+  // it('should create an instance', inject([MockWeatherService],( weatherService: WeatherServiceIF) => {
+  //   let component = new ForecastComponent(weatherService);
+  //   expect(component).toBeTruthy();
+  // }));
+
+  let comp: ForecastComponent;
+  let fixture : ComponentFixture<ForecastComponent>;
+  let el: DebugElement;
+
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    declarations: [
+      ForecastComponent,
+      MakeItBold
+    ],
+    imports: [HttpModule],
+    providers: [WeatherService]
+  });
+
+  fixture = TestBed.createComponent(ForecastComponent);
+  comp = fixture.componentInstance;
 
 });
 
-//import {SpyLocation, MockLocationStrategy} from "@angular/common/testing";
+it('should create the component', () => {
+  let fixture = TestBed.createComponent(ForecastComponent);
+  let app = fixture.debugElement.componentInstance;
+  expect(app).toBeTruthy();
+});
 
-// describe('Component: Forecast',  () => {
-//   beforeEachProviders(() => {
-//     let config: RouterConfig =   [{path: '', component: BlankCmp}];
-//     return [WeatherService, RouterOutletMap,
-//       {provide: UrlSerializer, useClass: DefaultUrlSerializer},
-//       {provide: Location, useClass: SpyLocation},
-//       {provide: LocationStrategy, useClass: MockLocationStrategy},
-//       {
-//         provide: Router,
-//         useFactory: (resolver: ComponentResolver, urlSerializer: UrlSerializer,
-//                      outletMap: RouterOutletMap, location: Location, injector: Injector) => {
-//           return new Router(
-//             RootCmp, resolver, urlSerializer, outletMap, location, injector, config);
-//         },
-//         deps: [ComponentResolver, UrlSerializer, RouterOutletMap, Location, Injector]
-//       },
-//       {provide: ActivatedRoute, useFactory: (r: Router) => r.routerState.root, deps: [Router]},
-//     ]});
-//
-//
-//   it('should create an instance', inject([Router, WeatherService, ActivatedRoute], (router : Router, route : ActivatedRoute, service: WeatherService)=> {
-//     let component = new ForecastComponent(router, route, service);
-//     expect(component).toBeTruthy();
-//   }));
-// });
-
-
-
-// @Component({
-//   selector: 'root-cmp',
-//   template: `<router-outlet></router-outlet>`,
-//   directives: [ROUTER_DIRECTIVES]
-// })
-// class RootCmp {
-// }
-//
-//
-// @Component({selector: 'blank-cmp', template: ``, directives: ROUTER_DIRECTIVES})
-// class BlankCmp {
-// }
-
-
-
+});

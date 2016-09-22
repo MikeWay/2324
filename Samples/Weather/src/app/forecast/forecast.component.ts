@@ -5,11 +5,9 @@ import {WeatherServiceIF, WeatherService} from "../services/weather.service";
 import { MakeItBold } from '../directives/make-it-bold.directive';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
   styles: ['p {color:blue;}'],
-  directives: [MakeItBold]
 })
 
 export class ForecastComponent implements OnInit, OnDestroy  {
@@ -44,6 +42,6 @@ export class ForecastComponent implements OnInit, OnDestroy  {
 
   ngOnDestroy(){
     //this.sub.unsubscribe();
-    this.sub2.unsubscribe();
+    //this.sub2.unsubscribe();
   }
 }

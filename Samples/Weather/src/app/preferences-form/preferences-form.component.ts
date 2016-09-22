@@ -1,15 +1,12 @@
 import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 
 import { Preferences } from '../entities/preferences'
-import {FORM_DIRECTIVES} from "@angular/forms";
 import {WeatherService} from "../services/weather.service";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-preferences-form',
   templateUrl: 'preferences-form.component.html',
   styleUrls: ['preferences-form.component.css'],
-  directives: [FORM_DIRECTIVES],
 })
 export class PreferencesFormComponent implements OnInit {
 

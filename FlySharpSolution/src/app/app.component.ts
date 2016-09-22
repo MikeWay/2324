@@ -11,11 +11,7 @@
 
 
 import {Component, OnInit} from '@angular/core';
-import {HomeComponent} from "./home/home.component";
-import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
-import { FlightsService } from './services/flights.service';
-import {RouterModule, Router} from "@angular/router";
-import {Time} from "./time/time.directive";
+import {Router} from "@angular/router";
 
 @Component({
  // moduleId: module.id,

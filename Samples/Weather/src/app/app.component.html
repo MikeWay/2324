@@ -6,11 +6,11 @@
 <app-weather-stats></app-weather-stats>
 -->
 <!-- <button (click)="currentWeather.onClick()">Update Child Weather</button> -->
-<a [routerLink]="['home']">Home</a>
-<a [routerLink]="['forecast']">Forecast</a>
-<a [routerLink]="['current']">Current Weather</a>
-<a [routerLink]="['warnings']">Warnings</a>
-<a [routerLink]="['preferences']">Preferences</a>
+<a [routerLink]="['/home']">Home</a>
+<a [routerLink]="['/forecast']">Forecast</a>
+<a [routerLink]="['/current']">Current Weather</a>
+<a [routerLink]="['/warnings']">Warnings</a>
+<a [routerLink]="['/preferences']">Preferences</a>
 
 
 <button [disabled]="buttonDisabled" (click)="onClickWarnings()" id="warningButton">Weather Warnings</button>

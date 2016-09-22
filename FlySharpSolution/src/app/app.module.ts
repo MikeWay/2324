@@ -10,7 +10,7 @@ import {Time} from "./time/time.directive";
 import {FlightFilterComponent} from "./flight-filter/flight-filter.component";
 import {PaymentComponent} from "./payment/payment.component";
 import {CurrencyConversionPipe} from "./currency/currency-conversion.pipe";
-import {routing} from "./app.routes";
+import {routing, appRoutingProviders} from "./app.routes";
 import {MyFlightsComponent} from "./my-flights/my-flights.component";
 import {AccountComponent} from "./account/account.component";
 import {SpecialOffersComponent} from "./special-offers/special-offers.component";
@@ -37,7 +37,7 @@ import {JsonPipe} from "@angular/common";
     HttpModule,
     routing
   ],
-  providers: [FlightsService],
+  providers: [FlightsService,appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
