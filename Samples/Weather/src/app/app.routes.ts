@@ -9,7 +9,7 @@ import {ModuleWithProviders} from "@angular/core";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'forecastQ/:location/:units', component: ForecastComponent },
+  { path: 'forecastq/:location/:units', component: ForecastComponent },
   { path: 'forecast', component: ForecastComponent },
   { path: 'warnings', component: WarningsComponent },
   { path: 'current', component: CurrentWeatherComponent },

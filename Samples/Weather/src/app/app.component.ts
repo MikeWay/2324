@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 
 export class AppComponent {
   title = 'app works!';
+  date = new Date();
 
   constructor(private router : Router){}
 
@@ -40,7 +41,10 @@ export class AppComponent {
   onClickForecastByQuery(){
     let location = "Paris";
     let units = "Celsius";
-    this.router.navigate(['/forecastq'], {queryParams : {'location' : location, 'units' : units}});
+    // Optional parameters
+    this.router.navigate(['/forecast'], {queryParams : {'location' : location, 'units' : units}});
+    // Required parameters
+    //this.router.navigate(['/forecastq', location, units]);
 
   }
 }

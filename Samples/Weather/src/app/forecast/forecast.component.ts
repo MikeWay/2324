@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 
-import { ActivatedRoute, Router } from "@angular/router";
+import {ActivatedRoute, Router, Params} from "@angular/router";
 import {WeatherServiceIF, WeatherService} from "../services/weather.service";
 import { MakeItBold } from '../directives/make-it-bold.directive';
 
@@ -18,13 +18,18 @@ export class ForecastComponent implements OnInit, OnDestroy  {
   private mylocation : string = "Netherland";
   private unit : string;
 
-  // constructor(private router : Router, private route: ActivatedRoute, private weatherService : WeatherService ){
-  //
-  // }
+  constructor(private router : Router, private route: ActivatedRoute, private weatherService : WeatherService ){}
 
 
-  constructor(private weatherService : WeatherService){}
   ngOnInit(){
+
+    this.route.queryParams.subscribe((params: Params) => {
+      this.mylocation = params['location'];
+      this.unit = params['units'];
+      console.log("Location is now: " + this.mylocation)
+      this.forecast = this.weatherService.getForecast(this.mylocation);
+    });
+
     // this.sub = this.route.params.subscribe(params => {
     //   this.mylocation = params['location'];
     //   this.unit = params['units'];
