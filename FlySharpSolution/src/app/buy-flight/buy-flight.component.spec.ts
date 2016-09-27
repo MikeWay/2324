@@ -1,12 +1,14 @@
 /* tslint:disable:no-unused-variable */
 
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
-import { BuyFlightComponent } from './buy-flight.component';
+
+import {BuyFlightComponent} from "./buy-flight.component";
+import {ComponentFixture, TestBed} from "@angular/core/testing";
+import {DebugElement} from "@angular/core";
 import {FlightsService} from "../services/flights.service";
-import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
+import {By} from "@angular/platform-browser";
 import {Flight} from "../model/flight";
+import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
+
 
 export class MockFlightsService {
 
@@ -19,36 +21,66 @@ export class MockFlightsService {
   public getMyFlights() : Flight[]{
     return MYFLIGHTS;
   }
+
 }
 
-
+let mockFlightsService = new MockFlightsService();
 
 describe('Component: BuyFlight', () => {
+  let comp: BuyFlightComponent;
+  let fixture : ComponentFixture<BuyFlightComponent>;
+  let el: DebugElement;
 
-  beforeEach(() => addProviders([MockFlightsService]));
-  it('should create an instance', inject( [MockFlightsService ],(flightsService : FlightsService) => {
-    let component = new BuyFlightComponent(flightsService);
-    expect(component).toBeTruthy();
-  }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        BuyFlightComponent
+      ],
+      providers: [{provide: FlightsService,
+      useValue: mockFlightsService }]
 
-  it('should default showBuyFlights to true', inject( [MockFlightsService ],(flightsService : FlightsService) => {
-    let component = new BuyFlightComponent(flightsService);
-    expect(component.showBuyFlights).toBeTruthy();
-  }));
+    });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', inject( [MockFlightsService ],(flightsService : FlightsService) => {
-    let component = new BuyFlightComponent(flightsService);
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeFalsy();
-  }));
+    fixture = TestBed.createComponent(BuyFlightComponent); // Which creates a test fixture
+    comp = fixture.debugElement.componentInstance; // which retrieves an instance of the component under test
+  });
 
-  it('should set showBuyFlights to true when onClickBuyFlights() is called twice', inject( [MockFlightsService ],(flightsService : FlightsService) => {
-    let component = new BuyFlightComponent(flightsService);
-    component.onClickBuyFlights();
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeTruthy();
-  }));
+  it('should create an instance', () => {
+    expect(comp).toBeTruthy();
+  });
 
+  it('should default showBuyFlights to true', () => {
+    comp.onClickBuyFlights();
+    expect(comp.showBuyFlights).toBeFalsy();
+  });
+
+  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
+    comp.onClickBuyFlights();
+    comp.onClickBuyFlights();
+    expect(comp.showBuyFlights).toBeTruthy();
+  });
+
+  it('should hide the flights table  when the link is clicked', () => {
+    comp.onClickBuyFlights();
+    comp.onClickBuyFlights();
+    expect(comp.showBuyFlights).toBeTruthy();
+  });
+
+  it('should set showBuyFlights to false when the link is clicked', () => {
+    el = fixture.debugElement.query(By.css('a'));
+    el.triggerEventHandler('click', null);
+    expect(comp.showBuyFlights).toBeFalsy();
+  });
+
+  it('should hide the flights table  when the link is clicked', () => {
+    fixture.detectChanges();
+    let tableEle = fixture.debugElement.query(By.css('table'));
+    expect(tableEle).toBeTruthy();
+    el = fixture.debugElement.query(By.css('a'));
+    el.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    tableEle = fixture.debugElement.query(By.css('table'));
+    expect(tableEle).toBeFalsy();
+  });
 });
-
 

@@ -5,30 +5,25 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./home/home.component";
-import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
-import {Time} from "./time/time.directive";
-import {FlightFilterComponent} from "./flight-filter/flight-filter.component";
-import {PaymentComponent} from "./payment/payment.component";
-import {CurrencyConversionPipe} from "./currency/currency-conversion.pipe";
-import {routing, appRoutingProviders} from "./app.routes";
-import {MyFlightsComponent} from "./my-flights/my-flights.component";
-import {AccountComponent} from "./account/account.component";
+import { BuyFlightComponent } from './buy-flight/buy-flight.component';
+import { PaymentComponent } from './payment/payment.component';
+import { FlightFilterComponent } from './flight-filter/flight-filter.component';
+import { AccountComponent } from './account/account.component';
+import { MyFlightsComponent } from './my-flights/my-flights.component';
+import {routing} from "./app.routes";
+import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
+import { TimeDirective } from './time/time.directive';
 import {SpecialOffersComponent} from "./special-offers/special-offers.component";
-import {FlightsService} from "./services/flights.service";
-import {JsonPipe} from "@angular/common";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    BuyFlightComponent,
-    Time ,
-    PaymentComponent,
-    FlightFilterComponent,
-    CurrencyConversionPipe,
+    AppComponent, HomeComponent, BuyFlightComponent,
+    PaymentComponent, FlightFilterComponent, AccountComponent,
+    SpecialOffersComponent,
     MyFlightsComponent,
-      AccountComponent,
-    SpecialOffersComponent
+    CurrencyConversionPipe,
+    CurrencyConversionPipe,
+    TimeDirective
   ],
   imports: [
     BrowserModule,
@@ -37,7 +32,7 @@ import {JsonPipe} from "@angular/common";
     HttpModule,
     routing
   ],
-  providers: [FlightsService,appRoutingProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

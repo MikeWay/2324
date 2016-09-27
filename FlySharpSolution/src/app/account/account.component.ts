@@ -9,7 +9,6 @@ import { Account } from '../model/account';
 })
 export class AccountComponent {
 
-
   accountForm: FormGroup;
 
   constructor(fb: FormBuilder) {

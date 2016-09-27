@@ -14,17 +14,14 @@
     <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li routerLinkActive="active"><a [routerLink]="['/home']">Home</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/buy']">Buy Flights</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/myflights']">My Flights</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/account']">Account</a></li>
-
-      </ul>
-
-      <span class="label label-primary" time></span>
+        <li routerLinkActive="active" ><a routerLink='/home'>Home</a></li>
+        <li routerLinkActive="active"><a routerLink='/buy'>Buy Flights</a></li>
+        <li routerLinkActive="active"><a routerLink='/myflights'>My Flights</a></li>
+        <li routerLinkActive="active"><a routerLink='/account'>Account</a></li>
+      </ul><span class="label label-primary" apptime></span>
     </div>
   </div>
 </nav>
-
-<router-outlet></router-outlet>
-
+<main class="container-fluid">
+  <router-outlet></router-outlet>
+</main>

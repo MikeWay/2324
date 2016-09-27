@@ -4,14 +4,14 @@ body {
 
 
 .form-outline {
-  margin-right: 0;
-  margin-left: 0;
-  background-color: #fff;
-  border-color: #ddd;
-  border-width: 1px;
-  border-radius: 4px 4px 0 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 .dev-note {
@@ -26,20 +26,4 @@ body {
 
 .form-label {
   font-weight: bold;
-}
-
-form *.ng-valid[required] {
-  border-left: 5px solid #42A948; /* green */
-}
-
-form *.ng-invalid {
-  border-left: 5px solid #a94442; /* red */
-}
-
-form *.ng-touched {
-  border-right: 5px solid yellow;
-}
-
-form *.ng-dirty {
-  border-right: 5px solid blue;
 }

@@ -1,11 +1,10 @@
-import {AccountComponent} from "./account/account.component";
-import {MyFlightsComponent} from "./my-flights/my-flights.component";
-import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
-import {HomeComponent} from "./home/home.component";
+import {Routes, RouterModule} from "@angular/router";
 import {AppComponent} from "./app.component";
-import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import {HomeComponent} from "./home/home.component";
+import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
+import {MyFlightsComponent} from "./my-flights/my-flights.component";
+import {AccountComponent} from "./account/account.component";
+import {ModuleWithProviders} from "@angular/core";
 const routes: Routes = [
   {
     path: '',
@@ -28,10 +27,7 @@ const routes: Routes = [
     path: 'account',
     component: AccountComponent
   }
-
 ];
 
-export const appRoutingProviders: any[] = [
-];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

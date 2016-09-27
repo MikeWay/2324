@@ -1,14 +1,16 @@
 import {Directive, ElementRef} from '@angular/core';
 
 @Directive({
-  selector: '[time]'
+  selector: '[apptime]'
 })
-export class Time {
+export class TimeDirective {
 
-  constructor(el : ElementRef ) {
+  constructor(el : ElementRef) {
     this.setStyle(el);
     this.showTime(el);
-    setInterval(() => this.showTime(el));
+    setInterval(() => {
+      this.showTime(el);
+    }, 1000);
   }
 
   private showTime(el: ElementRef){
@@ -16,8 +18,8 @@ export class Time {
     el.nativeElement.innerHTML = myDate.toLocaleTimeString("en-US");
   }
   private setStyle(el: ElementRef){
-    el.nativeElement.style.fontSize = '1.2em';
-    el.nativeElement.style.marginTop = '0.7em';
+    el.nativeElement.style.fontSize = '2em';
+    el.nativeElement.style.marginTop = '0.2em';
     el.nativeElement.style.float = 'right';
   }
 
