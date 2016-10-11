@@ -14,3 +14,6 @@ Notes for configuring once the repo is cloned onto a VM
    
 2) Run mklink in lots of folders! -  all the Donows and the exercise folders   
 
+
+3) MySql root password = rootpw
+
