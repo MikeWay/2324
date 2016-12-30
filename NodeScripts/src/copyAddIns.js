@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var fs = requirejs('fs-extra')
+var fs = require('fs-extra')
 var SRC_DIR_ROOT = "C:\\Course2324\\AddIns\\";
 var TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
 let exercise = process.argv[2];

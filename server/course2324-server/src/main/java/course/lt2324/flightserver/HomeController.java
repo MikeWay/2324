@@ -42,4 +42,14 @@ public class HomeController {
 		return Iterables.toArray(dao.findAll(), Flight.class);
 	}
 
+	
+	/**
+	 * Selects the home page and populates the model with a message
+	 */
+	@RequestMapping(value = "/flightssec", method = RequestMethod.GET)
+	public Flight[] flightsSec(Model model) {
+		logger.info("Requesting flights");
+
+		return Iterables.toArray(dao.findAll(), Flight.class);
+	}
 }

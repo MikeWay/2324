@@ -1,8 +1,9 @@
 <header><h1>Pseudo Keys Example</h1></header>
 
 <input #userInput
+
+
        (keyup)="allKeys=userInput.value"
-       (keyup.enter)="user=userInput.value"
        placeholder="Type in here and hit enter"
        class="form-control" size="50">
 <p class="text-primary">Value when enter pressed appears here here: [{{user}}]</p>
