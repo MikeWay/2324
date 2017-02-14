@@ -1,53 +1,53 @@
 /* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
-
-import {BuyFlightComponent} from "./buy-flight.component";
-import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {DebugElement} from "@angular/core";
+import { BuyFlightComponent } from './buy-flight.component';
 import {FlightsService} from "../services/flights.service";
-import {By} from "@angular/platform-browser";
-describe('Component: BuyFlight', () => {
-  let comp: BuyFlightComponent;
-  let fixture : ComponentFixture<BuyFlightComponent>;
+
+describe('BuyFlightComponent', () => {
+  let component: BuyFlightComponent;
+  let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        BuyFlightComponent
-      ],
+      declarations: [ BuyFlightComponent ],
       providers: [FlightsService]
-    });
+    })
+    .compileComponents();
+  }));
 
-    fixture = TestBed.createComponent(BuyFlightComponent); // Which creates a test fixture
-    comp = fixture.debugElement.componentInstance; // which retrieves an instance of the component under test
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BuyFlightComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should create an instance', () => {
-    expect(comp).toBeTruthy();
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should default showBuyFlights to true', () => {
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeFalsy();
+    expect(component.showBuyFlights).toBeTruthy();
   });
 
   it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
+    component.onClickBuyFlights();
+    expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should hide the flights table  when the link is clicked', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
+  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
+    component.onClickBuyFlights();
+    component.onClickBuyFlights();
+    expect(component.showBuyFlights).toBeTruthy();
   });
 
   it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
-    expect(comp.showBuyFlights).toBeFalsy();
+    expect(component.showBuyFlights).toBeFalsy();
   });
 });
 
