@@ -5,8 +5,8 @@ import {FlightsService} from "../services/flights.service";
 
 @Component({
   selector: 'app-my-flights',
-  templateUrl: 'my-flights.component.html',
-  styleUrls: ['my-flights.component.css']
+  templateUrl: './my-flights.component.html',
+  styleUrls: ['./my-flights.component.css']
 })
 export class MyFlightsComponent implements OnInit {
   private flights : Flight[];

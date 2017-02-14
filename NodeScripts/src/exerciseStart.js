@@ -1,9 +1,5 @@
-/// <reference path="./typings/index.d.ts" />
-// #!/usr/bin/env node
-// Edit JS: remove the <reference make the shenbang the top line in the file
-// Copies files rrom the AddIns directory (identified by the command line argument)
-// To the exercises/FlySharp directory
-import * as fs from "fs-extra";
+#!/usr/bin/env node
+var fs = require('fs-extra')
 const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
     "Ex3.1": "Ex2.2_Bonus_2",
