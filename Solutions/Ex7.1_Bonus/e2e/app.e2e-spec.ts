@@ -7,7 +7,7 @@ describe('fly-sharp App', function() {
     page = new FlySharpPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
@@ -16,6 +16,7 @@ describe('fly-sharp App', function() {
     page.navigateTo();
     expect(page.getNumTableRows()).toEqual(5);
   });
+
 
   it('should show 0 rows in the table when toggle is clicked', () => {
     page.navigateTo();

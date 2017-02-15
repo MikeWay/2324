@@ -53,6 +53,8 @@ export class BuyFlightComponent implements OnInit {
           } else {
             return null;
           }
+        } else {
+          return flight;
         }
         // the filter expression stops empty elements being returned (drops the null elements)
       }).filter(x => !!x);

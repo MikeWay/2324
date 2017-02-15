@@ -15,9 +15,7 @@ import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent,
-    PaymentComponent, FlightFilterComponent, AccountComponent,
-    MyFlightsComponent, CurrencyConversionPipe, CurrencyConversionPipe
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, AccountComponent, MyFlightsComponent, CurrencyConversionPipe
   ],
   imports: [
     BrowserModule,
