@@ -2,9 +2,9 @@
 
 <input #userInput
 
-
        (keyup)="allKeys=userInput.value"
        placeholder="Type in here and hit enter"
        class="form-control" size="50">
 <p class="text-primary">Value when enter pressed appears here here: [{{user}}]</p>
-<p class="text-primary">Every key pressed appears here [{{userInput.value}}]</p>
+<p class="text-primary">Every key pressed appears here [{{userInput.value}}] (Using the reference variable)</p>
+<p class="text-primary">Every key pressed appears here too: [{{allKeys}}] (Using the allKeys field)</p>
