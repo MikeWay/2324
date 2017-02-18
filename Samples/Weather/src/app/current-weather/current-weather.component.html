@@ -1,24 +1,3 @@
-<h2>Wind Conditions</h2>
-
-
-<app-wind></app-wind>
-<div>
-  <button [disabled]="buttonDisabled" (click)="onClick()" id="updateButton">Update Weather</button>
-  <button [disabled]="!buttonDisabled" (click)="onClickOther()" id="otherButton" >Enable Other Button</button>
-  <button [disabled]="buttonDisabled" (click)="onClickWarnings()" id="warningButton">Weather Warnings</button>
-</div>
-{{preferedUnits}}
-<span [ngSwitch]="conditions">
-  <template [ngSwitchCase]="'raining'">Bring an umbrella!</template>
-  <template ngSwitchCase="sunny">Don't forget the sun screen!</template>
-  <template ngSwitchCase="snowing">Maybe take crampons?</template>
-  <template ngSwitchDefault>If you are in the UK, it could do anything!</template>
-</span>
-
-<input #box (keyup.dot)="values=box.value">
-<p>{{values}}</p>
-<ul>
-  <li *ngFor="let w of weather">
-    {{w.skyConditions}}
-  </li>
-</ul>
+<p>
+  current-weather works!
+</p>

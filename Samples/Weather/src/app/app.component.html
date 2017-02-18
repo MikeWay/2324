@@ -1,22 +1,4 @@
-<h1 (click)="onClick()">
+<h1>
   {{title}}
 </h1>
-<!--<app-forecast></app-forecast>
-<app-current-weather #currentWeather [preferedUnits]="'Knots'" (weatherUpdated)="onWeatherUpdated($event)"></app-current-weather>
-<app-weather-stats></app-weather-stats>
--->
-<!-- <button (click)="currentWeather.onClick()">Update Child Weather</button> -->
-<a [routerLink]="['/home']">Home</a>
-<a [routerLink]="['/forecast']">Forecast</a>
-<a [routerLink]="['/current']">Current Weather</a>
-<a [routerLink]="['/warnings']">Warnings</a>
-<a [routerLink]="['/preferences']">Preferences</a>
-
-
-<button [disabled]="buttonDisabled" (click)="onClickWarnings()" id="warningButton">Weather Warnings</button>
-<button [disabled]="buttonDisabled" (click)="onClickForecast()" id="forecastButton">Forecast</button>
-<button [disabled]="buttonDisabled" (click)="onClickForecastByQuery()" id="forecastButtonQ">Forecast Query</button>
-
-Weather for {{date | date}}
-
-<router-outlet></router-outlet>
+<app-button-demo></app-button-demo>

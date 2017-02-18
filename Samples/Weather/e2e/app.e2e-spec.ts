@@ -1,6 +1,6 @@
 import { WeatherPage } from './app.po';
 
-describe('weather App', function() {
+describe('weather App', () => {
   let page: WeatherPage;
 
   beforeEach(() => {
