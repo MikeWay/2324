@@ -11,21 +11,24 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 import { AccountComponent } from './account/account.component';
+import { RouterLinkStubDirective, RouterOutletStubComponent } from './router-stubs';
 
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, AccountComponent
+        AppComponent, RouterLinkStubDirective, RouterOutletStubComponent
       ],
-      providers : [{provide: APP_BASE_HREF, useValue: '/'}],
+      //providers : [{provide: APP_BASE_HREF, useValue: '/'}],
         imports: [
-    RouterModule.forRoot(routes),
+    //RouterModule.forRoot(routes),
         ]
     });
     TestBed.compileComponents();
   });
+
+
 
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);

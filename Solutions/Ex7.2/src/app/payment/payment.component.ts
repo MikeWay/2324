@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
     this.payForm = formBuilder.group({
       'name': ['', Validators.compose([Validators.required,Validators.minLength(5)])],
       'address': ['', Validators.required],
-      'email': ['', Validators.required],
+      'email': ['', Validators.required ],
       'cardNum': ['', Validators.required],
       'cardType': ['', Validators.required],
       'expDate': ['', Validators.required],

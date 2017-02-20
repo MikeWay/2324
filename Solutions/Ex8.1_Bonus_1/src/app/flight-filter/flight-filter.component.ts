@@ -9,6 +9,10 @@ import {Output, Input} from "@angular/core/src/metadata/directives";
 export class FlightFilterComponent implements OnInit {
   @Input()
   label : string;
+
+  @Input()
+  initialValue : string = "";
+  
   @Output()
   onFilter = new EventEmitter<string>();
   constructor() { }

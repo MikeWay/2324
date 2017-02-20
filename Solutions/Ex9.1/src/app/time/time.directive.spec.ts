@@ -1,10 +1,8 @@
-/* tslint:disable:no-unused-variable */
+import { TimeDirective } from './time.directive';
 
-import { TestBed, async } from '@angular/core/testing';
-
-// describe('Directive: Time', () => {
+// describe('TimeDirective', () => {
 //   it('should create an instance', () => {
-//     let directive = new TimeDirective();
+//     const directive = new TimeDirective();
 //     expect(directive).toBeTruthy();
 //   });
 // });

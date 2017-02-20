@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {FlightsService} from "../services/flights.service";
 import {Flight} from "../model/flight";
 
@@ -17,7 +19,7 @@ export class BuyFlightComponent implements OnInit {
   destinationFilter : string = null;
 
 
-  constructor(private flightsService : FlightsService ){}
+  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -64,6 +66,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
     this._flights = this.flightsService.getFlights();
   }
 }

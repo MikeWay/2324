@@ -10,8 +10,9 @@ import { PaymentComponent } from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 import { AccountComponent } from './account/account.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
-import {routing} from "./app.routes";
+import { routes } from './app.routes';
 import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
+import { RouterModule } from '@angular/router';
 import { TimeDirective } from './time/time.directive';
 
 @NgModule({
@@ -25,7 +26,7 @@ import { TimeDirective } from './time/time.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    routing
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
