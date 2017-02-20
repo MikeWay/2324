@@ -8,6 +8,8 @@ import {FlightsService} from "../services/flights.service";
 import {By} from "@angular/platform-browser";
 import {Flight} from "../model/flight";
 import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
+import { PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 
 
 export class MockFlightsService {
@@ -34,7 +36,7 @@ describe('Component: BuyFlight', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BuyFlightComponent
+        BuyFlightComponent, PaymentComponent, FlightFilterComponent
       ],
       providers: [{provide: FlightsService,
       useValue: mockFlightsService }]
