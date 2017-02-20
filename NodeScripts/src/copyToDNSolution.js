@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-var fs = require('fs-extra')
+import * as fs from "fs-extra";
 var SRC_DIR_ROOT = "C:\\Course2324\\DoNows\\";
 var TARGET_DIR_ROOT = "C:\\Course2324\\DoNow_Solutions\\";
 console.log(process.argv);

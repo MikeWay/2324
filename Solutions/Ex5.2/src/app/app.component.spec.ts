@@ -4,12 +4,15 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./home/home.component";
 import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
+import { PaymentComponent } from './payment/payment.component';
+import { FlightFilterComponent } from './flight-filter/flight-filter.component';
+
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, HomeComponent, BuyFlightComponent
+        AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent
       ],
     });
     TestBed.compileComponents();

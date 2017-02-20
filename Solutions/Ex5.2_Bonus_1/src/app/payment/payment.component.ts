@@ -8,8 +8,17 @@ import {Input} from "@angular/core/src/metadata/directives";
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  @Input() selectedFlight: Flight;
+  private _selectedFlight: Flight;
 
+  @Input() 
+  
+  set selectedFlight( flight: Flight){
+    this._selectedFlight = flight;
+  }
+
+  get selectedFlight( ) : Flight{
+    return this._selectedFlight;
+  }
   constructor() { }
 
   ngOnInit() {
