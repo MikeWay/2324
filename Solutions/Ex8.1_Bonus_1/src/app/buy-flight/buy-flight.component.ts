@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FlightsService} from "../services/flights.service";
 import {Flight} from "../model/flight";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-buy-flight',
@@ -19,7 +20,7 @@ export class BuyFlightComponent implements OnInit {
   loaded : boolean = false;
 
 
-  constructor(private flightsService : FlightsService ){}
+  constructor(private flightsService : FlightsService, private activatedRoute : ActivatedRoute ){}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -69,7 +70,15 @@ export class BuyFlightComponent implements OnInit {
             (flights: Flight[])=>{this._flights = flights; this.loaded=true},
              (error: any)=>this.errorMessage = error
         );
+    this.activatedRoute.params.subscribe(params => {
+      if(typeof params['origin'] !== 'undefined' ) {
+        this.originFilter = params['origin'];
+      }
+    });		
   }
+  
+  
+
 }
 
 

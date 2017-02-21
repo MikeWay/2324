@@ -8,7 +8,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, HomeComponent
+        AppComponent, HomeComponent, BuyFlightComponent
       ],
     });
     TestBed.compileComponents();

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { BuyFlightComponent } from './buy-flight.component';
-/*
+
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
@@ -26,4 +26,4 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-*/
+

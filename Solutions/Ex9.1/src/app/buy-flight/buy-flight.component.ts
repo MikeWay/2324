@@ -69,6 +69,11 @@ export class BuyFlightComponent implements OnInit {
             (flights: Flight[])=>{this._flights = flights; this.loaded=true},
              (error: any)=>this.errorMessage = error
         );
+	this.activatedRoute.params.subscribe(params => {
+      if(typeof params['origin'] !== 'undefined' ) {
+        this.originFilter = params['origin'];
+      }
+    });
   }
 }
 
