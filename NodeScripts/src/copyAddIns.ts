@@ -6,8 +6,8 @@
 import * as fs from "fs-extra";
 
 
-var SRC_DIR_ROOT = "C:\\Course2324\\AddIns\\";
-var TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+var SRC_DIR_ROOT = "../../AddIns/";
+var TARGET_DIR_ROOT = ".";
 
 
 let exercise = process.argv[2];

@@ -34,12 +34,18 @@ Ex7.2_Bonus
 Ex8.1
 Ex9.1
 */
-const SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
-const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
-const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp";
+//const SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
+//const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
+//const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp";
 
-const SRC_DIR = "\\src"
-const E2E_DIR = "\\e2e"
+let SRC_DIR_ROOT = "../../Solutions/";
+const BACKUP_DIR_ROOT = "../../Backup/";
+let TARGET_DIR_ROOT = ".";
+
+
+
+const SRC_DIR = "/src"
+const E2E_DIR = "/e2e"
 
 
 let exercise = process.argv[2];
@@ -51,6 +57,7 @@ function doBackup(exercise : string){
 	console.log("About to copy " + srcDir + " to " + destDir);
 	
 	try{
+		fs.ensureDir(destDir);
 		fs.mkdirsSync(destDir);
 	} catch (err) {
 		console.log("Failed to create backup directories");
@@ -67,6 +74,7 @@ function doBackup(exercise : string){
 	console.log("About to copy " + srcDir + " to " + destDir);
 	
 	try{
+		fs.ensureDir(destDir);
 		fs.mkdirsSync(destDir);
 	} catch (err) {
 		console.log("Failed to create directories");

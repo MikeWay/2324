@@ -2,8 +2,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs-extra");
-var SRC_DIR_ROOT = "C:\\Course2324\\AddIns\\";
-var TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+var SRC_DIR_ROOT = "../../AddIns/";
+var TARGET_DIR_ROOT = ".";
 let exercise = process.argv[2];
 let srcDir = SRC_DIR_ROOT + exercise;
 if (process.argv.length < 3) {
