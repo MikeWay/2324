@@ -1,9 +1,10 @@
-!/usr/bin / env;
-node;
-var fs = requirejs('fs-extra');
-var SRC_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
-var TARGET_DIR_ROOT = "C:\\Course2324\\Solutions\\";
+#!/usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs-extra");
 console.log(process.argv);
+let SRC_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+let TARGET_DIR_ROOT = "C:\\Course2324\\Solutions\\";
 let exercise = process.argv[2];
 let targetDir = TARGET_DIR_ROOT + exercise;
 if (process.argv.length < 3) {

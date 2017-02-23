@@ -1,11 +1,17 @@
 #!/usr/bin/env node
-var fs = requirejs('fs-extra')
 
-var SRC_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
-var TARGET_DIR_ROOT = "C:\\Course2324\\Solutions\\";
+// Copies files rrom the AddIns directory (identified by the command line argument)
+// To the exercises/FlySharp directory
+
+import * as fs from "fs-extra";
+
+
 
 
 console.log(process.argv);
+
+let SRC_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
+let TARGET_DIR_ROOT = "C:\\Course2324\\Solutions\\";
 
 let exercise = process.argv[2];
 

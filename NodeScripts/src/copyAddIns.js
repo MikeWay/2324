@@ -1,9 +1,7 @@
-/// <reference path="./typings/index.d.ts" />
-// #!/usr/bin/env node
-// Edit JS: remove the <reference make the shenbang the top line in the file
-// Copies files rrom the AddIns directory (identified by the command line argument)
-// To the exercises/FlySharp directory
-import * as fs from "fs-extra";
+#!/usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs-extra");
 var SRC_DIR_ROOT = "C:\\Course2324\\AddIns\\";
 var TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp\\";
 let exercise = process.argv[2];

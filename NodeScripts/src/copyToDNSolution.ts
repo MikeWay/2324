@@ -1,5 +1,4 @@
-/// <reference path="./typings/index.d.ts" />
-// #!/usr/bin/env node
+#!/usr/bin/env node
 // Edit JS: remove the <reference make the shenbang the top line in the file
 import * as fs from "fs-extra";
 

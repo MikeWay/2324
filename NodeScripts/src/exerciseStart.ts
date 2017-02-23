@@ -1,5 +1,10 @@
 #!/usr/bin/env node
-var fs = requirejs('fs-extra')
+
+// Copies files rrom the AddIns directory (identified by the command line argument)
+// To the exercises/FlySharp directory
+
+import * as fs from "fs-extra";
+
 
 const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
