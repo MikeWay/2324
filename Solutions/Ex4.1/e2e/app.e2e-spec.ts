@@ -7,8 +7,8 @@ describe('fly-sharp App', function() {
     page = new FlySharpPage();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
+  // it('should display message saying app works', () => {
+  //   page.navigateTo();
+  //   expect(page.getParagraphText()).toEqual('Welcome to Fly Sharp');
+  // });
 });

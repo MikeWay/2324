@@ -23,4 +23,19 @@ describe('fly-sharp App', function() {
     page.clickToggle();
     expect(page.getNumTableRows()).toEqual(0);
   });
+
+  it('should show 9 columns in the table', () => {
+    page.navigateTo();
+    expect(page.getNumTableCols()).toEqual(9);
+  });  
+
+  it('flight number for 5th flight should be FS2211', () => {
+    page.navigateTo();
+    expect(page.getTableCellData('5','2')).toBe("FS2211");
+  })
+
+  it('destination for 5th flight should be LHR', () => {
+    page.navigateTo();
+    expect(page.getTableCellData('5','4')).toBe("LHR");
+  })  
 });

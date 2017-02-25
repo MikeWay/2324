@@ -1,3 +1,5 @@
+import { CurrencyConversionPipe } from './../currency/currency-conversion.pipe';
+import { ActivatedRoute } from '@angular/router';
 /* tslint:disable:no-unused-variable */
 
 
@@ -10,9 +12,7 @@ import {Flight} from "../model/flight";
 import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
 import { PaymentComponent } from '../payment/payment.component';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
-import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteStub } from '../router-stubs';
-import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 export class MockFlightsService {
@@ -29,9 +29,16 @@ export class MockFlightsService {
 
 }
 
-let activatedRoute = new ActivatedRouteStub();
-
 let mockFlightsService = new MockFlightsService();
+
+class MockActivatedRoute {
+    private subject = new BehaviorSubject(this.testParams);
+    params = this.subject.asObservable();
+
+    private testParams: {};
+}
+
+let mockActivatedRoute = new MockActivatedRoute();
 
 describe('Component: BuyFlight', () => {
   let comp: BuyFlightComponent;
@@ -43,9 +50,10 @@ describe('Component: BuyFlight', () => {
       declarations: [
         BuyFlightComponent, PaymentComponent, FlightFilterComponent, CurrencyConversionPipe
       ],
-      providers: [{provide: FlightsService,
-      useValue: mockFlightsService },
-      {provide : ActivatedRoute, useValue: activatedRoute}]
+      providers: [
+        {provide: FlightsService,useValue: mockFlightsService }, 
+        {provide:ActivatedRoute, useValue: mockActivatedRoute}
+      ]
 
     });
 
