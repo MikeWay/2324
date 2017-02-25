@@ -39,7 +39,7 @@ class MockPaymentComponent {
   @Input() selectedFlight;
 }
 
-let activatedRoute = new ActivatedRouteStub();
+let mockActivatedRoute = new ActivatedRouteStub();
 
 let mockFlightsService = new MockFlightsService();
 
@@ -51,11 +51,12 @@ describe('Component: BuyFlight', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BuyFlightComponent, FlightFilterComponent, CurrencyConversionPipe, MockPaymentComponent
+        BuyFlightComponent, FlightFilterComponent, CurrencyConversionPipe,MockPaymentComponent
       ],
-      providers: [{provide: FlightsService,
-      useValue: mockFlightsService },
-      {provide : ActivatedRoute, useValue: activatedRoute}]
+      providers: [
+        {provide: FlightsService,useValue: mockFlightsService }, 
+        {provide:ActivatedRoute, useValue: mockActivatedRoute}
+      ]
 
     });
 

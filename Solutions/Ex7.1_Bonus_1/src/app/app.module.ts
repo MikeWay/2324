@@ -8,9 +8,10 @@ import {HomeComponent} from "./home/home.component";
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 import { PaymentComponent } from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 import { AccountComponent } from './account/account.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
-import {routing} from "./app.routes";
 import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

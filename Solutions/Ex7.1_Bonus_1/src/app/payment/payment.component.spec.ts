@@ -1,6 +1,5 @@
 import { FormsModule } from '@angular/forms';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { Directive } from '@angular/core';
 import { PaymentComponent } from './payment.component';
 
 describe('PaymentComponent', () => {

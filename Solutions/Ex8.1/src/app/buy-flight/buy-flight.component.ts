@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {FlightsService} from "../services/flights.service";
 import {Flight} from "../model/flight";
 
@@ -14,11 +16,13 @@ export class BuyFlightComponent implements OnInit {
   errorMessage : string;
   selectedFlight : Flight;
 
-  originFilter : string = null;
-  destinationFilter : string = null;
+  originFilter : string = "";
+  destinationFilter : string = "";
+
+  conversionRate = 4.0;
 
 
-  constructor(private flightsService : FlightsService ){}
+  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -54,6 +58,8 @@ export class BuyFlightComponent implements OnInit {
           } else {
             return null;
           }
+        } else {
+          return flight;
         }
         // the filter expression stops empty elements being returned (drops the null elements)
       }).filter(x => !!x);
@@ -63,11 +69,12 @@ export class BuyFlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.flightsService.getFlights()
-        .subscribe(
-            (flights: Flight[])=>this._flights = flights,
-             (error: any)=>this.errorMessage = error
-        );
+    this.activatedRoute.params.subscribe(params => {
+      if(typeof params['origin'] !== 'undefined' ) {
+        this.originFilter = params['origin'];
+      }
+    });
+    this._flights = this.flightsService.getFlights();
   }
 }
 
