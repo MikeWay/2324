@@ -1,26 +1,23 @@
-import {Directive, ElementRef} from '@angular/core';
+import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[apptime]'
+  selector: '[appTime]'
 })
-export class TimeDirective {
+export class TimeDirective implements OnInit {
 
-  constructor(el : ElementRef) {
-    this.setStyle(el);
+  constructor(private el: ElementRef) {
     this.showTime(el);
-    setInterval(() => {
-      this.showTime(el);
-    }, 1000);
+    setInterval(()=>{this.showTime(el)}, 1000);
   }
 
-  private showTime(el: ElementRef){
-    let myDate =  new Date();
+  private showTime(el: ElementRef) {
+    let myDate = new Date();
     el.nativeElement.innerHTML = myDate.toLocaleTimeString("en-US");
   }
-  private setStyle(el: ElementRef){
-    el.nativeElement.style.fontSize = '2em';
-    el.nativeElement.style.marginTop = '0.2em';
-    el.nativeElement.style.float = 'right';
-  }
 
+  ngOnInit() {
+    this.el.nativeElement.style.fontSize = '2em';
+    this.el.nativeElement.style.marginTop = '0.2em';
+    this.el.nativeElement.style.float = 'right';
+  }
 }
