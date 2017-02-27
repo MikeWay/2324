@@ -1,9 +1,12 @@
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Component, Input } from '@angular/core';
 /* tslint:disable:no-unused-variable */
 
 
 import {BuyFlightComponent} from "./buy-flight.component";
 import {ComponentFixture, TestBed} from "@angular/core/testing";
-import { DebugElement, Component, Input } from '@angular/core';
+import {DebugElement} from "@angular/core";
 import {FlightsService} from "../services/flights.service";
 import {By} from "@angular/platform-browser";
 import {Flight} from "../model/flight";
@@ -16,11 +19,12 @@ import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
 
 
 export class MockFlightsService {
-
+  private subject = new BehaviorSubject(FLIGHTS);
+  flights = this.subject.asObservable();
   constructor() { }
 
-  public getFlights() : Flight[]{
-    return FLIGHTS;
+  public getFlights() : Observable<Flight[]>{
+    return this.flights;
   }
 
   public getMyFlights() : Flight[]{
@@ -29,9 +33,6 @@ export class MockFlightsService {
 
 }
 
-let activatedRoute = new ActivatedRouteStub();
-
-let mockFlightsService = new MockFlightsService();
 
 @Component({
     selector: 'app-payment',
@@ -41,6 +42,9 @@ class MockPaymentComponent {
   @Input() selectedFlight;
 }
 
+let mockActivatedRoute = new ActivatedRouteStub();
+
+let mockFlightsService = new MockFlightsService();
 
 describe('Component: BuyFlight', () => {
   let comp: BuyFlightComponent;
@@ -50,11 +54,12 @@ describe('Component: BuyFlight', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BuyFlightComponent, MockPaymentComponent, FlightFilterComponent, CurrencyConversionPipe
+        BuyFlightComponent, FlightFilterComponent, CurrencyConversionPipe,MockPaymentComponent
       ],
-      providers: [{provide: FlightsService,
-      useValue: mockFlightsService },
-      {provide : ActivatedRoute, useValue: activatedRoute}]
+      providers: [
+        {provide: FlightsService,useValue: mockFlightsService }, 
+        {provide:ActivatedRoute, useValue: mockActivatedRoute}
+      ]
 
     });
 
@@ -66,38 +71,33 @@ describe('Component: BuyFlight', () => {
     expect(comp).toBeTruthy();
   });
 
-  it('should default showBuyFlights to true', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is caled ', () => {
+    comp.onClickBuyFlights();
+    expect(comp.showBuyFlights).toBeTruthy();
+  });
+
+  it('should set showBuyFlights to false when onClickBuyFlights() is called twice', () => {
+    comp.onClickBuyFlights();
     comp.onClickBuyFlights();
     expect(comp.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
+
+  it('should set showBuyFlights to false when the link is clicked', () => {
+    el = fixture.debugElement.query(By.css('a'));
+    el.triggerEventHandler('click', null);
     expect(comp.showBuyFlights).toBeTruthy();
   });
 
   it('should hide the flights table  when the link is clicked', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
+    fixture.detectChanges();
+    let tableEle = fixture.debugElement.query(By.css('table'));
+    expect(tableEle).toBeTruthy();
+    el = fixture.debugElement.query(By.css('a'));
+    el.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    tableEle = fixture.debugElement.query(By.css('table'));
+    expect(tableEle).toBeFalsy();
   });
-
-  // it('should set showBuyFlights to false when the link is clicked', () => {
-  //   el = fixture.debugElement.query(By.css('a'));
-  //   el.triggerEventHandler('click', null);
-  //   expect(comp.showBuyFlights).toBeFalsy();
-  // });
-
-  // it('should hide the flights table  when the link is clicked', () => {
-  //   fixture.detectChanges();
-  //   let tableEle = fixture.debugElement.query(By.css('table'));
-  //   expect(tableEle).toBeTruthy();
-  //   el = fixture.debugElement.query(By.css('a'));
-  //   el.triggerEventHandler('click', null);
-  //   fixture.detectChanges();
-  //   tableEle = fixture.debugElement.query(By.css('table'));
-  //   expect(tableEle).toBeFalsy();
-  // });
 });
 
