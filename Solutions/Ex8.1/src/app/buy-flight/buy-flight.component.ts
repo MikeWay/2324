@@ -12,10 +12,10 @@ import {Flight} from "../model/flight";
 export class BuyFlightComponent implements OnInit {
 
   _flights : Flight[];
-  showBuyFlights = true;
-  errorMessage : string;
+  showBuyFlights = false;
   selectedFlight : Flight;
 
+  errorMessage : string;
   originFilter : string = "";
   destinationFilter : string = "";
 
@@ -74,7 +74,9 @@ export class BuyFlightComponent implements OnInit {
         this.originFilter = params['origin'];
       }
     });
-    this._flights = this.flightsService.getFlights();
+    this.flightsService.getFlights().subscribe(
+      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
+      (error : any)=>this.errorMessage = error);
   }
 }
 

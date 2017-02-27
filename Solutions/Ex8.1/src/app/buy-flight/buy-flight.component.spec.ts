@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Component, Input } from '@angular/core';
 /* tslint:disable:no-unused-variable */
 
@@ -17,11 +19,12 @@ import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
 
 
 export class MockFlightsService {
-
+  private subject = new BehaviorSubject(FLIGHTS);
+  flights = this.subject.asObservable();
   constructor() { }
 
-  public getFlights() : Flight[]{
-    return FLIGHTS;
+  public getFlights() : Observable<Flight[]>{
+    return this.flights;
   }
 
   public getMyFlights() : Flight[]{
@@ -68,27 +71,22 @@ describe('Component: BuyFlight', () => {
     expect(comp).toBeTruthy();
   });
 
-  it('should default showBuyFlights to true', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is caled ', () => {
+    comp.onClickBuyFlights();
+    expect(comp.showBuyFlights).toBeTruthy();
+  });
+
+  it('should set showBuyFlights to false when onClickBuyFlights() is called twice', () => {
+    comp.onClickBuyFlights();
     comp.onClickBuyFlights();
     expect(comp.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
-  });
-
-  it('should hide the flights table  when the link is clicked', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
-  });
 
   it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
-    expect(comp.showBuyFlights).toBeFalsy();
+    expect(comp.showBuyFlights).toBeTruthy();
   });
 
   it('should hide the flights table  when the link is clicked', () => {

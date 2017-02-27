@@ -12,7 +12,9 @@ export class FlightsService {
   public getFlights() : Observable<Flight[]>{
     let url = "http://localhost:8080/flightserver/flights";
     let resultObservable = this.http.get(url).catch(this.handleError);
-    let flightResults = resultObservable.map(res => <Flight[]> res.json());
+    let flightResults = resultObservable.map(
+      res => <Flight[]> res.json()
+    );
     return flightResults;
   }
 
