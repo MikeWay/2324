@@ -12,9 +12,9 @@ describe('fly-sharp App', function() {
     expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
-  it('should show 100 rows in the table', () => {
+  it('should show 20 rows in the table', () => {
     page.navigateToTab('buy');
-    expect(page.getNumTableRows()).toEqual(100);
+    expect(page.getNumTableRows()).toEqual(20);
   });
 
 

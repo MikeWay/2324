@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
-import {Flight} from "../model/flight";
+import { FlightsService } from "../services/flights.service";
+import { Flight } from "../model/flight";
 
 @Component({
   selector: 'app-buy-flight',
@@ -11,19 +11,20 @@ import {Flight} from "../model/flight";
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights : Flight[];
+  _flights: Flight[];
   showBuyFlights = false;
-  selectedFlight : Flight;
+  selectedFlight: Flight;
+  numFlights: number;
 
-  errorMessage : string;
-  originFilter : string = "";
-  destinationFilter : string = "";
+  errorMessage: string;
+  originFilter: string = "";
+  destinationFilter: string = "";
 
   conversionRate = 4.0;
-  nextFlightIndex = 20;
+  private nextFlightIndex = 20;
 
 
-  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -34,11 +35,11 @@ export class BuyFlightComponent implements OnInit {
   }
 
 
-  onClickBuyFlights(){
+  onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  private onFlightClick(flight : Flight){
+  private onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
   }
 
@@ -46,10 +47,10 @@ export class BuyFlightComponent implements OnInit {
     if (this.originFilter != null || this.destinationFilter != null) {
       return this._flights.map((flight) => {
         let match = true;
-        if(this.originFilter != null) {
+        if (this.originFilter != null) {
           match = flight.origin.startsWith(this.originFilter);
         }
-        if(!match){
+        if (!match) {
           return null;
         }
         if (match && this.destinationFilter != null) {
@@ -70,22 +71,46 @@ export class BuyFlightComponent implements OnInit {
   }
 
 
-  onNext(){
-     this.flightsService.getChunkOfFlights(this.nextFlightIndex += 20,20).subscribe(
-      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
-      (error : any)=>this.errorMessage = error);     
-  }   
-  
+  onNext() {
+
+    let numFlights = 20;
+    if (this.nextFlightIndex + numFlights > this.numFlights) {
+      numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
+    }
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
+      (error: any) => this.errorMessage = error);
+    if (this.nextFlightIndex <= this.numFlights) {
+      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
+    }
+  }
+
+  onPrevious() {
+      // Don't load flights pre 0
+    if (this.nextFlightIndex > 20) {
+      this.nextFlightIndex -= 20;
+    } else {
+      this.nextFlightIndex = 0;
+    }
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
+      (error: any) => this.errorMessage = error);
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if(typeof params['origin'] !== 'undefined' ) {
+      if (typeof params['origin'] !== 'undefined') {
         this.originFilter = params['origin'];
       }
     });
-    this.flightsService.getChunkOfFlights(0,20).subscribe(
-      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
-      (error : any)=>this.errorMessage = error);
+    this.flightsService.getChunkOfFlights(0, 20).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
+      (error: any) => this.errorMessage = error);
+
+      // Get the number of flights available
+    this.flightsService.getNumberOfFlights().subscribe(
+      num => this.numFlights = num,
+      (error: any) => this.errorMessage = error)
   }
 }
 

@@ -21,14 +21,25 @@ import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
 export class MockFlightsService {
   private subject = new BehaviorSubject(FLIGHTS);
   flights = this.subject.asObservable();
+  private numFlights = new BehaviorSubject(10);
+  numFlightsObs = this.numFlights.asObservable();
   constructor() { }
 
   public getFlights() : Observable<Flight[]>{
     return this.flights;
   }
 
+  public getChunkOfFlights(start : number, num : number) : Observable<Flight[]>{
+    return this.flights;
+  }  
+
   public getMyFlights() : Flight[]{
     return MYFLIGHTS;
+  }
+
+  public getNumberOfFlights() : Observable<number>{
+    return this.numFlightsObs;
+
   }
 
 }

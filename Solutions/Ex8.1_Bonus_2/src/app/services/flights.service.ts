@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class FlightsService {
 
-  private headers = new Headers({'Content-Type': 'application/json'}); ///
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 
@@ -21,14 +21,17 @@ export class FlightsService {
   }
 
 
+	
   public getChunkOfFlights(start: number, num : number) : Observable<Flight[]>{
-
     let url = "http://localhost:8080/flightserver/flights";
     let data = new RequestData(start, num);
-
     return this.http.post(url, JSON.stringify(data), {headers: this.headers}).catch(this.handleError)
         .map(res => <Flight[]> res.json());
+  }
 
+  public getNumberOfFlights() : Observable<number>{
+    let url = "http://localhost:8080/flightserver/numflights";
+    return this.http.get(url).catch(this.handleError).map(res => <number> res.json());
   }
 
   public getMyFlights() : Flight[]{

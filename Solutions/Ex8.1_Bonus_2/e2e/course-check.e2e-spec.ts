@@ -39,9 +39,9 @@ describe('Validate exercise 8.1 start', function() {
     expect(page.getFlightTableRows()).toBe(0);
   });    
 
-  it('should have a 100 flights (plus header) displayed', () => {
+  it('should have a 20 flights (plus header) displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(101);
+    expect(page.getFlightTableRows()).toBe(21);
   });      
 
 
@@ -96,6 +96,7 @@ describe('Validate exercise 8.1 start', function() {
 
   it('should have a Payment Component when the buy button is pressed', () => {
     page.navigateToTab('buy');
+    debugger;
     page.clickBuyFlightButton();
     expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();  
   });     

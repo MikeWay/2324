@@ -66,7 +66,7 @@ export class FlySharpCourseCheckPage {
   }
 
   clickBuyFlightButton(){
-    element(by.css('app-buy-flight button')).click();
+    element(by.css('app-buy-flight table button')).click();
   }
 
   getPaymentForm(){
