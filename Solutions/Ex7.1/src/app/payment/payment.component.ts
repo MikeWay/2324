@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Flight} from "../model/flight";
-import {Input} from "@angular/core/src/metadata/directives";
+import {Input} from "@angular/core";
 import {Payment} from "../model/payment";
 
 @Component({

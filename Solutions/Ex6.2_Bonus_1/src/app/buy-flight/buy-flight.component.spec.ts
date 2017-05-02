@@ -32,10 +32,13 @@ export class MockFlightsService {
 let mockFlightsService = new MockFlightsService();
 
 class MockActivatedRoute {
+
+    private testParams: {};
+    
     private subject = new BehaviorSubject(this.testParams);
     params = this.subject.asObservable();
 
-    private testParams: {};
+    
 }
 
 let mockActivatedRoute = new MockActivatedRoute();

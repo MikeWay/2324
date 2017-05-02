@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
-import {Output} from "@angular/core/src/metadata/directives";
+import {Output} from "@angular/core";
 
 @Component({
   selector: 'app-flight-filter',
