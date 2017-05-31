@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.1.6.2 (Linux)"/>
+	<meta name="created" content="2017-05-31T18:37:39.340056339"/>
+	<meta name="changed" content="2017-05-31T19:18:05.419068584"/>
+	<style type="text/css">
+		@page { margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 120% }
+		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt }
+		h2.cjk { font-family: "Noto Sans CJK SC Regular"; font-size: 16pt }
+		h2.ctl { font-family: "FreeSans"; font-size: 16pt }
+		h1 { margin-bottom: 0.21cm }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt }
+		h1.cjk { font-family: "Noto Sans CJK SC Regular"; font-size: 18pt }
+		h1.ctl { font-family: "FreeSans"; font-size: 18pt }
+		h3.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt }
+		h3.cjk { font-family: "Noto Sans CJK SC Regular"; font-size: 14pt }
+		h3.ctl { font-family: "FreeSans"; font-size: 14pt }
+		a:link { so-language: zxx }
+	</style>
+</head>
+<body lang="en-GB" dir="ltr">
+<h1 class="western">Unofficial Bonus Exercise</h1>
+<p><br/>
+<br/>
+
+</p>
+<h3 class="western">Objective:</h3>
+<p>Migrate an Angular JS component to Angular 2 ao that both Angular
+JS and  Angular 2 components run in the same application.</p>
+<ul>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">git
+	clone <a href="https://github.com/vsavkin/ng1ng2router.git">https://github.com/vsavkin/ng1ng2router.git</a></font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Open
+	ng1ng2router in an editor. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">In a terminal
+	window:</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">npm
+	install</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">npm
+	start</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><a href="http://localhost:8080/">http://localhost:8080/</a></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Click inbox –
+	This is an AngularJS component we will migrate</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Click on a
+	message This is an Angular 2 component</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><a href="http://localhost:8080/settings">http://localhost:8080/settings</a></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">These are all
+	A2 components</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Open
+	<font face="Courier New, monospace">ng1ng2router/src/messages/message_text_cmp.ts</font>
+	– this is an Angular 2 component we can use as a template</p>
+</ul>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">Create a new MessagesComponent</h2>
+<ul>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Create a new
+	file: <font face="Courier New, monospace">ng1ng2router/src/messages/messages_cmp_a2.ts</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Copy the
+	content of  <font face="Courier New, monospace">message_text_cmp.ts</font>
+	into it as a starting point.</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Change the
+	class name in <font face="Courier New, monospace">messages_cmp_a2.ts</font>
+	to <font face="Courier New, monospace">MessagesComponent</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Copy the
+	template from <font face="Courier New, monospace">MessagesCmp</font>
+	and replace the template in your <font face="Courier New, monospace">MessagesComponent</font>.
+	Replace the content of the <font face="Courier New, monospace">&lt;h1&gt;</font>
+	tag with &quot;<font face="Courier New, monospace">Messages from
+	Angular 2</font>&quot;.</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Copy the
+	content of the <font face="Courier New, monospace">MessagesController</font>
+	to your new class (replacing the old class content)</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Remove
+	<font face="Courier New, monospace">$routeParams</font> from the
+	constructor</p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Change the
+	initialisation of this.folder to be &quot;<font face="Courier New, monospace">inbox</font>&quot;</p>
+</ul>
+<p style="margin-bottom: 0cm; line-height: 100%">Hint:</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">export
+class MessageTextCmp {</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">folder:
+string;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">messages:
+Message[];</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">constructor(
+repository: Repository) {</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">this.folder
+= &quot;inbox&quot;;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">this.messages
+= repository.messagesFor(this.folder);</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"> <font face="Courier New, monospace">}</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">}</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<ul>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Fix the
+	template (replace <font face="Courier New, monospace">ng-repeat</font>
+	with <font face="Courier New, monospace">*ngFor</font> and remove
+	the reference to ctrl)</p>
+</ul>
+<p style="margin-bottom: 0cm; line-height: 100%">Hint:</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;h1&gt;Messages
+from Angular 2&lt;/h1&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;ul&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;li
+*ngFor=&quot;m in messages&quot;&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">{{m.id}}
+- &lt;a href=&quot;/messages/{{folder}}/{{m.id}}&quot;&gt;{{m.text}}&lt;/a&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;/li&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;/ul&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;a
+href=&quot;/settings/pagesize&quot;&gt;Change Page Size&lt;/a&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">&lt;a
+href=&quot;/&quot;&gt;Back&lt;/a&gt;</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%">Comment out all the
+code in <font face="Courier New, monospace">messages_cmp.ts</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">Update the Module</h2>
+<p><br/>
+<br/>
+
+</p>
+<ul>
+	<li/>
+<p>Open <font face="Courier New, monospace">ng1ng2router/src/messages/index.ts</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Remove any
+	code related to <font face="Courier New, monospace">MessagesCmp</font>
+	add <font face="Courier New, monospace">MessagesComponent</font> to
+	the declarations section of <font face="Courier New, monospace">NgModule</font></p>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">Add an
+	<font face="Courier New, monospace">imports</font> section as shown
+	to the <font face="Courier New, monospace">NgModule</font>:</p>
+</ul>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%">  <font face="Courier New, monospace">imports
+: [   CommonModule,</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">  
+<font face="Courier New, monospace">RouterModule.forChild([</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%">      <font face="Courier New, monospace">{
+path: 'messages',  component: MessagesComponent },</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%">    <font face="Courier New, monospace">])],</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<ul>
+	<li/>
+<p style="margin-bottom: 0cm; line-height: 100%">At the bottom
+	of the file, duplicate the <font face="Courier New, monospace">MessagesModule.directive
+	</font>section and modify it to define the MessagesComponent. (There
+	are no inputs).</p>
+</ul>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%">Hint:</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">MessagesModule.directive('messages',
+&lt;any&gt;downgradeComponent({</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">component:
+MessagesComponent</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><font face="Courier New, monospace">}));</font></p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">Build and Test</h2>
+<ul>
+	<li/>
+<p>Stop the npm process which you started at the beginning of
+	the exercise (CTRL+C).</p>
+	<li/>
+<p>Run <font face="Courier New, monospace">npm start</font>
+	again. This should build the project.</p>
+	<li/>
+<p>Fix any errors</p>
+	<li/>
+<p>Stop the npm start process and try again.</p>
+</ul>
+<p><br/>
+<br/>
+
+</p>
+<h2 class="western">Super Bonus</h2>
+<p>We hard-coded the folder to be inbox. Figure out to retreive the
+folder from the path.</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0cm; line-height: 100%"><br/>
+
+</p>
+</body>
+</html>
