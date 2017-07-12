@@ -27,11 +27,13 @@ Installing the Flights Service as a Service
 
 2) From $COURSE_HOME/server/course2324-node-server run: npm link node-windows
 
-3) From $COURSE_HOME/server/course2324-node-server run npm build
+3) From $COURSE_HOME/server/course2324-node-server run: npm install
 
-4) From $COURSE_HOME/server/course2324-node-server run node install.js
+4) From $COURSE_HOME/server/course2324-node-server run npm build
 
-5) Go to localhost:8080 and check you see: "REST data is served from /flightserver/flights"
+5) From $COURSE_HOME/server/course2324-node-server run node install.js
+
+6) Go to localhost:8080 and check you see: "REST data is served from /flightserver/flights"
 
 
 HISTORIC Setting up the environment

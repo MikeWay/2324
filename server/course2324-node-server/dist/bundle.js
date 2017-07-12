@@ -118,7 +118,8 @@ const app = new Koa();
 
 //let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
 log.info("Starting Flight Service...");
-let flightsAsJSON = __WEBPACK_IMPORTED_MODULE_6_fs___default.a.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
+let flightsAsJSON = __WEBPACK_IMPORTED_MODULE_6_fs___default.a.readFileSync('./data/flights.json', 'utf8');
+//let flightsAsJSON = fs.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
 let flights = JSON.parse(flightsAsJSON);
 
 const router = new __WEBPACK_IMPORTED_MODULE_3_koa_router___default.a();
@@ -131,7 +132,7 @@ const router = new __WEBPACK_IMPORTED_MODULE_3_koa_router___default.a();
   //ctx.body = 'Hello World';
 router.get('/flightserver(sec)?/allflights', async ctx => {  
   console.log("GET: allflights");
-  await __WEBPACK_IMPORTED_MODULE_2_koa_send___default.a(ctx, './data/flights.json');
+  await __WEBPACK_IMPORTED_MODULE_2_koa_send___default()(ctx, './data/flights.json');
 });
 
 router.get('/flightserver(sec)?/flights', async ctx => {  
@@ -158,7 +159,7 @@ router.get('/', ctx => {
 
 
 app
-  .use(__WEBPACK_IMPORTED_MODULE_4_koa_cors___default.a())
+  .use(__WEBPACK_IMPORTED_MODULE_4_koa_cors___default()())
   .use(router.routes());
   
 

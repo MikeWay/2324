@@ -20,7 +20,8 @@ const app = new Koa();
 
 //let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
 log.info("Starting Flight Service...");
-let flightsAsJSON = fs.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
+let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
+//let flightsAsJSON = fs.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
 let flights = JSON.parse(flightsAsJSON);
 
 const router = new Router();
