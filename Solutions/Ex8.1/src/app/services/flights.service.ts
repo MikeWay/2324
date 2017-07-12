@@ -24,6 +24,6 @@ export class FlightsService {
 
   private handleError (error: Response) {
     console.error("Server Error" + error);
-    return Observable.throw(error.json().errorMessage || 'Server error - is the REST server running?');
+    return Observable.throw(error.json().body || 'Server error - is the REST server running?');
   }
 }

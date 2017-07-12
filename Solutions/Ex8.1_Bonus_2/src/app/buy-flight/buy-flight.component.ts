@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { FlightsService } from "../services/flights.service";
-import { Flight } from "../model/flight";
+import {FlightsService} from "../services/flights.service";
+import {Flight} from "../model/flight";
 
 @Component({
   selector: 'app-buy-flight',
@@ -11,20 +11,20 @@ import { Flight } from "../model/flight";
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights: Flight[];
+  _flights : Flight[];
   showBuyFlights = false;
-  selectedFlight: Flight;
-  numFlights: number;
+  selectedFlight : Flight;
 
-  errorMessage: string;
-  originFilter: string = "";
-  destinationFilter: string = "";
+  originFilter : string = "";
+  destinationFilter : string = "";
 
   conversionRate = 4.0;
-  private nextFlightIndex = 20;
+  errorMessage = "";
+  nextFlightIndex = 20;
+  numFlights=0;
 
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -35,41 +35,13 @@ export class BuyFlightComponent implements OnInit {
   }
 
 
-  onClickBuyFlights() {
+  onClickBuyFlights(){
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  private onFlightClick(flight: Flight) {
+  private onFlightClick(flight : Flight){
     this.selectedFlight = flight;
   }
-
-  get flights(): Flight[] {
-    if (this.originFilter != null || this.destinationFilter != null) {
-      return this._flights.map((flight) => {
-        let match = true;
-        if (this.originFilter != null) {
-          match = flight.origin.startsWith(this.originFilter);
-        }
-        if (!match) {
-          return null;
-        }
-        if (match && this.destinationFilter != null) {
-          match = flight.destination.startsWith(this.destinationFilter);
-          if (match) {
-            return flight;
-          } else {
-            return null;
-          }
-        } else {
-          return flight;
-        }
-        // the filter expression stops empty elements being returned (drops the null elements)
-      }).filter(x => !!x);
-    } else {
-      return this._flights;
-    }
-  }
-
 
   onNext() {
 
@@ -97,20 +69,47 @@ export class BuyFlightComponent implements OnInit {
       (error: any) => this.errorMessage = error);
   }
 
+  get flights(): Flight[] {
+    if (this.originFilter != null || this.destinationFilter != null) {
+      return this._flights.map((flight) => {
+        let match = true;
+        if(this.originFilter != null) {
+          match = flight.origin.startsWith(this.originFilter);
+        }
+        if(!match){
+          return null;
+        }
+        if (match && this.destinationFilter != null) {
+          match = flight.destination.startsWith(this.destinationFilter);
+          if (match) {
+            return flight;
+          } else {
+            return null;
+          }
+        } else {
+          return flight;
+        }
+        // the filter expression stops empty elements being returned (drops the null elements)
+      }).filter(x => !!x);
+    } else {
+      return this._flights;
+    }
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if (typeof params['origin'] !== 'undefined') {
+      if(typeof params['origin'] !== 'undefined' ) {
         this.originFilter = params['origin'];
       }
     });
-    this.flightsService.getChunkOfFlights(0, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: any) => this.errorMessage = error);
-
+    this.flightsService.getChunkOfFlights(0,20).subscribe(
+      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
+      (error : any)=>this.errorMessage = error
+    );
       // Get the number of flights available
     this.flightsService.getNumberOfFlights().subscribe(
       num => this.numFlights = num,
-      (error: any) => this.errorMessage = error)
+      (error: any) => this.errorMessage = error)    
   }
 }
 

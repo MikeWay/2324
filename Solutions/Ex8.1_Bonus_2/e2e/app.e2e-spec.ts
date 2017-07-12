@@ -12,9 +12,9 @@ describe('fly-sharp App', function() {
     expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
-  it('should show 20 rows in the table', () => {
+  it('should show 5 rows in the table', () => {
     page.navigateToTab('buy');
-    expect(page.getNumTableRows()).toEqual(20);
+    expect(page.getNumTableRows()).toEqual(5);
   });
 
 
@@ -29,13 +29,13 @@ describe('fly-sharp App', function() {
     expect(page.getNumTableCols()).toEqual(9);
   });  
 
-  it('flight number for 5th flight should be 114', () => {
+  it('flight number for 5th flight should be FS2211', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','2')).toBe("114");
+    expect(page.getTableCellData('5','2')).toBe("FS2211");
   })
 
-  it('destination for 5th flight should be JFK', () => {
+  it('destination for 5th flight should be LHR', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','4')).toBe("JFK");
+    expect(page.getTableCellData('5','4')).toBe("LHR");
   })  
 });

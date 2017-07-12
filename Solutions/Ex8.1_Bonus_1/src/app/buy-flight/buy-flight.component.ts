@@ -15,11 +15,11 @@ export class BuyFlightComponent implements OnInit {
   showBuyFlights = false;
   selectedFlight : Flight;
 
-  errorMessage : string;
   originFilter : string = "";
   destinationFilter : string = "";
 
   conversionRate = 4.0;
+  errorMessage = "";
 
 
   constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
@@ -76,7 +76,8 @@ export class BuyFlightComponent implements OnInit {
     });
     this.flightsService.getFlights().subscribe(
       (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
-      (error : any)=>this.errorMessage = error);
+      (error : any)=>this.errorMessage = error
+    );
   }
 }
 

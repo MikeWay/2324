@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack && node dist/bundle.js",
+    "build": "webpack",
     "debug": "webpack && node --inspect dist/bundle.js"
   },
   "author": "Mike Way",
@@ -15,6 +16,7 @@
     "koa-basic-auth": "^2.0.0",
     "koa-body": "^2.3.0",
     "koa-cors": "0.0.16",
+    "koa-mount": "^3.0.0",
     "koa-router": "^7.2.1",
     "koa-send": "^4.1.0",
     "koa-static": "^3.0.0"

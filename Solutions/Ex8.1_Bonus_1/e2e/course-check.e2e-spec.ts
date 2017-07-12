@@ -39,9 +39,9 @@ describe('Validate exercise 8.1 start', function() {
     expect(page.getFlightTableRows()).toBe(0);
   });    
 
-  it('should have a 100 flights (plus header) displayed', () => {
+  it('should have a 5 flights displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(101);
+    expect(page.getFlightTableRows()).toBe(6);
   });      
 
 

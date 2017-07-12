@@ -1,6 +1,6 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 9.1 start', function() {
+describe('Validate exercise 8.1 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -39,9 +39,9 @@ describe('Validate exercise 9.1 start', function() {
     expect(page.getFlightTableRows()).toBe(0);
   });    
 
-  it('should have a 20 flights (plus header) displayed', () => {
+  it('should have a 5 flights displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(21);
+    expect(page.getFlightTableRows()).toBe(6);
   });      
 
 
@@ -96,7 +96,6 @@ describe('Validate exercise 9.1 start', function() {
 
   it('should have a Payment Component when the buy button is pressed', () => {
     page.navigateToTab('buy');
-    debugger;
     page.clickBuyFlightButton();
     expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();  
   });     

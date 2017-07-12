@@ -90,6 +90,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_body___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_body__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_fs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_fs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_basic_auth__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_basic_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_basic_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_koa_mount__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_koa_mount___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_koa_mount__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_node_windows__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_node_windows___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_node_windows__);
 
 
 
@@ -97,6 +103,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+
+// For the windows event log
+
+var log = new __WEBPACK_IMPORTED_MODULE_9_node_windows__["EventLogger"]('Flight Service');
 
 
 const Koa = __webpack_require__(0);
@@ -104,33 +116,44 @@ const koaBody = new __WEBPACK_IMPORTED_MODULE_5_koa_body___default.a();
 const app = new Koa();
 
 
-let flightsAsJSON = __WEBPACK_IMPORTED_MODULE_6_fs___default.a.readFileSync('./data/flights.json', 'utf8');
+//let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
+log.info("Starting Flight Service...");
+let flightsAsJSON = __WEBPACK_IMPORTED_MODULE_6_fs___default.a.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
 let flights = JSON.parse(flightsAsJSON);
 
 const router = new __WEBPACK_IMPORTED_MODULE_3_koa_router___default.a();
 
+// This enables authentication for all requests with a path startgin /flightserversec
+//app.use(mount('/flightserversec', auth({ name: 'tobi', pass: 'ferret' })));
 
-router.get('/flightserver/flights', async ctx => {
+
+//router.get('flightserver(sec)?\/flights', async ctx => {
   //ctx.body = 'Hello World';
-  await __WEBPACK_IMPORTED_MODULE_2_koa_send___default.a(ctx, '/data/flights.json');
+router.get('/flightserver(sec)?/allflights', async ctx => {  
+  console.log("GET: allflights");
+  await __WEBPACK_IMPORTED_MODULE_2_koa_send___default.a(ctx, './data/flights.json');
 });
 
-router.post('/flightserver/flights', koaBody, async ctx => {
+router.get('/flightserver(sec)?/flights', async ctx => {  
+  console.log("GET: flights");
+  ctx.body = JSON.stringify(flights.slice(0, 10));
+});
 
-  //ctx.body = 'Hello World';
-  console.log("REQUEST: BODY", ctx.request.body);
+
+router.post('/flightserver(sec)?/flights', koaBody, async ctx => {
   let args = ctx.request.body;
+  console.log("REQUEST: BODY", args);
   ctx.body = JSON.stringify(flights.slice(args.start, args.start + args.num));
-  //await send(ctx, '/data/flights.json');
 });
 
-router.get('/flightserver/numflights', async ctx => {
+router.get('/flightserver(sec)?/numflights', async ctx => {
   //ctx.body = 'Hello World';
-  ctx.body= '10';
+    console.log("GET: numflights");
+  ctx.body= flights.length;
 });
 
 router.get('/', ctx => {
-     ctx.body = "REST data is served from /flightserver/flights";
+     ctx.body = "REST data is served from /flightserver/allflights";
 });
 
 
@@ -145,6 +168,7 @@ app.listen(8080);
 
 
 //http://localhost:8080/flightserver/numflights
+
 
 /***/ }),
 /* 2 */
@@ -181,6 +205,24 @@ module.exports = require("koa-body");
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-basic-auth");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("koa-mount");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("node-windows");
 
 /***/ })
 /******/ ]);
