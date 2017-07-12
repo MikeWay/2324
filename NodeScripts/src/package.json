@@ -4,12 +4,12 @@
   "description": "A command line tool for copying exercise files",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "tsc"
   },
   "author": "mikeway@webwrights.co.uk",
   "license": "Apache-2.0",
   "bin": {
-    "wobble": "./index.js",
     "cpAddIns": "./copyAddIns.js",
     "cpToDNSolution": "./copyToDNSolution.js",
     "cpToSolution": "./copyToSolution.js",

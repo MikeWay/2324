@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 // Copies files rrom the AddIns directory (identified by the command line argument)
 // To the exercises/FlySharp directory
 

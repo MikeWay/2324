@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// Edit JS: remove the <reference make the shenbang the top line in the file
 import * as fs from "fs-extra";
 
 var SRC_DIR_ROOT = "C:\\Course2324\\DoNows\\";

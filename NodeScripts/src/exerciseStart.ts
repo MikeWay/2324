@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 // Copies files rrom the AddIns directory (identified by the command line argument)
 // To the exercises/FlySharp directory
 
@@ -18,7 +17,8 @@ const EX_MAPPINGS = {
     "Ex7.1": "Ex6.2_Bonus_3",
     "Ex7.2": "Ex7.1_Bonus_1",
     "Ex8.1": "Ex7.2_Bonus_1",
-    "Ex9.1": "Ex8.1_Bonus_2"
+    "Ex9.1": "Ex8.1_Bonus_2",
+	"Final": "Ex9.1_Bonus_1"
 };
 
 /*
@@ -93,6 +93,12 @@ if(process.argv.length < 3){
   console.log("Initialises an exercise to a standard start point");
   console.log("Usage exStart [Exercise Number].");
   console.log("You must supply an exercise number to copy from");
+  console.log("Available exercise starts are:");
+  for (let exName in EX_MAPPINGS){
+	  if (EX_MAPPINGS.hasOwnProperty(exName)) {
+		console.log(exName);
+	  }
+  }
   process.exit(1);
 }
 
