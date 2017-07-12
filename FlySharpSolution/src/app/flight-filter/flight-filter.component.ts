@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
-import {Output, Input} from "@angular/core/src/metadata/directives";
+import {Output, Input} from "@angular/core";
 
 @Component({
   selector: 'app-flight-filter',
@@ -9,6 +9,10 @@ import {Output, Input} from "@angular/core/src/metadata/directives";
 export class FlightFilterComponent implements OnInit {
   @Input()
   label : string;
+
+  @Input()
+  initialValue : string = "";
+  
   @Output()
   onFilter = new EventEmitter<string>();
   constructor() { }
@@ -16,7 +20,7 @@ export class FlightFilterComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onFilterEnter( filterValue : string){
+  onFilterEnter( filterValue : string){
     this.onFilter.emit(filterValue);
   }
 }

@@ -9,7 +9,7 @@ import {FlightsService} from "../services/flights.service";
   styleUrls: ['./my-flights.component.css']
 })
 export class MyFlightsComponent implements OnInit {
-  private flights : Flight[];
+  flights : Flight[];
   private selectedFlight : Flight;
 
   constructor(private flightService: FlightsService) {}

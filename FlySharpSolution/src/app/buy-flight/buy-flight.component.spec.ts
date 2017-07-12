@@ -1,3 +1,4 @@
+import { Component, Input } from '@angular/core';
 /* tslint:disable:no-unused-variable */
 
 
@@ -8,6 +9,11 @@ import {FlightsService} from "../services/flights.service";
 import {By} from "@angular/platform-browser";
 import {Flight} from "../model/flight";
 import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
+import { PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '../router-stubs';
+import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
 
 
 export class MockFlightsService {
@@ -24,6 +30,17 @@ export class MockFlightsService {
 
 }
 
+
+@Component({
+    selector: 'app-payment',
+  template: '',
+})
+class MockPaymentComponent {
+  @Input() selectedFlight;
+}
+
+let mockActivatedRoute = new ActivatedRouteStub();
+
 let mockFlightsService = new MockFlightsService();
 
 describe('Component: BuyFlight', () => {
@@ -34,10 +51,12 @@ describe('Component: BuyFlight', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        BuyFlightComponent
+        BuyFlightComponent, FlightFilterComponent, CurrencyConversionPipe,MockPaymentComponent
       ],
-      providers: [{provide: FlightsService,
-      useValue: mockFlightsService }]
+      providers: [
+        {provide: FlightsService,useValue: mockFlightsService }, 
+        {provide:ActivatedRoute, useValue: mockActivatedRoute}
+      ]
 
     });
 

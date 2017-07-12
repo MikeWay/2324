@@ -6,17 +6,32 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class FlightsService {
-
+  private headers = new Headers({'Content-Type': 'application/json'});
+  
   constructor(private http: Http) { }
 
-  public getFlights() : Observable<Flight[]>{
-    let url = "http://localhost:8080/flightserver/flights";
-
-    let resultObservable = this.http.get(url).catch(this.handleError);
-    let flightResults = resultObservable.map(res => <Flight[]> res.json());
-    return flightResults;
+  public getFlights(): Observable<Flight[]> {
+    let url = "http://localhost:8080/flightserver/allflights";
+    let resultObservable = this.http.get(url)
+                                    .catch(this.handleError);
+    let flightResults = resultObservable.map(res => <Flight[]> res.json());      
+    return flightResults;                              
   }
 
+
+  public getChunkOfFlights( start: number, num: number): Observable<Flight[]> {
+    let url = "http://localhost:8080/flightserver/flights";
+    let data = {start, num};
+    let resultObservable = this.http.post(url, JSON.stringify(data), {headers: this.headers})
+                                                                       .catch(this.handleError);
+    let flightResults = resultObservable.map(res => <Flight[]> res.json());      
+    return flightResults;                              
+  }
+
+  public getNumberOfFlights() : Observable<number>{
+    let url = "http://localhost:8080/flightserver/numflights";
+    return this.http.get(url).catch(this.handleError).map(res => <number> res.json());
+  }
 
 /**
  * An alternative version of the getFlights method which communicates with an endpoint which requires basic authentication
