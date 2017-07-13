@@ -2,10 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { ForecastComponent } from './forecast';
 
 @NgModule({
   declarations: [
-    AppComponent 
+    AppComponent, ForecastComponent
   ],
   imports: [
     BrowserModule
