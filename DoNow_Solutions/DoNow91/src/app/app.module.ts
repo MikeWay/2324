@@ -3,7 +3,8 @@ import {PreferencesFormComponent} from "./preferences-form/preferences-form.comp
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {NgModule} from "@angular/core/src/metadata/ng_module";
+import {NgModule} from "@angular/core";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {NgModule} from "@angular/core/src/metadata/ng_module";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
