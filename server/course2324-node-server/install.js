@@ -29,6 +29,7 @@ var svc = new Service({
 // Listen for the "install" event, which indicates the
 // process is available as a service.
 svc.on('install',function(){
+  console.log('Starting service.');
   svc.start();
 });
 
@@ -38,7 +39,9 @@ svc.on('uninstall',function(){
 });
 
 if(uninstall){
+	console.log('Uninstalling service.');
     svc.uninstall();
 } else {
+	console.log('Installing service.');
     svc.install();
 }

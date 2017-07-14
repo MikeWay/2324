@@ -1,10 +1,15 @@
+import { browser } from 'protractor';
+
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 9.1 start', function() {
+describe('Validate Final Exercise', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
     page = new FlySharpCourseCheckPage();
+    // The time directive causes the waitForAngular function to fail! 
+    // This is a work-around. IMHO: it's dangerous    
+    browser.waitForAngularEnabled(false);
   });
 
   it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
@@ -27,19 +32,19 @@ describe('Validate exercise 9.1 start', function() {
     expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
       
-  it('should have a Toggle Flights button', () => {
-    page.navigateToTab('buy');
+  // it('should have a Toggle Flights button', () => {
+  //   page.navigateToTab('buy');
 
-    expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
-  });    
+  //   expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
+  // });    
 
-  it('should have a 0 flights displayed', () => {
-    page.navigateToTab('buy');
-    page.clickToggleFlights();
-    expect(page.getFlightTableRows()).toBe(0);
-  });    
+  // it('should have a 0 flights displayed', () => {
+  //   page.navigateToTab('buy');
+  //   page.clickToggleFlights();
+  //   expect(page.getFlightTableRows()).toBe(0);
+  // });    
 
-  it('should have a 20 flights (plus header) displayed', () => {
+  it('should have a 20 flights displayed', () => {
     page.navigateToTab('buy'); 
     expect(page.getFlightTableRows()).toBe(21);
   });      
@@ -96,7 +101,6 @@ describe('Validate exercise 9.1 start', function() {
 
   it('should have a Payment Component when the buy button is pressed', () => {
     page.navigateToTab('buy');
-    debugger;
     page.clickBuyFlightButton();
     expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();  
   });     

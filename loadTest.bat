@@ -9,7 +9,10 @@ cd FlySharp
 call npm install
 
 
-FOR %%E in ("Ex2.2", "Ex3.1", "Ex4.1", "Ex4.2","Ex5.1","Ex5.2","Ex6.1","Ex6.2","Ex7.1","Ex7.2","Ex8.1","Ex9.1", "Final") DO CALL :run_test %%E
+FOR %%E in ("Ex2.2", "Ex3.1", "Ex4.1", "Ex4.2","Ex5.1","Ex5.2","Ex6.1","Ex6.2","Ex7.1","Ex7.2","Ex8.1","Ex9.1", "Final") DO (
+CALL :run_test %%E
+IF %ERRORLEVEL% NEQ 0 Exit /b
+)
 exit /B
 
 :run_test
