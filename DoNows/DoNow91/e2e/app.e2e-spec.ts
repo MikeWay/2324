@@ -11,4 +11,10 @@ describe('do-now91 App', function() {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Your Preferences');
   });
+
+  it('should not have a style attribute in the form element', () => {
+    page.navigateTo();
+    expect(page.getFormEleWithStyle().isPresent()).toBeFalsy();
+  });
+  
 });

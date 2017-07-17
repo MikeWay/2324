@@ -1,7 +1,7 @@
 <header><h1>Pseudo Keys Example</h1></header>
 
 <input #userInput
-(keyup.enter)="user=userInput.value"
+
        (keyup)="allKeys=userInput.value"
        placeholder="Type in here and hit enter"
        class="form-control" size="50">

@@ -8,4 +8,11 @@ export class DoNow91Page {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+
+  getFormEleWithStyle(){
+    // Animation adds a style element
+    return element(by.xpath("//form[@style]"));
+    
+  }  
 }

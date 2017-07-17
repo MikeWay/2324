@@ -11,4 +11,9 @@ describe('do-now71 App', function() {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Your Preferences');
   });
+
+  it('should not have a pre element', () => {
+    page.navigateTo();
+    expect(page.getPreElement().isPresent()).toBeFalsy();
+  });  
 });

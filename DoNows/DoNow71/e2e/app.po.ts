@@ -8,4 +8,8 @@ export class DoNow71Page {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getPreElement() {
+    return element(by.css('pre'));
+  }  
 }

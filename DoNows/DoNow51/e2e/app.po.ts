@@ -14,7 +14,12 @@ export class DoNow51Page {
   }
 
   findElementsByTextContent(theText){
-    return element.all(by.xpath("//*[contains(., '" + theText + "')]"));
+    return element.all(by.xpath("//*[contains(text(),'" + theText + "')]"));
     
   }
+
+  findPElements(){
+    return element.all(by.xpath("//P"));
+    
+  }  
 }
