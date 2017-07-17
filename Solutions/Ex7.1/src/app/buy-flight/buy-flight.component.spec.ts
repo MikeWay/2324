@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { CurrencyConversionPipe } from './../currency/currency-conversion.pipe';
+import { ActivatedRoute } from '@angular/router';
 /* tslint:disable:no-unused-variable */
 
 
@@ -11,9 +12,7 @@ import {Flight} from "../model/flight";
 import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
 import { PaymentComponent } from '../payment/payment.component';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
-import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteStub } from '../router-stubs';
-import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 export class MockFlightsService {
@@ -30,6 +29,7 @@ export class MockFlightsService {
 
 }
 
+let mockFlightsService = new MockFlightsService();
 
 @Component({
     selector: 'app-payment',

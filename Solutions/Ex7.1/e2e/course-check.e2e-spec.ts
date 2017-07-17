@@ -100,15 +100,15 @@ describe('Validate exercise 7.1 start', function() {
     expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();  
   });     
 
-   it('should have have a Payment Component FORM when the buy button is pressed', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getPaymentForm().isPresent()).toBeTruthy();  
-  }); 
+  
    
 /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
-
+  it('should have NOT have a Payment Component FORM when the buy button is pressed', () => {
+    page.navigateToTab('buy');
+    page.clickBuyFlightButton();
+    expect(page.getPaymentForm().isPresent()).toBeFalsy();  
+  });
 
      
 

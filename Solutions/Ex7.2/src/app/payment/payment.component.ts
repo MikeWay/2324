@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Flight} from "../model/flight";
-import {Input} from "@angular/core";
-import {Payment} from "../model/payment";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Flight } from "../model/flight";
+import { Input } from "@angular/core";
+import { Payment } from "../model/payment";
 
 @Component({
   selector: 'app-payment',
@@ -15,27 +15,27 @@ export class PaymentComponent implements OnInit {
   payForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
-
     this.payForm = formBuilder.group({
       'name': ['', Validators.compose([Validators.required,Validators.minLength(5)])],
       'address': ['', Validators.required],
-      'email': ['', Validators.required ],
+      'email': ['', Validators.required],
       'cardNum': ['', Validators.required],
       'cardType': ['', Validators.required],
       'expDate': ['', Validators.required],
-
     });
 
-  }
-
-  ngOnInit() {
   }
 
   get jsonModel() {
     return JSON.stringify(this.model);
   }
 
+
   onSubmit(): void {
     alert(this.jsonModel);
   }
+
+  ngOnInit() {
+  }
+
 }

@@ -3,9 +3,9 @@
   <div class="row">
     <div class="col-md-2 col-xs-4 form-label">Flight Number : </div>
     <div class="col-md-1 col-xs-8">{{selectedFlight?.flightNumber}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Origin : </div>
+    <div class="col-md-1 col-xs-4 form-label">Origin&nbsp;:</div>
     <div class="col-md-1  col-xs-8">{{selectedFlight?.origin}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Destination : </div>
+    <div class="col-md-1 col-xs-4 form-label">Destination&nbsp;:</div>
     <div class="col-md-1  col-xs-8">{{selectedFlight?.destination}}</div>
   </div>
   <div class="row">
@@ -30,37 +30,41 @@
 
 <div class="row">
   <div class="form-outline col-md-12">
-
     <form #paymentForm="ngForm" (ngSubmit)="onSubmit()">
+
       <div class="form-group">
         <label for="name">Name</label>
-        <input required ngControl="name" [(ngModel)]="model.name" type="text" class="form-control" id="name" name="name" placeholder="Name" >
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="model.name" required >
       </div>
+
       <div class="form-group">
         <label for="address">Address</label>
-        <textarea required ngControl="address" [(ngModel)]="model.address" class="form-control" id="address" name="address" placeholder="Address" rows="4"></textarea>
+        <textarea class="form-control" id="address" name="address" placeholder="Address" rows="4" [(ngModel)]="model.address" required ></textarea>
       </div>
+
       <div class="form-group">
         <label for="email">Email</label>
-        <input required ngControl="email" [(ngModel)]="model.email" type="email" class="form-control" id="email" name="email" placeholder="Email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="model.email" required >
       </div>
+
       <div class="form-group">
         <label for="cardNum">Card Number</label>
-        <input required ngControl="cardNum" [(ngModel)]="model.cardNum" type="text" class="form-control" id="cardNum" name="cardNum" placeholder="Card Number">
+        <input type="text" class="form-control" id="cardNum" name="cardNum" placeholder="Card Number" [(ngModel)]="model.cardNum" required >
       </div>
       <div class="form-group">
         <label for="cardType">Card Type</label>
-        <select required ngControl="cardType" [(ngModel)]="model.cardType" type="text" class="form-control" id="cardType" name="cardType" placeholder="Card Type">
+        <select type="text" class="form-control" id="cardType" name="cardType" placeholder="Card Type" [(ngModel)]="model.cardType" required >
           <option>VISA</option>
           <option>AMEX</option>
         </select>
       </div>
       <div class="form-group">
         <label for="expDate">Card Expiry</label>
-        <input required ngControl="expDate" [(ngModel)]="model.expDate" type="month" class="form-control" id="expDate" name="expDate">
+        <input type="month" class="form-control" id="expDate" name="expDate" [(ngModel)]="model.expDate" required >
       </div>
-      <button [disabled]="!paymentForm.form.valid" type="submit" class="btn btn-default"  required>Buy Flight</button>
+	<button type="submit" class="btn btn-default"  [disabled]="!paymentForm.form.valid">Buy Flight</button>
     </form>
+
   </div>
 </div>
 {{jsonModel}}
