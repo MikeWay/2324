@@ -107,17 +107,17 @@ describe('Validate exercise 7.2 start', function() {
   }); 
    
 
-   it('should have an input with a ngcontrol attribute when the buy button is pressed', () => {
+   it('should not have an input with an ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getNGControlAttributeFromPaymentForm()).toBeTruthy();  
+    expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
   });    
 /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
-   it('should not have an input with a formcontrolname attribute when the buy button is pressed', () => {
+   it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getFormControlNameAttributeFromPaymentForm()).toBeFalsy();  
+    expect(page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();  
   });    
 
 

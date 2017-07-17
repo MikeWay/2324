@@ -107,11 +107,11 @@ describe('Validate exercise 8.1 start', function() {
   }); 
    
 
-   it('should have not an input with a ngcontrol attribute when the buy button is pressed', () => {
+   it('should not have an input with an ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
-  });  
+  });   
 
    it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
