@@ -8,4 +8,8 @@ export class DoNow21Page {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getForecastElement(){
+    return element(by.css('app-forecast'));
+  }
 }

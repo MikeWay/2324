@@ -11,4 +11,9 @@ describe('do-now21 App', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
+
+  it('should not have an app-forecast element', () => {
+    page.navigateTo();
+    expect(page.getForecastElement().isPresent()).toBeFalsy();
+  });  
 });

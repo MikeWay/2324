@@ -7,8 +7,8 @@ describe('do-now71 App', function() {
     page = new DoNow71Page();
   });
 
-  it('should display message saying app works', () => {
+  it('should display message saying Your Preferences', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Your Preferences');
   });
 });
