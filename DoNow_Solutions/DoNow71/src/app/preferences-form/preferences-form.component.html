@@ -3,7 +3,7 @@
   <form (ngSubmit)="onSubmit()" #theForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" required name="name" [(ngModel)]="model.name" ngControl="name" #controlState>
+      <input type="text" class="form-control" required name="name" [(ngModel)]="model.name" #controlState>
       {{controlState.className}}
 
     </div>
