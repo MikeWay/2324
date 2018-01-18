@@ -13,6 +13,7 @@ import { MyFlightsComponent } from './my-flights/my-flights.component';
 import { routes } from './app.routes';
 import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
 import { RouterModule } from '@angular/router';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
