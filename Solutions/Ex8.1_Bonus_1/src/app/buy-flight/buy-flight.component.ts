@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import {FlightsService} from "../services/flights.service";
 import {Flight} from "../model/flight";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-buy-flight',
@@ -19,7 +20,7 @@ export class BuyFlightComponent implements OnInit {
   destinationFilter : string = "";
 
   conversionRate = 4.0;
-  errorMessage = "";
+  errorMessage: String =""
 
 
   constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
@@ -75,9 +76,16 @@ export class BuyFlightComponent implements OnInit {
       }
     });
     this.flightsService.getFlights().subscribe(
-      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
-      (error : any)=>this.errorMessage = error
-    );
+      (flights: Flight[]) => {this._flights = flights; this.showBuyFlights = true},
+      (error: HttpErrorResponse) => this.handleError(error));
+  }
+
+  handleError(err: HttpErrorResponse) {
+    if (err.error instanceof Error) {
+      this.errorMessage = err.error.message;
+    } else {
+      this.errorMessage = `Error code ${err.status}, body was: ${err.error}`;
+    }
   }
 }
 

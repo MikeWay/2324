@@ -1,6 +1,6 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 8.1 start', function() {
+describe('Validate exercise 7.2 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -111,16 +111,14 @@ describe('Validate exercise 8.1 start', function() {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
-  });   
+  });    
+/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
    it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();  
-  });        
-/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
-
-// For 8.1 -- the number of rows in the table is a good check!
+  });    
 
 
 });
