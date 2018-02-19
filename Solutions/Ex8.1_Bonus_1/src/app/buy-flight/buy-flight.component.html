@@ -3,7 +3,7 @@
     <app-flight-filter (onFilter)="onDestinationFilterChange($event)" [label]="'Destination'"></app-flight-filter>
     <br>
     <p>Currency Conversion Rate <input #rate (keyup)='conversionRate=rate.value'></p>
-    <h2 *ngIf="!showBuyFlights" >Loading Flights ...</h2>
+    <h2 *ngIf="!showBuyFlights" >Loading Flight Data</h2>
     <h2 *ngIf="errorMessage" class="bg-danger text-danger">{{errorMessage}}</h2>
 <table *ngIf="showBuyFlights" class="table table-bordered table-condensed table-responsive">
   <thead><tr><th>&nbsp;</th><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
@@ -22,4 +22,4 @@
   </tbody>
 </table>
 
-<app-payment [selectedFlight]="selectedFlight"></app-payment>
+<app-payment *ngIf="selectedFlight" [selectedFlight]="selectedFlight"></app-payment>
