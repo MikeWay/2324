@@ -66,7 +66,7 @@ export class FlySharpCourseCheckPage {
   }
 
   clickBuyFlightButton(){
-    element(by.css('app-buy-flight table button')).click();
+    element(by.css('app-buy-flight button')).click();
   }
 
   getPaymentForm(){
@@ -77,7 +77,6 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-payment'));
   }
 
-
   getNGControlAttributeFromPaymentForm(){
     return element(by.css('app-payment form input')).getAttribute('ngcontrol');
   }  
@@ -85,9 +84,5 @@ export class FlySharpCourseCheckPage {
   getFormControlNameAttributeFromPaymentForm(){
     return element(by.css('app-payment form input')).getAttribute('formcontrolname');
   }    
-  
-  getElementsWithAppTime(){
-    return element(by.css('span[appTime'));
-  }
   
 }

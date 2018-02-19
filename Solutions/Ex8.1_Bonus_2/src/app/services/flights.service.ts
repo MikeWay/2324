@@ -1,81 +1,50 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
 import {Flight} from "../model/flight";
 import {MYFLIGHTS} from "../model/mock-flights";
-
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import {ErrorObservable} from "rxjs/observable/ErrorObservable";
+import {catchError} from "rxjs/operators";
 
 @Injectable()
 export class FlightsService {
 
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
   constructor(private http: HttpClient) { }
-
+  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   public getFlights(): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/allflights';
-    const resultObservable = this.http.get<Flight[]>(url);
-    return resultObservable;
+
+    return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
   public getChunkOfFlights( start: number, num: number): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/flights';
     const data = {start, num};
-    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), {headers: this.headers});
+    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), {headers: this.headers}).pipe(catchError(this.handleError));
     return resultObservable;
   }
 
 
   public getNumberOfFlights(): Observable<number> {
     const url = 'http://localhost:8080/flightserver/numflights';
-    return this.http.get<number>(url);
-  }
-}
-
-
-// import { Injectable } from '@angular/core';
-// import { Http, RequestOptions, Response, Headers } from '@angular/http';
-// import { FLIGHTS, MYFLIGHTS } from "../model/mock-flights";
-// import {HttpClient, HttpHeaders} from "@angular/common/http";
-// import {Observable} from "rxjs/Observable";
-// import {Flight} from "../model/flight";
-
-
-@Injectable()
-export class FlightsServiceX {
-
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-  constructor(private http: HttpClient) { }
-
-  public getFlights(): Observable<Flight[]> {
-    const url = 'http://localhost:8080/flightserver/allflights';
-    const resultObservable = this.http.get<Flight[]>(url);
-    return resultObservable;
+    return this.http.get<number>(url).pipe(catchError(this.handleError));
   }
 
 
-  public getChunkOfFlights( start: number, num: number): Observable<Flight[]> {
-    const url = 'http://localhost:8080/flightserver/flights';
-    const data = {start, num};
-    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), {headers: this.headers});
-    return resultObservable;
-  }
-
-
-  public getNumberOfFlights(): Observable<number> {
-    const url = 'http://localhost:8080/flightserver/numflights';
-    return this.http.get<number>(url);
-  }
-
-  public getMyFlights(): Flight[] {
+  public getMyFlights() : Flight[]{
     return MYFLIGHTS;
   }
 
+  private handleError (error: HttpErrorResponse ) : ErrorObservable {
+    if(error.error instanceof ErrorEvent){
+      // Client error
+      console.error('Http communication error:', error.error.message )
+    } else {
+      // Server error
+      console.error(`Server error: ${error.status}. Message body: ${error.error}`)
+    }
+    return new ErrorObservable( 'Server error - is the REST server running?');
+  }
 
-  // private handleError (error: Response) {
-  //   console.error('Server Error' + error);
-  //   return Observable.throw(error.json().body || 'Server error - is the REST server running?');
-  // }
 }

@@ -1,8 +1,6 @@
-import { browser } from 'protractor';
-
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 9.1 start', function() {
+describe('Validate exercise 7.2 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -29,21 +27,21 @@ describe('Validate exercise 9.1 start', function() {
     expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
       
-  // it('should have a Toggle Flights button', () => {
-  //   page.navigateToTab('buy');
+  it('should have a Toggle Flights button', () => {
+    page.navigateToTab('buy');
 
-  //   expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
-  // });    
+    expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
+  });    
 
-  // it('should have a 0 flights displayed', () => {
-  //   page.navigateToTab('buy');
-  //   page.clickToggleFlights();
-  //   expect(page.getFlightTableRows()).toBe(0);
-  // });    
+  it('should have a 0 flights displayed', () => {
+    page.navigateToTab('buy');
+    page.clickToggleFlights();
+    expect(page.getFlightTableRows()).toBe(0);
+  });    
 
-  it('should have a 20 flights displayed', () => {
+  it('should have a 5 flights displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(21);
+    expect(page.getFlightTableRows()).toBe(6);
   });      
 
 
@@ -109,26 +107,18 @@ describe('Validate exercise 9.1 start', function() {
   }); 
    
 
-   it('should have not an input with a ngcontrol attribute when the buy button is pressed', () => {
+   it('should not have an input with an ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
-  });  
+  });    
+/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
    it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();  
-  });        
-/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
-
-   it('should not have an appTime attribute anywhere ', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getElementsWithAppTime().isPresent()).toBeFalsy();  
-  });        
-
-// For 8.1 -- the number of rows in the table is a good check!
+  });    
 
 
 });

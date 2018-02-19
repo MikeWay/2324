@@ -14,7 +14,7 @@ describe('Service: Flights', () => {
     expect(service).toBeTruthy();
   }));
 
-
-});  it('should return 5 flights from gtFlights()', inject([FlightsService], (service: FlightsService) => {
-//  expect(service.getFlights().length).toBe(5);
-}));
+  it('should return 5 flights from gtFlights()', inject([FlightsService], (service: FlightsService) => {
+    expect(service.getFlights().length).toBe(5);
+  }));
+});
