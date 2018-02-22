@@ -9,3 +9,35 @@ form *.ng-invalid {
 
 
 */
+
+form {
+  width: 30em;
+  margin-left: 2em;
+}
+
+label {
+  color: #B4886B;
+  font-weight: bold;
+  display: block;
+  width: 150px;
+  float: left;
+}
+label:after { content: ": " }
+
+input, select {
+  float: right;
+  width: 20em;
+}
+
+.form-group {
+  padding-top: 1em;
+  margin-bottom: 1em;
+  clear: both;
+
+}
+
+button {
+  float: right;
+}
+
+
