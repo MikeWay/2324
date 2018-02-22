@@ -1,0 +1,5 @@
+Need to replace the node_modules for all the DoNows and for the FS solution.
+
+Check that the FS solution is up to date (merge the new HttpClient stuff).
+
+Update the solutions / start points from Ex8.1 onward
