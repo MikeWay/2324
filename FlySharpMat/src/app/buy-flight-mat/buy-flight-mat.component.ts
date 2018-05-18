@@ -1,33 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort } from '@angular/material';
+import { BuyFlightMatDataSource } from './buy-flight-mat-datasource';
+import { Flight } from "../model/flight";
+import { FlightsService } from '../services/flights.service';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
-import {Flight} from "../model/flight";
+const NUM_FLIGHTS_TO_LOAD=1;
 
 @Component({
-  selector: 'app-buy-flight',
-  templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  selector: 'buy-flight-mat',
+  templateUrl: './buy-flight-mat.component.html',
+  styleUrls: ['./buy-flight-mat.component.css']
 })
-export class BuyFlightComponent implements OnInit {
+export class BuyFlightMatComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: BuyFlightMatDataSource;
 
-  _flights : Flight[];
+  _flights : Flight[] = new Array<Flight>();
   showBuyFlights = false;
   selectedFlight : Flight;
-  errorMessage : String;
 
   originFilter : string = "";
   destinationFilter : string = "";
 
   conversionRate = 4.0;
-
-  nextFlightIndex = 20;
-  numFlights=0;
+  errorMessage = "";
+  nextFlightIndex = NUM_FLIGHTS_TO_LOAD;
+  numFlights=0;  
 
 
   constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
+  
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['id', 'origin', 'destination', 'departDay', 'departTime', 'arriveDay', 'arriveTime'];
 
-  onFilterChange(filterValue: string) {
+onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
   }
 
@@ -46,28 +54,28 @@ export class BuyFlightComponent implements OnInit {
 
   onNext() {
 
-    let numFlights = 20;
+    let numFlights = NUM_FLIGHTS_TO_LOAD;
     if (this.nextFlightIndex + numFlights > this.numFlights) {
       numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
     }
     this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
       (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: string) => this.errorMessage = error);
+      (error: any) => this.errorMessage = error);
     if (this.nextFlightIndex <= this.numFlights) {
-      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
+      this.nextFlightIndex += NUM_FLIGHTS_TO_LOAD; // Move the flightIndex on if there are more flights
     }
   }
 
   onPrevious() {
       // Don't load flights pre 0
-    if (this.nextFlightIndex > 20) {
-      this.nextFlightIndex -= 20;
+    if (this.nextFlightIndex > NUM_FLIGHTS_TO_LOAD) {
+      this.nextFlightIndex -= NUM_FLIGHTS_TO_LOAD;
     } else {
       this.nextFlightIndex = 0;
     }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex, NUM_FLIGHTS_TO_LOAD).subscribe(
       (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: string) => this.errorMessage = error);
+      (error: any) => this.errorMessage = error);
   }
 
   get flights(): Flight[] {
@@ -103,20 +111,16 @@ export class BuyFlightComponent implements OnInit {
         this.originFilter = params['origin'];
       }
     });
-
-
-    const flightStream = this.flightsService.getChunkOfFlights(0,20);
-    flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
-      (error: string) => this.errorMessage = error
+    this.flightsService.getChunkOfFlights(0,NUM_FLIGHTS_TO_LOAD).subscribe(
+      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true;
+       },  
+      (error : any)=>this.errorMessage = error
     );
-
       // Get the number of flights available
     this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num },
-      (error: string) => this.errorMessage = error);
+      num => this.numFlights = num,
+      (error: any) => this.errorMessage = error)    
+
+   this.dataSource = new BuyFlightMatDataSource(this.paginator, this.sort, this.flightsService);
   }
 }
-
-
-
