@@ -34,6 +34,10 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-root app-buy-flight'));
   }
 
+  getToggleFlightsButton(){
+    return element(by.css('app-root app-buy-flight a'));
+  }
+
   getToggleFlightsButtonText(){
     return element(by.css('app-root app-buy-flight a')).getText();
   }
@@ -66,7 +70,7 @@ export class FlySharpCourseCheckPage {
   }
 
   clickBuyFlightButton(){
-    element(by.css('app-buy-flight button')).click();
+    element(by.css('app-buy-flight table tr td button')).click();
   }
 
   getPaymentForm(){

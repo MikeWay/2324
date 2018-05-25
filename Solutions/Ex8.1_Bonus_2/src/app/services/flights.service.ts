@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import {Flight} from "../model/flight";
 import {MYFLIGHTS} from "../model/mock-flights";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-import {ErrorObservable} from "rxjs/observable/ErrorObservable";
 import {catchError} from "rxjs/operators";
+import { throwError, Observable } from 'rxjs';
 
 @Injectable()
 export class FlightsService {
@@ -36,15 +35,15 @@ export class FlightsService {
     return MYFLIGHTS;
   }
 
-  private handleError (error: HttpErrorResponse ) : ErrorObservable {
+  private handleError (error: HttpErrorResponse )  {
     if(error.error instanceof ErrorEvent){
       // Client error
       console.error('Http communication error:', error.error.message )
     } else {
       // Server error
-      console.error(`Server error: ${error.status}. Message body: ${error.error}`)
+      console.error(`Server error: ${error.status}. Message body: ${error.message}`)
     }
-    return new ErrorObservable( 'Server error - is the REST server running?');
+    return throwError( 'Server error - is the REST server running?');
   }
 
 }

@@ -1,6 +1,6 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 7.2 start', function() {
+describe('Validate exercise 9.1 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -27,21 +27,17 @@ describe('Validate exercise 7.2 start', function() {
     expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
       
-  it('should have a Toggle Flights button', () => {
+  it('should not have a Toggle Flights button', () => {
     page.navigateToTab('buy');
 
-    expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
+    expect(page.getToggleFlightsButton().isPresent()).toBeFalsy();
   });    
 
-  it('should have a 0 flights displayed', () => {
-    page.navigateToTab('buy');
-    page.clickToggleFlights();
-    expect(page.getFlightTableRows()).toBe(0);
-  });    
+   
 
-  it('should have a 5 flights displayed', () => {
+  it('should have a 20 flights displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(6);
+    expect(page.getFlightTableRows()).toBe(21); // including header?
   });      
 
 

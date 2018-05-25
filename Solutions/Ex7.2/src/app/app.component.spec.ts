@@ -7,14 +7,13 @@ import {BuyFlightComponent} from "./buy-flight/buy-flight.component";
 import { PaymentComponent } from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 import { RouterModule } from '@angular/router';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from './router-stubs';
 
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, RouterLinkStubDirective, RouterOutletStubComponent
+        AppComponent
       ],
     });
     TestBed.compileComponents();
