@@ -36,22 +36,7 @@ Installing the Flights Service as a Service
 6) Go to localhost:8080 and check you see: "REST data is served from /flightserver/flights"
 
 
-HISTORIC Setting up the environment
-==========================
-
-Notes for configuring once the repo is cloned onto a VM
-
-1) Install the ltree support node module. Cd to C:\Course2324\NodeScripts\src
-	Run npm install -g
-	Provides access to utilities including
-	   cpAddIns - copies addins to the exercise folder
-	   cpToDNSolution - copies donows DoNow solutions foler
-		(var SRC_DIR_ROOT = "C:\\Course2324\\DoNows\\";
-		var TARGET_DIR_ROOT = "C:\\Course2324\\DoNow_Solutions\\";)
-   cpToSolution - copies from the exercise dir to the solutions folder
-   
-2) Run mklink in lots of folders! -  all the Donows and the exercise folders   
-
-
-3) MySql root password = rootpw
+Notes for course developers:
+=============================
+There is an overall test script currently run from course2324/NodeScripts/src/runAllTests.js which builds all the exercise starts in turn and then runs ng e2e on them.
 
