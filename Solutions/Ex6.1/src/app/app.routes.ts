@@ -17,6 +17,11 @@ export const routes: Routes = [
   },
   {
     path: 'buy',
+    component: BuyFlightComponent,
+    pathMatch: 'prefix'
+  },  
+  {
+    path: 'buy/:origin',
     component: BuyFlightComponent
   },
   {

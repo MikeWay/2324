@@ -14,6 +14,7 @@ import { routes } from './app.routes';
 import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
 import { RouterModule } from '@angular/router';
 import { TimeDirective } from './time/time.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { TimeDirective } from './time/time.directive';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

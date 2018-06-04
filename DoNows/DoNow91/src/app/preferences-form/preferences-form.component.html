@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Your Preferences</h1>
-  <form #theForm="ngForm">
+
+  <form (ngSubmit)="onSubmit()" #theForm="ngForm" [@myanimate]="onOff">
     <div class="form-group">
       <label for="name">Name</label>
       <input id="name" type="text" class="form-control" required name="name" >
@@ -31,12 +32,15 @@
       <label for="forecastLength" >Forecast Length</label>
       <input id="forecastLength" type="text" class="form-control" [(ngModel)]="model.forecastLength" name="forecastLength">
     </div>
-    <button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid">Submit</button>
-
+    <div class="form-group">
+      <button type="submit" class="btn btn-default" [disabled]="!theForm.form.valid">Submit</button>
+    </div>
   </form>
   <br/>
-  <button class="btn btn-default" (click)="onHide()">Hide</button>
-  <button class="btn btn-default" (click)="onShow()">Show</button>
+  <div class="form-group">
+  <button class="btn btn-primary" (click)="onHide()">Hide</button>
+  <button class="btn btn-primary" (click)="onShow()">Show</button>
+  </div>
 
 </div>
 

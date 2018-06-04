@@ -14,12 +14,13 @@ export class BuyFlightComponent implements OnInit {
   _flights : Flight[];
   showBuyFlights = false;
   selectedFlight : Flight;
+  errorMessage : String;
 
   originFilter : string = "";
   destinationFilter : string = "";
 
   conversionRate = 4.0;
-  errorMessage = "";
+
   nextFlightIndex = 20;
   numFlights=0;
 
@@ -51,7 +52,7 @@ export class BuyFlightComponent implements OnInit {
     }
     this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
       (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: any) => this.errorMessage = error);
+      (error: string) => this.errorMessage = error);
     if (this.nextFlightIndex <= this.numFlights) {
       this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
     }
@@ -66,7 +67,7 @@ export class BuyFlightComponent implements OnInit {
     }
     this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
       (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: any) => this.errorMessage = error);
+      (error: string) => this.errorMessage = error);
   }
 
   get flights(): Flight[] {
@@ -102,14 +103,18 @@ export class BuyFlightComponent implements OnInit {
         this.originFilter = params['origin'];
       }
     });
-    this.flightsService.getChunkOfFlights(0,20).subscribe(
-      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},  
-      (error : any)=>this.errorMessage = error
+
+
+    const flightStream = this.flightsService.getChunkOfFlights(0,20);
+    flightStream.subscribe(
+      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
+      (error: string) => this.errorMessage = error
     );
+
       // Get the number of flights available
     this.flightsService.getNumberOfFlights().subscribe(
-      num => this.numFlights = num,
-      (error: any) => this.errorMessage = error)    
+      num => {console.log(num); this.numFlights = num },
+      (error: string) => this.errorMessage = error);
   }
 }
 
