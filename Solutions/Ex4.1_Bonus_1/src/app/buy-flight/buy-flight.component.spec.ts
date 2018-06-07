@@ -1,10 +1,9 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from "../services/flights.service";
+import { FlightsService } from '../flights/flights.service';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import {Flight} from "../model/flight";
 import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
 
@@ -29,7 +28,6 @@ describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent ],
@@ -82,4 +80,3 @@ describe('BuyFlightComponent', () => {
     expect(tableEle).toBeFalsy();
   });
 });
-

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CustomerAccountsRoutingModule } from './customer-accounts-routing.module';
+import { DummyComponent } from './dummy/dummy.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { CustomerAccountsRoutingModule } from './customer-accounts-routing.modul
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [AccountComponent]
+  declarations: [AccountComponent, DummyComponent]
 })
 export class CustomerAccountsModule { }

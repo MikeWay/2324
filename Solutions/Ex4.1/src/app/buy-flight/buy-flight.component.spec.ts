@@ -1,20 +1,18 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from "../services/flights.service";
+import { FlightsService } from '../flights/flights.service';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent ],
-      providers: [FlightsService]
+      providers: [FlightsService],
     })
     .compileComponents();
   }));
@@ -50,4 +48,3 @@ describe('BuyFlightComponent', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 });
-

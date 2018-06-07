@@ -7,9 +7,9 @@ describe('Validate exercise 2.2 start', function() {
     page = new FlySharpCourseCheckPage();
   });
 
-  it('should display message saying Welcome to Fly Sharp', () => {
+  it('should display message saying Fly Sharp', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to Fly Sharp');
+    expect(page.getParagraphText()).toEqual('Fly Sharp');
   });
 
   it('should have an App-Home component', () => {

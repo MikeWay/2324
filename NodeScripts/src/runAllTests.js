@@ -20,6 +20,7 @@ const EX_MAPPINGS = [
     "Ex5.2",
     "Ex6.1",
     "Ex6.2",
+    "Ex6.3",
     "Ex7.1",
     "Ex7.2",
     "Ex8.1",

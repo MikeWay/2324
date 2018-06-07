@@ -1,6 +1,6 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 4.1 start', function() {
+describe('Validate exercise 3.1 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -34,13 +34,14 @@ describe('Validate exercise 4.1 start', function() {
 
   it('should have a 0 flights displayed', () => {
     page.navigateTo();
-    page.clickToggleFlights();
+
     expect(page.getFlightTableRows()).toBe(0);
   });    
 
-  it('should have a 5 flights displayed', () => {
-    page.navigateTo();   
-    expect(page.getFlightTableRows()).toBe(6);
+  it('should have a 3 flights displayed', () => {
+    page.navigateTo();
+    page.clickToggleFlights();
+    expect(page.getFlightTableRows()).toBe(4);
   });      
 
 

@@ -22,7 +22,7 @@ function doCopy(srcDir, destDir) {
     console.log("Copying from " + srcDir + " to " + destDir);
     try {
         fs.ensureDir(destDir);
-        fs.copy(srcDir, destDir);
+        fs.copySync(srcDir, destDir, { overwrite: true });
     }
     catch (err) {
         console.log("Failed to copy to solution: " + err);

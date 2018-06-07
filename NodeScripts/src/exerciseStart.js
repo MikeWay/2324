@@ -11,6 +11,7 @@ const EX_MAPPINGS = {
     "Ex5.2": "Ex5.1_Bonus_1",
     "Ex6.1": "Ex5.2_Bonus_3",
     "Ex6.2": "Ex6.1_Bonus_2",
+    "Ex6.3": "Ex6.2_Bonus_1",
     "Ex7.1": "Ex6.2_Bonus_3",
     "Ex7.2": "Ex7.1_Bonus_1",
     "Ex8.1": "Ex7.2_Bonus_1",
@@ -98,7 +99,7 @@ doBackup(exercise);
 let srcDir = SRC_DIR_ROOT + exSource;
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
 try {
-    fs.copy(srcDir, TARGET_DIR_ROOT, 'clobber');
+    fs.copySync(srcDir, TARGET_DIR_ROOT, { overwrite: true });
 }
 catch (err) {
     console.log("Failure copying to ex dir" + err);
