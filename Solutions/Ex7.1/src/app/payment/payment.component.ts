@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
   onSubmit(): void {
     alert(this.jsonModel);
   }
-  
+
   ngOnInit() {
   }
 

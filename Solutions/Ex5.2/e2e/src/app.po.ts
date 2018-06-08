@@ -15,7 +15,7 @@ export class FlySharpPage {
 
   getNumTableCols() {
     return (element(by.css('table tbody tr')).all(by.css('td'))).count();
-  }  
+  }
 
   clickToggle() {
     element(by.css('#toggle')).click();

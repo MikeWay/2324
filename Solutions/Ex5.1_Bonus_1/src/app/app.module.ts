@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./home/home.component";
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
+import { FlightsService } from './flights/flights.service';
 import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
@@ -14,10 +14,9 @@ import { PaymentComponent } from './payment/payment.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [FlightsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

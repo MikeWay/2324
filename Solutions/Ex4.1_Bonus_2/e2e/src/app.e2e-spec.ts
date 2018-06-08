@@ -7,8 +7,8 @@ describe('fly-sharp App', function() {
     page = new FlySharpPage();
   });
 
-  // it('should display message saying app works', () => {
-  //   page.navigateTo();
-  //   expect(page.getParagraphText()).toEqual('Welcome to Fly Sharp');
-  // });
+  it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
+    page.navigateTo();
+    expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+  });
 });

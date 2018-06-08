@@ -21,7 +21,7 @@ class MockFlightsService {
   }
 
 }
-
+// Create an instance of the mock
 let mockFlightsService = new MockFlightsService();
 
 describe('BuyFlightComponent', () => {

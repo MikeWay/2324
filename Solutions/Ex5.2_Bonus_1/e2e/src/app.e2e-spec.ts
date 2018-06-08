@@ -27,7 +27,7 @@ describe('fly-sharp App', function() {
   it('should show 9 columns in the table', () => {
     page.navigateTo();
     expect(page.getNumTableCols()).toEqual(9);
-  });  
+  });
 
   it('flight number for 5th flight should be FS2211', () => {
     page.navigateTo();
@@ -37,5 +37,5 @@ describe('fly-sharp App', function() {
   it('destination for 5th flight should be LHR', () => {
     page.navigateTo();
     expect(page.getTableCellData('5','4')).toBe("LHR");
-  })  
+  })
 });

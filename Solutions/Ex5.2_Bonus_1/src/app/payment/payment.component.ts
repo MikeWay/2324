@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Flight} from "../model/flight";
-import {Input} from "@angular/core";
+
 
 @Component({
   selector: 'app-payment',
@@ -10,8 +10,8 @@ import {Input} from "@angular/core";
 export class PaymentComponent implements OnInit {
   private _selectedFlight: Flight;
 
-  @Input() 
-  
+  @Input()
+
   set selectedFlight( flight: Flight){
     this._selectedFlight = flight;
   }

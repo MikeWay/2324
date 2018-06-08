@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
+import {FlightsService} from "../flights/flights.service";
 import {Flight} from "../model/flight";
 
 @Component({

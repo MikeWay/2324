@@ -48,5 +48,9 @@ describe('Validate exercise 5.1 start', function() {
 
 
 
+  it('should not have an app-payment element', () => {
+    page.navigateTo();
+    expect(page.getPaymentElement().isPresent()).toBeFalsy();
+  });  
 
 });

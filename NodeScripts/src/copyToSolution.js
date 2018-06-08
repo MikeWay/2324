@@ -13,15 +13,21 @@ if (process.argv.length < 3) {
 }
 let srcDir = SRC_DIR_ROOT + "/src";
 let destDir = targetDir + "/src";
-doCopy(srcDir, destDir);
-srcDir = SRC_DIR_ROOT + "/e2e";
-destDir = targetDir + "/e2e";
-doCopy(srcDir, destDir);
-console.log("Copy to solution " + exercise + " complete");
+try {
+    fs.removeSync(destDir);
+    doCopy(srcDir, destDir);
+    srcDir = SRC_DIR_ROOT + "/e2e";
+    destDir = targetDir + "/e2e";
+    doCopy(srcDir, destDir);
+    console.log("Copy to solution " + exercise + " complete");
+}
+catch (err) {
+    console.log("Failed to copy to solution: " + err);
+}
 function doCopy(srcDir, destDir) {
     console.log("Copying from " + srcDir + " to " + destDir);
     try {
-        fs.ensureDir(destDir);
+        fs.ensureDirSync(destDir);
         fs.copySync(srcDir, destDir, { overwrite: true });
     }
     catch (err) {

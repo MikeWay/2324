@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
+import {FlightsService} from "../flights/flights.service";
 import {Flight} from "../model/flight";
 
 @Component({
@@ -66,7 +66,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
+        this.activatedRoute.params.subscribe(params => {
       if(typeof params['origin'] !== 'undefined' ) {
         this.originFilter = params['origin'];
       }
