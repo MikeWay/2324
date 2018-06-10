@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
+import {FlightsService} from "../flights/flights.service";
 import {Flight} from "../model/flight";
 
 @Component({
@@ -21,9 +21,6 @@ export class BuyFlightComponent implements OnInit {
 
   conversionRate = 4.0;
 
-  nextFlightIndex = 20;
-  numFlights=0;
-
 
   constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
 
@@ -42,32 +39,6 @@ export class BuyFlightComponent implements OnInit {
 
   private onFlightClick(flight : Flight){
     this.selectedFlight = flight;
-  }
-
-  onNext() {
-
-    let numFlights = 20;
-    if (this.nextFlightIndex + numFlights > this.numFlights) {
-      numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
-    }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: string) => this.errorMessage = error);
-    if (this.nextFlightIndex <= this.numFlights) {
-      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
-    }
-  }
-
-  onPrevious() {
-      // Don't load flights pre 0
-    if (this.nextFlightIndex > 20) {
-      this.nextFlightIndex -= 20;
-    } else {
-      this.nextFlightIndex = 0;
-    }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
-      (error: string) => this.errorMessage = error);
   }
 
   get flights(): Flight[] {
@@ -103,19 +74,11 @@ export class BuyFlightComponent implements OnInit {
         this.originFilter = params['origin'];
       }
     });
-
-
-    const flightStream = this.flightsService.getChunkOfFlights(0,20);
-    flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
-      (error: string) => this.errorMessage = error
-    );
-
-      // Get the number of flights available
-    this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num },
-      (error: string) => this.errorMessage = error);
+    this.flightsService.getFlights().subscribe(
+      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},
+      (error : any)=>this.errorMessage = error);
   }
+
 }
 
 

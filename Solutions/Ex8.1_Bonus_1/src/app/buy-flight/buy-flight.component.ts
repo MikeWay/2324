@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../services/flights.service";
+import {FlightsService} from "../flights/flights.service";
 import {Flight} from "../model/flight";
 
 @Component({
@@ -74,11 +74,11 @@ export class BuyFlightComponent implements OnInit {
         this.originFilter = params['origin'];
       }
     });
-
     this.flightsService.getFlights().subscribe(
-      (flights: Flight[]) => {this._flights = flights; this.showBuyFlights = true},
-      (error: string) => this.errorMessage = error);
+      (flights : Flight[])=>{this._flights = flights; this.showBuyFlights = true},
+      (error : any)=>this.errorMessage = error);
   }
+
 }
 
 

@@ -1,15 +1,10 @@
-import { browser } from 'protractor';
-
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate Final Exercise', function() {
+describe('Validate exercise 9.1 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
     page = new FlySharpCourseCheckPage();
-    // The time directive causes the waitForAngular function to fail! 
-    // This is a work-around. IMHO: it's dangerous    
-    browser.waitForAngularEnabled(false);
   });
 
   it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
@@ -32,21 +27,17 @@ describe('Validate Final Exercise', function() {
     expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
       
-  // it('should have a Toggle Flights button', () => {
-  //   page.navigateToTab('buy');
+  it('should not have a Toggle Flights button', () => {
+    page.navigateToTab('buy');
 
-  //   expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
-  // });    
+    expect(page.getToggleFlightsButton().isPresent()).toBeFalsy();
+  });    
 
-  // it('should have a 0 flights displayed', () => {
-  //   page.navigateToTab('buy');
-  //   page.clickToggleFlights();
-  //   expect(page.getFlightTableRows()).toBe(0);
-  // });    
+   
 
   it('should have a 20 flights displayed', () => {
     page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(21);
+    expect(page.getFlightTableRows()).toBe(21); // including header?
   });      
 
 
@@ -112,20 +103,18 @@ describe('Validate Final Exercise', function() {
   }); 
    
 
-   it('should have not an input with a ngcontrol attribute when the buy button is pressed', () => {
+   it('should not have an input with an ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
-  });  
+  });    
+/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
    it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();  
-  });        
-/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
-
-// For 8.1 -- the number of rows in the table is a good check!
+  });    
 
 
 });

@@ -1,6 +1,6 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 
-describe('Validate exercise 7.2 start', function() {
+describe('Validate exercise 8.1 start', function() {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -107,7 +107,7 @@ describe('Validate exercise 7.2 start', function() {
   }); 
    
 
-   it('should not have an input with an ngcontrol attribute when the buy button is pressed', () => {
+   it('should not have an input with a ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  

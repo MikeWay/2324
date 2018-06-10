@@ -12,7 +12,7 @@ export class FlightFilterComponent implements OnInit {
 
   @Input()
   initialValue : string = "";
-  
+
   @Output()
   onFilter = new EventEmitter<string>();
   constructor() { }
