@@ -25,7 +25,7 @@ let srcDir = SRC_DIR_ROOT + "/src";
 let destDir = targetDir + "/src";
 
 try {
-    fs.removeSync(destDir);
+    fs.removeSync(targetDir);
     doCopy(srcDir, destDir);
 
     srcDir = SRC_DIR_ROOT + "/e2e";
