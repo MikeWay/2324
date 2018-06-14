@@ -9,7 +9,8 @@ console.log(process.argv);
 
 let exercise = process.argv[2];
 
-let targetDir = TARGET_DIR_ROOT + exercise + "\\src";
+let targetDir = TARGET_DIR_ROOT + exercise ;
+let destDir = targetDir + "\\src";
 let srcDir = SRC_DIR_ROOT + exercise + "\\src";
 
 if(process.argv.length < 3){
@@ -17,9 +18,12 @@ if(process.argv.length < 3){
   process.exit(1);
 }
 
-fs.copy(srcDir, targetDir);
 
-targetDir = TARGET_DIR_ROOT + exercise + "\\e2e";
-srcDir = SRC_DIR_ROOT + exercise + "\\e2e";
+try {
+  fs.removeSync(destDir);
+  fs.copySync(srcDir, targetDir);
 
-console.log("Copy to solution " + exercise + " complete");
+  console.log("Copy to solution " + exercise + " complete");
+ } catch (err) {
+  console.log("Failed to copy to solution: " + err);
+ }
