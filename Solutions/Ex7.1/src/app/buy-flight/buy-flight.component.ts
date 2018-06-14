@@ -36,7 +36,7 @@ export class BuyFlightComponent implements OnInit {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  private onFlightClick(flight : Flight){
+  onFlightClick(flight : Flight){
     this.selectedFlight = flight;
   }
 

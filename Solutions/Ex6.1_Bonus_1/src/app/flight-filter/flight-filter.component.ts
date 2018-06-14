@@ -16,7 +16,7 @@ export class FlightFilterComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onFilterEnter( filterValue : string){
+  onFilterEnter( filterValue : string){
     this.onFilter.emit(filterValue);
   }
 }
