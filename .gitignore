@@ -2,6 +2,7 @@
 /Backup
 /Exercises/FlySharp
 /temp
+/DoNows_Orig
 **/node_modules
 **/*.war
 **/*.jar
