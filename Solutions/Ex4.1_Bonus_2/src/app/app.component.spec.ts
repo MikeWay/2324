@@ -3,9 +3,21 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {HomeComponent} from "./home/home.component";
-import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import { FlightsService } from './flights/flights.service';
+import { HomeComponent } from "./home/home.component";
+
+import { Component } from '@angular/core';
+
+@Component({
+  template: '',
+  selector: 'app-buy-flight'
+})
+class MockBuyFlightComponent { }
+
+@Component({
+  template: '',
+  selector: 'app-home'
+})
+class MockHomeComponent { }
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,9 +26,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent, HomeComponent, BuyFlightComponent
+        AppComponent, MockHomeComponent, MockBuyFlightComponent
       ],
-      providers: [FlightsService],
     }).compileComponents();
   }));
   it('should create the app', async(() => {
@@ -30,10 +41,14 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('FlySharp');
   }));
 
-  it('should render special offer in a h1 tag', async(() => {
+  it('should have an app-home element', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Special Offer of the month 10% off all round-the-World flights');
+    // const compiled = fixture.debugElement.nativeElement;
+    // expect(compiled.querySelector('app-home')..toBeTruthy());
+
+    let homeEle = fixture.debugElement.nativeElement.querySelector('app-home');
+    expect(homeEle).toBeTruthy();
+
   }));
 });
