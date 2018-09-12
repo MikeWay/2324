@@ -1,6 +1,11 @@
-
-    <app-flight-filter (onFilter)="onFilterChange($event)" [label]="'Origin'"></app-flight-filter>
-    <app-flight-filter (onFilter)="onDestinationFilterChange($event)" [label]="'Destination'"></app-flight-filter>  
+<mat-card>
+  <mat-card-content>
+    <app-flight-filter (onFilter)="onFilterChange($event)"
+                       label='Origin'></app-flight-filter>
+    <app-flight-filter (onFilter)="onDestinationFilterChange($event)"
+                       [label]="'Destination'"></app-flight-filter>
+  </mat-card-content>
+</mat-card>
 <div class="mat-elevation-z8">
 
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" *ngIf="showBuyFlights">
@@ -21,31 +26,31 @@
     <ng-container matColumnDef="destination">
       <mat-header-cell *matHeaderCellDef >Destination</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.destination}}</mat-cell>
-    </ng-container>    
+    </ng-container>
 
     <!-- Depart Day Column -->
     <ng-container matColumnDef="departDay">
       <mat-header-cell *matHeaderCellDef >DepartDay</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.departDay}}</mat-cell>
-    </ng-container>    
+    </ng-container>
 
     <!-- Depart Time Column -->
     <ng-container matColumnDef="departTime">
       <mat-header-cell *matHeaderCellDef >DepartTime</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.departTime}}</mat-cell>
-    </ng-container>    
+    </ng-container>
 
         <!-- Arrive Day Column -->
     <ng-container matColumnDef="arriveDay">
       <mat-header-cell *matHeaderCellDef >DepartDay</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.departDay}}</mat-cell>
-    </ng-container>    
+    </ng-container>
 
     <!-- Arrive Time  Column -->
     <ng-container matColumnDef="arriveTime">
       <mat-header-cell *matHeaderCellDef >DepartTime</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.departTime}}</mat-cell>
-    </ng-container>   
+    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

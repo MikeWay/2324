@@ -8,11 +8,11 @@ import {Output, Input} from "@angular/core";
 })
 export class FlightFilterComponent implements OnInit {
   @Input()
-  label : string;
+  label : string = "LABEL";
 
   @Input()
   initialValue : string = "";
-  
+
   @Output()
   onFilter = new EventEmitter<string>();
   constructor() { }

@@ -19,7 +19,8 @@ import {TimeDirective} from "./time/time.directive";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule,
+  MatInputModule } from '@angular/material';
 import { BuyFlightMatComponent } from './buy-flight-mat/buy-flight-mat.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { BuyFlightMatComponent } from './buy-flight-mat/buy-flight-mat.component
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     LayoutModule,
+    MatInputModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
