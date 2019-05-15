@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 "use strict";
-// Copies files rrom the AddIns directory (identified by the command line argument)
+// Copies files from the Solutions directory 
+// (identified by the command line argument)
 // To the exercises/FlySharp directory
+// Slightly different to the exStart script as it is intended to be used 
+// when upgrading exercises to a new Angular version and it does not create a backup
 exports.__esModule = true;
 var fs = require("fs-extra");
 var EX_MAPPINGS = {
+    "Ex1.2": "Ex1.1",
     "Ex2.2": "Ex2.1_Bonus",
     "Ex3.1": "Ex2.2_Bonus_2",
     "Ex4.1": "Ex3.1",
@@ -37,47 +41,10 @@ Ex9.1
 //const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
 //const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp";
 var SRC_DIR_ROOT = "../../Solutions/";
-var BACKUP_DIR_ROOT = "../../Backup/";
 var TARGET_DIR_ROOT = ".";
 var SRC_DIR = "/src";
 var E2E_DIR = "/e2e";
 var exercise = process.argv[2];
-function doBackup(exercise) {
-    // Backup src
-    var destDir = BACKUP_DIR_ROOT + exercise + SRC_DIR;
-    var srcDir = TARGET_DIR_ROOT + SRC_DIR;
-    console.log("About to copy " + srcDir + " to " + destDir);
-    try {
-        fs.ensureDir(destDir);
-        fs.mkdirsSync(destDir);
-    }
-    catch (err) {
-        console.log("Failed to create backup directories");
-    }
-    try {
-        fs.copySync(srcDir, destDir);
-    }
-    catch (err) {
-        console.log("Failure" + err);
-    }
-    // Backup e2e
-    destDir = BACKUP_DIR_ROOT + exercise + E2E_DIR;
-    srcDir = TARGET_DIR_ROOT + E2E_DIR;
-    console.log("About to copy " + srcDir + " to " + destDir);
-    try {
-        fs.ensureDir(destDir);
-        fs.mkdirsSync(destDir);
-    }
-    catch (err) {
-        console.log("Failed to create directories");
-    }
-    try {
-        fs.copySync(srcDir, destDir);
-    }
-    catch (err) {
-        console.log("Failure backing up" + err);
-    }
-}
 if (process.argv.length < 3) {
     console.log("Initialises an exercise to a standard start point");
     console.log("Usage exStart [Exercise Number].");
@@ -96,12 +63,12 @@ if (exSource == null) {
     console.log("Unknown exercise name [" + exercise + "]. Did you type it correctly?");
     process.exit(1);
 }
-doBackup(exercise);
 // Set up the srcDir based on the lookup of the solutions directory
 var srcDir = SRC_DIR_ROOT + exSource;
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
 try {
-    fs.copySync(srcDir, TARGET_DIR_ROOT, { overwrite: true });
+    fs.copySync(srcDir + "/src/index.html", TARGET_DIR_ROOT + "/src/index.html", { overwrite: true });
+    fs.copySync(srcDir + "/src/app", TARGET_DIR_ROOT + "/src/app", { overwrite: true });
 }
 catch (err) {
     console.log("Failure copying to ex dir" + err);

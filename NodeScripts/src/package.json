@@ -14,6 +14,7 @@
     "cpToDNSolution": "./copyToDNSolution.js",
     "cpToSolution": "./copyToSolution.js",
     "exStart": "./exerciseStart.js",
+    "upgrd": "./upgrd.js",
     "runAllTests": "./runAllTests.js"
   },
   "dependencies": {
@@ -22,6 +23,6 @@
   },
   "devDependencies": {
     "@types/es6-promise": "^3.3.0",
-    "@types/node": "^7.0.5"
+    "@types/node": "^7.10.6"
   }
 }
