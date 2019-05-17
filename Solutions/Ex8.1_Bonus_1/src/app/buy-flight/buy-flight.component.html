@@ -4,7 +4,7 @@
 <br>
 <p>Currency Conversion Rate <input #rate (keyup)='conversionRate=rate.value'></p>
 <h2 *ngIf="errorMessage" class="bg-danger text-danger">{{errorMessage}}</h2>
-<table *ngIf="showBuyFlights" class="table table-bordered table-condensed table-responsive">
+<table *ngIf="showBuyFlights" class="table  table-condensed table-responsive">
   <thead><tr><th>&nbsp;</th><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
   <tbody>
   <tr *ngFor="let flight of flights">

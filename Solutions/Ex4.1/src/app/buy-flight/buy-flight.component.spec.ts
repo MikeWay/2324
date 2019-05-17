@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import { FlightsService } from '../flights/flights.service';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import {FlightsService} from '../flights/flights.service';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent ],

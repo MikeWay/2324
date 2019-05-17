@@ -1,2 +1,8 @@
 VS COde -- No types for protractor fix with "Generate Types for Protractor"
 
+
+Migrated
+
+EX -- Up to Ex2.1_Bonus_1
+
+DN -- Up to DN22

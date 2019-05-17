@@ -1,3 +1,4 @@
+
 <table *ngIf="showBuyFlights">
   <tbody>
   <tr *ngFor="let flight of flights">
@@ -13,4 +14,4 @@
   </tbody>
 </table>
 
-<a (click)="showBuyFlights = !showBuyFlights">Toggle Flights</a>
+<a (click)="showBuyFlights = !showBuyFlights" href="#">Toggle Flights</a>
