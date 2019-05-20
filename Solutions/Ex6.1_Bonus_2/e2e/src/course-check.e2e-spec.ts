@@ -1,4 +1,5 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
+import { browser, logging } from 'protractor';
 
 describe('Validate exercise 6.2 start', function() {
   let page: FlySharpCourseCheckPage;
@@ -7,53 +8,58 @@ describe('Validate exercise 6.2 start', function() {
     page = new FlySharpCourseCheckPage();
   });
 
+
   it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
     page.navigateToTab('home');
     expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
-
   it('should have an App-Home component', () => {
     page.navigateTo();
     expect(page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
-  });  
+  });
 
   it('should have a nav element', () => {
     page.navigateTo();
     expect(page.getNavBar().isPresent()).toBeTruthy();
-  });   
+  });
 
   it('should have an app-buy-flights element', () => {
     page.navigateToTab('buy');
     expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
-      
   it('should have a Toggle Flights button', () => {
     page.navigateToTab('buy');
 
-    expect(page.getToggleFlightsButtonText()).toEqual("Toggle Flights");
-  });    
+    expect(page.getToggleFlightsButtonText()).toEqual('Toggle Flights');
+  });
 
-  it('should have a 0 flights displayed', () => {
+  it('should have a 5 flights displayed', () => {
+    page.navigateToTab('buy');
+
+    expect(page.getFlightTableRows()).toBe(6); // One for the header
+  });
+
+  it('should have a 0 flights displayed when flight toggle is clicked', () => {
     page.navigateToTab('buy');
     page.clickToggleFlights();
     expect(page.getFlightTableRows()).toBe(0);
-  });    
-
-  it('should have a 5 flights displayed', () => {
-    page.navigateToTab('buy'); 
-    expect(page.getFlightTableRows()).toBe(6);
-  });      
-
-
-  it('should have a router-outlet', () => {
-   
-    page.navigateTo();
-    expect(page.getRouterOutlet().isPresent()).toBeTruthy();  
-
+  });
+  it('should show 9 columns in the table', () => {
+    page.navigateToTab('buy');
+    expect(page.getNumTableCols()).toEqual(9);
   });
 
+  it('flight number for 5th flight should be FS2211', () => {
+    page.navigateToTab('buy');
+    expect(page.getTableCellData('5', '2')).toBe('FS2211');
+  });
 
-  it('should have an h1 element with Special Offer on the home tab', () => {
+  it('destination for 5th flight should be LHR', () => {
+    page.navigateToTab('buy');
+    expect(page.getTableCellData('5', '4')).toBe('LHR');
+  });
+  
+ it('should have an h1 element with Special Offer on the home tab', () => {
     // There should not yet be a router so these should not change anything
 
     page.navigateToTab('home');
@@ -96,7 +102,12 @@ describe('Validate exercise 6.2 start', function() {
     expect(page.getTableCellData('2','9')).not.toContain("USD");
   })  
 
-     
 
-
+  afterEach(async () => {
+    // Assert that there are no errors emitted from the browser
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    expect(logs).not.toContain(jasmine.objectContaining({
+      level: logging.Level.SEVERE,
+    } as logging.Entry));
+  });
 });

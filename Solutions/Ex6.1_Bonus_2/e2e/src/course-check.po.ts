@@ -5,9 +5,9 @@ export class FlySharpCourseCheckPage {
     return browser.get('/');
   }
 
-  navigateToTab(tab : string) {
+  navigateToTab(tab: string) {
     return browser.get('/' + tab);
-  }  
+  }
 
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
@@ -26,43 +26,43 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-home h1')).getText();
   }
 
-  getNavBar(){
+  getNavBar() {
     return element(by.css('app-root nav'));
   }
 
-  getBuyFlightsElement(){
+  getBuyFlightsElement() {
     return element(by.css('app-root app-buy-flight'));
   }
 
-  getToggleFlightsButtonText(){
+  getToggleFlightsButtonText() {
     return element(by.css('app-root app-buy-flight a')).getText();
   }
 
-  clickToggleFlights(){
+  clickToggleFlights() {
     element(by.css('app-root app-buy-flight a')).click();
   }
 
-  getFlightTableRows(){
+  getFlightTableRows() {
     return (element.all(by.css('app-buy-flight table tr'))).count();
   }
 
-
-  getPaymentElement(){
+  getNumTableCols() {
+    return (element(by.css('table tbody tr')).all(by.css('td'))).count();
+  }
+  getPaymentElement() {
     return element(by.css('app-root app-payment'));
   }
 
-  getFlightFilterElement(){
+  getFlightFilterElement() {
     return element(by.css('app-root app-flight-filter'));
   }
-  
-  getRouterOutlet(){
-    return element(by.css('router-outlet'));
-  }
 
-  getTableCellData(row : string, col : string){
-    let query : string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
-    //console.log("QUERY: " + query);
+  getTableCellData(row: string, col: string) {
+    const query: string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
+    console.log('QUERY: ' + query);
     return element(by.css(query)).getText();
   }
-  
+  getRouterOutlet() {
+    return element(by.css('router-outlet'));
+  }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../flights/flights.service";
-import {Flight} from "../model/flight";
+import {FlightsService} from '../flights/flights.service';
+import {Flight} from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -11,15 +11,14 @@ import {Flight} from "../model/flight";
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights : Flight[];
+  _flights: Flight[];
   showBuyFlights = true;
-  selectedFlight : Flight;
+  selectedFlight: Flight;
+  originFilter: string = "";
+  destinationFilter: string = null;
 
-  originFilter : string = "";
-  destinationFilter : string = null;
 
-
-  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -29,23 +28,27 @@ export class BuyFlightComponent implements OnInit {
     this.destinationFilter = filterValue;
   }
 
-
-  onClickBuyFlights(){
-    this.showBuyFlights = !this.showBuyFlights;
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      if(typeof params['origin'] !== 'undefined' ) {
+        this.originFilter = params['origin'];
+      }
+    });
+    this._flights = this.flightsService.getFlights();
   }
 
-  onFlightClick(flight : Flight){
-    this.selectedFlight = flight;
+  onClickBuyFlights() {
+    this.showBuyFlights = !this.showBuyFlights;
   }
 
   get flights(): Flight[] {
     if (this.originFilter != null || this.destinationFilter != null) {
       return this._flights.map((flight) => {
         let match = true;
-        if(this.originFilter != null) {
+        if (this.originFilter != null) {
           match = flight.origin.startsWith(this.originFilter);
         }
-        if(!match){
+        if (!match) {
           return null;
         }
         if (match && this.destinationFilter != null) {
@@ -65,15 +68,9 @@ export class BuyFlightComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if(typeof params['origin'] !== 'undefined' ) {
-        this.originFilter = params['origin'];
-      }
-    });
-    this._flights = this.flightsService.getFlights();
+
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
   }
 }
-
-
 
