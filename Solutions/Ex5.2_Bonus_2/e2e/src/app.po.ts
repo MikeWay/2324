@@ -1,12 +1,12 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
-export class FlySharpPage {
+export class AppPage {
   navigateTo() {
-    return browser.get('/');
+    return browser.get(browser.baseUrl) as Promise<any>;
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitleText() {
+    return element(by.css('app-root h1')).getText() as Promise<string>;
   }
 
   getNumTableRows() {
@@ -16,14 +16,13 @@ export class FlySharpPage {
   getNumTableCols() {
     return (element(by.css('table tbody tr')).all(by.css('td'))).count();
   }
-
   clickToggle() {
     element(by.css('#toggle')).click();
   }
 
-  getTableCellData(row : string, col : string){
-    let query : string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
-    //console.log("QUERY: " + query);
+  getTableCellData(row: string, col: string) {
+    const query: string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
+    console.log('QUERY: ' + query);
     return element(by.css(query)).getText();
   }
 }

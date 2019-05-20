@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightsService } from '../flights/flights.service';
-import { Flight } from '../model/flight';
+import {FlightsService} from '../flights/flights.service';
+import {Flight} from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -9,26 +9,24 @@ import { Flight } from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights : Flight[];
+  _flights: Flight[];
   showBuyFlights = true;
-  selectedFlight : Flight;
+  selectedFlight: Flight;
+  originFilter: string = null;
 
-  originFilter : string = null;
+  constructor( private flightsService: FlightsService ) { }
 
-
-  constructor(private flightsService : FlightsService ){}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
   }
 
-
-  onClickBuyFlights(){
-    this.showBuyFlights = !this.showBuyFlights;
+  ngOnInit() {
+    this._flights = this.flightsService.getFlights();
   }
 
-  onFlightClick(flight : Flight){
-    this.selectedFlight = flight;
+  onClickBuyFlights() {
+    this.showBuyFlights = !this.showBuyFlights;
   }
 
   get flights(): Flight[] {
@@ -38,7 +36,7 @@ export class BuyFlightComponent implements OnInit {
     if (this.originFilter != null) {
       return this._flights.map((flight) => {
         console.log(flight);
-        let match = flight.origin.startsWith(this.originFilter);
+        const match = flight.origin.startsWith(this.originFilter);
         if (match) {
           return flight;
         }
@@ -49,10 +47,8 @@ export class BuyFlightComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this._flights = this.flightsService.getFlights();
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
   }
 }
-
-
 

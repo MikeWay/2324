@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Flight} from "../model/flight";
+import {Flight} from '../model/flight';
 
 @Component({
   selector: 'app-payment',
@@ -7,17 +7,18 @@ import {Flight} from "../model/flight";
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
+
   private _selectedFlight: Flight;
 
-  @Input()
-
-  set selectedFlight( flight: Flight){
-    this._selectedFlight = flight;
-  }
-
-  get selectedFlight( ) : Flight{
+  get selectedFlight(): Flight {
     return this._selectedFlight;
   }
+  @Input()
+  set selectedFlight(value: Flight) {
+    this._selectedFlight = value;
+  }
+
+
   constructor() { }
 
   ngOnInit() {
