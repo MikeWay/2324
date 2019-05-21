@@ -12,4 +12,9 @@ export class FlySharpCourseCheckPage {
   getAppHomeH1(){
     return element(by.css('app-home h1')).getText();
   }
+
+  isBuyFlightElementPresent(){
+    return browser.isElementPresent(by.css('app-buy-flight'));
+  }
+ 
 }

@@ -42,7 +42,7 @@ describe('Validate exercise 3.1 start', function() {
   it('should have a 3 flights displayed', () => {
     page.navigateTo();
     page.clickToggleFlights();
-    expect(page.getFlightTableRows()).toBe(3);
+    expect(page.getFlightTableRows()).toBe(4); // Includes a header row!
   });
 
   afterEach(async () => {
