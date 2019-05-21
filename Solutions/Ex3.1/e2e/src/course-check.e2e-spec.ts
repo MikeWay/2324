@@ -35,6 +35,7 @@ describe('Validate exercise 4.1 start', function() {
 
   it('should have a 0 flights displayed', () => {
     page.navigateTo();
+    page.clickToggleFlights();
 
     expect(page.getFlightTableRows()).toBe(0);
   });
