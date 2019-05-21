@@ -36,7 +36,7 @@ describe('Validate exercise 4.2 start', function() {
   it('should have a 5 flights displayed', () => {
     page.navigateTo();
 
-    expect(page.getFlightTableRows()).toBe(5);
+    expect(page.getFlightTableRows()).toBe(6);
   });
 
   it('should have a 0 flights displayed when flight toggle is clicked', () => {
