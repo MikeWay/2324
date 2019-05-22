@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Flight} from "../model/flight";
-import {Input} from "@angular/core";
-import { Payment } from "../model/payment";
+import { Component, OnInit, Input } from '@angular/core';
+import {Flight} from '../model/flight';
+import {Payment} from '../model/payment';
 
 @Component({
   selector: 'app-payment',
@@ -9,20 +8,27 @@ import { Payment } from "../model/payment";
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  @Input() selectedFlight: Flight;
+
+  private _selectedFlight: Flight;
   model: Payment = new Payment();
   constructor() { }
 
-  get jsonModel() {
-    return JSON.stringify(this.model);
+  get selectedFlight(): Flight {
+    return this._selectedFlight;
   }
-
-
+  @Input()
+  set selectedFlight(value: Flight) {
+    this._selectedFlight = value;
+  }
   onSubmit(): void {
     alert(this.jsonModel);
   }
 
   ngOnInit() {
+  }
+
+  get jsonModel() {
+    return JSON.stringify(this.model);
   }
 
 }
