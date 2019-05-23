@@ -1,22 +1,22 @@
-import { FlySharpPage } from './app.po';
+import { AppPage } from './app.po';
+import { browser, logging } from 'protractor';
 
-describe('fly-sharp App', function() {
-  let page: FlySharpPage;
+describe('workspace-project App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new FlySharpPage();
+    page = new AppPage();
   });
 
   it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+    expect(page.getTitleText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
-  it('should show 5 rows in the table', () => {
+  it('should show 10 rows in the table', () => {
     page.navigateToTab('buy');
-    expect(page.getNumTableRows()).toEqual(5);
+    expect(page.getNumTableRows()).toEqual(10);
   });
-
 
   it('should show 0 rows in the table when toggle is clicked', () => {
     page.navigateToTab('buy');
@@ -27,15 +27,15 @@ describe('fly-sharp App', function() {
   it('should show 9 columns in the table', () => {
     page.navigateToTab('buy');
     expect(page.getNumTableCols()).toEqual(9);
-  });  
+  });
 
-  it('flight number for 5th flight should be FS2211', () => {
+  it('flight number for 5th flight should be 114', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','2')).toBe("FS2211");
+    expect(page.getTableCellData('5','2')).toBe("114");
   })
 
-  it('destination for 5th flight should be LHR', () => {
+  it('destination for 5th flight should be JFK', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','4')).toBe("LHR");
-  })  
+    expect(page.getTableCellData('5','4')).toBe("JFK");
+  })
 });

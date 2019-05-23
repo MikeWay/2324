@@ -11,7 +11,7 @@ export class FlightsService {
   constructor(private http: HttpClient) { }
 
   public getFlights(): Observable<Flight[]> {
-    const url = 'http://localhost:8080/flightserver/allflights';
+    const url = 'http://localhost:8080/flightserver/flights';
 
     return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }

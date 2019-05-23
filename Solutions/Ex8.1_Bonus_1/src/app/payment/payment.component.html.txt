@@ -33,8 +33,8 @@
         <label for="expDate">Card Expiry</label>
         <input type="month" class="form-control" id="expDate" name="expDate">
       </div>
-	<button type="submit" class="btn btn-default"  required>Buy Flight</button>
+	<button type="submit" class="btn btn-secondary"  required>Buy Flight</button>
     </form>
 
   </div>
-</div>	
+</div>
