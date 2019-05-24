@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {FlightsService} from "../flights/flights.service";
-import {Flight} from "../model/flight";
+import {FlightsService} from '../flights/flights.service';
+import {Flight} from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -11,21 +11,18 @@ import {Flight} from "../model/flight";
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights : Flight[];
-  showBuyFlights = false;
-  selectedFlight : Flight;
-  errorMessage : String;
-
-  originFilter : string = "";
-  destinationFilter : string = "";
-
-  conversionRate = 4.0;
+  _flights: Flight[];
+  showBuyFlights = true;
+  selectedFlight: Flight;
+  errorMessage: String;
+  originFilter: string = null;
+  destinationFilter: string = null;
+conversionRate = 4.0;
 
   nextFlightIndex = 20;
   numFlights=0;
 
-
-  constructor(private flightsService : FlightsService, private activatedRoute: ActivatedRoute ){}
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -35,14 +32,30 @@ export class BuyFlightComponent implements OnInit {
     this.destinationFilter = filterValue;
   }
 
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      if(typeof params['origin'] !== 'undefined' ) {
+        this.originFilter = params['origin'];
+      }
+    });
 
-  onClickBuyFlights(){
+
+    const flightStream = this.flightsService.getChunkOfFlights(0,20);
+    flightStream.subscribe(
+      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
+      (error: string) => this.errorMessage = error
+    );
+
+    // Get the number of flights available
+    this.flightsService.getNumberOfFlights().subscribe(
+      num => {console.log(num); this.numFlights = num },
+      (error: string) => this.errorMessage = error);
+  }
+
+  onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  onFlightClick(flight : Flight){
-    this.selectedFlight = flight;
-  }
 
   onNext() {
 
@@ -74,10 +87,10 @@ export class BuyFlightComponent implements OnInit {
     if (this.originFilter != null || this.destinationFilter != null) {
       return this._flights.map((flight) => {
         let match = true;
-        if(this.originFilter != null) {
+        if (this.originFilter != null) {
           match = flight.origin.startsWith(this.originFilter);
         }
-        if(!match){
+        if (!match) {
           return null;
         }
         if (match && this.destinationFilter != null) {
@@ -97,26 +110,11 @@ export class BuyFlightComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if(typeof params['origin'] !== 'undefined' ) {
-        this.originFilter = params['origin'];
-      }
-    });
 
-
-    const flightStream = this.flightsService.getChunkOfFlights(0,20);
-    flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
-      (error: string) => this.errorMessage = error
-    );
-
-      // Get the number of flights available
-    this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num },
-      (error: string) => this.errorMessage = error);
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
   }
+
+
 }
-
-
 

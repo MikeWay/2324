@@ -1,40 +1,91 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import { FlightsService } from '../flights/flights.service';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import {Flight} from "../model/flight";
-import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
-import { PaymentComponent } from '../payment/payment.component';
-import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import {FlightsService} from '../flights/flights.service';
+import {Component, DebugElement, Input, Pipe, PipeTransform} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {Flight} from '../model/flight';
+import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
+import {ActivatedRoute, Params} from '@angular/router';
+import {from, Observable, of} from 'rxjs';
+import {CurrencyConversionPipe} from '../currency-conversion/currency-conversion.pipe';
 
 
 class MockFlightsService {
 
   constructor() { }
 
-  public getFlights() : Flight[]{
-    return FLIGHTS;
+  public getFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
   }
 
-  public getMyFlights() : Flight[]{
+  public getChunkOfFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
+  }
+
+  public getNumberOfFlights(): Observable<number> {
+    return of<number>( 10);
+  }
+
+  public getMyFlights(): Flight[] {
     return MYFLIGHTS;
+  }
+}
+
+@Component({
+  selector: 'app-payment',
+  template: ''
+})
+class MockAppPaymentComponent {
+  @Input()
+  public selectedFlight: Flight;
+
+}
+
+@Component({
+  selector: 'app-flight-filter',
+  template: ''
+})
+class MockFlightFilterComponent {
+  @Input()
+  public label: string;
+  @Input()
+  public initialValue: string;
+
+  public onFilterChange(flight: string) {}
+
+}
+
+@Pipe({
+  name: 'currencyConversion'
+})
+class MockCurrencyConversionPipe implements PipeTransform{
+  transform(value: any, ...args: any[]): any {
   }
 
 }
-// Create an instance of the mock
-let mockFlightsService = new MockFlightsService();
+
+const mockFlightsService = new MockFlightsService();
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent, PaymentComponent, FlightFilterComponent ],
-      providers: [{provide: FlightsService,
-        useValue: mockFlightsService }]
+      declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe ],
+      providers: [{
+                    provide: FlightsService,
+                    useValue: mockFlightsService
+                  },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{id: 1}]),
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
@@ -69,7 +120,6 @@ describe('BuyFlightComponent', () => {
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
-
 
   it('should hide the flights table  when the link is clicked', () => {
     fixture.detectChanges();
