@@ -1,94 +1,124 @@
-import { Component, Input } from '@angular/core';
-/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BuyFlightComponent } from './buy-flight.component';
+import {FlightsService} from '../flights/flights.service';
+import {Component, DebugElement, Input, Pipe, PipeTransform} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {Flight} from '../model/flight';
+import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
+import {ActivatedRoute, Params} from '@angular/router';
+import {from, Observable, of} from 'rxjs';
+import {CurrencyConversionPipe} from '../currency-conversion/currency-conversion.pipe';
 
 
-import {BuyFlightComponent} from "./buy-flight.component";
-import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {DebugElement} from "@angular/core";
-import {FlightsService} from "../services/flights.service";
-import {By} from "@angular/platform-browser";
-import {Flight} from "../model/flight";
-import {FLIGHTS, MYFLIGHTS} from "../model/mock-flights";
-import { PaymentComponent } from '../payment/payment.component';
-import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
-import { ActivatedRoute } from '@angular/router';
-import { ActivatedRouteStub } from '../router-stubs';
-import { CurrencyConversionPipe } from '../currency/currency-conversion.pipe';
-
-
-export class MockFlightsService {
+class MockFlightsService {
 
   constructor() { }
 
-  public getFlights() : Flight[]{
-    return FLIGHTS;
+  public getFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
   }
 
-  public getMyFlights() : Flight[]{
+  public getChunkOfFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
+  }
+
+  public getNumberOfFlights(): Observable<number> {
+    return of<number>( 10);
+  }
+
+  public getMyFlights(): Flight[] {
     return MYFLIGHTS;
   }
-
 }
-
 
 @Component({
-    selector: 'app-payment',
-  template: '',
+  selector: 'app-payment',
+  template: ''
 })
-class MockPaymentComponent {
-  @Input() selectedFlight;
+class MockAppPaymentComponent {
+  @Input()
+  public selectedFlight: Flight;
+
 }
 
-let mockActivatedRoute = new ActivatedRouteStub();
+@Component({
+  selector: 'app-flight-filter',
+  template: ''
+})
+class MockFlightFilterComponent {
+  @Input()
+  public label: string;
+  @Input()
+  public initialValue: string;
 
-let mockFlightsService = new MockFlightsService();
+  public onFilterChange(flight: string) {}
 
-describe('Component: BuyFlight', () => {
-  let comp: BuyFlightComponent;
-  let fixture : ComponentFixture<BuyFlightComponent>;
+}
+
+@Pipe({
+  name: 'currencyConversion'
+})
+class MockCurrencyConversionPipe implements PipeTransform{
+  transform(value: any, ...args: any[]): any {
+  }
+
+}
+
+const mockFlightsService = new MockFlightsService();
+
+describe('BuyFlightComponent', () => {
+  let component: BuyFlightComponent;
+  let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        BuyFlightComponent, FlightFilterComponent, CurrencyConversionPipe,MockPaymentComponent
-      ],
-      providers: [
-        {provide: FlightsService,useValue: mockFlightsService }, 
-        {provide:ActivatedRoute, useValue: mockActivatedRoute}
+      declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe ],
+      providers: [{
+                    provide: FlightsService,
+                    useValue: mockFlightsService
+                  },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{id: 1}]),
+          }
+        }
       ]
+    })
+    .compileComponents();
+  }));
 
-    });
-
-    fixture = TestBed.createComponent(BuyFlightComponent); // Which creates a test fixture
-    comp = fixture.debugElement.componentInstance; // which retrieves an instance of the component under test
+  beforeEach(() => {
+    fixture = TestBed.createComponent(BuyFlightComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should create an instance', () => {
-    expect(comp).toBeTruthy();
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should default showBuyFlights to true', () => {
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeFalsy();
+    expect(component.showBuyFlights).toBeTruthy();
   });
 
   it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
+    component.onClickBuyFlights();
+    expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should hide the flights table  when the link is clicked', () => {
-    comp.onClickBuyFlights();
-    comp.onClickBuyFlights();
-    expect(comp.showBuyFlights).toBeTruthy();
+  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
+    component.onClickBuyFlights();
+    component.onClickBuyFlights();
+    expect(component.showBuyFlights).toBeTruthy();
   });
 
   it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
-    expect(comp.showBuyFlights).toBeFalsy();
+    expect(component.showBuyFlights).toBeFalsy();
   });
 
   it('should hide the flights table  when the link is clicked', () => {
@@ -102,4 +132,3 @@ describe('Component: BuyFlight', () => {
     expect(tableEle).toBeFalsy();
   });
 });
-

@@ -1,23 +1,23 @@
 
-<form #accountForm="ngForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+<form (ngSubmit)="onSubmit()" class="form-horizontal">
   <div class="form-group">
     <label class="col-sm-2 control-label">First Name:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="firstName">
+      <input type="text" class="form-control" formControlName="firstName">
     </div>
     <!--<div *ngIf="accountForm.controls['firstName'].valid" class="col-sm-1"><img src="images/checkmark.png"/></div>-->
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Family Name:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="familyName">
+      <input type="text" class="form-control" formControlName="familyName">
     </div>
     <!--<div *ngIf="accountForm.controls['familyName'].valid" class="col-sm-1" ><img src="images/checkmark.png"/></div>-->
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Email:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="email">
+      <input type="text" class="form-control" formControlName="email">
     </div>
     <!--<div *ngIf="accountForm.controls['email'].valid" class="col-sm-1"><img src="images/checkmark.png"/></div>-->
   </div>
@@ -25,28 +25,28 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Address Line 1:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="address1">
+      <input type="text" class="form-control" formControlName="address1">
     </div>
     <!--<div *ngIf="accountForm.controls['address1'].valid" class="col-sm-1" ><img src="images/checkmark.png"/></div>-->
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Address Line 2:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="address2">
+      <input type="text" class="form-control" formControlName="address2">
     </div>
     <!--<div *ngIf="accountForm.controls['address1'].valid" class="col-sm-1" ><img src="images/checkmark.png"/></div>-->
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Town / City:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="city">
+      <input type="text" class="form-control" formControlName="city">
     </div>
     <!--<div *ngIf="accountForm.controls['city'].valid" class="col-sm-1" ><img src="images/checkmark.png"/></div>-->
   </div>
   <div class="form-group">
     <label class="col-sm-2 control-label">Post Code / Zip Code:</label>
     <div class="col-sm-9">
-      <input type="text" class="form-control" ngControl="postCode">
+      <input type="text" class="form-control" formControlName="postCode">
     </div>
     <!--<div *ngIf="accountForm.controls['postCode'].valid" class="col-sm-1" ><img src="images/checkmark.png"/></div>-->
   </div>

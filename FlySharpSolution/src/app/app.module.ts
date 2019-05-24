@@ -1,40 +1,36 @@
+import { HomeComponent } from './home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HomeComponent} from "./home/home.component";
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import { PaymentComponent } from './payment/payment.component';
+import {FlightsService} from './flights/flights.service';
+import {PaymentComponent} from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
-import { AccountComponent } from './account/account.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
-import { CurrencyConversionPipe } from './currency/currency-conversion.pipe';
-import {HttpClientModule} from "@angular/common/http";
-import {SpecialOffersComponent} from "./special-offers/special-offers.component";
-import {TimeDirective} from "./time/time.directive";
+import {AccountsModule} from './accounts/accounts.module';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TimeDirective } from './time.directive';
+import {CurrencyConversionPipe} from './currency/currency-conversion.pipe';
+
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent,
-    PaymentComponent, FlightFilterComponent, AccountComponent,
-    SpecialOffersComponent,
-    MyFlightsComponent,
-    CurrencyConversionPipe,
-    CurrencyConversionPipe,
-    TimeDirective
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent,
+    FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, TimeDirective
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [FlightsService],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

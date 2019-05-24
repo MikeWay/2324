@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from '../model/account';
 
 @Component({
@@ -13,17 +13,17 @@ export class AccountComponent {
 
   constructor(fb: FormBuilder) {
       this.accountForm = fb.group({
-          firstName: ["", Validators.required],
-          familyName : ["", Validators.required],
-          email:     ["", Validators.compose([Validators.required, Validators.minLength(10)])],
-          address1 : ["", Validators.required],
-          address2 : ["", Validators.required],
-          city     : ["", Validators.required],
-          postCode : ["", Validators.required],
+          firstName: ['', Validators.required],
+          familyName : ['', Validators.required],
+          email:     ['', Validators.compose([Validators.required, Validators.minLength(10)])],
+          address1 : ['', Validators.required],
+          address2 : ['', Validators.required],
+          city     : ['', Validators.required],
+          postCode : ['', Validators.required],
       });
   }
   onSubmit() {
-      console.log("model-based form submitted");
+      console.log('model-based form submitted');
       console.log(this.accountForm.valid);
   }
 

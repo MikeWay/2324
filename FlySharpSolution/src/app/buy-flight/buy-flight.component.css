@@ -1,8 +1,5 @@
-.btn-primary{
-    width: 8em;
-}
-
-.butCol {
-    width: 9em;
-    text-align: center;
+button {
+  margin-left: 1em;
+  margin-top: 0.5em;
+  width: 10em;
 }
