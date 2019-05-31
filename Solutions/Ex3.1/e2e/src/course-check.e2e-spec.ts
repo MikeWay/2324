@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 4.1 start', function() {
+describe('Validate exercise 4.1 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -41,9 +41,9 @@ describe('Validate exercise 4.1 start', function() {
   });
 
   it('should have a 5 flights displayed', () => {
-    page.navigateTo();   
+    page.navigateTo();
     expect(page.getFlightTableRows()).toBe(6);
-  });      
+  });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
