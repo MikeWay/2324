@@ -8,6 +8,8 @@ import {Flight} from '../model/flight';
 })
 export class PaymentComponent implements OnInit {
 
+  // Next line stops tslint complaining about the _ at the start of the variable name
+  // tslint:disable-next-line
   private _selectedFlight: Flight;
 
   get selectedFlight(): Flight {
