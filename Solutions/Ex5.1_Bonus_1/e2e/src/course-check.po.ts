@@ -40,7 +40,7 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-root app-payment'));
   }
 
-  getFlightFilterElement(){
+  getFlightFilterElement() {
     return element(by.css('app-root app-flight-filter'));
   }
 
