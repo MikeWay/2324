@@ -31,13 +31,13 @@ describe('workspace-project App', () => {
 
   it('flight number for 5th flight should be FS2211', () => {
     page.navigateTo();
-    expect(page.getTableCellData('5','1')).toBe("FS2211");
-  })
+    expect(page.getTableCellData('5', '1')).toBe('FS2211');
+  });
 
   it('destination for 5th flight should be LHR', () => {
     page.navigateTo();
-    expect(page.getTableCellData('5','3')).toBe("LHR");
-  })
+    expect(page.getTableCellData('5', '3')).toBe('LHR');
+  });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
