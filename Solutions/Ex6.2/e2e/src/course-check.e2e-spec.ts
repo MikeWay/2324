@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 6.3 start', function() {
+describe('Validate exercise 6.3 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -58,49 +58,49 @@ describe('Validate exercise 6.3 start', function() {
     page.navigateToTab('buy');
     expect(page.getTableCellData('5', '4')).toBe('LHR');
   });
-  
- it('should have an h1 element with Special Offer on the home tab', () => {
+
+  it('should have an h1 element with Special Offer on the home tab', () => {
     // There should not yet be a router so these should not change anything
 
     page.navigateToTab('home');
-    expect(page.getAppHomeH1()).toContain("Special Offer");
-  
+    expect(page.getAppHomeH1()).toContain('Special Offer');
+
   });
 
   it('should have an app-buy-flights element on the buy tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('buy');
-    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();  
+    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
 
 
   it('should not have an app-buy-flights element on the home tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('home');
-    expect(page.getBuyFlightsElement().isPresent()).toBeFalsy();  
-  });  
+    expect(page.getBuyFlightsElement().isPresent()).toBeFalsy();
+  });
 
   it('should say my-flights works! on the My Flights tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('myflights');
-    expect(page.getMyFlightsParagraphText()).toBe("my-flights works!");
-    
-  });   
+    expect(page.getMyFlightsParagraphText()).toBe('my-flights works!');
+
+  });
 
 
   it('should say account works! on the Account tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('account');
-    expect(page.getAccountParagraphText()).toBe("account works!");
-    
-  });     
+    expect(page.getAccountParagraphText()).toBe('account works!');
+
+  });
 /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
-   it('The price column should not contain USD', () => {
+  it('The price column should not contain USD', () => {
     page.navigateToTab('buy');
-    page.getTableCellData('1','8').then(value => console.log("===============>" + value));
-    expect(page.getTableCellData('2','9')).not.toContain("USD");
-  })  
+    page.getTableCellData('1', '8').then(value => console.log('===============>' + value));
+    expect(page.getTableCellData('2', '9')).not.toContain('USD');
+  });
 
 
   afterEach(async () => {

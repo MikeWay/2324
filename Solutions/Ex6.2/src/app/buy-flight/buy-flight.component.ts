@@ -11,10 +11,12 @@ import {Flight} from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
+  // Next line stops tslint complaining about the _ at the start of the variable name
+  // tslint:disable-next-line
   _flights: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight;
-  originFilter: string = "";
+  originFilter = '';
   destinationFilter: string = null;
 
 
@@ -30,8 +32,8 @@ export class BuyFlightComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if(typeof params['origin'] !== 'undefined' ) {
-        this.originFilter = params['origin'];
+      if (typeof params.origin !== 'undefined' ) {
+        this.originFilter = params.origin;
       }
     });
     this._flights = this.flightsService.getFlights();
