@@ -20,9 +20,9 @@ export class FlySharpCourseCheckPage {
 
   getAccountParagraphText() {
     return element(by.css('app-root app-account p')).getText();
-  }  
+  }
 
-  getAppHomeH1(){
+  getAppHomeH1() {
     return element(by.css('app-home h1')).getText();
   }
 
@@ -66,16 +66,16 @@ export class FlySharpCourseCheckPage {
     return element(by.css('router-outlet'));
   }
 
-  clickBuyFlightButton(){
+  clickBuyFlightButton() {
     element(by.css('app-buy-flight button')).click();
   }
 
-  getPaymentForm(){
+  getPaymentForm() {
     return element(by.css('app-payment form'));
   }
 
-  getPaymentComponentElement(){
+  getPaymentComponentElement() {
     return element(by.css('app-payment'));
   }
-  
+
 }

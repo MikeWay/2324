@@ -51,7 +51,7 @@ class MockFlightFilterComponent {
 @Pipe({
   name: 'currencyConversion'
 })
-class MockCurrencyConversionPipe implements PipeTransform{
+class MockCurrencyConversionPipe implements PipeTransform {
   transform(value: any, ...args: any[]): any {
   }
 

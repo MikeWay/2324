@@ -18,5 +18,5 @@ describe('FlightsService', () => {
 
   it('should return 2 flights from getMyFlights()', inject([FlightsService], (service: FlightsService) => {
     expect(service.getMyFlights().length).toBe(2);
-  }));  
+  }));
 });
