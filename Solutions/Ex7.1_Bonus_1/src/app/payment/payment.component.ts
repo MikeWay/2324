@@ -8,7 +8,8 @@ import {Payment} from '../model/payment';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-
+  // Next line stops tslint complaining about the _ at the start of the variable name
+  // tslint:disable-next-line
   private _selectedFlight: Flight;
   model: Payment = new Payment();
   constructor() { }

@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 7.2 start', function() {
+describe('Validate exercise 7.2 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -58,75 +58,75 @@ describe('Validate exercise 7.2 start', function() {
     page.navigateToTab('buy');
     expect(page.getTableCellData('5', '4')).toBe('LHR');
   });
-  
- it('should have an h1 element with Special Offer on the home tab', () => {
+
+  it('should have an h1 element with Special Offer on the home tab', () => {
     // There should not yet be a router so these should not change anything
 
     page.navigateToTab('home');
-    expect(page.getAppHomeH1()).toContain("Special Offer");
-  
+    expect(page.getAppHomeH1()).toContain('Special Offer');
+
   });
 
   it('should have an app-buy-flights element on the buy tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('buy');
-    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();  
+    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
 
 
   it('should not have an app-buy-flights element on the home tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('home');
-    expect(page.getBuyFlightsElement().isPresent()).toBeFalsy();  
-  });  
+    expect(page.getBuyFlightsElement().isPresent()).toBeFalsy();
+  });
 
   it('should say my-flights works! on the My Flights tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('myflights');
-    expect(page.getMyFlightsParagraphText()).toBe("my-flights works!");
-    
-  });   
+    expect(page.getMyFlightsParagraphText()).toBe('my-flights works!');
+
+  });
 
 
   it('should say account works! on the Account tab', () => {
     // There should not yet be a router so these should not change anything
     page.navigateToTab('account');
-    expect(page.getAccountParagraphText()).toBe("account works!");
-    
-  });    
+    expect(page.getAccountParagraphText()).toBe('account works!');
+
+  });
 
 
-   it('The price column should contain USD', () => {
+  it('The price column should contain USD', () => {
     page.navigateToTab('buy');
-    page.getTableCellData('1','8').then(value => console.log("===============>" + value));
-    expect(page.getTableCellData('2','9')).toContain("USD");
-  })    
+    page.getTableCellData('1', '8').then(value => console.log('===============>' + value));
+    expect(page.getTableCellData('2', '9')).toContain('USD');
+  });
 
   it('should have a Payment Component when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();  
-  });  
+    expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();
+  });
 
-   it('should have have a Payment Component FORM when the buy button is pressed', () => {
+  it('should have have a Payment Component FORM when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getPaymentForm().isPresent()).toBeTruthy();  
+    expect(page.getPaymentForm().isPresent()).toBeTruthy();
   });
 /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
 
-   it('should not have an input with a ngcontrol attribute when the buy button is pressed', () => {
+  it('should not have an input with a ngcontrol attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();  
-  }); 
+    expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();
+  });
 
-   it('should not have an input with a formcontrolname attribute when the buy button is pressed', () => {
+  it('should not have an input with a formcontrolname attribute when the buy button is pressed', () => {
     page.navigateToTab('buy');
     page.clickBuyFlightButton();
-    expect(page.getFormControlNameAttributeFromPaymentForm()).toBeFalsy();  
-  });  
+    expect(page.getFormControlNameAttributeFromPaymentForm()).toBeFalsy();
+  });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
