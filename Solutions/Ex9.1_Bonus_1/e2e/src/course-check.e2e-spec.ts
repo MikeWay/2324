@@ -4,7 +4,7 @@ import { browser, logging } from 'protractor';
  * The tests will all fail because of the AppTime directive -- the every changing clock stops Protractor seeing the page as stable!
  */
 
-describe('Validate exercise 9.1 start', function() {
+describe('Validate exercise 9.1 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {

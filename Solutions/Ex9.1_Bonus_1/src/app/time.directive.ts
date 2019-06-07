@@ -6,16 +6,16 @@ import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 export class TimeDirective implements OnInit {
 
   @Input('appTime')
-  private color : string = "white";
+  private color = 'white';
 
   constructor(private el: ElementRef) {
     this.showTime(el);
-    setInterval(()=>{this.showTime(el)}, 1000);
+    setInterval(() => {this.showTime(el); }, 1000);
   }
 
   private showTime(el: ElementRef) {
-    let myDate = new Date();
-    el.nativeElement.innerHTML = myDate.toLocaleTimeString("en-US");
+    const myDate = new Date();
+    el.nativeElement.innerHTML = myDate.toLocaleTimeString('en-US');
   }
 
   ngOnInit() {

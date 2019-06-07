@@ -18,7 +18,8 @@ import { TimeDirective } from './time.directive';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, TimeDirective
+    AppComponent, HomeComponent, BuyFlightComponent,
+    PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, TimeDirective
   ],
   imports: [
     BrowserModule,
