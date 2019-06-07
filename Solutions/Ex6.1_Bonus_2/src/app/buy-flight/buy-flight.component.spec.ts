@@ -41,7 +41,7 @@ class MockFlightFilterComponent {
   @Input()
   public label: string;
   @Input()
-  public initialValue: string;  
+  public initialValue: string;
   public onFilterChange(flight: string) {}
 
 }

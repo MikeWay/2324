@@ -20,9 +20,9 @@ export class FlySharpCourseCheckPage {
 
   getAccountParagraphText() {
     return element(by.css('app-root app-account p')).getText();
-  }  
+  }
 
-  getAppHomeH1(){
+  getAppHomeH1() {
     return element(by.css('app-home h1')).getText();
   }
 
