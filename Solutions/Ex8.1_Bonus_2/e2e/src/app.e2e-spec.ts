@@ -31,11 +31,11 @@ describe('workspace-project App', () => {
 
   it('flight number for 5th flight should be 114', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','2')).toBe("114");
-  })
+    expect(page.getTableCellData('5', '2')).toBe('114');
+  });
 
   it('destination for 5th flight should be JFK', () => {
     page.navigateToTab('buy');
-    expect(page.getTableCellData('5','4')).toBe("JFK");
-  })
+    expect(page.getTableCellData('5', '4')).toBe('JFK');
+  });
 });

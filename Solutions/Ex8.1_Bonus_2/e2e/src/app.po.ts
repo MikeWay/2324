@@ -4,10 +4,10 @@ export class AppPage {
   navigateTo() {
     return browser.get(browser.baseUrl) as Promise<any>;
   }
-  
-  navigateToTab(tab : string) {
+
+  navigateToTab(tab: string) {
     return browser.get('/' + tab) as Promise<any>;
-  }  
+  }
 
   getTitleText() {
     return element(by.css('app-root h1')).getText() as Promise<string>;
