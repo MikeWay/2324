@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DoNow22": {
+    "DoNow21": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/DoNow22",
+            "outputPath": "dist/DoNow21",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DoNow22:build"
+            "browserTarget": "DoNow21:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "DoNow22:build:production"
+              "browserTarget": "DoNow21:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow22:build"
+            "browserTarget": "DoNow21:build"
           }
         },
         "test": {
@@ -105,15 +105,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "DoNow22:serve"
+            "devServerTarget": "DoNow21:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "DoNow22:serve:production"
+              "devServerTarget": "DoNow21:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "DoNow22"
+  "defaultProject": "DoNow21"
 }

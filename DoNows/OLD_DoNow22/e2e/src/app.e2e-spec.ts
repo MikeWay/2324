@@ -10,8 +10,13 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to DoNow22!');
+    expect(page.getTitleText()).toEqual('DoNow22');
   });
+
+  it('should have a Forecast component', () => {
+    page.navigateTo();
+    expect(page.getAppForecast().count()).toBe(1);
+  });  
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

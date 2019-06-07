@@ -1,6 +1,6 @@
-# DoNow22
+# DoNow21
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0-rc.3.
 
 ## Development server
 
