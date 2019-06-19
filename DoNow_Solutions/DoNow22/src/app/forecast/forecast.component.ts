@@ -1,26 +1,26 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
-  styles: ['p {color:blue;}'],
+  styleUrls: ['./forecast.component.css'],
 })
 
 export class ForecastComponent implements OnInit, OnDestroy  {
 
-  private sub : any;
-  private sub2 : any;
-  private forecast : string;
-  mylocation : string = "Somewhere over the rainbow";
-  private unit : string;
+  private sub: any;
+  private sub2: any;
+  private forecast: string;
+  mylocation = 'Somewhere over the rainbow';
+  private unit: string;
 
-  constructor(){
+  constructor() {
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
   }
 }

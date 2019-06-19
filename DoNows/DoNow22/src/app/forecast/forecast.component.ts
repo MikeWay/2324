@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
-  styles: ['p {color:blue;}'],
+  styleUrls: ['./forecast.component.css'],
 })
 
 export class ForecastComponent implements OnInit, OnDestroy  {
