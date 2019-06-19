@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Preferences } from '../entities/preferences';
 
-import { Preferences } from '../entities/preferences'
 
 @Component({
   selector: 'app-preferences-form',
