@@ -3,9 +3,10 @@
   <form #theForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" required name="name" id="name" [(ngModel)]='model.name' >
-
+      <input type="text" class="form-control" required name="name" id="name" [(ngModel)]="model.name" #controlState >
+      
     </div>
+    <br>{{controlState.className}}
     <div class="form-group">
       <label for="location">Location</label>
       <input type="text" class="form-control" required [(ngModel)]="model.location" name="location" id="location">
