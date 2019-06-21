@@ -1,6 +1,7 @@
-import {Component, OnInit, animate, style, state, transition, trigger} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 
 import { Preferences } from '../entities/preferences'
+import {state, transition, trigger, animate, style } from "@angular/animations";
 
 @Component({
   selector: 'app-preferences-form',
