@@ -10,17 +10,18 @@ import {Flight} from '../model/flight';
   styleUrls: ['./buy-flight.component.css']
 })
 export class BuyFlightComponent implements OnInit {
-
+  // Next line stops tslint complaining about the _ at the start of the variable name
+  // tslint:disable-next-line
   _flights: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight;
-  errorMessage: String;
+  errorMessage: string;
   originFilter: string = null;
   destinationFilter: string = null;
 conversionRate = 4.0;
 
   nextFlightIndex = 20;
-  numFlights=0;
+  numFlights = 0;
 
   constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
@@ -34,21 +35,21 @@ conversionRate = 4.0;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if(typeof params['origin'] !== 'undefined' ) {
-        this.originFilter = params['origin'];
+      if (typeof params.origin !== 'undefined' ) {
+        this.originFilter = params.origin;
       }
     });
 
 
-    const flightStream = this.flightsService.getChunkOfFlights(0,20);
+    const flightStream = this.flightsService.getChunkOfFlights(0, 20);
     flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true;},
+      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true; },
       (error: string) => this.errorMessage = error
     );
 
     // Get the number of flights available
     this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num },
+      num => {console.log(num); this.numFlights = num; },
       (error: string) => this.errorMessage = error);
   }
 
@@ -64,7 +65,7 @@ conversionRate = 4.0;
       numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
     }
     this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
       (error: string) => this.errorMessage = error);
     if (this.nextFlightIndex <= this.numFlights) {
       this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
@@ -79,7 +80,7 @@ conversionRate = 4.0;
       this.nextFlightIndex = 0;
     }
     this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true },
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
       (error: string) => this.errorMessage = error);
   }
 

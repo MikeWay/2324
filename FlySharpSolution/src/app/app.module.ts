@@ -10,17 +10,16 @@ import {PaymentComponent} from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 import {AccountsModule} from './accounts/accounts.module';
-
+import { CurrencyConversionPipe } from './currency-conversion/currency-conversion.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TimeDirective } from './time.directive';
-import {CurrencyConversionPipe} from './currency/currency-conversion.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, 
-    FlightFilterComponent, MyFlightsComponent,  CurrencyConversionPipe
+    AppComponent, HomeComponent, BuyFlightComponent,
+    PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, TimeDirective
   ],
   imports: [
     BrowserModule,

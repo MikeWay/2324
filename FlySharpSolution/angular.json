@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FlySharpSolution": {
+    "FlySharp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,12 +13,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/FlySharpSolution",
+            "outputPath": "dist/FlySharp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -58,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "FlySharpSolution:build"
+            "browserTarget": "FlySharp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "FlySharpSolution:build:production"
+              "browserTarget": "FlySharp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FlySharpSolution:build"
+            "browserTarget": "FlySharp:build"
           }
         },
         "test": {
@@ -106,15 +105,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "FlySharpSolution:serve"
+            "devServerTarget": "FlySharp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FlySharpSolution:serve:production"
+              "devServerTarget": "FlySharp:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "FlySharpSolution"
+  "defaultProject": "FlySharp"
 }

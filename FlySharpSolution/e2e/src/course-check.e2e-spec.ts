@@ -1,7 +1,10 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
+/**
+ * The tests will all fail because of the AppTime directive -- the every changing clock stops Protractor seeing the page as stable!
+ */
 
-describe('Validate exercise 9.1 start', function() {
+describe('Validate exercise 9.1 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -38,11 +41,12 @@ describe('Validate exercise 9.1 start', function() {
     expect(page.getFlightTableRows()).toBe(21); // including header?
   });
 
-  it('should have a 0 flights displayed when flight toggle is clicked', () => {
+  it('hould have a 0 flights displayed when flight toggle is clicked', () => {
     page.navigateToTab('buy');
     page.clickToggleFlights();
     expect(page.getFlightTableRows()).toBe(0);
   });
+
   it('should show 9 columns in the table', () => {
     page.navigateToTab('buy');
     expect(page.getNumTableCols()).toEqual(9);
