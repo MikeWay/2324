@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: './accounts/accounts.module#AccountsModule'
+    loadChildren: () => import('./accounts/accounts.module').then(mod => mod.AccountsModule)
   }
 ];
 
