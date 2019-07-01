@@ -6,7 +6,7 @@ import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 export class TimeDirective implements OnInit {
 
   @Input('appTime')
-  private color = 'white';
+  public color = 'white';
 
   constructor(private el: ElementRef) {
     this.showTime(el);
