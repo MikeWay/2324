@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-content>
+    <app-flight-filter (onFilter)="onFilterChange($event)"
+                       label='Origin'></app-flight-filter>
+    <app-flight-filter (onFilter)="onDestinationFilterChange($event)"
+                       [label]="'Destination'"></app-flight-filter>
+  </mat-card-content>
+</mat-card>
+<div class="mat-elevation-z8">
+
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements" *ngIf="showBuyFlights">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef >Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <!-- Origin Column -->
+    <ng-container matColumnDef="origin">
+      <mat-header-cell *matHeaderCellDef>Origin</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.origin}}</mat-cell>
+    </ng-container>
+
+    <!-- Destination Column -->
+    <ng-container matColumnDef="destination">
+      <mat-header-cell *matHeaderCellDef >Destination</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.destination}}</mat-cell>
+    </ng-container>
+
+    <!-- Depart Day Column -->
+    <ng-container matColumnDef="departDay">
+      <mat-header-cell *matHeaderCellDef >DepartDay</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.departDay}}</mat-cell>
+    </ng-container>
+
+    <!-- Depart Time Column -->
+    <ng-container matColumnDef="departTime">
+      <mat-header-cell *matHeaderCellDef >DepartTime</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.departTime}}</mat-cell>
+    </ng-container>
+
+        <!-- Arrive Day Column -->
+    <ng-container matColumnDef="arriveDay">
+      <mat-header-cell *matHeaderCellDef >DepartDay</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.departDay}}</mat-cell>
+    </ng-container>
+
+    <!-- Arrive Time  Column -->
+    <ng-container matColumnDef="arriveTime">
+      <mat-header-cell *matHeaderCellDef >DepartTime</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.departTime}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="10"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
