@@ -12,7 +12,7 @@ echo "Starting tests"
 set COURSE_HOME=C:\course2324
 cd %COURSE_HOME%\Exercises
 rmdir /s /q FlySharp 
-call ng new FlySharp --routing --style css
+call ng new FlySharp --enable-ivy --routing --style css
 cd FlySharp
 call npm install
 
