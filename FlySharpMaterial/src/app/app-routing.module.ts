@@ -5,6 +5,7 @@ import { BuyFlightMatComponent } from './buy-flight-mat/buy-flight-mat.component
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 import { AccountComponent } from './account/account.component';
+import { BuyFlightMatTableComponent } from './buy-flight-mat-table/buy-flight-mat-table.component';
 
 export const routes: Routes = [
   {
@@ -18,12 +19,12 @@ export const routes: Routes = [
   },
   {
     path: 'buy',
-    component: BuyFlightMatComponent,
+    component: BuyFlightMatTableComponent,
     pathMatch: 'prefix'
   },
   {
     path: 'buy/:origin',
-    component: BuyFlightComponent
+    component: BuyFlightMatTableComponent,
   },
   {
     path: 'myflights',
