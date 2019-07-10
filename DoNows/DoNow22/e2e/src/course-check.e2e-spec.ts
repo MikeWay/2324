@@ -1,3 +1,6 @@
+/**
+ * Suite of tests to verify that the exercises have not been completed!
+ */
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
@@ -12,6 +15,11 @@ describe('workspace-project App', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('DoNow22');
   });
+
+  it('should not have an app-forecast element', ()=>{
+    page.navigateTo();
+    expect(page.getAppForecastElement().isPresent()).toBeFalsy();
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
