@@ -6,11 +6,44 @@
       <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    <!-- Origin Column -->
+    <ng-container matColumnDef="origin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Origin</th>
+      <td mat-cell *matCellDef="let row">{{row.origin}}</td>
     </ng-container>
+
+
+    <!-- Destination Column -->
+    <ng-container matColumnDef="destination">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
+      <td mat-cell *matCellDef="let row">{{row.destination}}</td>
+    </ng-container>
+    
+    
+    <!-- Depart Day Column -->
+    <ng-container matColumnDef="departDay">
+      <th mat-header-cell *matHeaderCellDef >DepartDay</th>
+      <td mat-cell *matCellDef="let row">{{row.departDay}}</td>
+    </ng-container>
+
+    <!-- Depart Time Column -->
+    <ng-container matColumnDef="departTime">
+      <th mat-header-cell *matHeaderCellDef >DepartTime</th>
+      <td mat-cell *matCellDef="let row">{{row.departTime}}</td>
+    </ng-container>
+
+        <!-- Arrive Day Column -->
+    <ng-container matColumnDef="arriveDay">
+      <th mat-header-cell *matHeaderCellDef >Arrive Day</th>
+      <td mat-cell *matCellDef="let row">{{row.arriveDay}}</td>
+    </ng-container>
+
+    <!-- Arrive Time  Column -->
+    <ng-container matColumnDef="arriveTime">
+      <th mat-header-cell *matHeaderCellDef >Arrive Time</th>
+      <td mat-cell *matCellDef="let row">{{row.arriveTime}}</td>
+    </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
