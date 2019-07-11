@@ -1,3 +1,6 @@
+/**
+ * Suite of tests to verify that the exercises have not been completed!
+ */
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
@@ -8,10 +11,12 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should not have a class with the word "myanimate" in it', async ()=>{
+    
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Your Preferences');
-  });
+    let classes = await page.getFormClasses();
+    expect(classes.includes('myanimate')).toBeFalsy();
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
