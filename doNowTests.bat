@@ -13,7 +13,7 @@ set COURSE_HOME=C:\course2324
 cd %COURSE_HOME%\Exercises
 
 
-FOR %%E in ("DoNow21", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
+FOR %%E in ("DoNow22", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
 CALL :run_donow_test %%E
 IF %ERRORLEVEL% NEQ 0 Exit 1
 )
