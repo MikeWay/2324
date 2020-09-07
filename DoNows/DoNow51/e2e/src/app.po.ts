@@ -8,4 +8,17 @@ export class AppPage {
   getTitleText() {
     return element(by.css('app-root h1')).getText() as Promise<string>;
   }
+
+  getInputElement(){
+    return element(by.css('#userInput'));
+  }
+
+  getOutputAllText(){
+    return element(by.css('#outputAll span')).getText() as Promise<string>;
+  }
+  
+  getOutputEnterText(){
+    return element(by.css('#outputEnter span')).getText() as Promise<string>;
+  }
+  
 }

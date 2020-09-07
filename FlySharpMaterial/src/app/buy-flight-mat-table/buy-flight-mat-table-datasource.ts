@@ -1,6 +1,8 @@
+import { FlightsService } from './../flights/flights.service';
+import { FLIGHTS } from './../model/mock-flights';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Flight } from '../model/flight';
 
@@ -12,11 +14,13 @@ import { Flight } from '../model/flight';
  * (including sorting, pagination, and filtering).
  */
 export class BuyFlightMatTableDataSource extends DataSource<Flight> {
-  data: Flight[];
+  data: Flight[] = new Array<Flight>();
+  //data: Flight[] = FLIGHTS;
   paginator: MatPaginator;
   sort: MatSort;
+  commsError = "";
 
-  constructor() {
+  constructor( private flightsService : FlightsService, ) {
     super();
   }
 
@@ -29,14 +33,27 @@ export class BuyFlightMatTableDataSource extends DataSource<Flight> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
+      //observableOf(this.data),
+      this.flightsService.getChunkOfFlights(0, this.paginator.pageSize),
       this.paginator.page,
       this.sort.sortChange
     ];
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+//    return merge(...dataMutations);
+
+    // return merge(...dataMutations)
+    // .pipe(map(() => {
+    //   return this.getPagedData(this.getSortedData([...this.data]));
+    // }));
+
+    return merge(...dataMutations)
+      .pipe(map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      }),
+        flatMap(value => value));
+      
+
+
   }
 
   /**
@@ -51,7 +68,13 @@ export class BuyFlightMatTableDataSource extends DataSource<Flight> {
    */
   private getPagedData(data: Flight[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-    return data.splice(startIndex, this.paginator.pageSize);
+    // return data.splice(startIndex, this.paginator.pageSize);
+
+    return this.flightsService.getChunkOfFlights(startIndex, this.paginator.pageSize);
+    // .subscribe(
+    //   (flights: Flight[]) => { this.data = flights; /*this.showBuyFlights = true*/ },
+    //   (error: any) => this.commsError = error);
+
   }
 
   /**
@@ -66,7 +89,7 @@ export class BuyFlightMatTableDataSource extends DataSource<Flight> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        //case 'name': return compare(a.name, b.name, isAsc);
+        case 'origin': return compare(a.origin, b.origin, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         default: return 0;
       }

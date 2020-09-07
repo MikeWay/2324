@@ -1,3 +1,6 @@
+/**
+ * Suite of tests to verify that the exercises have not been completed!
+ */
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
@@ -8,20 +11,10 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should not have a pre element', ()=>{
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Pseudo Keys Example');
-  });
-
-
-  it('should reflect test data in the #outputAll output area', async ()=>{
-    let inputEle = null;
-      debugger;
-      page.navigateTo();
-      inputEle = page.getInputElement();
-      await inputEle.sendKeys("test data");
-      expect(page.getOutputAllText()).toEqual("test data");
-  });
+    expect(page.getPreElement().isPresent()).toBeFalsy();
+  })
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

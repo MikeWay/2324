@@ -9,8 +9,8 @@ import auth from 'koa-basic-auth';
 import mount from 'koa-mount';
 
 // For the windows event log
-import {EventLogger} from 'node-windows';
-var log = new EventLogger('Flight Service');
+// import {EventLogger} from 'node-windows';
+// var log = new EventLogger('Flight Service');
 
 
 const Koa = require('koa');
@@ -19,7 +19,7 @@ const app = new Koa();
 
 
 //let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
-log.info("Starting Flight Service...");
+//log.info("Starting Flight Service...");
 let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
 //let flightsAsJSON = fs.readFileSync('C:\\Users\\mjrw\\Documents\\course2324\\server\\course2324-node-server\\data\\flights.json','utf8');
 let flights = JSON.parse(flightsAsJSON);

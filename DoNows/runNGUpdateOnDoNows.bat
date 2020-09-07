@@ -20,7 +20,7 @@ exit /B
 
 :run_donow_update
 cd %COURSE_HOME%\DoNows\%1
-call ng update --all --force
+call ng update --all --force --allow-dirty
 IF %ERRORLEVEL% NEQ 0 Echo An error was found when updating
 rem next line special when updating to A8
 call npm install typescript@"<3.5"
