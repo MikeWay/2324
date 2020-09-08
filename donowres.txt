@@ -1,0 +1,76 @@
+
+C:\course2324>IF "true" == "" (
+REM this is necessary so that we can use "exit" to terminate the batch file,  
+ REM and all subroutines, but not the original cmd.exe  
+ SET selfWrapped=true  
+ C:\WINDOWS\system32\cmd.exe /s /c ""doNowTests.bat" "  
+ GOTO :EOF 
+) 
+
+C:\course2324>cls
+
+C:\course2324>echo "Make sure you have met the pre-reqs. See $COURSE_HOME/testing.md" 
+"Make sure you have met the pre-reqs. See $COURSE_HOME/testing.md"
+
+C:\course2324>echo "Starting tests" 
+"Starting tests"
+
+C:\course2324>set COURSE_HOME=C:\course2324 
+
+C:\course2324>cd C:\course2324\Exercises 
+
+C:\course2324\Exercises>FOR %E in ("DoNow22" "DoNow41" "DoNow51" "DoNow71" "DoNow91") DO (
+CALL :run_donow_test %E  
+ IF 0 NEQ 0 Exit 1 
+) 
+
+C:\course2324\Exercises>(
+CALL :run_donow_test "DoNow22"  
+ IF 0 NEQ 0 Exit 1 
+) 
+
+C:\course2324\Exercises>cd C:\course2324\DoNows\"DoNow22" 
+
+C:\course2324\DoNows\DoNow22>call ng e2e 
+[12:55:15] I/update - chromedriver: file exists C:\course2324\DoNows\DoNow22\node_modules\protractor\node_modules\webdriver-manager\selenium\chromedriver_85.0.4183.87.zip
+[12:55:15] I/update - chromedriver: unzipping chromedriver_85.0.4183.87.zip
+[12:55:15] I/update - chromedriver: chromedriver_85.0.4183.87.exe up to date
+
+chunk {main} main.js, main.js.map (main) 10.1 kB [initial] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 251 kB [initial] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 6.15 kB [entry] [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 12.5 kB [initial] [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 3.85 MB [initial] [rendered]
+Date: 2020-09-08T11:55:42.801Z - Hash: 9d5fd9ad7e724469b1f4 - Time: 8709ms
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+: Compiled successfully.
+[12:55:43] I/launcher - Running 1 instances of WebDriver
+[12:55:43] I/direct - Using ChromeDriver directly...
+Jasmine started
+
+  workspace-project App
+    [32m√ should display welcome message[39m
+
+  workspace-project App
+    [32m√ should display welcome message[39m
+    [32m√ should not have an app-forecast element[39m
+
+Executed 3 of 3 specs[32m SUCCESS[39m in 2 secs.
+[12:55:52] I/launcher - 0 instance(s) of WebDriver still running
+[12:55:52] I/launcher - chrome #01 passed
+
+C:\course2324\DoNows\DoNow22>IF 0 NEQ 0 Echo An error was found in the "DoNow22" start E2E   & EXIT 1 
+
+C:\course2324\DoNows\DoNow22>EXIT /B 
+
+C:\course2324\DoNows\DoNow22>(
+CALL :run_donow_test "DoNow41"  
+ IF 0 NEQ 0 Exit 1 
+) 
+
+C:\course2324\DoNows\DoNow22>cd C:\course2324\DoNows\"DoNow41" 
+
+C:\course2324\DoNows\DoNow41>call ng e2e 
+
+C:\course2324\DoNows\DoNow41>IF 127 NEQ 0 Echo An error was found in the "DoNow41" start E2E   & EXIT 1 
+An error was found in the "DoNow41" start E2E 

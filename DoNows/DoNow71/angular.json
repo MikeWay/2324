@@ -115,6 +115,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "DoNow41"
+    }
+  },
+  "defaultProject": "DoNow41",
+  "cli": {
+    "analytics": false
+  }
 }

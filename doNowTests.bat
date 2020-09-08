@@ -17,7 +17,7 @@ FOR %%E in ("DoNow22", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
 CALL :run_donow_test %%E
 IF %ERRORLEVEL% NEQ 0 Exit 1
 )
-
+PAUSE
 exit /B
 
 :run_donow_test
