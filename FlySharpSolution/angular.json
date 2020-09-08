@@ -114,6 +114,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "FlySharp"
+    }
+  },
+  "defaultProject": "FlySharp",
+  "cli": {
+    "analytics": false
+  }
 }
