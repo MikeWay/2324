@@ -2,9 +2,9 @@
 "use strict";
 // Copies files rrom the AddIns directory (identified by the command line argument)
 // To the exercises/FlySharp directory
-exports.__esModule = true;
-var fs = require("fs-extra");
-var EX_MAPPINGS = {
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs-extra");
+const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
     "Ex3.1": "Ex2.2_Bonus_3",
     "Ex4.1": "Ex3.1",
@@ -17,7 +17,8 @@ var EX_MAPPINGS = {
     "Ex7.1": "Ex6.3_Bonus_3",
     "Ex7.2": "Ex7.1_Bonus_1",
     "Ex8.1": "Ex7.2_Bonus_1",
-    "Ex9.1": "Ex8.1_Bonus_2",
+    "Ex8.2": "Ex8.1_Bonus_2",
+    "Ex9.1": "Ex8.2",
     "Final": "Ex9.1_Bonus_1"
 };
 /*
@@ -36,16 +37,16 @@ Ex9.1
 //const SRC_DIR_ROOT = "C:\\Course2324\\Solutions\\";
 //const BACKUP_DIR_ROOT = "C:\\Course2324\\Backup\\";
 //const TARGET_DIR_ROOT = "C:\\Course2324\\Exercises\\FlySharp";
-var SRC_DIR_ROOT = "../../Solutions/";
-var BACKUP_DIR_ROOT = "../../Backup/";
-var TARGET_DIR_ROOT = ".";
-var SRC_DIR = "/src";
-var E2E_DIR = "/e2e";
-var exercise = process.argv[2];
+let SRC_DIR_ROOT = "../../Solutions/";
+const BACKUP_DIR_ROOT = "../../Backup/";
+let TARGET_DIR_ROOT = ".";
+const SRC_DIR = "/src";
+const E2E_DIR = "/e2e";
+let exercise = process.argv[2];
 function doBackup(exercise) {
     // Backup src
-    var destDir = BACKUP_DIR_ROOT + exercise + SRC_DIR;
-    var srcDir = TARGET_DIR_ROOT + SRC_DIR;
+    let destDir = BACKUP_DIR_ROOT + exercise + SRC_DIR;
+    let srcDir = TARGET_DIR_ROOT + SRC_DIR;
     console.log("About to copy " + srcDir + " to " + destDir);
     try {
         fs.ensureDir(destDir);
@@ -83,7 +84,7 @@ if (process.argv.length < 3) {
     console.log("Usage exStart [Exercise Number].");
     console.log("You must supply an exercise number to copy from");
     console.log("Available exercise starts are:");
-    for (var exName in EX_MAPPINGS) {
+    for (let exName in EX_MAPPINGS) {
         if (EX_MAPPINGS.hasOwnProperty(exName)) {
             console.log(exName);
         }
@@ -91,14 +92,14 @@ if (process.argv.length < 3) {
     process.exit(1);
 }
 // Locate the exercise in the EX_MAPPINGS
-var exSource = EX_MAPPINGS[exercise];
+let exSource = EX_MAPPINGS[exercise];
 if (exSource == null) {
     console.log("Unknown exercise name [" + exercise + "]. Did you type it correctly?");
     process.exit(1);
 }
 doBackup(exercise);
 // Set up the srcDir based on the lookup of the solutions directory
-var srcDir = SRC_DIR_ROOT + exSource;
+let srcDir = SRC_DIR_ROOT + exSource;
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
 try {
     fs.copySync(srcDir, TARGET_DIR_ROOT, { overwrite: true });
