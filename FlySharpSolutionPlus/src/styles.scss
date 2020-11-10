@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+$flame: #e53d00ff;
+$middle-yellow: #ffe900ff;
+$baby-powder: #fcfff7ff;
+$viridian-green: #21a0a0ff;
+$skobeloff: #046865ff;
+
+
+
+$theme-colors: (
+  "primary": $skobeloff,
+  "danger": $flame,
+  "warning": $middle-yellow,
+  "success": $viridian-green
+);
+
+$navbar-dark-brand-color : $middle-yellow;
+
+@import "node_modules/bootstrap/scss/bootstrap"; 
+
+h1, h2 {
+  color: $skobeloff;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+.debug-border {
+  border: red 1px solid;
+}
+#page-wrapper {
+  width:90%; margin:auto
+}

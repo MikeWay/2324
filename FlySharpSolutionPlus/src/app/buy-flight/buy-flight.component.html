@@ -1,0 +1,86 @@
+<div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-md-1">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2 *ngIf="!showBuyFlights">Loading Flight Data</h2>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-12">
+            <app-flight-filter (filterEmitter)="onFilterChange($event)" label='Origin' [initialValue]='originFilter'></app-flight-filter>
+        </div>
+    </div>
+    <div class="row  mt-2">
+        <div class="col-12">
+            <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination' [initialValue]='destinationFilter'></app-flight-filter>
+        </div>
+    </div>
+    <div class="row  mt-2 mb-3">
+        <div class="col-3">
+            Currency Conversion Rate
+        </div>
+        <div class="col-3"> <input #rate (keyup)='conversionRate=rate.value'>
+        </div>
+    </div>
+
+    <h2 *ngIf="errorMessage" class="text-danger">{{errorMessage}}</h2>
+    <div class="table-responsive">
+        <table *ngIf="showBuyFlights" class="table  table-condensed ">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Flight</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Departure Day</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Day</th>
+                    <th>Arrival Time</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let flight of flights">
+                    <td><button (click)="onFlightClick(content, flight)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#buyFlightModal">Buy</button></td>
+                    <td>{{flight.flightNumber}}</td>
+                    <td>{{flight.origin}}</td>
+                    <td>{{flight.destination}}</td>
+                    <td>{{flight.departDay}}</td>
+                    <td>{{flight.departTime}}</td>
+                    <td>{{flight.arriveDay}}</td>
+                    <td>{{flight.arriveTime}}</td>
+                    <td>{{flight.price | currencyConversion : conversionRate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <Button class="btn" (click)="onPrevious()">&lt;&lt; Previous</Button>
+        </div>
+        <div class="col-2 offset-8">
+            <Button class="btn" (click)="onNext()">Next &gt;&gt;</Button>
+        </div>
+    </div>
+    <a (click)="onClickBuyFlights()" href="#" id="toggle">Toggle Flights</a>
+
+    <!-- All the following is wrapped around app-payment to create a modal dialogue -->
+    <ng-template #content let-modal>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Purchase this flight</h5>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight" (closeEvent)="modal.close($event)"></app-payment>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <!--<app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight"></app-payment>-->
