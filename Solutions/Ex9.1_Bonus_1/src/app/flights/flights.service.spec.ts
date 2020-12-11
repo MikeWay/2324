@@ -6,7 +6,7 @@ import {Flight} from '../model/flight';
 import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 
 describe('FlightsService', () => {
-
+  let service: FlightsService;
   let httpTestingController: HttpTestingController;
   let httpClient: HttpClient;
 
@@ -18,7 +18,7 @@ describe('FlightsService', () => {
 
       providers: [FlightsService]
     });
-  // tslint:disable-next-line
+    service = TestBed.inject(FlightsService);
     httpTestingController = TestBed.get(HttpTestingController);
     httpClient = TestBed.get(HttpClient);
   });
@@ -26,11 +26,11 @@ describe('FlightsService', () => {
 
 
 
-  it('should be created', inject([FlightsService], (service: FlightsService) => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
-  }));
+  });
 
-  it('should do somthing with HTTP!)', inject([FlightsService], (service: FlightsService) => {
+  it('should do somthing with HTTP!)', () => {
     const testData: Flight[] = MYFLIGHTS;
     //
     // expect(service.getFlights().length).toBe(5);
@@ -38,15 +38,15 @@ describe('FlightsService', () => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
+    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/flights');
     req.flush(FLIGHTS); // Supply the data which will be returned
 
     httpTestingController.verify();
-  }));
+  });
 
 
 
-  it('should return 2 flights from getMyFlights()', inject([FlightsService], (service: FlightsService) => {
+  it('should return 2 flights from getMyFlights()', () => {
     expect(service.getMyFlights().length).toBe(2);
-  }));
+  });
 });
