@@ -25,8 +25,8 @@ export class MockBuyFlightComponent {
 
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
@@ -34,7 +34,7 @@ describe('AppComponent', () => {
         AppComponent, MockAppHomeComponent, MockBuyFlightComponent
       ],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

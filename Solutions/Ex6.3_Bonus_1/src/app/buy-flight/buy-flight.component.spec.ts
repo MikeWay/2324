@@ -64,8 +64,8 @@ describe('BuyFlightComponent', () => {
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe ],
       providers: [{
                     provide: FlightsService,
@@ -80,7 +80,7 @@ describe('BuyFlightComponent', () => {
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BuyFlightComponent);

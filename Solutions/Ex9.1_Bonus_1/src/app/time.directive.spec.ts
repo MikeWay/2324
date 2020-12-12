@@ -17,7 +17,7 @@ describe('TimeDirective', () => {
   let debugEle: DebugElement;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [ TestComponent ],
       imports: [FormsModule, ReactiveFormsModule]
     });

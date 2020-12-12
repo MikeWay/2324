@@ -11,7 +11,7 @@ describe('FlightsService', () => {
   let httpClient: HttpClient;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
       ],

@@ -17,8 +17,8 @@ export class MockAppHome {
 
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
@@ -26,7 +26,7 @@ describe('AppComponent', () => {
         AppComponent,MockAppHome
       ],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

@@ -4,7 +4,7 @@ import { FlightsService } from '../flights/flights.service';
 describe('FlightsService', () => {
   let service: FlightsService;
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       providers: [FlightsService]
     });
     service = TestBed.inject(FlightsService);

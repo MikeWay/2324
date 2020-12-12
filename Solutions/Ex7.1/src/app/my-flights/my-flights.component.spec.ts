@@ -6,12 +6,12 @@ describe('MyFlightsComponent', () => {
   let component: MyFlightsComponent;
   let fixture: ComponentFixture<MyFlightsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ MyFlightsComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MyFlightsComponent);
