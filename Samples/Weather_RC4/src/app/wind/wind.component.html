@@ -1,7 +1,0 @@
-<ul>
-  <li [class.highlight]="highlightSpeed" [style.color]="highlightSpeed ? 'red' : 'green'">Wind Speed (Knots) - {{windSpeedKnots}}</li>
-  <li [ngStyle]="getStyles()">Wind Speed (MPH) - {{windSpeedKnots * 1.1}}</li>
-  <li>Max Speed (Knots) - {{windSpeedKnots  * instabilityIndex}}</li>
-  <li>Speed - {{windSpeedKnots  | windSpeed : 'MPH' : 0.91 }}</li>
-
-</ul>
