@@ -5,13 +5,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './button-demo.component.html',
   styleUrls: ['./button-demo.component.css']
 })
-export class ButtonDemoComponent {
+export class ButtonDemoComponent implements OnInit {
+  buttonDisabled : boolean = false;
 
-buttonDisabled : boolean = false;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  
 
 onClick(){ this.buttonDisabled = true;}
 
 onClickOther(){ this.buttonDisabled = false;}
-
-
 }
+ 
