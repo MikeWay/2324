@@ -3,7 +3,7 @@ import { FlightsService } from '../flights/flights.service';
 
 describe('FlightsService', () => {
   let service: FlightsService;
-  beforeEach(() => {
+  beforeEach( async () => {
     await TestBed.configureTestingModule({
       providers: [FlightsService]
     });

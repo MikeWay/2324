@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { FlightsService } from '../flights/flights.service';
 
 describe('FlightsService', () => {
-  beforeEach(() => {
+  beforeEach( async () => {
     await TestBed.configureTestingModule({
       providers: [FlightsService]
     });
