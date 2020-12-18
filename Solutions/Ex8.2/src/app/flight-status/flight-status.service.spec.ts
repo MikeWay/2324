@@ -27,7 +27,7 @@ describe('FlightStatusService', () => {
     WebSocketStub.OPEN = WebSocket.OPEN;
     WebSocketStub.CLOSED = WebSocket.CLOSED;
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: Window,

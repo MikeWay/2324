@@ -38,7 +38,7 @@ describe('FlightsService', () => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/flights');
+    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
     req.flush(FLIGHTS); // Supply the data which will be returned
 
     httpTestingController.verify();

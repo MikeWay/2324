@@ -49,7 +49,7 @@ describe('FlightStatusComponent', () => {
 
 
 
-    await await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [ FlightStatusComponent ],
       providers: [{provide: FlightStatusService, useValue: mockFlightStatusService}]
     })
@@ -77,20 +77,20 @@ describe('FlightStatusComponent', () => {
     const response = 'All flights are currently on time';
     fixture.detectChanges();
     expect(component.flightStatus).toEqual(response);
-  });
+  }));
 
   it('should display value from the an initial flight status', fakeAsync(()=>{
     const response = 'All flights are currently on time';
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
     expect(ele.innerHTML).toEqual(response);
-  });
+  }));
 
   it('should display value from the service when the observables are flushed', fakeAsync(()=>{
     getTestScheduler().flush();
     fixture.detectChanges();
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
     expect(ele.innerHTML).toEqual(testStatus);
-  });
+  }));
 
   it('should have called next to set the airport code', () => {
     const mockFlightStatusServce = socketService as unknown as MockFlightStatusService;

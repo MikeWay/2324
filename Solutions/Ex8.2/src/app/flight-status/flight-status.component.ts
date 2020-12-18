@@ -13,18 +13,18 @@ export class FlightStatusComponent implements OnInit {
 
   public flightStatus = 'All flights are currently on time';
 
-  constructor(private socketService: FlightStatusService) { }
+  constructor(private flightStatusService: FlightStatusService) { }
 
 
+	
   ngOnInit(): void {
-
-    this.socket = this.socketService.connect('ws://localhost:8081');
-
+    this.socket = this.flightStatusService.connect('ws://localhost:8081');
     this.socket.subscribe(
-      dataFromServer => { this.flightStatus = dataFromServer; },
-      err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
+       dataFromServer => { this.flightStatus = dataFromServer },
+       err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
     );
+
     this.socket.next({airport: 'JFK'});
-  }
+}
 
 }
