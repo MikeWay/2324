@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 9.1 start', () => {
+describe('Validate exercise 8.2 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -125,7 +125,20 @@ describe('Validate exercise 9.1 start', () => {
     page.clickBuyFlightButton();
     expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();
   });
+
+  it('should not have an app-flight-status element on the Home page', () => {
+    page.navigateToTab('home');
+    expect(page.getPaymentFlightStatusElement()).toBeTruthy();
+  });
+
+
 /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
+
+it('should have an app-flight-status text of "All flights are currently on time"  on the Home page', () => {
+  page.navigateToTab('home');
+  expect(page.getPaymentFlightStatusText()).toBe('All flights are currently on time');
+});
+
 
   it('should not have elements containing AppTime', () => {
     expect(page.getElementContainingAppTime().isPresent()).toBeFalsy();

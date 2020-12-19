@@ -86,6 +86,14 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-payment form input')).getAttribute('formcontrolname');
   }
 
+  getPaymentFlightStatusElement() {
+    return element(by.css('app-flight-status'));
+  }
+
+  getPaymentFlightStatusText() {
+    return element(by.css('app-flight-status span')).getText();
+  }
+
 
   getElementContainingAppTime() {
     return element(by.css('[appTime]'));
