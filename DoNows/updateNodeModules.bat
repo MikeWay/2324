@@ -7,10 +7,8 @@ IF "%selfWrapped%"=="" (
 )
 
 cls
-echo "Make sure you have met the pre-reqs. See $COURSE_HOME/testing.md"
-echo "Starting tests"
-set COURSE_HOME=C:\course2324
-cd %COURSE_HOME%\Exercises
+rem set COURSE_HOME=C:\course2324
+rem cd %COURSE_HOME%\Exercises
 
 
 FOR %%E in ("DoNow22", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
