@@ -2,7 +2,7 @@
 
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
+import { addProviders, inject, waitForAsync } from '@angular/core/testing';
 import { AccountComponent } from './account.component';
 
 describe('Component: Account', () => {
