@@ -11,7 +11,7 @@ rem set COURSE_HOME=C:\course2324
 rem cd %COURSE_HOME%\Exercises
 
 
-FOR %%E in ("DoNow22", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
+FOR %%E in ("DoNow22", "DoNow41", "DoNow51", "DoNow71","DoNow81", "DoNow91") DO (
 CALL :run_donow_update %%E
 IF %ERRORLEVEL% NEQ 0 Exit 1
 )
