@@ -13,8 +13,8 @@ const NUM_FLIGHTS_TO_LOAD=1;
   styleUrls: ['./buy-flight-mat.component.css']
 })
 export class BuyFlightMatComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   dataSource: BuyFlightMatDataSource;
 
   _flights : Flight[] = new Array<Flight>();

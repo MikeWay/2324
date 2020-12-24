@@ -12,9 +12,9 @@ import { Flight } from '../model/flight';
 export class BuyFlightMatTableComponent implements AfterViewInit, OnInit {
 
   constructor( private flightsService : FlightsService){};
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<Flight>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<Flight>;
   dataSource: BuyFlightMatTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */

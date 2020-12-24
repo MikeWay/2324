@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { FlightFilterComponent } from './flight-filter.component';
 
 describe('Component: FlightFilter', () => {
