@@ -119,5 +119,8 @@
       }
     }
   },
-  "defaultProject": "FlySharpMaterial"
+  "defaultProject": "FlySharpMaterial",
+  "cli": {
+    "analytics": false
+  }
 }
