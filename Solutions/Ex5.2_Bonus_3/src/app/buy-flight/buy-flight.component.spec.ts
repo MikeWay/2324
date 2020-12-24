@@ -37,7 +37,7 @@ export class MockAppPaymentComponent {
 export class MockFlightFilterComponent {
   @Input()
   public label: string;
-  public onFilterChange(flight: string) {}
+  public onFilterChange(flight: string): void {}
 
 }
 

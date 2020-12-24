@@ -20,19 +20,19 @@ export class BuyFlightComponent implements OnInit {
   constructor( private flightsService: FlightsService ) { }
 
 
-  onFilterChange(filterValue: string) {
+  onFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
   }
 
-  onDestinationFilterChange(filterValue: string) {
+  onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this._flights = this.flightsService.getFlights();
   }
 
-  onClickBuyFlights() {
+  onClickBuyFlights(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
@@ -64,7 +64,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
 
-  onFlightClick(flight: Flight) {
+  onFlightClick(flight: Flight): void {
     this.selectedFlight = flight;
   }
 }
