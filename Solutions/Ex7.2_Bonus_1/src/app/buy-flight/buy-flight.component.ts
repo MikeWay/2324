@@ -22,15 +22,15 @@ conversionRate = 4.0;
 
   constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
-  onFilterChange(filterValue: string) {
+  onFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
   }
 
-  onDestinationFilterChange(filterValue: string) {
+  onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (typeof params.origin !== 'undefined' ) {
         this.originFilter = params.origin;
@@ -39,7 +39,7 @@ conversionRate = 4.0;
     this._flights = this.flightsService.getFlights();
   }
 
-  onClickBuyFlights() {
+  onClickBuyFlights(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
@@ -71,7 +71,7 @@ conversionRate = 4.0;
   }
 
 
-  onFlightClick(flight: Flight) {
+  onFlightClick(flight: Flight): void {
     this.selectedFlight = flight;
   }
 }
