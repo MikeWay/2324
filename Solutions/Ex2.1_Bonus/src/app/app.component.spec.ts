@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
   selector: 'app-home',
   template: ''
 })
-export class MockAppHome {
+export class MockAppHomeComponent {
 
 }
 
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent,MockAppHome
+        AppComponent, MockAppHomeComponent
       ],
     }).compileComponents();
   });
