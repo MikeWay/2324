@@ -41,7 +41,7 @@ describe('BuyFlightComponent', () => {
     mockFlightsService = jasmine.createSpyObj('FlightsService', {
       getFlights: FLIGHTS,
       getMyFlights: MYFLIGHTS
-    });  
+    });
     await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent ],
       providers: [{provide: FlightsService,
