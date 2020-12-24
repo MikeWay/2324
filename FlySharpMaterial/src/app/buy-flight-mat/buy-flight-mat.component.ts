@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { BuyFlightMatDataSource } from './buy-flight-mat-datasource';
 import { Flight } from "../model/flight";
 import { FlightsService } from '../services/flights.service';

@@ -1,7 +1,8 @@
 import { FlightsService } from './../flights/flights.service';
 import { FLIGHTS } from './../model/mock-flights';
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { map, flatMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Flight } from '../model/flight';
