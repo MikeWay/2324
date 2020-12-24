@@ -31,11 +31,11 @@ export class FlightFilterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 
-  onFilterEnter( filterValue: string) {
+  onFilterEnter( filterValue: string): void {
     this.filterEmitter.emit(filterValue);
 
   }
