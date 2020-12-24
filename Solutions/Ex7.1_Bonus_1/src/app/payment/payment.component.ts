@@ -25,10 +25,10 @@ export class PaymentComponent implements OnInit {
     alert(this.jsonModel);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  get jsonModel() {
+  get jsonModel(): string {
     return JSON.stringify(this.model);
   }
 
