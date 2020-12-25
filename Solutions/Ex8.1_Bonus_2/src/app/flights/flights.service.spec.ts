@@ -19,8 +19,8 @@ describe('FlightsService', () => {
       providers: [FlightsService]
     });
     service = TestBed.inject(FlightsService);
-    httpTestingController = TestBed.get(HttpTestingController);
-    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
   });
 
 

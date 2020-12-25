@@ -15,10 +15,10 @@ const EX_MAPPINGS = {
     "Ex6.1": "Ex5.2_Bonus_3", OK
 	"Ex6.2": "Ex6.1_Bonus_2", OK
 	"Ex6.3": "Ex6.2", OK
-    "Ex7.1": "Ex6.3_Bonus_3",
-    "Ex7.2": "Ex7.1_Bonus_1",
-    "Ex8.1": "Ex7.2_Bonus_1",
-	"Ex8.2": "Ex8.1_Bonus_2",
+    "Ex7.1": "Ex6.3_Bonus_3", OK
+    "Ex7.2": "Ex7.1_Bonus_1", OK
+    "Ex8.1": "Ex7.2_Bonus_1", OK
+	"Ex8.2": "Ex8.1_Bonus_2", IN - progress -- need fix and lint
 	"Ex9.1": "Ex8.2",
 	"Final": "Ex9.1_Bonus_1"
 };
