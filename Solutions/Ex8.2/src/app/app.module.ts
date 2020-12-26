@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent,
+    FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
   ],
   imports: [
     BrowserModule,

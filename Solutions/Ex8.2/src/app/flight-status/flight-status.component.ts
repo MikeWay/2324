@@ -16,11 +16,10 @@ export class FlightStatusComponent implements OnInit {
   constructor(private flightStatusService: FlightStatusService) { }
 
 
-	
   ngOnInit(): void {
     this.socket = this.flightStatusService.connect('ws://localhost:8081');
     this.socket.subscribe(
-       dataFromServer => { this.flightStatus = dataFromServer },
+       dataFromServer =>  this.flightStatus = dataFromServer ,
        err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
     );
 

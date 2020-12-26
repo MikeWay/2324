@@ -10,7 +10,7 @@ describe('FlightStatusService', () => {
 
   beforeEach(() => {
 
-    function WebSocketStub(theUrl: string) {
+    function WebSocketStub(theUrl: string): any {
       socketMock = {
         url: theUrl,
         readyState: WebSocket.CONNECTING,
@@ -32,7 +32,7 @@ describe('FlightStatusService', () => {
         {
           provide: Window,
           useValue: {socketMock},
-        },FlightStatusService
+        }, FlightStatusService
       ]
     });
     service = TestBed.inject(FlightStatusService);

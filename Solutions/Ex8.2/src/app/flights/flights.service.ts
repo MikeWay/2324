@@ -36,7 +36,7 @@ export class FlightsService {
     return MYFLIGHTS;
   }
 
-  private handleError(error: HttpErrorResponse )  {
+  private handleError(error: HttpErrorResponse ): Observable<never>  {
     if (error.error instanceof ErrorEvent) {
       // Client error
       console.error('Http communication error:', error.error.message );

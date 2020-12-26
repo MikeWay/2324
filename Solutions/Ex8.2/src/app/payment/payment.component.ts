@@ -18,12 +18,12 @@ export class PaymentComponent implements OnInit {
     this.buildSampleModel();
   }
 
-  get jsonModel() {
+  get jsonModel(): string {
     return JSON.stringify(this.model);
   }
 
 
-  private buildForm() {
+  private buildForm(): void {
     this.payForm = this.formBuilder.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
@@ -35,7 +35,7 @@ export class PaymentComponent implements OnInit {
   }
 
 
-  private buildSampleModel() {
+  private buildSampleModel(): void {
 
     this.model.name = 'A Customer';
     this.model.address = 'Customer Address';
@@ -71,7 +71,7 @@ export class PaymentComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buildForm();
     this.payForm.setValue(this.model);
   }
