@@ -22,7 +22,7 @@ export class AccountComponent {
           postCode : ['', Validators.required],
       });
   }
-  onSubmit() {
+  onSubmit(): void {
       console.log('model-based form submitted');
       console.log(this.accountForm.valid);
   }

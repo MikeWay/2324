@@ -20,7 +20,7 @@ describe('FlightsService', () => {
     });
   // tslint:disable-next-line
     httpTestingController = TestBed.get(HttpTestingController);
-    httpClient = TestBed.get(HttpClient);
+    httpClient = TestBed.inject(HttpClient);
   });
 
 

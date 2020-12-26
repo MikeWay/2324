@@ -9,12 +9,12 @@ import {FlightsService} from '../flights/flights.service';
   styleUrls: ['./my-flights.component.css']
 })
 export class MyFlightsComponent implements OnInit {
-  flights : Flight[];
-  private selectedFlight : Flight;
+  flights: Flight[];
+  private selectedFlight: Flight;
 
   constructor(private flightService: FlightsService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.flights = this.flightService.getMyFlights();
     this.selectedFlight = this.flights[0];
   }
