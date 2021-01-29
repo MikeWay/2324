@@ -28,7 +28,7 @@ const EX_MAPPINGS = [
 
 function runATest(index : number) {
     let options = { cwd: 'c:\\course2324\\Exercises\\FlySharp' };
-    let prom = new Promise((resolve, reject)=>{
+    let prom = new Promise<void>((resolve, reject)=>{
 
     const exStart = exec('exStart ' + EX_MAPPINGS[index], options, (error, stdout, stderr) => {
       if (error) {
