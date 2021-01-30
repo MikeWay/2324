@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+  it('should display welcome message', async () => {
+    await page.navigateTo();
+    expect(await page.getTitleText()).toEqual('FlySharp app is running!');
   });
 
   afterEach(async () => {
