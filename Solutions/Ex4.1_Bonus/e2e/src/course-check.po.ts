@@ -1,36 +1,37 @@
-import { browser, element, by } from 'protractor';
+import { browser, element, by, ElementFinder } from 'protractor';
 
 export class FlySharpCourseCheckPage {
-  navigateTo() {
-    return browser.get('/');
+
+  async navigateTo(): Promise<unknown> {
+    return browser.get(browser.baseUrl);
   }
 
-  getParagraphText() {
+  async getParagraphText(): Promise<string> {
     return element(by.css('app-root h1')).getText();
   }
 
-  getAppHomeH1(){
+  async getAppHomeH1(): Promise<string> {
     return element(by.css('app-home h1')).getText();
   }
 
-  getNavBar(){
+  getNavBar(): ElementFinder{
     return element(by.css('app-root nav'));
   }
 
-  getBuyFlightsElement(){
+  getBuyFlightsElement(): ElementFinder {
     return element(by.css('app-root app-buy-flight'));
   }
 
-  getToggleFlightsButtonText(){
+  async getToggleFlightsButtonText(): Promise<string> {
     return element(by.css('app-root app-buy-flight a')).getText();
   }
 
-  clickToggleFlights(){
+  async clickToggleFlights(): Promise<void> {
     element(by.css('app-root app-buy-flight a')).click();
   }
 
-  getFlightTableRows(){
-    return (element.all(by.css('app-buy-flight table tr'))).count();
+  async getFlightTableRows(): Promise<number> {
+    return (element.all(by.css('app-buy-flight table tbody tr'))).count();
   }
-  
+
 }

@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import {FlightsService} from './flights/flights.service';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,7 @@ import {FlightsService} from './flights/flights.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [FlightsService],
-  bootstrap: [AppComponent],
-
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
