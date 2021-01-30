@@ -6,16 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buy-flight.component.css']
 })
 export class BuyFlightComponent implements OnInit {
-
+// @ts-ignore : FLIGHTS used before definition
   flights = FLIGHTS;
   showBuyFlights = false;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  onClickBuyFlights(){
+  onClickBuyFlights(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 }
