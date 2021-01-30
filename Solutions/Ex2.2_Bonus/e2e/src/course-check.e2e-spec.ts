@@ -8,11 +8,15 @@ describe('Validate exercise 2.2 start', function() {
     page = new FlySharpCourseCheckPage();
   });
 
-
-  it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
+  it('should display message saying "Fly Sharp"', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+    expect(page.getParagraphText()).toEqual('Fly Sharp');
   });
+
+  it('should have an App-Home component', () => {
+    page.navigateTo();
+    expect(page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+  });  
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
@@ -20,5 +24,5 @@ describe('Validate exercise 2.2 start', function() {
     expect(logs).not.toContain(jasmine.objectContaining({
       level: logging.Level.SEVERE,
     } as logging.Entry));
-  });
+  });  
 });
