@@ -9,7 +9,8 @@ import {Flight} from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
-  flights: Flight[];
+
+  flights: Flight[] | undefined;
   showBuyFlights = true;
 
   constructor( private flightsService: FlightsService ) { }
@@ -22,4 +23,6 @@ export class BuyFlightComponent implements OnInit {
     this.showBuyFlights = !this.showBuyFlights;
   }
 }
+
+
 
