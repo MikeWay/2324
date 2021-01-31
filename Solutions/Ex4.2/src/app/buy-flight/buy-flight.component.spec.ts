@@ -23,7 +23,7 @@ import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 // const mockFlightsService = new MockFlightsService();
 
 
-let mockFlightsService;
+let mockFlightsService: FlightsService;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -34,7 +34,7 @@ describe('BuyFlightComponent', () => {
     mockFlightsService = jasmine.createSpyObj('FlightsService', {
       getFlights: FLIGHTS,
       getMyFlights: MYFLIGHTS
-    });    
+    });
 
     await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent ],
@@ -45,7 +45,6 @@ describe('BuyFlightComponent', () => {
   });
 
   beforeEach(() => {
-
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
