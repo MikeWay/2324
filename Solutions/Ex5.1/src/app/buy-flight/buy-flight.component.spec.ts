@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
 import {FlightsService} from '../flights/flights.service';
-import {Component, DebugElement, Input} from '@angular/core';
+import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {Flight} from '../model/flight';
 import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
@@ -28,9 +28,8 @@ export class MockAppPaymentComponent {
   @Input()
   public selectedFlight: Flight;
 
-}
 
-let mockFlightsService;
+let mockFlightsService: FlightsService;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -41,7 +40,8 @@ describe('BuyFlightComponent', () => {
     mockFlightsService = jasmine.createSpyObj('FlightsService', {
       getFlights: FLIGHTS,
       getMyFlights: MYFLIGHTS
-    });  
+    });
+
     await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent ],
       providers: [{provide: FlightsService,
@@ -60,9 +60,11 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
   it('should have called getFlights() once', () => {
     expect(mockFlightsService.getFlights).toHaveBeenCalledTimes(1);
   });
+
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
