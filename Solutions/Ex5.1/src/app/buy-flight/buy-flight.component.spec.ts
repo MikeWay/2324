@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
 import {FlightsService} from '../flights/flights.service';
-import {DebugElement} from '@angular/core';
+import {Component, DebugElement, Input} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {Flight} from '../model/flight';
 import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
@@ -26,7 +26,8 @@ import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 })
 export class MockAppPaymentComponent {
   @Input()
-  public selectedFlight: Flight;
+  public selectedFlight: Flight| undefined;
+}
 
 
 let mockFlightsService: FlightsService;
