@@ -26,11 +26,11 @@ import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 })
 export class MockAppPaymentComponent {
   @Input()
-  public selectedFlight: Flight;
-
+  public selectedFlight: Flight| undefined;
 }
 
-let mockFlightsService;
+
+let mockFlightsService: FlightsService;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -42,6 +42,7 @@ describe('BuyFlightComponent', () => {
       getFlights: FLIGHTS,
       getMyFlights: MYFLIGHTS
     });
+
     await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent ],
       providers: [{provide: FlightsService,
@@ -60,9 +61,11 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
+
   it('should have called getFlights() once', () => {
     expect(mockFlightsService.getFlights).toHaveBeenCalledTimes(1);
   });
+
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
