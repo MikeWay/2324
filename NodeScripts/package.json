@@ -10,12 +10,13 @@
   "author": "mikeway@webwrights.co.uk",
   "license": "Apache-2.0",
   "bin": {
-    "cpAddIns": "./copyAddIns.js",
-    "cpToDNSolution": "./copyToDNSolution.js",
-    "cpToSolution": "./copyToSolution.js",
-    "exStart": "./exerciseStart.js",
-    "upgrd": "./upgrd.js",
-    "runAllTests": "./runAllTests.js"
+    "cpAddIns": "./dist/copyAddIns.js",
+    "cpToDNSolution": "./dist/copyToDNSolution.js",
+    "cpToSolution": "./dist/copyToSolution.js",
+    "cpFromSolution": "./dist/copyFromSolution.js",
+    "exStart": "./dist/exerciseStart.js",
+    "upgrd": "./dist/upgrd.js",
+    "runAllTests": "./dist/runAllTests.js"
   },
   "dependencies": {
     "@types/es6-promise": "^3.3.0",

@@ -7,18 +7,18 @@ import {By} from '@angular/platform-browser';
 import {Flight} from '../model/flight';
 import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 
-class MockFlightsService {
+// class MockFlightsService {
 
-  constructor() { }
+//   constructor() { }
 
-  public getFlights(): Flight[] {
-    return FLIGHTS;
-  }
+//   public getFlights(): Flight[] {
+//     return FLIGHTS;
+//   }
 
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
-  }
-}
+//   public getMyFlights(): Flight[] {
+//     return MYFLIGHTS;
+//   }
+// }
 
 @Component({
   selector: 'app-payment',
@@ -26,8 +26,7 @@ class MockFlightsService {
 })
 export class MockAppPaymentComponent {
   @Input()
-  public selectedFlight: Flight;
-
+  public selectedFlight: Flight| undefined;
 }
 
 @Component({
@@ -35,13 +34,10 @@ export class MockAppPaymentComponent {
   template: ''
 })
 export class MockFlightFilterComponent {
-  @Input()
-  public label: string;
-  public onFilterChange(flight: string) {}
-
+  public onFilterChange(flight: string): void {}
 }
 
-const mockFlightsService = new MockFlightsService();
+let mockFlightsService: FlightsService;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -49,6 +45,11 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
+    mockFlightsService = jasmine.createSpyObj('FlightsService', {
+      getFlights: FLIGHTS,
+      getMyFlights: MYFLIGHTS
+    });
+
     await TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent ],
       providers: [{provide: FlightsService,
@@ -65,6 +66,11 @@ describe('BuyFlightComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+
+  it('should have called getFlights() once', () => {
+    expect(mockFlightsService.getFlights).toHaveBeenCalledTimes(1);
   });
 
   it('should default showBuyFlights to true', () => {

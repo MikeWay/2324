@@ -1,0 +1,16 @@
+Upgrade @angular/cli
+Install eslint
+npm i -g @angular/cli @angular-devkit/{core,schematics} @angular-eslint/schematics
+ng new FlySharp --collection=@angular-eslint/schematics
+
+CN: Update 
+
+0) Add TS material on stict types / eslint
+
+1) Add material on async / await to E2E section
+
+2) Check code in MA for type issuses
+
+3) Need new sort code for 5.2
+
+4) Re-work 5.2 manually and commit

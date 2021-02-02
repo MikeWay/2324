@@ -48,18 +48,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Fly Sharp');
   });
 
-  it('should have an app-home tag', () => {
+  it('should have an router-outlet tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('main app-home')).toBeTruthy();
-  });
-
-  it('should have an app-buy-flight tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('main app-buy-flight')).toBeTruthy();
+    expect(compiled.querySelector('main router-outlet')).toBeTruthy();
   });
 
 });

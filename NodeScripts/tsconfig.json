@@ -4,16 +4,14 @@
         "target": "es2015",
         "lib": [ "es2015" ],
         "noImplicitAny": false,
-        "sourceMap": false
+        "sourceMap": true,
+        "outDir": "./dist",
+        "moduleResolution": "node",
+        "skipLibCheck": true
     },
+    "include": ["src/**/*"],
     "exclude": [
         "node_modules"
-    ],
-    "files": [
-	  "exerciseStart.ts",
-      "copyToSolution.ts",
-      "copyAddIns.ts",
-      "copyToDNSolution.ts",
-      "runAllTests.ts"
     ]
+
 }

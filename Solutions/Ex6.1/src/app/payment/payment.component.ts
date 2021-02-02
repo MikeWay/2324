@@ -7,21 +7,22 @@ import {Flight} from '../model/flight';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
+  // Next line stops tslint complaining about the _ at the start of the variable name
+  // tslint:disable-next-line
+  private _selectedFlight: Flight | undefined;
 
-  private _selectedFlight: Flight;
-
-  get selectedFlight(): Flight {
+  get selectedFlight(): Flight | undefined{
     return this._selectedFlight;
   }
   @Input()
-  set selectedFlight(value: Flight) {
+  set selectedFlight(value: Flight | undefined) {
     this._selectedFlight = value;
   }
 
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
