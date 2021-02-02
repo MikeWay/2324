@@ -9,7 +9,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class FlightFilterComponent implements OnInit {
 
   @Input()
-  label: string;
+  label = '';
 
   @Output()
   filterEmitter = new EventEmitter<string>();
