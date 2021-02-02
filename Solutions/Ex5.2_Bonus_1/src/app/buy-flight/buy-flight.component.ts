@@ -9,23 +9,24 @@ import {Flight} from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
-  _flights: Flight[];
+
+  // tslint:disable-next-line: variable-name
+  _flights: (Flight)[] = new Array<Flight>();
   showBuyFlights = true;
-  selectedFlight: Flight;
-  originFilter: string = null;
+  selectedFlight: Flight | undefined;
+  originFilter: string | null = null;
 
   constructor( private flightsService: FlightsService ) { }
 
-
-  onFilterChange(filterValue: string) {
-    this.originFilter = filterValue;
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this._flights = this.flightsService.getFlights();
   }
 
-  onClickBuyFlights() {
+  onFilterChange(filterValue: string): void {
+    this.originFilter = filterValue;
+  }
+
+  onClickBuyFlights(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
@@ -33,21 +34,17 @@ export class BuyFlightComponent implements OnInit {
     /**
      * Version of the flight getter that implements a simple filter
      */
-    if (this.originFilter != null) {
-      return this._flights.map((flight) => {
-        console.log(flight);
-        const match = flight.origin.startsWith(this.originFilter);
-        if (match) {
-          return flight;
-        }
-        // the filter expression stops empty elements being returned (drops the null elements)
-      }).filter(x => !!x);
+
+    if (this.originFilter) {
+      return this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string);
+      });  // We know it's not undefined or null from the outer if
     } else {
       return this._flights;
     }
   }
 
-  onFlightClick(flight: Flight) {
+  onFlightClick(flight: Flight): void {
     this.selectedFlight = flight;
   }
 }
