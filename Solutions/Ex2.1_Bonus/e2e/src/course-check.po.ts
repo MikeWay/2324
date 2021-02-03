@@ -1,15 +1,16 @@
 import { browser, element, by } from 'protractor';
 
 export class FlySharpCourseCheckPage {
-  navigateTo() {
-    return browser.get('/');
-  }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
-  }
+    async navigateTo(): Promise<unknown> {
+      return browser.get(browser.baseUrl);
+    }
 
-  getAppHomeH1(){
-    return element(by.css('app-home h1')).getText();
-  }
+    async getParagraphText(): Promise<string> {
+      return element(by.css('app-root h1')).getText();
+    }
+
+    async getAppHomeH1(): Promise<string> {
+      return element(by.css('app-home h1')).getText();
+    }
 }
