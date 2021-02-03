@@ -40,7 +40,14 @@ function doCopy(srcDir : string, destDir : string){
   console.log("Copying from " + srcDir + " to " + destDir);
   try {
     fs.ensureDirSync(destDir);
-    fs.copySync(srcDir, destDir,{overwrite: true});
+    fs.copySync(srcDir, destDir,{overwrite: true, filter: (src: string, dest: string) => {
+      if(src.endsWith('protractor.conf.js') || src.endsWith('tsconfig.json') || src.endsWith('polyfills.ts')){
+        return false;
+      } else {
+        return true;
+      }
+    } // end filter fn
+  });
 	} catch (err) {
 		console.log("Failed to copy to solution: " + err);
 	}
