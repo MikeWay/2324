@@ -22,12 +22,20 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-root app-buy-flight'));
   }
 
+  getFlightFilterElement(): ElementFinder {
+    return element(by.css('app-buy-flight app-flight-filter'));
+  }
+
   async getToggleFlightsButtonText(): Promise<string> {
     return element(by.css('app-root app-buy-flight a')).getText();
   }
 
   async clickToggleFlights(): Promise<void> {
     element(by.css('app-root app-buy-flight a')).click();
+  }
+
+  async clickBuyFlight(): Promise<void> {
+    element(by.css('app-buy-flight table button')).click();
   }
 
   async getFlightTableRows(): Promise<number> {
