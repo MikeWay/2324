@@ -1,7 +1,7 @@
-import {FlySharpCourseCheckPage} from './course-check.po';
+import { FlySharpCourseCheckPage } from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 6.1 start', () => {
+describe('Validate exercise 6.1_bonus start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -24,48 +24,59 @@ describe('Validate exercise 6.1 start', () => {
   });
 
   it('should have an app-buy-flights element', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
     expect(await page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
   it('should have a Toggle Flights button', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
 
     expect(await page.getToggleFlightsButtonText()).toEqual('Toggle Flights');
   });
 
   it('should have a 5 flights displayed', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
 
     expect(await page.getFlightTableRows()).toBe(5);
   });
 
   it('should have a 0 flights displayed when flight toggle is clicked', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
     await page.clickToggleFlights();
     await browser.waitForAngular();
     expect(await page.getFlightTableRows()).toBe(0);
   });
   it('should show 9 columns in the table', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
     expect(await page.getNumTableCols()).toEqual(9);
   });
 
   it('flight number for 6th flight should be FS2211', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
     expect(await page.getTableCellData('5', '2')).toBe('FS2211');
   });
 
   it('destination for 5th flight should be LHR', async () => {
-    await page.navigateTo();
+    await page.navigateToTab('buy');
     expect(await page.getTableCellData('5', '4')).toBe('LHR');
   });
+
+  it('should have a app-payment element when a flight is selected', async () => {
+    await page.navigateToTab('buy');
+    await page.clickBuyFlight();
+    await browser.waitForAngular();
+    expect(page.getPaymentElement().isPresent()).toBeTruthy();
+  });
+
+  it('should have a app-flight-filter element', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getFlightFilterElement().isPresent()).toBeTruthy();
+  });
+
   /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
-
-
-  it('should NOT have a router-outlet', async () => {
-    await page.navigateTo();
-    expect(await page.getRouterOutlet().isPresent()).toBeFalsy();
+  it('should have a router-outlet', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getRouterOutlet().isPresent()).toBeTruthy();
   });
 
   afterEach(async () => {

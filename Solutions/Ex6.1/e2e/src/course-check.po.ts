@@ -6,6 +6,10 @@ export class FlySharpCourseCheckPage {
     return browser.get(browser.baseUrl);
   }
 
+  async navigateToTab(tab: string): Promise<unknown> {
+    return browser.get('/' + tab) as Promise<any>;
+  }
+
   async getParagraphText(): Promise<string> {
     return element(by.css('app-root h1')).getText();
   }
@@ -14,12 +18,16 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-home h1')).getText();
   }
 
-  getNavBar(): ElementFinder{
+  getNavBar(): ElementFinder {
     return element(by.css('app-root nav'));
   }
 
   getBuyFlightsElement(): ElementFinder {
     return element(by.css('app-root app-buy-flight'));
+  }
+
+  getFlightFilterElement(): ElementFinder {
+    return element(by.css('app-buy-flight app-flight-filter'));
   }
 
   async getToggleFlightsButtonText(): Promise<string> {
@@ -30,19 +38,19 @@ export class FlySharpCourseCheckPage {
     element(by.css('app-root app-buy-flight a')).click();
   }
 
+  async clickBuyFlight(): Promise<void> {
+    element(by.css('app-buy-flight table button')).click();
+  }
+
   async getFlightTableRows(): Promise<number> {
     return (element.all(by.css('app-buy-flight table tbody tr'))).count();
   }
 
-  async getNumTableCols(): Promise<number>  {
+  async getNumTableCols(): Promise<number> {
     return (element(by.css('table tbody tr')).all(by.css('td'))).count();
   }
   getPaymentElement(): ElementFinder {
     return element(by.css('app-root app-payment'));
-  }
-
-  getFlightFilterElement(): ElementFinder {
-    return element(by.css('app-root app-flight-filter'));
   }
 
   async getTableCellData(row: string, col: string): Promise<string> {
