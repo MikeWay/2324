@@ -18,6 +18,13 @@ describe('Validate exercise 3.1 start', () => {
       expect(await page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
     });
 
+    it('should have 3 flights displayed when flight toggle is clicked', async () => {
+      await page.navigateTo();
+      await page.clickToggleFlights();
+      await browser.waitForAngular();
+      expect(await page.getFlightTableRows()).toBe(3);
+    });    
+
     afterEach(async () => {
       // Assert that there are no errors emitted from the browser
       const logs = await browser.manage().logs().get(logging.Type.BROWSER);
