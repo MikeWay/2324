@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-flight-filter',
@@ -8,12 +7,20 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class FlightFilterComponent implements OnInit {
 
+  @Output()
+  filterEmitter = new EventEmitter<string>();
+
   @Input()
-  label: string;
+  label = '';
 
   // Next line stops tslint complaining about the _ at the start of the variable name
   // tslint:disable-next-line
   private _initialValue = '';
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
   get initialValue(): string {
     return this._initialValue;
@@ -25,19 +32,8 @@ export class FlightFilterComponent implements OnInit {
     }
   }
 
-
-  @Output()
-  filterEmitter = new EventEmitter<string>();
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-  onFilterEnter( filterValue: string): void {
+  onFilterEnter(filterValue: string): void {
     this.filterEmitter.emit(filterValue);
-
   }
 
 }

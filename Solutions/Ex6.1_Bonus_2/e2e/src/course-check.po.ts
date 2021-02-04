@@ -1,68 +1,65 @@
-import { browser, element, by } from 'protractor';
+import { browser, element, by, ElementFinder } from 'protractor';
 
 export class FlySharpCourseCheckPage {
-  navigateTo() {
-    return browser.get('/');
+
+  async navigateTo(): Promise<unknown> {
+    return browser.get(browser.baseUrl);
   }
 
-  navigateToTab(tab: string) {
-    return browser.get('/' + tab);
+  async navigateToTab(tab: string): Promise<unknown> {
+    return browser.get('/' + tab) as Promise<any>;
   }
 
-  getParagraphText() {
+  async getParagraphText(): Promise<string> {
     return element(by.css('app-root h1')).getText();
   }
 
-  getMyFlightsParagraphText() {
-    return element(by.css('app-root app-my-flights p')).getText();
-  }
-
-
-  getAccountParagraphText() {
-    return element(by.css('app-root app-account p')).getText();
-  }
-
-  getAppHomeH1() {
+  async getAppHomeH1(): Promise<string> {
     return element(by.css('app-home h1')).getText();
   }
 
-  getNavBar() {
+  getNavBar(): ElementFinder {
     return element(by.css('app-root nav'));
   }
 
-  getBuyFlightsElement() {
+  getBuyFlightsElement(): ElementFinder {
     return element(by.css('app-root app-buy-flight'));
   }
 
-  getToggleFlightsButtonText() {
+  getFlightFilterElement(): ElementFinder {
+    return element(by.css('app-buy-flight app-flight-filter'));
+  }
+
+  async getToggleFlightsButtonText(): Promise<string> {
     return element(by.css('app-root app-buy-flight a')).getText();
   }
 
-  clickToggleFlights() {
+  async clickToggleFlights(): Promise<void> {
     element(by.css('app-root app-buy-flight a')).click();
   }
 
-  getFlightTableRows() {
-    return (element.all(by.css('app-buy-flight table tr'))).count();
+  async clickBuyFlight(): Promise<void> {
+    element(by.css('app-buy-flight table tr:nth-child(2) button:first-child')).click();
   }
 
-  getNumTableCols() {
-    return (element(by.css('table tbody tr')).all(by.css('td'))).count();
+  async getFlightTableRows(): Promise<number> {
+    return (element.all(by.css('app-buy-flight table tbody tr'))).count();
   }
-  getPaymentElement() {
+
+  async getNumTableCols(): Promise<number> {
+    return (element(by.css('table tbody tr:first-child')).all(by.css('td'))).count();
+  }
+  getPaymentElement(): ElementFinder {
     return element(by.css('app-root app-payment'));
   }
 
-  getFlightFilterElement() {
-    return element(by.css('app-root app-flight-filter'));
-  }
-
-  getTableCellData(row: string, col: string) {
+  async getTableCellData(row: string, col: string): Promise<string> {
     const query: string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
-    console.log('QUERY: ' + query);
+    //console.log('QUERY: ' + query);
     return element(by.css(query)).getText();
   }
-  getRouterOutlet() {
+
+  getRouterOutlet(): ElementFinder {
     return element(by.css('router-outlet'));
   }
 }
