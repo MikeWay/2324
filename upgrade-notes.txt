@@ -98,3 +98,5 @@ this.originFilter = filterValue;
       return this._flights;
     }
   }
+
+  5.2 B2 -- steps not really clear!
