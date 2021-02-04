@@ -14,3 +14,19 @@ CN: Update
 3) Need new sort code for 5.2
 
 4) Re-work 5.2 manually and commit
+
+
+
+MA Changes:
+
+3.1 20: Hint
+
+  ngOnInit(): void {
+    this.flights =
+    this.flightsService.getFlights();    
+  }
+
+
+3.1.21 Hint and step:
+
+flights: Flight[] = new Array<Flight>();
