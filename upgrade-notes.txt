@@ -100,3 +100,19 @@ this.originFilter = filterValue;
   }
 
   5.2 B2 -- steps not really clear!
+
+  5.2.21 H:
+  get flights(): Flight[] {
+    let flights = this._flights;
+    if (this.originFilter) {
+      flights = this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
+      });
+    }
+    if (this.destinationFilter) {
+      flights = flights.filter((flight: Flight) => {
+        return flight.destination.startsWith(this.destinationFilter as string);
+      });
+    }
+    return flights;
+  }

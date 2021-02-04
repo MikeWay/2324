@@ -22,12 +22,20 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-root app-buy-flight'));
   }
 
+  getFlightFilterElement(): ElementFinder {
+    return element(by.css('app-buy-flight app-flight-filter'));
+  }
+
   async getToggleFlightsButtonText(): Promise<string> {
     return element(by.css('app-root app-buy-flight a')).getText();
   }
 
   async clickToggleFlights(): Promise<void> {
     element(by.css('app-root app-buy-flight a')).click();
+  }
+
+  async clickBuyFlight(): Promise<void> {
+    element(by.css('app-buy-flight table button')).click();
   }
 
   async getFlightTableRows(): Promise<number> {
@@ -41,11 +49,7 @@ export class FlySharpCourseCheckPage {
     return element(by.css('app-root app-payment'));
   }
 
-  getFlightFilterElement(): ElementFinder {
-    return element(by.css('app-root app-flight-filter'));
-  }
-
-  async getTableCellData(row: string, col: string): Promise<string> {
+  async getTableCellData(row: string, col: string): Promise<string>  {
     const query: string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
     console.log('QUERY: ' + query);
     return element(by.css(query)).getText();
@@ -53,5 +57,5 @@ export class FlySharpCourseCheckPage {
 
   getRouterOutlet(): ElementFinder {
     return element(by.css('router-outlet'));
-  }
+  }  
 }
