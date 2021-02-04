@@ -69,3 +69,32 @@ fail with a message indicating that the function has been called twice --> Multi
     onFlightClick(flight: Flight): void {
     this.selectedFlight = flight;
   }
+
+  5.2.8 H:
+
+    onFilterEnter( filterValue: string): void {
+    this.filterEmitter.emit(filterValue);
+  }
+
+  5.2.12: H:
+
+  originFilter: string| null = null;
+
+  onFilterChange(filterValue: string): void {
+this.originFilter = filterValue;
+}
+
+5.2.13: Add hint: // tslint:disable-next-line: variable-name
+
+5.2.14:
+
+  get flights(): Flight[] {
+
+    if (this.originFilter) {
+      return this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string);
+      });  // We know it's not undefined or null from the outer if
+    } else {
+      return this._flights;
+    }
+  }
