@@ -1,11 +1,11 @@
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from '../flights/flights.service';
-import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {Flight} from '../model/flight';
-import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
 
 class MockFlightsService {
 
@@ -20,6 +20,7 @@ class MockFlightsService {
   }
 }
 
+
 const mockFlightsService = new MockFlightsService();
 
 describe('BuyFlightComponent', () => {
@@ -29,11 +30,10 @@ describe('BuyFlightComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent ],
-      providers: [{provide: FlightsService,
-        useValue: mockFlightsService }]
+      declarations: [BuyFlightComponent],
+      providers: [{provide: FlightsService, useValue: mockFlightsService }],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -55,19 +55,13 @@ describe('BuyFlightComponent', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeTruthy();
-  });
-
-  it('should set showBuyFlights to false when the link is clicked', () => {
+  it('should set showBuyFlights to false when the  link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should hide the flights table  when the link is clicked', () => {
+  it('should hide the flights table when the link is clicked', () => {
     fixture.detectChanges();
     let tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeTruthy();

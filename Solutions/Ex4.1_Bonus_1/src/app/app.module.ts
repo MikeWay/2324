@@ -16,7 +16,6 @@ import { FlightsService } from './flights/flights.service';
     AppRoutingModule
   ],
   providers: [FlightsService],
-  bootstrap: [AppComponent],
-
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
