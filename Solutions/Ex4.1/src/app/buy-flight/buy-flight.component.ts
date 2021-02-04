@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FlightsService} from '../flights/flights.service';
-import {Flight} from '../model/flight';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -9,11 +9,10 @@ import {Flight} from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
-
-  flights: Flight[] | undefined;
+  flights: Flight[] = new Array<Flight>();
   showBuyFlights = true;
 
-  constructor( private flightsService: FlightsService ) { }
+  constructor(private flightsService: FlightsService) { }
 
   ngOnInit(): void {
     this.flights = this.flightsService.getFlights();
@@ -23,6 +22,5 @@ export class BuyFlightComponent implements OnInit {
     this.showBuyFlights = !this.showBuyFlights;
   }
 }
-
 
 
