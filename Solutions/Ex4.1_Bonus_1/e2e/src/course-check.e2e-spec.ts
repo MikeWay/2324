@@ -21,7 +21,7 @@ describe('Validate exercise 4.1_Bonus start', () => {
     it('should have 5 flights displayed ', async () => {
       await page.navigateTo();
       expect(await page.getFlightTableRows()).toBe(5);
-    });    
+    });
 
     it('should have 0 flights displayed when flight toggle is clicked', async () => {
       await page.navigateTo();
