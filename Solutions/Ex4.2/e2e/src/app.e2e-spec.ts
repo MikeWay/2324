@@ -7,10 +7,14 @@ describe('workspace-project App', () => {
   beforeEach(() => {
     page = new AppPage();
   });
-
-  it('should display message saying Special Offer of the month 10% off all round-the-World flights', async () => {
+  it('should display message saying "Special Offer of the month 10% off all round-the-World flights"', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+    expect(await page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+  });
+
+  it('should have an App-Home component', async () => {
+    await page.navigateTo();
+    expect(await page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
   it('should show 5 rows in the table', async () => {
@@ -20,11 +24,10 @@ describe('workspace-project App', () => {
 
   it('should show 0 rows in the table when toggle is clicked', async () => {
     await page.navigateTo();
-    await page.clickToggle();
+    page.clickToggle();
     await browser.waitForAngular();
     expect(await page.getNumTableRows()).toEqual(0);
   });
-
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

@@ -33,3 +33,26 @@ flights: Flight[] = new Array<Flight>();
 
 4.1.43 --> Depending on where you initialised the Jasmine Spy object, your test may
 fail with a message indicating that the function has been called twice --> Multiple times!
+
+
+4.2.5: Hint
+  async getNumTableRows(): Promise<number> {
+    return (element.all(by.css('table tbody tr'))).count();
+  } 
+
+4.2.8: Hint:
+
+  it('should show 5 rows in the table', async () => {
+    await page.navigateTo();
+    expect(await page.getNumTableRows()).toEqual(5);
+  });
+
+
+4.2.14: Hint:
+
+  it('should show 0 rows in the table when toggle is clicked', async () => {
+    await page.navigateTo();
+    page.clickToggle();
+    await browser.waitForAngular();
+    expect(await page.getNumTableRows()).toEqual(0);
+  });

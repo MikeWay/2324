@@ -5,15 +5,19 @@ export class AppPage {
     return browser.get(browser.baseUrl);
   }
 
-  async getTitleText(): Promise<string> {
+  async getParagraphText(): Promise<string> {
     return element(by.css('app-root h1')).getText();
   }
 
-  getNumTableRows() {
+  async getAppHomeH1(): Promise<string> {
+    return element(by.css('app-home h1')).getText();
+  }
+
+  async getNumTableRows(): Promise<number> {
     return (element.all(by.css('table tbody tr'))).count();
   }
 
-  clickToggle() {
+  clickToggle(): void {
     element(by.css('#toggle')).click();
   }
 }
