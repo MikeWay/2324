@@ -76,7 +76,7 @@ describe('Validate exercise 6.1 start', () => {
 
   it('should NOT have a router-outlet', async () => {
     await page.navigateTo();
-    expect(page.getRouterOutlet().isPresent()).toBeFalsy();
+    expect(await page.getRouterOutlet().isPresent()).toBeFalsy();
   });
 
   afterEach(async () => {
