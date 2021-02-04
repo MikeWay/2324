@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Fly Sharp';
+  navbarOpen = false;
+
+  toggleNavbar(): void {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }

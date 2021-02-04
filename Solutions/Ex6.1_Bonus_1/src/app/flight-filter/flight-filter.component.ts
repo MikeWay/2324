@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-flight-filter',
@@ -8,21 +7,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class FlightFilterComponent implements OnInit {
 
-  @Input()
-  label: string;
-
   @Output()
   filterEmitter = new EventEmitter<string>();
 
+  @Input()
+  label = '';
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-
-  onFilterEnter( filterValue: string) {
+  onFilterEnter( filterValue: string): void {
     this.filterEmitter.emit(filterValue);
-
   }
 
 }
