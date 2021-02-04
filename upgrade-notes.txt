@@ -30,3 +30,6 @@ MA Changes:
 3.1.21 Hint and step:
 
 flights: Flight[] = new Array<Flight>();
+
+4.1.43 --> Depending on where you initialised the Jasmine Spy object, your test may
+fail with a message indicating that the function has been called twice --> Multiple times!
