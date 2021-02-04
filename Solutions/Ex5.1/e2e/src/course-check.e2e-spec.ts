@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 5.1 start', () => {
+describe('Validate exercise 5.1_Bonus start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -45,12 +45,12 @@ describe('Validate exercise 5.1 start', () => {
     await browser.waitForAngular();
     expect(await page.getFlightTableRows()).toBe(0);
   });
-  it('should show 9 columns in the table', async () => {
+  it('should show 9columns in the table', async () => {
     await page.navigateTo();
     expect(await page.getNumTableCols()).toEqual(9);
   });
 
-  it('flight number for 6th flight should be FS2211', async () => {
+  it('flight number for 5th flight should be FS2211', async () => {
     await page.navigateTo();
     expect(await page.getTableCellData('5', '2')).toBe('FS2211');
   });

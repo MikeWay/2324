@@ -56,3 +56,16 @@ fail with a message indicating that the function has been called twice --> Multi
     await browser.waitForAngular();
     expect(await page.getNumTableRows()).toEqual(0);
   });
+
+  5.1.10 H: 
+
+  @Input() selectedFlight: Flight | undefined;
+
+
+  5.1.18: H: + step
+
+  selectedFlight: Flight | undefined;
+
+    onFlightClick(flight: Flight): void {
+    this.selectedFlight = flight;
+  }

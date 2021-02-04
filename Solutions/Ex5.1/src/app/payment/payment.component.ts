@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Flight} from '../model/flight';
+import { Component, Input, OnInit } from '@angular/core';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-payment',
@@ -7,8 +7,8 @@ import {Flight} from '../model/flight';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  @Input()
-  selectedFlight: Flight | undefined;
+
+  @Input() selectedFlight: Flight | undefined;
 
   constructor() { }
 
