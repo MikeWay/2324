@@ -1,7 +1,7 @@
 import {FlySharpCourseCheckPage} from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 5.2 start', () => {
+describe('Validate exercise 5.2 bonus start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
@@ -59,14 +59,22 @@ describe('Validate exercise 5.2 start', () => {
     await page.navigateTo();
     expect(await page.getTableCellData('5', '4')).toBe('LHR');
   });
+
+  it('should have a app-payment element when a flight is selected', async () => {
+    await page.navigateTo();
+    await page.clickBuyFlight();
+    await browser.waitForAngular();
+    expect(page.getPaymentElement().isPresent()).toBeTruthy();
+  });
+
+  it('should have a app-flight-filter element', async () => {
+    await page.navigateTo();
+    expect(await page.getFlightFilterElement().isPresent()).toBeTruthy();
+  });  
+
   /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
 
-
-  it('should not have as flight-filter element', async () => {
-    await page.navigateTo();
-    expect(await page.getFlightFilterElement().isPresent()).toBeFalsy();
-  });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
