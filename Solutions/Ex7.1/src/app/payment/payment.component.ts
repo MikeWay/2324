@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Flight} from '../model/flight';
-import {Payment} from '../model/payment';
+import { Component, Input, OnInit } from '@angular/core';
+import { Flight } from '../model/flight';
+import { Payment } from '../model/payment';
 
 @Component({
   selector: 'app-payment',
@@ -9,26 +9,22 @@ import {Payment} from '../model/payment';
 })
 export class PaymentComponent implements OnInit {
 
-  private _selectedFlight: Flight;
+  @Input() selectedFlight: Flight | undefined;
+
   model: Payment = new Payment();
+
   constructor() { }
 
-  get selectedFlight(): Flight {
-    return this._selectedFlight;
+  ngOnInit(): void {
   }
-  @Input()
-  set selectedFlight(value: Flight) {
-    this._selectedFlight = value;
+
+  get jsonModel(): string {
+    return JSON.stringify(this.model);
   }
+
+
   onSubmit(): void {
     alert(this.jsonModel);
-  }
-
-  ngOnInit() {
-  }
-
-  get jsonModel() {
-    return JSON.stringify(this.model);
   }
 
 }
