@@ -1,32 +1,40 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+
+  async navigateTo(): Promise<unknown> {
+    return browser.get(browser.baseUrl);
   }
-  
-  navigateToTab(tab : string) {
+
+  async navigateToTab(tab: string): Promise<unknown> {
     return browser.get('/' + tab) as Promise<any>;
-  }  
-
-  getTitleText() {
-    return element(by.css('app-root h1')).getText() as Promise<string>;
   }
 
-  getNumTableRows() {
+  async getParagraphText(): Promise<string> {
+    return element(by.css('app-root h1')).getText();
+  }
+
+  async getAppHomeH1(): Promise<string> {
+    return element(by.css('app-home h1')).getText();
+  }
+
+  async getNumTableRows(): Promise<number> {
     return (element.all(by.css('table tbody tr'))).count();
   }
 
-  getNumTableCols() {
-    return (element(by.css('table tbody tr')).all(by.css('td'))).count();
-  }
-  clickToggle() {
+  clickToggle(): void {
     element(by.css('#toggle')).click();
   }
 
-  getTableCellData(row: string, col: string) {
+  async getNumTableCols(): Promise<number> {
+    return (element(by.css('table tbody tr:first-child')).all(by.css('td'))).count();
+  }
+
+  async getTableCellData(row: string, col: string): Promise<string> {
     const query: string = 'table tr:nth-child(' + row + ') td:nth-child(' + col + ')';
-    console.log('QUERY: ' + query);
+    // console.log('QUERY: ' + query);
     return element(by.css(query)).getText();
   }
+
+
 }
