@@ -78,7 +78,7 @@ fail with a message indicating that the function has been called twice --> Multi
 
   5.2.12: H:
 
-  originFilter: string| null = null;
+  originFilter = '';
 
   onFilterChange(filterValue: string): void {
 this.originFilter = filterValue;
