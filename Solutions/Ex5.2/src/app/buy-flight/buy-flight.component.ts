@@ -14,7 +14,7 @@ export class BuyFlightComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   _selectedFlight: Flight | undefined;
 
-  originFilter: string | null = null;
+  originFilter= '';
 
   constructor(private flightsService: FlightsService) { }
 
