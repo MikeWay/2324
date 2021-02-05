@@ -119,3 +119,9 @@ this.originFilter = filterValue;
 
 
   EX6.2 remove Info about Augury at the end -- does not work with Ivy!
+
+  Ex6.3.5:H Remove "" from USD
+  And 6.3.9.H
+
+  6.3.7.1 23 -> 15
+
