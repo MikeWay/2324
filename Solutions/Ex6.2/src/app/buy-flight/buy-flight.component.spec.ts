@@ -1,14 +1,30 @@
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from '../flights/flights.service';
-import {Component, DebugElement, Input} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {Flight} from '../model/flight';
-import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
-import {ActivatedRoute, Params} from '@angular/router';
-import {from, Observable, of} from 'rxjs';
 
+
+@Component({
+  selector: 'app-flight-filter',
+  template: ''
+})
+class MockFlightFilterComponent {
+  @Input() initialValue = '';
+}
+
+@Component({
+  selector: 'app-payment',
+  template: ''
+})
+class MockPaymentComponent {
+  @Input() selectedFlight = null;
+}
 
 class MockFlightsService {
 
@@ -23,31 +39,10 @@ class MockFlightsService {
   }
 }
 
-@Component({
-  selector: 'app-payment',
-  template: ''
-})
-class MockAppPaymentComponent {
-  @Input()
-  public selectedFlight: Flight;
 
-}
+let mockFlightsService: FlightsService;
 
-@Component({
-  selector: 'app-flight-filter',
-  template: ''
-})
-class MockFlightFilterComponent {
-  @Input()
-  public label: string;
-  @Input()
-  public initialValue: string;
-
-  public onFilterChange(flight: string): void {}
-
-}
-
-const mockFlightsService = new MockFlightsService();
+const mockActivatedRoute = {params: of(['LHR'])};
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -55,21 +50,15 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
+    mockFlightsService = jasmine.createSpyObj('FlightsService', {
+      getFlights: FLIGHTS,
+      getMyFlights: MYFLIGHTS
+    });
     await TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent ],
-      providers: [{
-                    provide: FlightsService,
-                    useValue: mockFlightsService
-                  },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: from([{id: 1}]),
-          }
-        }
-      ]
+      declarations: [BuyFlightComponent, MockFlightFilterComponent, MockPaymentComponent],
+      providers: [{provide: FlightsService, useValue: mockFlightsService }, {provide: ActivatedRoute, useValue: mockActivatedRoute}],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -82,6 +71,10 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have called getFlights() once', () => {
+    expect(mockFlightsService.getFlights).toHaveBeenCalledTimes(1);
+  });
+
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
@@ -91,19 +84,13 @@ describe('BuyFlightComponent', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeTruthy();
-  });
-
-  it('should set showBuyFlights to false when the link is clicked', () => {
+  it('should set showBuyFlights to false when the  link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should hide the flights table  when the link is clicked', () => {
+  it('should hide the flights table when the link is clicked', () => {
     fixture.detectChanges();
     let tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeTruthy();
