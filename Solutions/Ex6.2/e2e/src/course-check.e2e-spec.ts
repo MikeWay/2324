@@ -1,7 +1,7 @@
 import { FlySharpCourseCheckPage } from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 6.2 start', () => {
+describe('Validate exercise 6.3 start', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {

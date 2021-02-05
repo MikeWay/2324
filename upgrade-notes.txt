@@ -116,3 +116,6 @@ this.originFilter = filterValue;
     }
     return flights;
   }
+
+
+  EX6.2 remove Info about Augury at the end -- does not work with Ivy!
