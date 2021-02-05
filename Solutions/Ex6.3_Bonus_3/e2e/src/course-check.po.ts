@@ -64,5 +64,5 @@ export class FlySharpCourseCheckPage {
 
   getPaymentForm(): ElementFinder {
     return element(by.css('app-payment form'));
-  }  
+  }
 }

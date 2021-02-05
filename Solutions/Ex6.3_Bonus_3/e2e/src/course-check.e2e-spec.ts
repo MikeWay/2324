@@ -86,7 +86,7 @@ describe('Validate exercise 7.1 start', () => {
   /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
 
-  it('should NOT have a Payment Component FORM when the buy button is pressed',async  () => {
+  it('should NOT have a Payment Component FORM when the buy button is pressed', async () => {
     await page.navigateToTab('buy');
     await page.clickBuyFlight();
     await browser.waitForAngular();
