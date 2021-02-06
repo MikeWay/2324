@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 })
 export class FlightStatusComponent implements OnInit {
 
-  private socket: Subject<any>;
+  private socket: Subject<any> | undefined;
 
   public flightStatus = 'All flights are currently on time';
 

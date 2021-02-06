@@ -12,7 +12,7 @@ const testStatus = 'Too windy to fly';
  * It's just a marbles based observable with a dummy next method
  */
 class MockSubject {
-  subscribe(next, error): Subscription {
+  subscribe(next: any, error: any): Subscription {
     return cold('---a-b', {a: 'Wet', b: testStatus}).subscribe({next, error });
   }
   next(msg: object) {}
@@ -39,7 +39,7 @@ describe('FlightStatusComponent', () => {
   beforeEach(async () => {
 
     const mockSubjectObj = {
-      subscribe: (next, error) => {
+      subscribe: (next: any, error: any) => {
         return cold('---a-b', {a: 'Wet', b: testStatus}).subscribe({next, error });
       },
       next: jasmine.createSpy('next')

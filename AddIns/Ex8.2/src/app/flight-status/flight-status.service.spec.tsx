@@ -6,17 +6,17 @@ describe('FlightStatusService', () => {
   let service: FlightStatusService;
 
   const url = 'ws://localhost:8888';
-  let socketMock;
+  let socketMock: any;
 
   beforeEach(() => {
 
-    function WebSocketStub(theUrl: string) {
+    function WebSocketStub(theUrl: string): void {
       socketMock = {
         url: theUrl,
         readyState: WebSocket.CONNECTING,
         next: jasmine.createSpy('next'),
         send: jasmine.createSpy('send'),
-        close: jasmine.createSpy('close').and.callFake( () => {
+        close: jasmine.createSpy('close').and.callFake(() => {
           socketMock.readyState = WebSocket.CLOSING;
         })
       };
@@ -31,8 +31,8 @@ describe('FlightStatusService', () => {
       providers: [
         {
           provide: Window,
-          useValue: {socketMock},
-        },FlightStatusService
+          useValue: { socketMock },
+        }, FlightStatusService
       ]
     });
     service = TestBed.inject(FlightStatusService);
@@ -43,7 +43,7 @@ describe('FlightStatusService', () => {
   });
 
   it('should call the websocket function', () => {
-    const message = {key: 'hello'};
+    const message = { key: 'hello' };
     const wsSubject = service.connect(url);
     wsSubject.next(message);
     expect(socketMock.send.calls.count()).toEqual(0);
