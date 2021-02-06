@@ -151,3 +151,16 @@ this.originFilter = filterValue;
     return this.payForm.value as Payment;
   }
 
+  8.1.12: Add hint: you may need these imports:
+
+  import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Flight } from '../model/flight';
+import { MYFLIGHTS } from '../model/mock-flights';
+
+
+8.1.16.H:
+
+<h2 class="text-danger">{{errorMessage}}</h2>
