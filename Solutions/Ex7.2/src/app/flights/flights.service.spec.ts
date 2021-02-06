@@ -1,5 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { FlightsService } from '../flights/flights.service';
+import { TestBed } from '@angular/core/testing';
+
+import { FlightsService } from './flights.service';
 
 describe('FlightsService', () => {
   let service: FlightsService;

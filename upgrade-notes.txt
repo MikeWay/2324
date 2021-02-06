@@ -133,3 +133,21 @@ this.originFilter = filterValue;
     return JSON.stringify(this.model);
   }
 
+
+7.2.5 payForm: FormGroup | undefined;
+  private buildForm(): void{
+    this.payForm= this.formBuilder.group({});
+  }
+
+  7.2 Mods:
+
+  1) buildForm should return the FormGroup
+  2) in the constructor: call buildSampleModel() then this.payForm = this.buildForm()
+
+
+  7.2 Step 21: Simplified to: 
+
+  private preparePaymentForSave(): Payment {
+    return this.payForm.value as Payment;
+  }
+
