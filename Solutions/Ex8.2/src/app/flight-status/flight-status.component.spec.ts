@@ -5,6 +5,7 @@ import { getTestScheduler, cold } from 'jasmine-marbles';
 import { FlightStatusComponent } from './flight-status.component';
 import { FlightStatusService } from './flight-status.service';
 import { By } from '@angular/platform-browser';
+import { WebSocketSubject } from 'rxjs/webSocket';
 
 const testStatus = 'Too windy to fly';
 
@@ -12,21 +13,22 @@ const testStatus = 'Too windy to fly';
  * It's just a marbles based observable with a dummy next method
  */
 class MockSubject {
-  subscribe(next, error): Subscription {
-    return cold('---a-b', {a: 'Wet', b: testStatus}).subscribe({next, error });
+  subscribe(next: any, error: any): Subscription {
+    return cold('---a-b', { a: 'Wet', b: testStatus }).subscribe({ next, error });
   }
-  next(msg: object) {}
+  next(msg: object): void { }
 }
 
-const _mockSubject = new MockSubject()
+// tslint:disable-next-line: variable-name
+const _mockSubject = new MockSubject();
 
 
 /** A mock of the flight status service */
 class MockFlightStatusService {
 
-  constructor( public mockSubject : MockSubject){}
+  constructor(public mockSubject: MockSubject) { }
 
-  connect() {
+  connect(): any {
     return this.mockSubject;
   }
 }
@@ -39,21 +41,21 @@ describe('FlightStatusComponent', () => {
   beforeEach(async () => {
 
     const mockSubjectObj = {
-      subscribe: (next, error) => {
-        return cold('---a-b', {a: 'Wet', b: testStatus}).subscribe({next, error });
+      subscribe: (next: any, error: any) => {
+        return cold('---a-b', { a: 'Wet', b: testStatus }).subscribe({ next, error });
       },
       next: jasmine.createSpy('next')
-    }
+    };
 
     const mockFlightStatusService = new MockFlightStatusService(mockSubjectObj);
 
 
 
     await TestBed.configureTestingModule({
-      declarations: [ FlightStatusComponent ],
-      providers: [{provide: FlightStatusService, useValue: mockFlightStatusService}]
+      declarations: [FlightStatusComponent],
+      providers: [{ provide: FlightStatusService, useValue: mockFlightStatusService }]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -67,25 +69,25 @@ describe('FlightStatusComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have loaded flight status from the server', ()=>{
+  it('should have loaded flight status from the server', () => {
     getTestScheduler().flush();
     fixture.detectChanges();
     expect(component.flightStatus).toEqual(testStatus);
   });
 
-  it('should display an initial flight status', fakeAsync(()=>{
+  it('should display an initial flight status', fakeAsync(() => {
     const response = 'All flights are currently on time';
     fixture.detectChanges();
     expect(component.flightStatus).toEqual(response);
   }));
 
-  it('should display value from the an initial flight status', fakeAsync(()=>{
+  it('should display value from the an initial flight status', fakeAsync(() => {
     const response = 'All flights are currently on time';
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
     expect(ele.innerHTML).toEqual(response);
   }));
 
-  it('should display value from the service when the observables are flushed', fakeAsync(()=>{
+  it('should display value from the service when the observables are flushed', fakeAsync(() => {
     getTestScheduler().flush();
     fixture.detectChanges();
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
@@ -94,7 +96,7 @@ describe('FlightStatusComponent', () => {
 
   it('should have called next to set the airport code', () => {
     const mockFlightStatusServce = socketService as unknown as MockFlightStatusService;
-    expect(mockFlightStatusServce.mockSubject.next).toHaveBeenCalledWith({airport: 'JFK'});
+    expect(mockFlightStatusServce.mockSubject.next).toHaveBeenCalledWith({ airport: 'JFK' });
   });
 
 });

@@ -1,4 +1,4 @@
-import {FlySharpCourseCheckPage} from './course-check.po';
+import { FlySharpCourseCheckPage } from './course-check.po';
 import { browser, logging } from 'protractor';
 
 describe('Validate exercise 9.1 start', () => {
@@ -9,123 +9,92 @@ describe('Validate exercise 9.1 start', () => {
   });
 
 
-  it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
-    page.navigateToTab('home');
-    expect(page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
+  it('should display message saying Special Offer of the month 10% off all round-the-World flights', async () => {
+    await page.navigateTo();
+    expect(await page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
-  it('should have an App-Home component', () => {
-    page.navigateTo();
-    expect(page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
-  });
-
-  it('should have a nav element', () => {
-    page.navigateTo();
-    expect(page.getNavBar().isPresent()).toBeTruthy();
+  it('should have an App-Home component', async () => {
+    await page.navigateTo();
+    expect(await page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
-  it('should have an app-buy-flights element', () => {
-    page.navigateToTab('buy');
-    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
-  });
-  it('should have a Toggle Flights button', () => {
-    page.navigateToTab('buy');
-
-    expect(page.getToggleFlightsButtonText()).toEqual('Toggle Flights');
+  it('should have a nav element', async () => {
+    await page.navigateTo();
+    expect(await page.getNavBar().isPresent()).toBeTruthy();
   });
 
-  it('should have a 20 flights displayed', () => {
-    page.navigateToTab('buy');
-    expect(page.getFlightTableRows()).toBe(21); // including header?
-  });
-
-  it('should have a 0 flights displayed when flight toggle is clicked', () => {
-    page.navigateToTab('buy');
-    page.clickToggleFlights();
-    expect(page.getFlightTableRows()).toBe(0);
-  });
-  it('should show 9 columns in the table', () => {
-    page.navigateToTab('buy');
-    expect(page.getNumTableCols()).toEqual(9);
-  });
-
-  it('flight number for 5th flight should be 114', () => {
-    page.navigateToTab('buy');
-    expect(page.getTableCellData('5', '2')).toBe('114');
-  });
-
-  it('destination for 5th flight should be JFK', () => {
-    page.navigateToTab('buy');
-    expect(page.getTableCellData('5', '4')).toBe('JFK');
-  });
-
-  it('should have an h1 element with Special Offer on the home tab', () => {
-    // There should not yet be a router so these should not change anything
-
-    page.navigateToTab('home');
-    expect(page.getAppHomeH1()).toContain('Special Offer');
-
-  });
-
-  it('should have an app-buy-flights element on the buy tab', () => {
-    // There should not yet be a router so these should not change anything
-    page.navigateToTab('buy');
-    expect(page.getBuyFlightsElement().isPresent()).toBeTruthy();
+  it('should have an app-buy-flights element', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getBuyFlightsElement().isPresent()).toBeTruthy();
   });
 
 
-  it('should not have an app-buy-flights element on the home tab', () => {
-    // There should not yet be a router so these should not change anything
-    page.navigateToTab('home');
-    expect(page.getBuyFlightsElement().isPresent()).toBeFalsy();
+  it('should have a 20 flights displayed', async () => {
+    await page.navigateToTab('buy');
+
+    expect(await page.getFlightTableRows()).toBe(20);
   });
 
-  it('should say my-flights works! on the My Flights tab', () => {
-    // There should not yet be a router so these should not change anything
-    page.navigateToTab('myflights');
-    expect(page.getMyFlightsParagraphText()).toBe('my-flights works!');
-
+  it('should show 9 columns in the table', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getNumTableCols()).toEqual(9);
   });
 
-
-  it('should say account works! on the Account tab', () => {
-    // There should not yet be a router so these should not change anything
-    page.navigateToTab('account');
-    expect(page.getAccountParagraphText()).toBe('account works!');
-
+  it('flight number for 6th flight should be 114', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getTableCellData('5', '2')).toBe('114');
   });
 
-
-  it('The price column should contain USD', () => {
-    page.navigateToTab('buy');
-    page.getTableCellData('1', '8').then(value => console.log('===============>' + value));
-    expect(page.getTableCellData('2', '9')).toContain('USD');
+  it('destination for 5th flight should be LHR', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getTableCellData('5', '4')).toBe('JFK');
   });
 
-  it('should have a Payment Component when the buy button is pressed', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getPaymentComponentElement().isPresent()).toBeTruthy();
+  it('should have a app-payment element when a flight is selected', async () => {
+    await page.navigateToTab('buy');
+    await page.clickBuyFlight();
+    await browser.waitForAngular();
+    expect(page.getPaymentElement().isPresent()).toBeTruthy();
   });
 
-  it('should have have a Payment Component FORM when the buy button is pressed', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getPaymentForm().isPresent()).toBeTruthy();
-  });
-
-  it('should have an input with a formcontrolname attribute when the buy button is pressed', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();
+  it('should have a app-flight-filter element', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getFlightFilterElement().isPresent()).toBeTruthy();
   });
 
 
-  it('should not have an input with a ngcontrol attribute when the buy button is pressed', () => {
-    page.navigateToTab('buy');
-    page.clickBuyFlightButton();
-    expect(page.getNGControlAttributeFromPaymentForm()).toBeFalsy();
+  it('should have a router-outlet', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getRouterOutlet().isPresent()).toBeTruthy();
   });
-/* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
+
+  it('The price column should contain USD', async () => {
+    await page.navigateToTab('buy');
+    expect(await page.getTableCellData('2', '9')).toContain('USD');
+  });
+
+  it('should have a Payment Component FORM when the buy button is pressed', async () => {
+    await page.navigateToTab('buy');
+    await page.clickBuyFlight();
+    await browser.waitForAngular();
+    expect(await page.getPaymentForm().isPresent()).toBeTruthy();
+  });
+
+
+  it('should have an input with a formcontrolname attribute when the buy button is pressed', async () => {
+    await page.navigateToTab('buy');
+    await page.clickBuyFlight();
+    await browser.waitForAngular();
+    expect(await page.getFormControlNameAttributeFromPaymentForm()).toBeTruthy();
+  });
+
+
+  it('should have a app-flight-status element', async () => {
+    await page.navigateToTab('home');
+    expect(await page.getFlightStatusElement().isPresent()).toBeTruthy();
+  });
+
+  /* Tests from here are checks that we have not accidentally got the solution from subsequent exercises */
 
   it('should not have elements containing AppTime', () => {
     expect(page.getElementContainingAppTime().isPresent()).toBeFalsy();

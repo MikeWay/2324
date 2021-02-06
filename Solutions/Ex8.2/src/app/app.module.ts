@@ -5,20 +5,20 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import {FlightsService} from './flights/flights.service';
+import { FlightsService } from './flights/flights.service';
 import { FlightStatusComponent } from './flight-status/flight-status.component';
-import {PaymentComponent} from './payment/payment.component';
+import { PaymentComponent } from './payment/payment.component';
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
-import {AccountsModule} from './accounts/accounts.module';
+import { AccountsModule } from './accounts/accounts.module';
 import { CurrencyConversionPipe } from './currency-conversion/currency-conversion.pipe';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent,
-    FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent,
+    MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
   ],
   imports: [
     BrowserModule,
