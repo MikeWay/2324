@@ -11,7 +11,7 @@ import { Flight } from '../model/flight';
 export class BuyFlightComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   _flights: Flight[] = new Array<Flight>();
-  showBuyFlights = true;
+  showBuyFlights = false;
   // tslint:disable-next-line: variable-name
   _selectedFlight: Flight | undefined;
 
