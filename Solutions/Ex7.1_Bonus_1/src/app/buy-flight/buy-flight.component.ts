@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import {FlightsService} from '../flights/flights.service';
-import {Flight} from '../model/flight';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -10,32 +9,21 @@ import {Flight} from '../model/flight';
   styleUrls: ['./buy-flight.component.css']
 })
 export class BuyFlightComponent implements OnInit {
-  // Next line stops tslint complaining about the _ at the start of the variable name
-  // tslint:disable-next-line
-  _flights: Flight[];
+  // tslint:disable-next-line: variable-name
+  _flights: Flight[] = new Array<Flight>();
   showBuyFlights = true;
-  selectedFlight: Flight;
-  originFilter: string = null;
-  destinationFilter: string = null;
-conversionRate = 4.0;
+  // tslint:disable-next-line: variable-name
+  _selectedFlight: Flight | undefined;
 
+  originFilter = '';
+  destinationFilter = '';
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
+  conversionRate = 4.0;
 
-  onFilterChange(filterValue: string): void {
-    this.originFilter = filterValue;
-  }
-
-  onDestinationFilterChange(filterValue: string): void {
-    this.destinationFilter = filterValue;
-  }
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if (typeof params.origin !== 'undefined' ) {
-        this.originFilter = params.origin;
-      }
-    });
+    this.activatedRoute.params.subscribe(params => this.originFilter = params.origin);
     this._flights = this.flightsService.getFlights();
   }
 
@@ -43,36 +31,56 @@ conversionRate = 4.0;
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  get flights(): Flight[] {
-    if (this.originFilter != null || this.destinationFilter != null) {
-      return this._flights.map((flight) => {
-        let match = true;
-        if (this.originFilter != null) {
-          match = flight.origin.startsWith(this.originFilter);
-        }
-        if (!match) {
-          return null;
-        }
-        if (match && this.destinationFilter != null) {
-          match = flight.destination.startsWith(this.destinationFilter);
-          if (match) {
-            return flight;
-          } else {
-            return null;
-          }
-        } else {
-          return flight;
-        }
-        // the filter expression stops empty elements being returned (drops the null elements)
-      }).filter(x => !!x);
+  onFlightClick(flight: Flight): void {
+    this._selectedFlight = flight;
+  }
+
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
+  }
+
+  set selectedFlight(flight: Flight | undefined) {
+    this._selectedFlight = flight;
+  }
+
+  set conversionRateString(strRate: string) {
+    if (strRate.length > 0 ) {
+      this.conversionRate = parseFloat(strRate);
+      if (isNaN(this.conversionRate)){
+        this.conversionRate = 1.0;
+      }
     } else {
-      return this._flights;
+      this.conversionRate = 1.0;
     }
   }
 
-
-  onFlightClick(flight: Flight): void {
-    this.selectedFlight = flight;
+  onOriginFilterChange(filterValue: string): void {
+    this.originFilter = filterValue;
   }
+
+  onDestinationFilterChange(filterValue: string): void {
+    this.destinationFilter = filterValue;
+  }
+
+  /**
+   * Version of the flight getter that implements a simple filter
+   */
+
+  get flights(): Flight[] {
+    let flights = this._flights;
+    if (this.originFilter) {
+      flights = this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
+      });
+    }
+    if (this.destinationFilter) {
+      flights = flights.filter((flight: Flight) => {
+        return flight.destination.startsWith(this.destinationFilter as string);
+      });
+    }
+    return flights;
+  }
+
 }
+
 
