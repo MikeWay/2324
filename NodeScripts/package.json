@@ -1,6 +1,6 @@
 {
   "name": "ltree-support",
-  "version": "0.0.4",
+  "version": "1.0.1",
   "description": "A command line tool for copying exercise files",
   "main": "index.js",
   "scripts": {
