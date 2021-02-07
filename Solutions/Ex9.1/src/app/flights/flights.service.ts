@@ -1,26 +1,31 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Flight } from '../model/flight';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
-import { throwError, Observable } from 'rxjs';
+import { MYFLIGHTS } from '../model/mock-flights';
 
+// @Injectable({
+//   providedIn: 'root'
+// })
 @Injectable()
 export class FlightsService {
 
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) { }
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   public getFlights(): Observable<Flight[]> {
+    // const url = 'http://localhost:8080/flightserver/flights';
     const url = 'http://localhost:8080/flightserver/allflights';
-
     return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
-  public getChunkOfFlights( start: number, num: number): Observable<Flight[]> {
+  public getChunkOfFlights(start: number, num: number): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/flights';
-    const data = {start, num};
-    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), {headers: this.headers}).pipe(catchError(this.handleError));
+    const data = { start, num };
+    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), { headers: this.headers })
+      .pipe(catchError(this.handleError));
     return resultObservable;
   }
 
@@ -30,20 +35,18 @@ export class FlightsService {
     return this.http.get<number>(url).pipe(catchError(this.handleError));
   }
 
-
-  public getMyFlights() : Flight[]{
+  public getMyFlights(): Flight[] {
     return MYFLIGHTS;
   }
 
-  private handleError (error: HttpErrorResponse )  {
-    if(error.error instanceof ErrorEvent){
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.error instanceof ErrorEvent) {
       // Client error
-      console.error('Http communication error:', error.error.message )
+      console.error('Http communication error:', error.error.message);
     } else {
       // Server error
-      console.error(`Server error: ${error.status}. Message body: ${error.message}`)
+      console.error(`Server error: ${error.status}. Message body: ${error.message}`);
     }
-    return throwError( 'Server error - is the REST server running?');
+    return throwError('Server error - is the REST  server running?');
   }
-
 }

@@ -19,8 +19,8 @@ describe('FlightsService', () => {
       providers: [FlightsService]
     });
     service = TestBed.inject(FlightsService);
-    httpTestingController = TestBed.get(HttpTestingController);
-    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.inject(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
   });
 
 
@@ -38,7 +38,7 @@ describe('FlightsService', () => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
     });
 
-    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/flights');
+    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
     req.flush(FLIGHTS); // Supply the data which will be returned
 
     httpTestingController.verify();

@@ -7,15 +7,17 @@ export class TimeDirective implements OnInit {
 
   constructor(private el: ElementRef) {
     this.showTime(el);
-    setInterval(()=>{this.showTime(el)}, 1000);
+    setInterval(() => {
+      this.showTime(el);
+    }, 1000);
   }
 
-  private showTime(el: ElementRef) {
-    let myDate = new Date();
-    el.nativeElement.innerHTML = myDate.toLocaleTimeString("en-US");
+  private showTime(el: ElementRef): void {
+    const myDate = new Date();
+    el.nativeElement.innerHTML = myDate.toLocaleTimeString('en-US');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.el.nativeElement.style.fontSize = '2em';
     this.el.nativeElement.style.marginTop = '0.2em';
     this.el.nativeElement.style.float = 'right';

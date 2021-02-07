@@ -164,3 +164,32 @@ import { MYFLIGHTS } from '../model/mock-flights';
 8.1.16.H:
 
 <h2 class="text-danger">{{errorMessage}}</h2>
+
+ex9.1.3 add --flat=false
+
+9.1.4 change path
+
+9.1.6
+
+  private showTime(el: ElementRef): void {
+    const myDate = new Date();
+    el.nativeElement.innerHTML = myDate.toLocaleTimeString('en-US');
+  }
+
+  ngOnInit(): void {
+    this.el.nativeElement.style.fontSize = '2em';
+    this.el.nativeElement.style.marginTop = '0.2em';
+    this.el.nativeElement.style.float = 'right';
+  }
+
+
+9.1.8: Fix test
+
+  let spanEle = document.createElement('span');
+  let ref = new ElementRef(spanEle);
+
+  beforeEach(() => {
+    spanEle = document.createElement('span');
+    ref = new ElementRef(spanEle);
+  });
+
