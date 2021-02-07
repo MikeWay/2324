@@ -1,0 +1,153 @@
+3.1 20
+
+  ngOnInit(): void {
+    this.flights =
+    this.flightsService.getFlights();    
+  }
+
+
+3.1.21
+
+flights: Flight[] = new Array<Flight>();
+
+4.2.5
+  async getNumTableRows(): Promise<number> {
+    return (element.all(by.css('table tbody tr'))).count();
+  } 
+
+4.2.8
+
+  it('should show 5 rows in the table', async () => {
+    await page.navigateTo();
+    expect(await page.getNumTableRows()).toEqual(5);
+  });
+
+
+4.2.14
+
+  it('should show 0 rows in the table when toggle is clicked', async () => {
+    await page.navigateTo();
+    page.clickToggle();
+    await browser.waitForAngular();
+    expect(await page.getNumTableRows()).toEqual(0);
+  });
+
+5.1.10
+
+  @Input() selectedFlight: Flight | undefined;
+
+
+5.1.18
+
+  selectedFlight: Flight | undefined;
+
+    onFlightClick(flight: Flight): void {
+    this.selectedFlight = flight;
+  }
+
+5.2.8
+
+  onFilterEnter( filterValue: string): void {
+    this.filterEmitter.emit(filterValue);
+  }
+
+5.2.12
+
+originFilter = '';
+
+onFilterChange(filterValue: string): void {
+  this.originFilter = filterValue;
+}
+
+5.2.13 You may need this : // tslint:disable-next-line: variable-name
+
+5.2.14
+
+  get flights(): Flight[] {
+
+    if (this.originFilter) {
+      return this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string);
+      });  // We know it's not undefined or null from the outer if
+    } else {
+      return this._flights;
+    }
+  }
+
+
+  5.2.21:
+  get flights(): Flight[] {
+    let flights = this._flights;
+    if (this.originFilter) {
+      flights = this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
+      });
+    }
+    if (this.destinationFilter) {
+      flights = flights.filter((flight: Flight) => {
+        return flight.destination.startsWith(this.destinationFilter as string);
+      });
+    }
+    return flights;
+  }
+
+
+  7.1.10:
+
+  get jsonModel(): string {
+    return JSON.stringify(this.model);
+  }
+
+
+7.2.5 
+  payForm: FormGroup | undefined;
+  private buildForm(): void{
+    this.payForm= this.formBuilder.group({});
+  }
+
+  
+7.2 Step 21: Simplified to: 
+
+  private preparePaymentForSave(): Payment {
+    return this.payForm.value as Payment;
+  }
+
+8.1.12: You may need these imports:
+
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Flight } from '../model/flight';
+import { MYFLIGHTS } from '../model/mock-flights';
+
+
+8.1.16
+
+<h2 class="text-danger">{{errorMessage}}</h2>
+
+
+9.1.6
+
+  private showTime(el: ElementRef): void {
+    const myDate = new Date();
+    el.nativeElement.innerHTML = myDate.toLocaleTimeString('en-US');
+  }
+
+  ngOnInit(): void {
+    this.el.nativeElement.style.fontSize = '2em';
+    this.el.nativeElement.style.marginTop = '0.2em';
+    this.el.nativeElement.style.float = 'right';
+  }
+
+
+9.1.8: Correct code to fix the unit test
+
+  let spanEle = document.createElement('span');
+  let ref = new ElementRef(spanEle);
+
+  beforeEach(() => {
+    spanEle = document.createElement('span');
+    ref = new ElementRef(spanEle);
+  });
+
