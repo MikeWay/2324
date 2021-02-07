@@ -5,19 +5,19 @@
 // The build + e2e cycle should verify that exercises do build and that
 // they have not accidentally bee completed!
 
-import { exec } from 'child_process';
-//import {Promise} from 'es6-promise'
+import * as shell from 'shelljs';
+import * as yargs from 'yargs';
 
 const EX_MAPPINGS = [
-  "Ex2.2",
-  "Ex3.1",
-  "Ex4.1",
-  "Ex4.2",
-  "Ex5.1",
-  "Ex5.2",
-  "Ex6.1",
-  "Ex6.2",
-  "Ex6.3",
+  // "Ex2.2",
+  // "Ex3.1",
+  // "Ex4.1",
+  // "Ex4.2",
+  // "Ex5.1",
+  // "Ex5.2",
+  // "Ex6.1",
+  // "Ex6.2",
+  // "Ex6.3",
   "Ex7.1",
   "Ex7.2",
   "Ex8.1",
@@ -26,11 +26,11 @@ const EX_MAPPINGS = [
 ];
 
 
-function runATest(index : number) {
-    let options = { cwd: 'c:\\course2324\\Exercises\\FlySharp' };
+function runATest(cwd: string, index : number) {
+    let options = { cwd };
     let prom = new Promise<void>((resolve, reject)=>{
 
-    const exStart = exec('exStart ' + EX_MAPPINGS[index], options, (error, stdout, stderr) => {
+    const exStart = shell.exec('exStart ' + EX_MAPPINGS[index], options, (error, stdout, stderr) => {
       if (error) {
         console.log(stdout);
         //throw error;
@@ -38,7 +38,7 @@ function runATest(index : number) {
 
       }
       console.log(stdout);
-      const child = exec('ng e2e', options, (error, stdout, stderr) => {
+      const child = shell.exec('ng e2e', options, (error, stdout, stderr) => {
         console.log(stdout);
         if (error) {
           console.log(error);
@@ -55,11 +55,20 @@ return prom;
 
 
 async function main(){
+
+  const argv = yargs.options({
+    exHomeDir: {
+        alias: 'exHomeDir',
+        description: 'Home dir of FlySharp app',
+        default: 'c:\\course2324\\Exercises\\FlySharp'
+    }
+  }).argv;
+  
 let i=0;
 try{
 while(i < EX_MAPPINGS.length){
   console.log("Starting runATest for " + EX_MAPPINGS[i]);
-   await runATest(i);
+   await runATest(argv.exHomeDir, i);
    console.log("Back from runATest");
    i++;
 }
