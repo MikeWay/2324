@@ -9,7 +9,7 @@ export class MyFlightsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

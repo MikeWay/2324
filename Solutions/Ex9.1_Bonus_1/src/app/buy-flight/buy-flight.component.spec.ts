@@ -1,14 +1,39 @@
+import { Component, DebugElement, Input, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from '../flights/flights.service';
-import {Component, DebugElement, Input, Pipe, PipeTransform} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {Flight} from '../model/flight';
-import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
-import {ActivatedRoute, Params} from '@angular/router';
-import {from, Observable, of} from 'rxjs';
-import {CurrencyConversionPipe} from '../currency-conversion/currency-conversion.pipe';
+
+
+@Component({
+  selector: 'app-flight-filter',
+  template: ''
+})
+class MockFlightFilterComponent {
+  @Input() initialValue = '';
+}
+
+@Component({
+  selector: 'app-payment',
+  template: ''
+})
+class MockPaymentComponent {
+  @Input() selectedFlight = null;
+}
+
+@Pipe({
+  name: 'currencyConversion'
+})
+export class MockCurrencyConversionPipe implements PipeTransform {
+  transform(value: any, ...args: any[]): string {
+    return '';
+  }
+}
 
 
 class MockFlightsService {
@@ -16,15 +41,7 @@ class MockFlightsService {
   constructor() { }
 
   public getFlights(): Observable<Flight[]> {
-    return of<Flight[]>( FLIGHTS);
-  }
-
-  public getChunkOfFlights(): Observable<Flight[]> {
-    return of<Flight[]>( FLIGHTS);
-  }
-
-  public getNumberOfFlights(): Observable<number> {
-    return of<number>( 10);
+    return of(FLIGHTS);
   }
 
   public getMyFlights(): Flight[] {
@@ -32,62 +49,26 @@ class MockFlightsService {
   }
 }
 
-@Component({
-  selector: 'app-payment',
-  template: ''
-})
-class MockAppPaymentComponent {
-  @Input()
-  public selectedFlight: Flight;
 
-}
+let mockFlightsService: FlightsService;
 
-@Component({
-  selector: 'app-flight-filter',
-  template: ''
-})
-class MockFlightFilterComponent {
-  @Input()
-  public label: string;
-  @Input()
-  public initialValue: string;
-
-  public onFilterChange(flight: string) {}
-
-}
-
-@Pipe({
-  name: 'currencyConversion'
-})
-class MockCurrencyConversionPipe implements PipeTransform {
-  transform(value: any, ...args: any[]): any {
-  }
-
-}
-
-const mockFlightsService = new MockFlightsService();
+const mockActivatedRoute = { params: of(['LHR']) };
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
-  let el: DebugElement;
 
   beforeEach(async () => {
+    mockFlightsService = jasmine.createSpyObj('FlightsService', {
+      getFlights: of(FLIGHTS),
+      getChunkOfFlights: of(FLIGHTS),
+      getMyFlights: MYFLIGHTS
+    });
     await TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe ],
-      providers: [{
-                    provide: FlightsService,
-                    useValue: mockFlightsService
-                  },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: from([{id: 1}]),
-          }
-        }
-      ]
+      declarations: [BuyFlightComponent, MockFlightFilterComponent, MockPaymentComponent, MockCurrencyConversionPipe],
+      providers: [{ provide: FlightsService, useValue: mockFlightsService }, { provide: ActivatedRoute, useValue: mockActivatedRoute }],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -100,35 +81,33 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have called getChunkOfFlights() once', () => {
+    expect(mockFlightsService.getChunkOfFlights).toHaveBeenCalledTimes(1);
+  });
+
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeFalsy();
-  });
+  // it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
+  //   component.onClickBuyFlights();
+  //   expect(component.showBuyFlights).toBeFalsy();
+  // });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
-    component.onClickBuyFlights();
-    expect(component.showBuyFlights).toBeTruthy();
-  });
+  // it('should set showBuyFlights to false when the  link is clicked', () => {
+  //   el = fixture.debugElement.query(By.css('a'));
+  //   el.triggerEventHandler('click', null);
+  //   expect(component.showBuyFlights).toBeFalsy();
+  // });
 
-  it('should set showBuyFlights to false when the link is clicked', () => {
-    el = fixture.debugElement.query(By.css('a'));
-    el.triggerEventHandler('click', null);
-    expect(component.showBuyFlights).toBeFalsy();
-  });
-
-  it('should hide the flights table  when the link is clicked', () => {
-    fixture.detectChanges();
-    let tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeTruthy();
-    el = fixture.debugElement.query(By.css('a'));
-    el.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeFalsy();
-  });
+  // it('should hide the flights table when the link is clicked', () => {
+  //   fixture.detectChanges();
+  //   let tableEle = fixture.debugElement.query(By.css('table'));
+  //   expect(tableEle).toBeTruthy();
+  //   el = fixture.debugElement.query(By.css('a'));
+  //   el.triggerEventHandler('click', null);
+  //   fixture.detectChanges();
+  //   tableEle = fixture.debugElement.query(By.css('table'));
+  //   expect(tableEle).toBeFalsy();
+  // });
 });

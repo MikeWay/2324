@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Flight } from '../model/flight';
-import { Input } from '@angular/core';
-import { Payment } from '../model/payment';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Flight } from '../model/flight';
+import { Payment } from '../model/payment';
 
 @Component({
   selector: 'app-payment',
@@ -10,22 +9,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  @Input() selectedFlight: Flight;
+
+  @Input() selectedFlight: Flight | undefined;
+
   model: Payment = new Payment();
   payForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.buildSampleModel();
+    this.payForm = this.buildForm();
   }
 
-  get jsonModel() {
+  ngOnInit(): void {
+    this.payForm.setValue(this.model);
+  }
+
+  get jsonModel(): string {
     return JSON.stringify(this.model);
   }
 
 
-  private buildForm() {
-    this.payForm = this.formBuilder.group({
-      name: ['', Validators.required],
+  onSubmit(): void {
+    alert(JSON.stringify(this.preparePaymentForSave()));
+  }
+
+  private buildForm(): FormGroup {
+    return this.formBuilder.group({
+      name: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       address: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')])],
       cardNum: ['', Validators.required],
@@ -34,46 +44,16 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-
-  private buildSampleModel() {
-
+  private buildSampleModel(): void {
     this.model.name = 'A Customer';
     this.model.address = 'Customer Address';
     this.model.email = 'a.customer@ltree.com';
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
     this.model.expDate = new Date();
-
   }
-
-
   private preparePaymentForSave(): Payment {
-
-    const formData = this.payForm.value;
-
-    const payment: Payment = {
-
-      name: formData.name,
-      address: formData.address,
-      email: formData.email,
-      cardNum: formData.cardNum,
-      cardType: formData.cardType,
-      expDate: formData.expDate
-    };
-
-    return payment;
-  }
-
-
-  onSubmit(): void {
-
-    alert(JSON.stringify(this.preparePaymentForSave()));
-
-  }
-
-  ngOnInit() {
-    this.buildForm();
-    this.payForm.setValue(this.model);
+    return this.payForm.value as Payment;
   }
 
 }

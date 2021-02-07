@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import {FlightsService} from '../flights/flights.service';
-import {Flight} from '../model/flight';
+import { FlightsService } from '../flights/flights.service';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -10,70 +9,77 @@ import {Flight} from '../model/flight';
   styleUrls: ['./buy-flight.component.css']
 })
 export class BuyFlightComponent implements OnInit {
-  // Next line stops tslint complaining about the _ at the start of the variable name
-  // tslint:disable-next-line
-  _flights: Flight[];
-  showBuyFlights = true;
-  selectedFlight: Flight;
-  errorMessage: string;
-  originFilter: string = null;
-  destinationFilter: string = null;
-conversionRate = 4.0;
+  // tslint:disable-next-line: variable-name
+  _flights: Flight[] = new Array<Flight>();
+  showBuyFlights = false;
+  // tslint:disable-next-line: variable-name
+  _selectedFlight: Flight | undefined;
 
+  originFilter = '';
+  destinationFilter = '';
+  errorMessage = '';
+
+  conversionRate = 4.0;
   nextFlightIndex = 20;
   numFlights = 0;
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
-  onFilterChange(filterValue: string) {
-    this.originFilter = filterValue;
-  }
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
 
-  onDestinationFilterChange(filterValue: string) {
-    this.destinationFilter = filterValue;
-  }
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if (typeof params.origin !== 'undefined' ) {
-        this.originFilter = params.origin;
-      }
-    });
-
-
-    const flightStream = this.flightsService.getChunkOfFlights(0, 20);
-    flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => this.originFilter = params.origin);
+    this.flightsService.getChunkOfFlights(0, 20).subscribe(
+      (flights: Flight[]) => {
+        this._flights = flights;
+        this.showBuyFlights = true;
+      },
+      (error: any) => this.errorMessage = error
     );
-
-    // Get the number of flights available
-    this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num; },
-      (error: string) => this.errorMessage = error);
   }
 
-  onClickBuyFlights() {
+  onClickBuyFlights(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
+  onFlightClick(flight: Flight): void {
+    this._selectedFlight = flight;
+  }
 
-  onNext() {
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
+  }
 
-    let numFlights = 20;
-    if (this.nextFlightIndex + numFlights > this.numFlights) {
-      numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
-    }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error);
-    if (this.nextFlightIndex <= this.numFlights) {
-      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
+  set selectedFlight(flight: Flight | undefined) {
+    this._selectedFlight = flight;
+  }
+
+  set conversionRateString(strRate: string) {
+    if (strRate.length > 0) {
+      this.conversionRate = parseFloat(strRate);
+      if (isNaN(this.conversionRate)) {
+        this.conversionRate = 1.0;
+      }
+    } else {
+      this.conversionRate = 1.0;
     }
   }
 
-  onPrevious() {
-      // Don't load flights pre 0
+  onOriginFilterChange(filterValue: string): void {
+    this.originFilter = filterValue;
+  }
+
+  onDestinationFilterChange(filterValue: string): void {
+    this.destinationFilter = filterValue;
+  }
+
+  onNext(): void {
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex += 20, 20).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
+      (error: any) => this.errorMessage = error);
+  }
+
+  onPrevious(): void {
+    // Don't load flights pre 0
     if (this.nextFlightIndex > 20) {
       this.nextFlightIndex -= 20;
     } else {
@@ -84,38 +90,25 @@ conversionRate = 4.0;
       (error: string) => this.errorMessage = error);
   }
 
+  /**
+   * Version of the flight getter that implements a simple filter
+   */
+
   get flights(): Flight[] {
-    if (this.originFilter != null || this.destinationFilter != null) {
-      return this._flights.map((flight) => {
-        let match = true;
-        if (this.originFilter != null) {
-          match = flight.origin.startsWith(this.originFilter);
-        }
-        if (!match) {
-          return null;
-        }
-        if (match && this.destinationFilter != null) {
-          match = flight.destination.startsWith(this.destinationFilter);
-          if (match) {
-            return flight;
-          } else {
-            return null;
-          }
-        } else {
-          return flight;
-        }
-        // the filter expression stops empty elements being returned (drops the null elements)
-      }).filter(x => !!x);
-    } else {
-      return this._flights;
+    let flights = this._flights;
+    if (this.originFilter) {
+      flights = this._flights.filter((flight: Flight) => {
+        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
+      });
     }
+    if (this.destinationFilter) {
+      flights = flights.filter((flight: Flight) => {
+        return flight.destination.startsWith(this.destinationFilter as string);
+      });
+    }
+    return flights;
   }
-
-
-  onFlightClick(flight: Flight) {
-    this.selectedFlight = flight;
-  }
-
 
 }
+
 

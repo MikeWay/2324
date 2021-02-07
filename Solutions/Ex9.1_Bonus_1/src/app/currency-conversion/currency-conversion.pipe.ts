@@ -7,7 +7,7 @@ export class CurrencyConversionPipe implements PipeTransform {
 
   RATE = 0.8;
 
-  transform(value: any, rate: number = 1.0, args?: any): any {
+  transform(value: number, rate: number = 1.0): string {
     return 'USD ' + (value * rate).toFixed(2);
   }
 
