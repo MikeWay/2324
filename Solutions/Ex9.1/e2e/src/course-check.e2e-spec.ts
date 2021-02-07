@@ -1,7 +1,10 @@
 import { FlySharpCourseCheckPage } from './course-check.po';
 import { browser, logging } from 'protractor';
 
-describe('Validate exercise 9.1 start', () => {
+/** ! IMPORTANT! These tests will run very slowly or fail due to the clock updates causing Protractor to fail to detect that Angular is stable
+ * The only solution I have found so far is to add a flag to turn off the clock
+*/
+describe('Validate exercise 9.1', () => {
   let page: FlySharpCourseCheckPage;
 
   beforeEach(() => {
