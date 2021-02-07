@@ -135,6 +135,7 @@ const wss = new WebSocket.Server({ port: 8081 });
 var count = 0;
 var theSocket;
 let airport = "";
+let timerRunning = false;
 
 wss.on('connection', function connection(ws) {
     theSocket = ws;
@@ -149,7 +150,10 @@ wss.on('connection', function connection(ws) {
     });
 
     ws.send(JSON.stringify('waiting for flight status...'));
-    setInterval(sendMessage, 5000);
+    if(!timerRunning){
+        setInterval(sendMessage, 5000);
+        timerRunning = true;
+    }
 });
 
 //let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
