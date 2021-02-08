@@ -1,32 +1,33 @@
 {
-  "name": "ltree-support",
-  "version": "1.0.1",
-  "description": "A command line tool for copying exercise files",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "runAllTests": "./dist/runAllTests.js --exHomeDir ~/workNG/course2324/Exercises/FlySharp"
-  },
-  "author": "mikeway@webwrights.co.uk",
-  "license": "Apache-2.0",
-  "bin": {
-    "cpAddIns": "./dist/copyAddIns.js",
-    "cpToDNSolution": "./dist/copyToDNSolution.js",
-    "cpToSolution": "./dist/copyToSolution.js",
-    "cpFromSolution": "./dist/copyFromSolution.js",
-    "exStart": "./dist/exerciseStart.js",
-    "upgrd": "./dist/upgrd.js",
-    "runAllTests": "./dist/runAllTests.js"
-  },
-  "dependencies": {
-    "fs-extra": "^6.0.1",
-    "shelljs": "^0.8.4",
-    "yargs": "^16.2.0"
-  },
-  "devDependencies": {
-    "@types/es6-promise": "^3.3.0",
-    "@types/node": "^7.10.6",
-    "@types/yargs": "^15.0.12"
-  }
+    "name": "ltree-support",
+    "version": "1.0.1",
+    "description": "A command line tool for copying exercise files",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "runAllTests": "./dist/runAllTests.js --exHomeDir ~/workNG/course2324/Exercises/FlySharp",
+        "reinstall": "npm install -g npm@7 && npm install && npm run build && npm -g install && npm install -g npm@6"
+    },
+    "author": "mikeway@webwrights.co.uk",
+    "license": "Apache-2.0",
+    "bin": {
+        "cpAddIns": "./dist/copyAddIns.js",
+        "cpToDNSolution": "./dist/copyToDNSolution.js",
+        "cpToSolution": "./dist/copyToSolution.js",
+        "cpFromSolution": "./dist/copyFromSolution.js",
+        "exStart": "./dist/exerciseStart.js",
+        "upgrd": "./dist/upgrd.js",
+        "runAllTests": "./dist/runAllTests.js"
+    },
+    "dependencies": {
+        "fs-extra": "^6.0.1",
+        "shelljs": "^0.8.4",
+        "yargs": "^16.2.0"
+    },
+    "devDependencies": {
+        "@types/es6-promise": "^3.3.0",
+        "@types/node": "^7.10.6",
+        "@types/yargs": "^15.0.12"
+    }
 }
