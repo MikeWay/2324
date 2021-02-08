@@ -12,11 +12,6 @@ describe('workspace-project App', () => {
     expect(await page.getParagraphText()).toEqual('Special Offer of the month 10% off all round-the-World flights');
   });
 
-  it('should have an App-Home component', async () => {
-    await page.navigateTo();
-    expect(await page.getAppHomeH1()).toEqual('Special Offer of the month 10% off all round-the-World flights');
-  });
-
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
