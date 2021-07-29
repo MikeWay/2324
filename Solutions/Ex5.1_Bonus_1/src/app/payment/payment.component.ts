@@ -8,7 +8,7 @@ import { Flight } from '../model/flight';
 })
 export class PaymentComponent implements OnInit {
 
-  @Input()
+  
   private _selectedFlight: Flight | undefined;
 
   constructor() { }
@@ -16,6 +16,8 @@ export class PaymentComponent implements OnInit {
   public get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
+  
+  @Input()
   public set selectedFlight(value: Flight | undefined) {
     this._selectedFlight = value;
   }
