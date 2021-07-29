@@ -8,10 +8,19 @@ import { Flight } from '../model/flight';
 })
 export class PaymentComponent implements OnInit {
 
-  @Input() selectedFlight: Flight | undefined;
+  @Input()
+  private _selectedFlight: Flight | undefined;
 
   constructor() { }
 
+  public get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
+  }
+  public set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
+  }
+
+  
   ngOnInit(): void {
   }
 
