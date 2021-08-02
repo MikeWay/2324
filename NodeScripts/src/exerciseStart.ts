@@ -4,6 +4,7 @@
 
 import * as fs from "fs-extra";
 
+const VERSION='12.0';
 
 const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
@@ -49,7 +50,7 @@ let TARGET_DIR_ROOT = ".";
 const SRC_DIR = "/src"
 const E2E_DIR = "/e2e"
 
-
+console.log(`Exercise Start Script. Version: ${VERSION}`);
 let exercise = process.argv[2];
 
 function doBackup(exercise : string){
@@ -81,9 +82,12 @@ function doBackup(exercise : string){
 	} catch (err) {
 		console.log("Failed to create directories");
 	}
-	
+
+
 	try {
-		fs.copySync(srcDir, destDir);
+		if(fs.existsSync(srcDir)){
+			fs.copySync(srcDir, destDir);
+		}
 	} catch (err) {
 		console.log("Failure backing up" + err);
 	}

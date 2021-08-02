@@ -27,9 +27,8 @@ let destDir = targetDir + "/src";
 try {
     fs.removeSync(targetDir);
     doCopy(srcDir, destDir);
-
-    srcDir = SRC_DIR_ROOT + "/e2e";
-    destDir = targetDir + "/e2e";
+    srcDir = SRC_DIR_ROOT + "/cypress/integration";
+    destDir = targetDir + "/cypress/integration";
     doCopy(srcDir, destDir);
     console.log("Copy to solution " + exercise + " complete");
 } catch (err) {
