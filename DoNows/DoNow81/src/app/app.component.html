@@ -3,9 +3,13 @@
         <div class='col-2 '>Results</div>
         <div class='col-10 border border-primary' id='output1'>{{results}}</div>
     </div>
+    <!-- DoNow 1: Remove the comments around this block <div class="row">
+        <div class='col-2 '>Async pipe: </div>
+        <div class='col-10 border border-primary' id='output2'>{{observable}}</div>
+    </div>-->    
     <div class="row">
         <div class='col-2 '>Observable 1: </div>
-        <div class='col-10 border border-primary' id='output2'>{{opObs1}}</div>
+        <div class='col-10 border border-primary' id='output2'>{{opObs1}}{{observable | async}}</div>
     </div>
     <div class="row">
         <div class='col-2 '>Observable 2: </div>
