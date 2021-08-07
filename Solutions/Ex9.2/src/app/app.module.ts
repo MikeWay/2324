@@ -1,0 +1,46 @@
+import { HomeComponent } from './home/home.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BuyFlightComponent } from './buy-flight/buy-flight.component';
+import { FlightsService } from './flights/flights.service';
+import { FlightStatusComponent } from './flight-status/flight-status.component';
+import { PaymentComponent } from './payment/payment.component';
+import { FlightFilterComponent } from './flight-filter/flight-filter.component';
+import { MyFlightsComponent } from './my-flights/my-flights.component';
+import { AccountsModule } from './accounts/accounts.module';
+import { CurrencyConversionPipe } from './currency-conversion/currency-conversion.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TimeDirective } from './time/time.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+
+@NgModule({
+  declarations: [
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent,
+    MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent, TimeDirective
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule    
+  ],
+  providers: [FlightsService],
+  bootstrap: [AppComponent],
+
+})
+export class AppModule { }
