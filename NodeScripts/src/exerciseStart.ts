@@ -3,6 +3,7 @@
 // To the exercises/FlySharp directory
 
 import * as fs from "fs-extra";
+import * as cp from 'child_process';
 
 const VERSION='12.0';
 
@@ -93,6 +94,17 @@ function doBackup(exercise : string){
 		console.log("Failure backing up" + err);
 	}
 
+	if(exercise === 'Final' ){
+		// Need to add Angular/Material to the packages and config
+		// ng add @angular/material --defaults --skip-confirmation
+		cp.exec('ng add @angular/material --defaults --skip-confirmation', (error : Error,stdout,stderr) => {
+			if (error) {
+				console.log(error.stack);
+			  }
+			  console.log('Child Process STDOUT: '+stdout);
+			  console.log('Child Process STDERR: '+stderr);
+		});
+	}
 }
 
 
