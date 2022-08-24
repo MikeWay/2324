@@ -1,7 +1,11 @@
+rem This script is intended to allo the automated upgrade of Angular versions for the DNs
+rem I've not had a lot of suceess and would recomend just copying the dependencies from a 
+rem new package.json and then running npm install manually
+
 FOR %%D IN ( DoNow22,DoNow41,DoNow51,DoNow71,DoNow81,DoNow91 ) DO (
 
- start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core@13
- rem start "%%D" /D C:\course2324\DoNows\%%D\ npm install --force
+ rem start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core@13
+ start "%%D" /D C:\course2324\DoNows\%%D\ npm install --force
 )
 
 

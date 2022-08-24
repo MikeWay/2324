@@ -8,6 +8,7 @@
 **/node_modules
 **/*.war
 **/*.jar
+**/.angular
 #System Files
 .DS_Store
 Thumbs.db
