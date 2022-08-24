@@ -1,7 +1,7 @@
 FOR %%D IN ( DoNow22,DoNow41,DoNow51,DoNow71,DoNow81,DoNow91 ) DO (
 
- start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core
-
+ start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core@13
+ rem start "%%D" /D C:\course2324\DoNows\%%D\ npm install --force
 )
 
 
