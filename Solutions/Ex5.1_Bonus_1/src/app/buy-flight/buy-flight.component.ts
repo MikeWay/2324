@@ -11,8 +11,7 @@ export class BuyFlightComponent implements OnInit {
 
   flights: Flight[] = new Array<Flight>();
   showBuyFlights = true;
-  // tslint:disable-next-line: variable-name
-  _selectedFlight: Flight | undefined;
+  selectedFlight: Flight | undefined;
 
   constructor(private flightsService: FlightsService) { }
 
@@ -25,15 +24,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
   onFlightClick(flight: Flight): void {
-    this._selectedFlight = flight;
-  }
-
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
-  }
-
-  set selectedFlight(flight: Flight | undefined) {
-    this._selectedFlight = flight;
+    this.selectedFlight = flight;
   }
 }
 
