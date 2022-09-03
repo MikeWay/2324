@@ -32,6 +32,7 @@ export class BuyFlightComponent implements OnInit {
       },
       error: (error: any) => this.errorMessage = error
     });
+    
   }
 
   onClickBuyFlights(): void {
