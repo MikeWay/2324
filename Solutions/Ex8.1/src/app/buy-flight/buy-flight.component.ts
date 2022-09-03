@@ -24,14 +24,14 @@ export class BuyFlightComponent implements OnInit {
   constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.originFilter = params.origin);
-    this.flightsService.getFlights().subscribe(
-      (flights: Flight[]) => {
+    this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
+    this.flightsService.getFlights().subscribe({
+      next: (flights: Flight[]) => {
         this._flights = flights;
         this.showBuyFlights = true;
       },
-      (error: any) => this.errorMessage = error
-    );
+      error: (error: any) => this.errorMessage = error
+    });
   }
 
   onClickBuyFlights(): void {
