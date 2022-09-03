@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Flight } from '../model/flight';
 import { Payment } from '../model/payment';
 
@@ -13,14 +13,19 @@ export class PaymentComponent implements OnInit {
   @Input() selectedFlight: Flight | undefined;
 
   model: Payment = new Payment();
-  payForm: FormGroup;
+  payForm = this.formBuilder.group({
+    name: ['', [Validators.required,Validators.minLength(5)]],
+    address: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]],
+    cardNum: ['', Validators.required],
+    cardType: ['', Validators.required],
+    expDate: [new Date(), Validators.required],    
+  });
 
-  constructor(private formBuilder: FormBuilder) {
-    this.buildSampleModel();
-    this.payForm = this.buildForm();
-  }
+  constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+    this.buildSampleModel();
     this.payForm.setValue(this.model);
   }
 
@@ -30,18 +35,7 @@ export class PaymentComponent implements OnInit {
 
 
   onSubmit(): void {
-    alert(JSON.stringify(this.preparePaymentForSave()));
-  }
-
-  private buildForm(): FormGroup {
-    return this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
-      address: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')])],
-      cardNum: ['', Validators.required],
-      cardType: ['', Validators.required],
-      expDate: ['', Validators.required],
-    });
+    alert(JSON.stringify(this.payForm.value));
   }
 
   private buildSampleModel(): void {
@@ -51,9 +45,5 @@ export class PaymentComponent implements OnInit {
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
     this.model.expDate = new Date();
-  }
-  private preparePaymentForSave(): Payment {
-    return this.payForm.value as Payment;
-  }
-
+  }  
 }

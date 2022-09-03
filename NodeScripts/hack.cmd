@@ -1,4 +1,4 @@
-FOR %%D IN ( Ex7.2,Ex7.2_Bonus_1,Ex8.1,Ex8.1_Bonus_1,Ex8.1_Bonus_2,Ex9.1,Ex9.1_Bonus_1 ) DO (
+FOR %%D IN ( Ex8.1,Ex8.1_Bonus_1,Ex8.1_Bonus_2,Ex9.1,Ex9.1_Bonus_1 ) DO (
 
  rem del C:\course2324\Solutions\%%D\cypress\integration\spec.ts
  rem rmdir C:\course2324\Solutions\%%D\cypress\integration
@@ -7,7 +7,8 @@ FOR %%D IN ( Ex7.2,Ex7.2_Bonus_1,Ex8.1,Ex8.1_Bonus_1,Ex8.1_Bonus_2,Ex9.1,Ex9.1_B
  rem del C:\course2324\Solutions\%%D\e2e\src\app.e2e-spec.ts
 
  rem COPY C:\course2324\Exercises\FlySharp\src\app\payment\payment.component.html C:\course2324\Solutions\%%D\src\app\payment\.
- COPY C:\course2324\Solutions\Ex7.1_Bonus_1\src\app\buy-flight\buy-flight.component.ts C:\course2324\Solutions\%%D\src\app\buy-flight\.
+ COPY C:\course2324\Solutions\Ex7.2_Bonus_1\src\app\payment\payment.component.ts C:\course2324\Solutions\%%D\src\app\payment\.
+ COPY C:\course2324\Solutions\Ex7.2_Bonus_1\src\app\payment\payment.component.html C:\course2324\Solutions\%%D\src\app\payment\.
 )
 
 
