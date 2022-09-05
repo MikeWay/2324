@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Flight } from '../model/flight';
 import { Input } from '@angular/core';
 import { Payment } from '../model/payment';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -12,9 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaymentComponent implements OnInit {
   @Input() selectedFlight: Flight;
   model: Payment = new Payment();
-  payForm: FormGroup;
+  payForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     this.buildSampleModel();
   }
 

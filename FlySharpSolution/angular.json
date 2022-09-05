@@ -107,7 +107,6 @@
             }
         }
     },
-    "defaultProject": "FlySharp",
     "cli": {
         "analytics": false
     }
