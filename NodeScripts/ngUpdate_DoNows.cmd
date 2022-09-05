@@ -4,8 +4,8 @@ rem new package.json and then running npm install manually
 
 FOR %%D IN ( DoNow22,DoNow41,DoNow51,DoNow71,DoNow81,DoNow91 ) DO (
 
- rem start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core@13
- start "%%D" /D C:\course2324\DoNows\%%D\ npm install --force
+ start "%%D" /D C:\course2324\DoNows\%%D\ ng update @angular/cli @angular/core
+ rem start "%%D" /D C:\course2324\DoNows\%%D\ npm install --force
 )
 
 
