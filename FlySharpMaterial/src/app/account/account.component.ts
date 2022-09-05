@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { Account } from '../model/account';
 
 @Component({
@@ -9,9 +9,9 @@ import { Account } from '../model/account';
 })
 export class AccountComponent {
 
-  accountForm: FormGroup;
+  accountForm: UntypedFormGroup;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: UntypedFormBuilder) {
       this.accountForm = fb.group({
           firstName: ["", Validators.required],
           familyName : ["", Validators.required],
