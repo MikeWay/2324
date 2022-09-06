@@ -14,8 +14,7 @@ describe('CurrentWeatherComponent', () => {
   // TODO 1 Uncomment the next line to create a Spy object  for the WeatherService
   // mockWeatherService = jasmine.createSpyObj('WeatherService',['getForecast']);    
 
-  // TODO 5 - Do this at the end! Remove the comments around the next 3 lines of code to enable the functionality
-  // for the getForecast()
+  // TODO 5 - Do this at the end! Remove the comments around the next 3 lines of code to enable the functionality for the getForecast()
   // mockWeatherService.getForecast.and.callFake((city: string) => {
   //   return `Some weather ${city}`;
   // });
