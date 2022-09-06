@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
     email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]],
     cardNum: ['', Validators.required],
     cardType: ['', Validators.required],
-    expDate: [new Date(), Validators.required],    
+    expDate: ['', Validators.required],
   });
 
   constructor(private formBuilder : FormBuilder) { }
