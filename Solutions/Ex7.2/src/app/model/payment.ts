@@ -5,5 +5,5 @@ export class Payment {
     public email: string = '',
     public cardNum: string = '',
     public cardType: string = '',
-    public expDate: Date = new Date()) { }
+    public expDate: string = ''){}
 }

@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Flight } from '../model/flight';
@@ -19,7 +20,7 @@ export class PaymentComponent implements OnInit {
     email: ['', Validators.required],
     cardNum: ['', Validators.required],
     cardType: ['', Validators.required],
-    expDate: [new Date(), Validators.required],
+    expDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
    });
 
   constructor(private formBuilder: FormBuilder) { }
@@ -30,7 +31,7 @@ export class PaymentComponent implements OnInit {
   }
 
   get jsonModel(): string {
-    return JSON.stringify(this.model);
+    return JSON.stringify(this.payForm.value);
   }
 
 
@@ -44,6 +45,6 @@ export class PaymentComponent implements OnInit {
     this.model.email = 'a.customer@ltree.com';
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
-    this.model.expDate = new Date();
+    this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   }  
 }
