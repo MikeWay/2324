@@ -22,6 +22,10 @@ $navbar-dark-brand-color : $middle-yellow;
 h1, h2 {
   color: $skobeloff;
 }
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 

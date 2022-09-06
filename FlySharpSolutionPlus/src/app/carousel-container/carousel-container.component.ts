@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener, Input, ViewChild } from '@angular/core';
 import { ScreenInfoService } from '../screen-info/screen-info.service';
-import { CarouselComponent } from 'angular-responsive-carousel';
 
 /**
  * This component just wraps the IvyCarouselModule and allows direct control of the values being set and the

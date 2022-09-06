@@ -130,7 +130,6 @@
             }
         }
     },
-    "defaultProject": "FlySharpSolution",
     "cli": {
         "analytics": "8f3763ae-0def-4788-a431-adb9c89d8533"
     }
