@@ -20,8 +20,8 @@ export class PaymentComponent implements OnInit {
     email: ['', Validators.required],
     cardNum: ['', Validators.required],
     cardType: ['', Validators.required],
-    expDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
-   });
+    expDate: ['', Validators.required],
+  });
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -31,20 +31,22 @@ export class PaymentComponent implements OnInit {
   }
 
   get jsonModel(): string {
-    return JSON.stringify(this.payForm.value);
+    return JSON.stringify(this.model);
   }
 
 
   onSubmit(): void {
-    alert(this.jsonModel);
+    alert(JSON.stringify(this.payForm.value)); 
   }
 
   private buildSampleModel(): void {
+
     this.model.name = 'A Customer';
     this.model.address = 'Customer Address';
     this.model.email = 'a.customer@ltree.com';
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
     this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  }  
+
+  }
 }
