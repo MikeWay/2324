@@ -65,7 +65,7 @@
       </div>
       <div class="form-group">
         <label for="expDate">Card Expiry</label>
-        <input type="month" class="form-control" id="expDate" name="expDate" [(ngModel)]="model.expDate" required>
+        <input type="date" class="form-control" id="expDate" name="expDate" [(ngModel)]="model.expDate" required>
       </div>
       <button type="submit" class="btn btn-secondary" [disabled]="!paymentForm.form.valid">Buy Flight</button>
     </form>
