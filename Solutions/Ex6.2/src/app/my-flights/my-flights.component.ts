@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-my-flights',
   templateUrl: './my-flights.component.html',
   styleUrls: ['./my-flights.component.css']
 })
-export class MyFlightsComponent implements OnInit {
+export class MyFlightsComponent  {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  
 
 }
