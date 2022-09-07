@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-flight-filter',
   templateUrl: './flight-filter.component.html',
   styleUrls: ['./flight-filter.component.css']
 })
-export class FlightFilterComponent implements OnInit {
+export class FlightFilterComponent  {
 
   @Output()
   filterEmitter = new EventEmitter<string>();
@@ -15,8 +15,6 @@ export class FlightFilterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
   onFilterEnter( filterValue: string): void {
     this.filterEmitter.emit(filterValue);
