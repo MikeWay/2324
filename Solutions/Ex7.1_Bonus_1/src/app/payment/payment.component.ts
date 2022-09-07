@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Flight } from '../model/flight';
 import { Payment } from '../model/payment';
 
@@ -7,7 +7,7 @@ import { Payment } from '../model/payment';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent  {
 
   @Input() selectedFlight: Flight | undefined;
 
@@ -15,8 +15,7 @@ export class PaymentComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  
 
   get jsonModel(): string {
     return JSON.stringify(this.model);
