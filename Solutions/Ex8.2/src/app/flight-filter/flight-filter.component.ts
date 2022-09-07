@@ -19,9 +19,6 @@ export class FlightFilterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   get initialValue(): string {
     return this._initialValue;
   }
