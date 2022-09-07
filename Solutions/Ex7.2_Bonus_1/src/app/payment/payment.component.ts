@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Flight } from '../model/flight';
@@ -44,6 +45,7 @@ export class PaymentComponent implements OnInit {
     this.model.email = 'a.customer@ltree.com';
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
-    this.model.expDate = new Date();
+    this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
   }  
 }
