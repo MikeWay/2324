@@ -6,7 +6,6 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "tsc",
-        "runAllTests": "./dist/runAllTests.js --exHomeDir ~/workNG/course2324/Exercises/FlySharp",
         "reinstall": "npm install -g npm@7 && npm install && npm run build && npm -g install && npm install -g npm@6"
     },
     "author": "mikeway@webwrights.co.uk",
