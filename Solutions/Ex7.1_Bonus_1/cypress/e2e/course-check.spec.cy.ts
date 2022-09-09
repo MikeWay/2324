@@ -76,7 +76,7 @@ describe('Course Check - Ex7.2 Start', () => {
 
   it('should not yet have a formGroup binding in app-payment form', () => {
     cy.visit('/buy');
-    cy.get('app-payment form[formControlName]').should('not.exist');
+    cy.get('app-payment form[ng-reflect-form]').should('not.exist');
   });  
 
 /*
