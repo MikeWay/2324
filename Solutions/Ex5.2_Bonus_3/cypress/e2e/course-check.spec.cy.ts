@@ -55,7 +55,7 @@ describe('Course Check - Ex6.1 Start', () => {
 
   it('should not yet have any routerLink attributes', () => {
     cy.visit('/');
-    cy.get('a[routerLink]').should('not.exist');
+    cy.get('a[routerlink]').should('not.exist');
   });    
 /*
   it('should have a app-payment element when a flight is selected', async () => {
