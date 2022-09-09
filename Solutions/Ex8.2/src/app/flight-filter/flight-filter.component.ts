@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './flight-filter.component.html',
   styleUrls: ['./flight-filter.component.css']
 })
-export class FlightFilterComponent implements OnInit {
+export class FlightFilterComponent {
 
   @Output()
   filterEmitter = new EventEmitter<string>();
