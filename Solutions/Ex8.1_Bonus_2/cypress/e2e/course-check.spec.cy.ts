@@ -1,4 +1,4 @@
-describe('Course Check - Ex8.1 Start', () => {
+describe('Course Check - Ex8.2 Start', () => {
   it('should display message saying Special Offer of the month 10% off all round-the-World flights', () => {
     cy.visit('/');
     cy.contains('Special Offer of the month 10% off all round-the-World flights')
@@ -20,9 +20,9 @@ describe('Course Check - Ex8.1 Start', () => {
     cy.get('app-root app-buy-flight').should('be.visible');
   }); 
 
-  it('should have a 5 flights displayed', () => {
+  it('should have a 20 flights displayed', () => {
     cy.visit('/buy');
-    cy.get('app-buy-flight table tbody tr').should('have.length', 5);
+    cy.get('app-buy-flight table tbody tr').should('have.length', 20);
   }); 
 
 
@@ -77,10 +77,13 @@ describe('Course Check - Ex8.1 Start', () => {
   }); 
   
   
-  // End positive tests for Ex8.1
+  // End positive tests for Ex8.2
   // Following tests are to verify that code has not been completed!   
 
- 
+  it('should not yet have an app-flight-status element on the home page', () => {
+    cy.visit('/');
+    cy.get('app-home app-flight-status').should('not.exist');
+  }); 
 
 /*
   it('should have a app-payment element when a flight is selected', async () => {
