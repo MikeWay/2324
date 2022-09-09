@@ -58,6 +58,9 @@ describe('Course Check - Ex6.2 Start', () => {
 
   // End positive tests for Ex6.2
   // Following tests are to verify that code has not been completed!   
+
+/// No real opportunity for -ve tests as nothing changes in the DOM for 6.2!
+
 /*
   it('should have a app-payment element when a flight is selected', async () => {
     await page.navigateToTab('buy');
