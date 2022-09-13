@@ -15,12 +15,12 @@ rmdir /s /q FlySharp
 call ng new FlySharp --routing --style css
 cd FlySharp
 call npm install
+call ng add @cypress/schematic --e2e --component
 
-
-FOR %%E in ("Ex2.2", "Ex3.1", "Ex4.1", "Ex4.2","Ex5.1","Ex5.2","Ex6.1","Ex6.2","Ex7.1","Ex7.2","Ex8.1","Ex9.1", "Final") DO (
-CALL :run_test %%E
+rem the following is a NodeJS script from NodeScripts
+runAllTests
 IF %ERRORLEVEL% NEQ 0 Exit 1
-)
+
 
 
 FOR %%E in ("DoNow21", "DoNow41", "DoNow51", "DoNow71","DoNow91") DO (
@@ -32,13 +32,6 @@ exit /B
 
 :run_donow_test
 cd %COURSE_HOME%\DoNows\%1
-call ng e2e
-IF %ERRORLEVEL% NEQ 0 Echo An error was found in the %1 start E2E & EXIT 1
-EXIT /B
-
-
-:run_test
-call exStart %1
 call ng e2e
 IF %ERRORLEVEL% NEQ 0 Echo An error was found in the %1 start E2E & EXIT 1
 EXIT /B
