@@ -54,8 +54,9 @@ function runATest(cwd: string, index: number) {
 
       }
       console.log(stdout);
-      const child = shell.exec('ng e2e --spec cypress\\e2e\\**course-check.spec** --browser chrome --headless --record false --watch false', options, (error, stdout, stderr) => {
-        console.log(stdout);
+      //const child = shell.exec('ng e2e --spec cypress\\e2e\\**course-check.spec** --browser chrome --headless --record false --watch false', options, (error, stdout, stderr) => {
+        const child = shell.exec('ng e2e --spec cypress\\e2e\\**course-check.spec** --browser=chrome --headless=true --exit=true --record=false --watch=false', options, (error, stdout, stderr) => {        
+      console.log(stdout);
         if (error) {
           console.log(error);
           reject(error);
@@ -96,6 +97,8 @@ async function main() {
     console.log("Error: " + e);
     console.log("Failed checking exercise: " + EX_MAPPINGS[i]);
   }
+  console.log("All done. Calling process.exit()");
+  process.exit();
 }
 
 main();

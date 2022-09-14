@@ -1,5 +1,6 @@
 ================
-Utilities to copy files into the right place to create the exercise environment.
+Utilities to copy files into the right place to create the exercise environment and to perform E2E testing of the load.
+
 
 To install on your machine.
 

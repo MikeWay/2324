@@ -1,7 +1,7 @@
 Setting up the Environment
 ==========================
 
-1) You need Node.js (8) and NPM
+1) You need Node.js (16+) and NPM
 
 2) You should set up the COURSE_HOME environment variable to point to C:\course2324 or wherever you clone the course files
 
@@ -38,5 +38,5 @@ Installing the Flights Service as a Service
 
 Notes for course developers:
 =============================
-There is an overall test script currently run from course2324/NodeScripts/src/runAllTests.js which builds all the exercise starts in turn and then runs ng e2e on them.
+There is an overall test script currently run from C:\course2324\loadTest.bat which builds all the exercise starts and DoNows in turn and then runs ng e2e on them. It depends on the runAllTests.js script having been installed globally
 
