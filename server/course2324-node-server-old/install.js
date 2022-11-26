@@ -1,6 +1,3 @@
-/**
- * Installs the node server as a Windows service
- */
 var Service = require('node-windows').Service;
 
 var args = process.argv.slice(2);
@@ -26,7 +23,7 @@ console.log("COURSE_HOME: ", COURSE_HOME);
 var svc = new Service({
   name:'Flights Service',
   description: 'The nodejs.org example web server.',
-  script: COURSE_HOME + '\\server\\course2324-node-server-ts\\dist\\bundle.js'
+  script: COURSE_HOME + '\\server\\course2324-node-server\\dist\\bundle.js'
 });
 
 // Listen for the "install" event, which indicates the

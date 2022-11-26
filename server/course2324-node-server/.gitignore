@@ -1,2 +1,2 @@
-dist/daemon
-dist
+**/*.err.log
+./dist
