@@ -1,0 +1,2 @@
+Flights server active. Waiting on http://localhost:8080/flightserver/flights
+GET: allflights

@@ -1,2 +1,16 @@
 2022-11-26 11:11:03 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server-ts\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server-ts\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2022-11-26 11:11:03 - Started 3388
+2022-11-26 11:14:57 - Stopping flightsservice.exe
+2022-11-26 11:14:57 - ProcessKill 3388
+2022-11-26 11:14:57 - Found child process: 2648 Name: conhost.exe
+2022-11-26 11:14:57 - Found child process: 10956 Name: node.exe
+2022-11-26 11:14:57 - Stopping process 2648
+2022-11-26 11:14:57 - Send SIGINT 2648
+2022-11-26 11:14:57 - SIGINT to 2648 failed - Killing as fallback
+2022-11-26 11:14:57 - Stopping process 10956
+2022-11-26 11:14:57 - Send SIGINT 10956
+2022-11-26 11:14:57 - SIGINT to 10956 failed - Killing as fallback
+2022-11-26 11:14:57 - Stopping process 3388
+2022-11-26 11:14:57 - Send SIGINT 3388
+2022-11-26 11:14:57 - SIGINT to 3388 failed - Killing as fallback
+2022-11-26 11:14:57 - Finished flightsservice.exe
