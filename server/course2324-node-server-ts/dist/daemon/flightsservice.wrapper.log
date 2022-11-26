@@ -1,0 +1,2 @@
+2022-11-26 11:11:03 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server-ts\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server-ts\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-11-26 11:11:03 - Started 3388
