@@ -1,2 +1,38 @@
 Flights server active. Waiting on http://localhost:8080/flightserver/flights
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
+REQUEST: BODY undefined
+Cannot read properties of undefined (reading 'start')undefined
+undefined
+{}
 GET: allflights
+GET: allflights
+GET: allflights
+Flights server active. Waiting on http://localhost:8080/flightserver/flights
+Flights server active. Waiting on http://localhost:8080/flightserver/flights

@@ -18,7 +18,7 @@ const koa_1 = __importDefault(require("koa"));
 //import send from 'koa-send';
 const koa_router_1 = __importDefault(require("koa-router"));
 const fs_1 = __importDefault(require("fs"));
-const koa_cors_1 = __importDefault(require("koa-cors"));
+const koa2_cors_1 = __importDefault(require("koa2-cors"));
 // import auth from 'koa-basic-auth';
 // import mount from 'koa-mount';
 //import { processLoginAndIssueToken } from './jwt'
@@ -115,7 +115,10 @@ router.get('/login', ctx => {
         </form>`;
 });
 app
-    .use((0, koa_cors_1.default)())
+    .use((0, koa2_cors_1.default)({
+    origin: '*',
+    allowMethods: ['GET', 'POST']
+}))
     .use(router.routes());
 console.log("Flights server active. Waiting on http://localhost:8080/flightserver/flights");
 app.listen(8080);

@@ -4,9 +4,9 @@
 	<description>The nodejs.org example web server.</description>
 	<executable>C:\Program Files\nodejs\node.exe</executable>
 	<argument>--harmony</argument>
-	<argument>C:\course2324\server\course2324-node-server-ts\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js</argument>
 	<argument>--file</argument>
-	<argument>C:\course2324\server\course2324-node-server-ts\dist\bundle.js</argument>
+	<argument>C:\course2324\server\course2324-node-server\dist\bundle.js</argument>
 	<argument>--scriptoptions=</argument>
 	<argument>--log</argument>
 	<argument>Flights Service wrapper</argument>
@@ -27,5 +27,5 @@
 		<user>LocalSystem</user>
 		<password></password>
 	</serviceaccount>
-	<workingdirectory>C:\course2324\server\course2324-node-server-ts</workingdirectory>
+	<workingdirectory>C:\course2324\server\course2324-node-server</workingdirectory>
 </service>

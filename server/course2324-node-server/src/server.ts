@@ -4,13 +4,14 @@ import Koa from 'koa';
 //import send from 'koa-send';
 import Router from 'koa-router';
 import fs from 'fs';
-import cors from 'koa-cors'
+import cors from 'koa2-cors'
 // import auth from 'koa-basic-auth';
 // import mount from 'koa-mount';
 //import { processLoginAndIssueToken } from './jwt'
 import WebSocket from 'ws';
 import send from 'koa-send';
 import { processLoginAndIssueToken } from './jwt';
+import bodyParser from 'koa-bodyparser';
 
 
 // For the windows event log
@@ -129,10 +130,12 @@ router.get('/login', ctx => {
         </form>`;
 });
 
-
-
 app
-    .use(cors())
+    .use(bodyParser())
+    .use(cors({
+        origin: '*',
+        allowMethods: ['GET', 'POST']
+    }))
     .use(router.routes());
 
 
@@ -140,17 +143,6 @@ app
 console.log("Flights server active. Waiting on http://localhost:8080/flightserver/flights");
 
 app.listen(8080);
-
-
-
-
-//http://localhost:8080/flightserver/numflights
-
-
-
-
-
-
 
 
 function sendMessage() {
