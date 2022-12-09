@@ -5,8 +5,11 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {catchError} from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FlightsService {
+
 
   constructor(private http: HttpClient) { }
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -28,15 +31,18 @@ export class FlightsService {
 
   public getChunkOfFlights( start: number, num: number, org?: string, dest?: string): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/flights';
-    let params = new HttpParams();
-    params.set('start', start);
-    params.set('num', num);
-    if(org) params.set('origin', org);
-    if(dest) params.set('dest', dest);
+    
+    let params = new HttpParams()
+      .set('start', start)
+      .set('num', num);
+    if(org) params = params.set('origin', org);
+    if(dest) params = params.set('dest', dest)
+    console.log('QUERY' + JSON.stringify(params) + ' ' + params.toString());
     const resultObservable = this.http.get<Flight[]>(url, {params: params})
                               .pipe(catchError(this.handleError));
     return resultObservable;
   }
+
 
   public getNumberOfFlights(): Observable<number> {
     const url = 'http://localhost:8080/flightserver/numflights';
@@ -44,11 +50,12 @@ export class FlightsService {
   }
 
 
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
+  public getMyFlights(): Observable<Flight[]> {
+    const url = 'http://localhost:8080/flightserver/myflights';
+    return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
-  private handleError(error: HttpErrorResponse )  {
+  private handleError(error: HttpErrorResponse ): Observable<never>  {
     if (error.error instanceof ErrorEvent) {
       // Client error
       console.error('Http communication error:', error.error.message );
@@ -57,6 +64,13 @@ export class FlightsService {
       console.error(`Server error: ${error.status}. Message body: ${error.message}`);
     }
     return throwError( 'Server error - is the REST server running?');
+  }
+
+  addMyFlight(flight: Flight) {
+    const url = 'http://localhost:8080/flightserver/myflights';
+    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(new Array<Flight>(flight)), {headers: this.headers})
+                              .pipe(catchError(this.handleError));
+    return resultObservable;
   }
 
 }
