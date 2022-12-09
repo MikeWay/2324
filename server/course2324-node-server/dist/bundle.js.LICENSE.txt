@@ -6,6 +6,13 @@
  */
 
 /*!
+ * bytes
+ * Copyright(c) 2012-2014 TJ Holowaychuk
+ * Copyright(c) 2015 Jed Watson
+ * MIT Licensed
+ */
+
+/*!
  * content-disposition
  * Copyright(c) 2014-2017 Douglas Christopher Wilson
  * MIT Licensed
@@ -21,6 +28,12 @@
  * cookies
  * Copyright(c) 2014 Jed Schmidt, http://jed.is/
  * Copyright(c) 2015-2016 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
+ * copy-to - index.js
+ * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
  * MIT Licensed
  */
 
@@ -151,6 +164,13 @@
  */
 
 /*!
+ * raw-body
+ * Copyright(c) 2013-2014 Jonathan Ong
+ * Copyright(c) 2014-2022 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
  * resolve-path
  * Copyright(c) 2014 Jonathan Ong
  * Copyright(c) 2015-2018 Douglas Christopher Wilson
@@ -178,9 +198,25 @@
  */
 
 /*!
+ * unpipe
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+/*!
  * vary
  * Copyright(c) 2014-2017 Douglas Christopher Wilson
  * MIT Licensed
  */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/**!
+ * koa-body-parser - index.js
+ * Copyright(c) 2014
+ * MIT Licensed
+ *
+ * Authors:
+ *   dead_horse <dead_horse@qq.com> (http://deadhorse.me)
+ *   fengmk2 <m@fengmk2.com> (http://fengmk2.com)
+ */
