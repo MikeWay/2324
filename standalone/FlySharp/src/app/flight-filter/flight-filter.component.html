@@ -3,7 +3,7 @@
       Filter flights by {{label}}:
     </div>
     <div class="col-md-2 ">
-      <input #filter (keyup)="onFilterEnter(filter.value)" [value]='initialValue'>
+      <input #filter (keyup.enter)="onFilterEnter(filter.value)" [value]='initialValue'>
     </div>
   </div>
   

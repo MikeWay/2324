@@ -74,15 +74,7 @@ export function initAPIServer(): Koa {
     });
 
 
-    // router.post('/flightserver(sec)?/flights', async (ctx: Koa.Context) => {
-    //     let args = ctx.request.body as Args;
-    //     console.log("REQUEST: BODY", args);
-
-    //     let filteredFlights = filterFlights(flights, args);
-    //     ctx.body = JSON.stringify(filteredFlights);
-    // });
-
-    // TODO -- this probably needs to take the filter
+   // TODO -- this probably needs to take the filter
     router.get('/flightserver(sec)?/numflights', async ctx => {
         //ctx.body = 'Hello World';
         console.log("GET: numflights");

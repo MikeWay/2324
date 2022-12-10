@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,8 @@ import { FlightPayment, PaymentComponent } from '../payment/payment.component';
 import { CurrencyConversionPipe } from '../currency-conversion.pipe';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { Payment } from '../model/payment';
+import { ApplicationStateService } from '../application-state/application-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-buy-flight',
@@ -16,7 +18,7 @@ import { Payment } from '../model/payment';
   templateUrl: './buy-flight.component.html',
   styleUrls: ['./buy-flight.component.css']
 })
-export class BuyFlightComponent implements OnInit {
+export class BuyFlightComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   flights: Flight[] = new Array<Flight>();
   showBuyFlights = false;
@@ -31,16 +33,25 @@ export class BuyFlightComponent implements OnInit {
   nextFlightIndex = 20;
   numFlights = 0;
 
+  private flightsSubscription: Subscription | undefined;
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute, private router: Router) { }
+
+  constructor(private state: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router) { }
+
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
     this.loadFlights(0, 20);
   }
 
+  ngOnDestroy(): void {
+    if(this.flightsSubscription){
+      this.flightsSubscription.unsubscribe();
+    }
+  }
   private loadFlights(start: number, count: number) {
-    this.flightsService.getChunkOfFlights(start, count, this.originFilter, this.destinationFilter).subscribe({
+    this.state.loadFlights(start, count, this.originFilter, this.destinationFilter);
+    this.flightsSubscription = this.state.flights$.subscribe({
       next: (flights: Flight[]) => {
         this.flights = flights;
         this.showBuyFlights = true;
@@ -110,10 +121,10 @@ export class BuyFlightComponent implements OnInit {
       // Record Purchase -- maybe one day!
 
       // Update MyFlights
-      this.flightsService.addMyFlight(payment.flight).subscribe({
-        next: (data) => this.router.navigate(['/myflights']),
-        error: (msg: string) => this.errorMessage = msg
-      });     
+      // this.flightsService.addMyFlight(payment.flight).subscribe({
+      //   next: (data) => this.router.navigate(['/myflights']),
+      //   error: (msg: string) => this.errorMessage = msg
+      // });     
   }
 
 }
