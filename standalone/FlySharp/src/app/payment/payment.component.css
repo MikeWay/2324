@@ -1,0 +1,46 @@
+/* #dlg_close{
+    float:right
+} */
+
+
+h3 {
+    background-color: white;
+    font-size: 1.2em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 1rem;
+    font-weight: bolder;
+}
+
+#debug_info {
+    background-color: white;
+    font-size: 0.7em;
+}
+
+.mat-mdc-dialog-content {
+    padding-top: 0.5rem;
+}
+/*
+.mat-mdc-dialog-content .mdc-dialog__surface {
+    background-color: #fff;
+}
+.panel {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: none;
+}
+
+#dlg_close{
+    float:right
+}
+:host {
+  display: block;
+  background: #ff0;
+  border-radius: 8px;
+  padding: 16px;
+}
+*/

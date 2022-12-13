@@ -1,13 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { Flight } from '../model/flight';
 import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Payment } from '../model/payment';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatButtonModule],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
@@ -24,11 +27,13 @@ export class PaymentComponent implements OnInit {
     email: new FormControl<string>('',{validators: [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")], nonNullable: true}),
     cardNum: new FormControl<string>('',{validators: Validators.required, nonNullable: true}),
     cardType: new FormControl<string>('',{validators: Validators.required, nonNullable: true}),
-    expDate: new FormControl<Date>(new Date(), {validators: Validators.required, nonNullable: true})
+    expDate: new FormControl<string>('', {validators: [Validators.required, Validators.min(6)], nonNullable: true})
 
   })
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor( @Inject(DIALOG_DATA) flight: Flight,  public dialogRef: DialogRef<FlightPayment | null>) { 
+    this.selectedFlight = flight;
+  }
 
   ngOnInit(): void {
     this.buildSampleModel();
@@ -43,8 +48,9 @@ export class PaymentComponent implements OnInit {
 
 
   onSubmit(): void {
-    alert(JSON.stringify(this.payForm.value));
+    //alert(JSON.stringify(this.payForm.value));
     this.paymentConfirmed.emit(new FlightPayment(this.selectedFlight, this.payForm.value as Payment));
+    this.dialogRef.close(null);
   }
 
   private buildSampleModel(): void {
@@ -53,10 +59,14 @@ export class PaymentComponent implements OnInit {
     this.model.email = 'a.customer@ltree.com';
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
-    //this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en'); -- as a string type
-    this.model.expDate = new Date();
+    this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');// -- as a string type
+    //this.model.expDate = new Date();
 
   }  
+
+  close() {
+    this.dialogRef.close(new FlightPayment(this.selectedFlight, this.payForm.value as Payment));
+  }
 }
 
 export class FlightPayment {

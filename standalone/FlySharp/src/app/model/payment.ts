@@ -4,5 +4,5 @@ export class Payment {
   email: string = '';
   cardNum: string = '';
   cardType: string = '';
-  expDate: Date = new Date();
+  expDate: string = '';
 }

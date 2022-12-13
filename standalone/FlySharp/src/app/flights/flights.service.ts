@@ -67,11 +67,6 @@ export class FlightsService {
     return throwError( 'Server error - is the REST server running?');
   }
 
-  addMyFlight(flight: Flight): Observable<number> {
-    const url = 'http://localhost:8080/flightserver/myflights';
-    const resultObservable = this.http.post<number>(url, JSON.stringify(new Array<Flight>(flight)), {headers: this.headers})
-                              .pipe(catchError(this.handleError));
-    return resultObservable;
-  }
+
 
 }

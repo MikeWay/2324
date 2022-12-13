@@ -10,11 +10,17 @@ import { FlightFilterComponent } from '../flight-filter/flight-filter.component'
 import { Payment } from '../model/payment';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { Subscription } from 'rxjs';
+//import { MatDialog, MatDialogConfig, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog'
+import { MatDialog } from '@angular/material/dialog';
+//import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-buy-flight',
   standalone: true,
-  imports: [CommonModule, PaymentComponent, CurrencyConversionPipe, FlightFilterComponent],
+  imports: [CommonModule, PaymentComponent, 
+            CurrencyConversionPipe, FlightFilterComponent 
+            ],
   templateUrl: './buy-flight.component.html',
   styleUrls: ['./buy-flight.component.css']
 })
@@ -36,11 +42,13 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   private flightsSubscription: Subscription | undefined;
 
 
-  constructor(private state: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(public state: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router, public matDialog: MatDialog) { }
 
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
+    this.activatedRoute.params.subscribe(params => {
+      this.originFilter = params['origin'];
+      this.destinationFilter = params['destination']});
     this.loadFlights(0, 20);
   }
 
@@ -60,12 +68,13 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
     });
   }
 
-  onClickBuyFlights(): void {
+  toggleFlightDisplay(): void {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  onFlightClick(flight: Flight): void {
+  buyFlight(flight: Flight): void {
     this._selectedFlight = flight;
+    this.openModal();
   }
 
   get selectedFlight(): Flight | undefined {
@@ -121,15 +130,31 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
       // Record Purchase -- maybe one day!
 
       // Update MyFlights
-      // this.flightsService.addMyFlight(payment.flight).subscribe({
+      this.state.addMyFlight(payment.flight);
+      this.router.navigate(['/myflights']);
+      // .subscribe({
       //   next: (data) => this.router.navigate(['/myflights']),
       //   error: (msg: string) => this.errorMessage = msg
       // });     
   }
 
+
+  openModal() {
+    const dialogConfig = {
+    // The user can't close the dialog by clicking outside its body
+      disableClose: true,
+      id:"modal-component",
+      data: this._selectedFlight
+    }
+    // https://material.angular.io/components/dialog/overview
+    const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
+    modalDialogRef.afterClosed().subscribe((flightPayment: FlightPayment | null) => {
+      // Handle result from the Dialog - null if the dialog was dismissed
+      if(flightPayment){
+        this.flightPurchased(flightPayment);
+      }
+    });
+  }
+
 }
-
-
-
-
 

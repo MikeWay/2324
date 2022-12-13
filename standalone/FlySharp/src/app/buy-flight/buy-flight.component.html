@@ -1,20 +1,31 @@
 <div class="row">
-    <div class="col-12">
-        <Button class="btn btn-info" (click)="onPrevious()">Previous</Button>
-
-        <Button class="btn btn-info" (click)="onNext()">Next</Button>
+    <div class="col-md-1">&nbsp;</div>
+</div>
+<div class="row">
+    <div class="col-md-2 ml-3 p-1 bg-dark text-white">
+        <span>Find Flights: </span>
+    </div>
+    <div class="col-md-2 p-1  bg-dark text-white">
+        <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin' [initialValue]='originFilter'>
+        </app-flight-filter>
+    </div>
+    <div class="col-md-2 p-1  bg-dark text-white">
+        <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination' [initialValue]='destinationFilter'>
+        </app-flight-filter>
     </div>
 </div>
+
+
 <div class="row">
     <div class="col-md-1">&nbsp;</div>
 </div>
+<div class="row">
+    <div class="col-md-12">
 <h2 *ngIf="!showBuyFlights">Loading Flight Data</h2>
-<app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin' [initialValue]='originFilter'></app-flight-filter>
-<app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" [label]="'Destination'"></app-flight-filter>
-<br>
-<p>Currency Conversion Rate <input #rate (keyup)='conversionRate=+rate.value'></p>
+
+
 <h2 *ngIf="errorMessage" class="text-danger">{{errorMessage}}</h2>
-<table *ngIf="showBuyFlights" class="table  table-condensed table-responsive">
+<table *ngIf="showBuyFlights" class="table table-bordered  table-condensed">
     <thead>
         <tr>
             <th>&nbsp;</th>
@@ -30,7 +41,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let flight of flights">
-            <td><button (click)="onFlightClick(flight)" class="btn btn-primary btn-sm">Buy</button></td>
+            <td><button (click)="buyFlight(flight)" class="btn btn-primary btn-sm">Buy</button></td>
             <td>{{flight.flightNumber}}</td>
             <td>{{flight.origin}}</td>
             <td>{{flight.destination}}</td>
@@ -38,10 +49,33 @@
             <td>{{flight.departTime}}</td>
             <td>{{flight.arriveDay}}</td>
             <td>{{flight.arriveTime}}</td>
-            <td>{{flight.price | currencyConversion : conversionRate}}</td>
+            <td>{{flight.price | currencyConversion : state.displayCurrency.symbol : state.displayCurrency.rate}}</td>
         </tr>
     </tbody>
 </table>
+</div>
+</div>
 
-<a (click)="onClickBuyFlights()" href="#" id="toggle">Toggle Flights</a>
-<app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)"></app-payment>
+<div class="row">
+    <div class="col-md-1">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" (click)="onPrevious()">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" (click)="onNext()">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<a (click)="toggleFlightDisplay()" id="toggle">Toggle Flights</a>
+<!--<app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)">
+</app-payment>-->

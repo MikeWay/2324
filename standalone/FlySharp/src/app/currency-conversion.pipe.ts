@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ApplicationStateService } from './application-state/application-state.service';
 
 @Pipe({
   name: 'currencyConversion',
@@ -6,8 +7,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CurrencyConversionPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  RATE = 0.8;
+
+  constructor(private state: ApplicationStateService){}
+
+
+ transform(value: number, symbol: string = '£', rate: number = 1.0): string {
+    return symbol + (value * rate).toFixed(2);
   }
 
 }

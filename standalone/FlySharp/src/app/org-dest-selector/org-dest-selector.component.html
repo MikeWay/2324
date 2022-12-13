@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12">
+        <h2>Find a Flight</h2>
+    </div>
+</div>
+
+<form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-4">
+            <label for="origin">Origin</label>
+        </div>
+        <div class="col-8">
+            <select formControlName="origin" id="origin">
+        <option value="" disabled selected hidden>from...</option>
+        <option *ngFor="let origin of destinations" value="{{origin.code}}" >
+            {{origin.name}}
+        </option>
+    </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <label for="dest">Destination</label>
+        </div>
+        <div class="col-8">
+            <select formControlName="destination" id="dest">
+    <option value="" disabled selected hidden>to...</option>
+    <option *ngFor="let dest of destinations" value="{{dest.code}}" >
+        {{dest.name}}
+    </option>
+</select>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-2 offset-8">
+            <button type="submit" [disabled]="!flightSearchForm.valid">Search</button>
+        </div>
+    </div>
+</form>
