@@ -1,4 +1,9 @@
 describe('Basic Operation of FlySharp App', () => {
+
+  beforeEach(()=>{
+    cy.request('DELETE', 'http://localhost:8080/flightserver/myflights' );
+  });
+
   it('Visits the initial project page', () => {
     cy.visit('/')
     cy.contains('Special Offer')

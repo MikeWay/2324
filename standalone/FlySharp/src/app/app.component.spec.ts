@@ -19,6 +19,14 @@ export class MockBuyFlightComponent {
 
 }
 
+@Component({
+  selector: 'app-currency',
+  template: ''
+})
+export class MockCurrencyComponent {
+
+}
+
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,7 +34,7 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent, MockAppHomeComponent, MockBuyFlightComponent
+        AppComponent, MockAppHomeComponent, MockBuyFlightComponent,MockCurrencyComponent
       ],
     }).compileComponents();
   });

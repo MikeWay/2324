@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ApplicationStateService } from '../application-state/application-state.service';
 
 import { CurrencyComponent } from './currency.component';
 
@@ -8,7 +9,8 @@ describe('CurrencyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CurrencyComponent ]
+      imports: [ CurrencyComponent ],
+      providers: [{provide: ApplicationStateService, useValue: {}}]
     })
     .compileComponents();
 

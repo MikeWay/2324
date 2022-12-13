@@ -26,8 +26,8 @@ class MockFlightsService {
     return of<number>( 10);
   }
 
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
+  public getMyFlights(): Observable<Flight[]> {
+    return of(MYFLIGHTS);
   }
 }
 
@@ -99,23 +99,23 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should default showBuyFlights to true', () => {
+  it('should default showBuyFlights to false', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
+  it('should set showBuyFlights to true when toggleFlightDisplay() is called', () => {
+    component.toggleFlightDisplay();
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
-    component.onClickBuyFlights();
-    component.onClickBuyFlights();
+  it('should set showBuyFlights to false when toggleFlightDisplay() is called twice', () => {
+    component.toggleFlightDisplay();
+    component.toggleFlightDisplay();
     expect(component.showBuyFlights).toBeTruthy();
   });
 
   it('should set showBuyFlights to false when the link is clicked', () => {
-    el = fixture.debugElement.query(By.css('a'));
+    el = fixture.debugElement.query(By.css('#toggle'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
@@ -124,7 +124,7 @@ describe('BuyFlightComponent', () => {
     fixture.detectChanges();
     let tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeTruthy();
-    el = fixture.debugElement.query(By.css('a'));
+    el = fixture.debugElement.query(By.css('#toggle'));
     el.triggerEventHandler('click', null);
     fixture.detectChanges();
     tableEle = fixture.debugElement.query(By.css('table'));
