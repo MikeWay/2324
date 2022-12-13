@@ -56,6 +56,13 @@ export class FlightsService {
     return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
+  addMyFlight(flight: Flight) {
+    const url = 'http://localhost:8080/flightserver/myflights';
+    const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(new Array<Flight>(flight)), {headers: this.headers})
+                              .pipe(catchError(this.handleError));
+    return resultObservable;
+  }
+
   private handleError(error: HttpErrorResponse ): Observable<never>  {
     if (error.error instanceof ErrorEvent) {
       // Client error

@@ -19,7 +19,9 @@ export class ApplicationStateService {
 
   myFlights: Flight[] = new Array<Flight>();
   private flightsSubject = new ReplaySubject<Flight[]>(1);
+  private myFlightsSubject = new ReplaySubject<Flight[]>(1);
   flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
+  myFlights$: Observable<Flight[]> = this.myFlightsSubject.asObservable();
   //flightsCache!: Flight[];  // Cache of last flights received
 
   private lastStart: number = 0;
@@ -30,7 +32,11 @@ export class ApplicationStateService {
   currencies: Currency[] = [{code: 'GBP', symbol: '£', rate: 1.0},{code: 'USD', symbol: '$', rate: 0.9}, {code: 'EUR', symbol: '€', rate: 0.92}, {code: 'SEK', symbol: 'kr ', rate: 12.0}];
   displayCurrency: Currency = this.currencies[0];
 
-  constructor(private flightsService: FlightsService,) { }
+  constructor(private flightsService: FlightsService) { 
+    // Pre-load any myflights from the server
+    flightsService.getMyFlights().subscribe((flights:Flight[]) => this.myFlights=flights);
+    this.loadMyFlights();
+  }
 
   public loadFlights(start: number, count: number, origin?: string, destination?: string){
     if(start === this.lastStart && count === this .lastCount && origin === this.lastOrigin && destination === this.lastDestination){
@@ -48,26 +54,19 @@ export class ApplicationStateService {
     })
   } 
 
+  public loadMyFlights(){
+    this.flightsService.getMyFlights().subscribe({
+      next: (flights: Flight[]) => {
+        this.myFlights = flights;
+        this.myFlightsSubject.next(flights);
+      }
+    })
+  } 
+
   addMyFlight(flight: Flight): number {
-    // const url = 'http://localhost:8080/flightserver/myflights';
-    // const resultObservable = this.http.post<number>(url, JSON.stringify(new Array<Flight>(flight)), {headers: this.headers})
-    //                           .pipe(catchError(this.handleError));
-    // return resultObservable;
+    this.flightsService.addMyFlight(flight).subscribe({});
     this.myFlights.push(flight);
     return this.myFlights.length;
   }  
-
-  // get displayCurrency(): Currency{
-  //   return this._displayCurrency;
-  // }
-
-  
-  // // This setter exists purely so that if the displayCurrency changes we can notify any observers that the page should be redrawn
-  // set displayCurrency(c: Currency){
-  //   this._displayCurrency = c;
-  //   this.flightsSubject.next(this.flightsCache);
-
-  // }
-
 
 }

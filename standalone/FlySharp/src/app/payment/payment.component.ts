@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
 
   })
 
-  constructor( @Inject(DIALOG_DATA) flight: Flight,  public dialogRef: DialogRef<FlightPayment | null>) { 
+  constructor( @Inject(MAT_DIALOG_DATA) flight: Flight,  public dialogRef: MatDialogRef<PaymentComponent>) { 
     this.selectedFlight = flight;
   }
 
@@ -49,8 +49,9 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     //alert(JSON.stringify(this.payForm.value));
-    this.paymentConfirmed.emit(new FlightPayment(this.selectedFlight, this.payForm.value as Payment));
-    this.dialogRef.close(null);
+    const payment = new FlightPayment(this.selectedFlight, this.payForm.value as Payment)
+    this.paymentConfirmed.emit(payment);
+    this.dialogRef.close(payment);
   }
 
   private buildSampleModel(): void {

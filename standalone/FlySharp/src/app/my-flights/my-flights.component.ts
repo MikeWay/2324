@@ -14,16 +14,7 @@ import { ApplicationStateService } from '../application-state/application-state.
 export class MyFlightsComponent {
   flights!: Flight[];
   error: string = '';
-  //private selectedFlight: Flight;
+ 
+  constructor(public state: ApplicationStateService) {}
 
-  constructor(private state: ApplicationStateService) {}
-
-  ngOnInit(): void {
-    this.flights = this.state.myFlights;
-    // this.state.getMyFlights().subscribe({
-    //   next: (flights: Flight[]) => this.flights = flights,
-    //   error: (msg: string) => this.error = msg
-    // });
-    //this.selectedFlight = this.flights[0];
-  }
 }
