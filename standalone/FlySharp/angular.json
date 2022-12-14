@@ -138,11 +138,23 @@
               "devServerTarget": "FlySharp:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "33351ded-fb0c-4e0f-bcda-430b9e9c8027"
+    "analytics": "33351ded-fb0c-4e0f-bcda-430b9e9c8027",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

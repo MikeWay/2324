@@ -11,13 +11,9 @@ import {from, Observable, of} from 'rxjs';
 
 
 class MockFlightsService {
-
-  constructor() { }
-
   public getFlights(): Observable<Flight[]> {
     return of<Flight[]>( FLIGHTS);
   }
-
   public getChunkOfFlights(): Observable<Flight[]> {
     return of<Flight[]>( FLIGHTS);
   }
@@ -51,6 +47,7 @@ class MockFlightFilterComponent {
   @Input()
   public initialValue!: string;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public onFilterChange(flight: string): void {}
 
 }
@@ -59,9 +56,10 @@ class MockFlightFilterComponent {
   name: 'currencyConversion'
 })
 class MockCurrencyConversionPipe implements PipeTransform {
-  transform(value: any, ...args: any[]): any {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  transform(value: string, ...args: string[]): string {
+    return "";
   }
-
 }
 
 const mockFlightsService = new MockFlightsService();

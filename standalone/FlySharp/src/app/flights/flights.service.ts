@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 import { Flight } from '../model/flight';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';

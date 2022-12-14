@@ -6,7 +6,5 @@ import { Injectable } from '@angular/core';
 export class ScreenInfoService {
 
   public screenWidth = 100;
-  constructor() { }
-
 
 }

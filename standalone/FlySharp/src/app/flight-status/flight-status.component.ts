@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { FlightStatusService } from './flight-status.service';
@@ -10,7 +10,7 @@ import { FlightStatusService } from './flight-status.service';
   templateUrl: './flight-status.component.html',
   styleUrls: ['./flight-status.component.css']
 })
-export class FlightStatusComponent {
+export class FlightStatusComponent implements OnInit {
   private socket: Subject<any> | undefined;
 
   public flightStatus = 'All flights are currently on time';

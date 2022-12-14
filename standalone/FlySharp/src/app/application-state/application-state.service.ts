@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, shareReplay, throwIfEmpty } from 'rxjs';
+import { ReplaySubject} from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { FlightsService } from '../flights/flights.service';
 import { Currency } from '../model/curency';
@@ -22,10 +22,9 @@ export class ApplicationStateService {
   private myFlightsSubject = new ReplaySubject<Flight[]>(1);
   flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
   myFlights$: Observable<Flight[]> = this.myFlightsSubject.asObservable();
-  //flightsCache!: Flight[];  // Cache of last flights received
 
-  private lastStart: number = 0;
-  private lastCount: number = 0;;
+  private lastStart = 0;
+  private lastCount = 0;
   private lastOrigin: string | undefined;
   private lastDestination: string | undefined;
   
@@ -49,7 +48,6 @@ export class ApplicationStateService {
     this.flightsService.getChunkOfFlights(start, count, origin, destination).subscribe({
       next: (flights: Flight[]) => {
         this.flightsSubject.next(flights);
-//        this.flightsCache = flights;
       }
     })
   } 

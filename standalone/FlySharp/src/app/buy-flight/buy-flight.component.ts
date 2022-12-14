@@ -1,19 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlightsService } from '../flights/flights.service';
 import { Flight } from '../model/flight';
 import { FlightPayment, PaymentComponent } from '../payment/payment.component';
 import { CurrencyConversionPipe } from '../currency-conversion.pipe';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
-import { Payment } from '../model/payment';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { Subscription } from 'rxjs';
-//import { MatDialog, MatDialogConfig, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog'
 import { MatDialog } from '@angular/material/dialog';
-//import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-buy-flight',

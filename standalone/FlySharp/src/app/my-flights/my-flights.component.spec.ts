@@ -11,7 +11,7 @@ describe('MyFlightsComponent', () => {
 
   beforeEach(async () => {
 
-    let mockFlightsService = jasmine.createSpyObj('FlightsService', {
+    const mockFlightsService = jasmine.createSpyObj('FlightsService', {
       getFlights: FLIGHTS,
       getMyFlights: of(MYFLIGHTS)
     });

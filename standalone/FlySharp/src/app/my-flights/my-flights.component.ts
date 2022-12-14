@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlightsService } from '../flights/flights.service';
 import { Flight } from '../model/flight';
 import { ApplicationStateService } from '../application-state/application-state.service';
 
@@ -13,7 +12,7 @@ import { ApplicationStateService } from '../application-state/application-state.
 })
 export class MyFlightsComponent {
   flights!: Flight[];
-  error: string = '';
+  error = '';
  
   constructor(public state: ApplicationStateService) {}
 

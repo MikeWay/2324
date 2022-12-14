@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { Flight } from '../model/flight';
-import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { Validators, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Payment } from '../model/payment';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-payment',
