@@ -59,7 +59,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
         this.flights = flights;
         this.showBuyFlights = true;
       },
-      error: (error: any) => this.errorMessage = error
+      error: (error: string) => this.errorMessage = error
     });
   }
 

@@ -3,12 +3,12 @@ import { FlightsService } from '../flights/flights.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
 import {Flight} from '../model/flight';
-import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
+import {FLIGHTS} from '../model/mock-flights';
 
 describe('FlightsService', () => {
 
   let httpTestingController: HttpTestingController;
-  let httpClient: HttpClient;
+
   const A_FLIGHT: Flight = {id: 11, flightNumber : 'FS1298', origin: 'LAX', destination : 'LHR', departDay : 'Thursday',
   departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 99.99};
 

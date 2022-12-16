@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ScreenInfoService } from './screen-info.service';
 
 describe('ScreenInfoService', () => {

@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col-md-1">&nbsp;</div>
 </div>
-<div class="row">
-    <div class="col-md-2 ml-3 p-1 bg-dark text-white">
+<div class="row mr-4">
+    <div class="col-md-2 ml-3 p-1 bg-secondary text-white">
         <span>Find Flights: </span>
     </div>
-    <div class="col-md-2 p-1  bg-dark text-white">
+    <div class="col-md-3 col-sm p-1 pl-4  bg-secondary text-white">
         <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin' [initialValue]='originFilter'>
         </app-flight-filter>
     </div>
-    <div class="col-md-2 p-1  bg-dark text-white">
+    <div class="col-md-3 p-1 pl-4  bg-secondary text-white">
         <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination' [initialValue]='destinationFilter'>
         </app-flight-filter>
     </div>
@@ -20,22 +20,20 @@
     <div class="col-md-1">&nbsp;</div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
 <h2 *ngIf="!showBuyFlights">Loading Flight Data</h2>
 
 
 <h2 *ngIf="errorMessage" class="text-danger">{{errorMessage}}</h2>
-<table *ngIf="showBuyFlights" class="table table-bordered  table-condensed">
+<table *ngIf="showBuyFlights" class="table table-bordered  table-condensed"> 
     <thead>
         <tr>
             <th>&nbsp;</th>
             <th>Flight</th>
             <th>From</th>
             <th>To</th>
-            <th>Departure Day</th>
-            <th>Departure Time</th>
-            <th>Arrival Day</th>
-            <th>Arrival Time</th>
+            <th>Departure</th>
+            <th>Arrival</th>
             <th>Price</th>
         </tr>
     </thead>
@@ -45,10 +43,8 @@
             <td>{{flight.flightNumber}}</td>
             <td>{{flight.origin}}</td>
             <td>{{flight.destination}}</td>
-            <td>{{flight.departDay}}</td>
-            <td>{{flight.departTime}}</td>
-            <td>{{flight.arriveDay}}</td>
-            <td>{{flight.arriveTime}}</td>
+            <td>{{flight.departDay}} {{flight.departTime}}</td>
+            <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
             <td>{{flight.price | currencyConversion : state.displayCurrency.symbol : state.displayCurrency.rate}}</td>
         </tr>
     </tbody>

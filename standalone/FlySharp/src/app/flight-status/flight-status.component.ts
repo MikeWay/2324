@@ -11,7 +11,7 @@ import { FlightStatusService } from './flight-status.service';
   styleUrls: ['./flight-status.component.css']
 })
 export class FlightStatusComponent implements OnInit {
-  private socket: Subject<any> | undefined;
+  private socket: Subject<Record<string, string>> | undefined;
 
   public flightStatus = 'All flights are currently on time';
 
@@ -21,7 +21,7 @@ export class FlightStatusComponent implements OnInit {
   ngOnInit(): void {
     this.socket = this.flightStatusService.connect('ws://localhost:8081');
     this.socket.subscribe(
-      dataFromServer => this.flightStatus = dataFromServer,
+      dataFromServer => this.flightStatus = dataFromServer as unknown as string,  // Cast needed as input to Socket is Record and subscription is a string!
       err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
     );
     this.socket.next({ airport: 'JFK' });

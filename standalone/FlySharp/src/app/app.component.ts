@@ -21,7 +21,7 @@ export class AppComponent {
 
   /*** BONUS FOR RESPONSIVE */
   @HostListener('window:resize', ['$event'])
-  onResize(event:any) {
+  onResize(/*event:any*/) {
       this.screenInfo.screenWidth = document.body.clientWidth;
   }
 
