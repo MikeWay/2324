@@ -39,7 +39,7 @@ export class ApplicationStateService {
 
   public loadFlights(start: number, count: number, origin?: string, destination?: string){
     if(start === this.lastStart && count === this .lastCount && origin === this.lastOrigin && destination === this.lastDestination){
-      return
+      return;
     }
     this.lastStart = start;
     this .lastCount = count;
@@ -49,7 +49,7 @@ export class ApplicationStateService {
       next: (flights: Flight[]) => {
         this.flightsSubject.next(flights);
       }
-    })
+    });
   } 
 
   public loadMyFlights(){
@@ -58,7 +58,7 @@ export class ApplicationStateService {
         this.myFlights = flights;
         this.myFlightsSubject.next(flights);
       }
-    })
+    });
   } 
 
   addMyFlight(flight: Flight): number {

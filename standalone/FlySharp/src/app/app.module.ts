@@ -7,10 +7,15 @@ import { AppComponent } from './app.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import { TimeDirective } from './time/time.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, TimeDirective
   ],
   imports: [
     BrowserModule,
@@ -18,8 +23,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     CurrencyComponent,
     BrowserAnimationsModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule
+  ],     
   providers: [],
   bootstrap: [AppComponent]
 })

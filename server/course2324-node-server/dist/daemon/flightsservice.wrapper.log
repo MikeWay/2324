@@ -1,8 +1,8 @@
-2022-12-05 15:27:34 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2022-12-05 15:27:34 - Started 9672
-2022-12-05 15:39:21 - Stopping flightsservice.exe
-2022-12-05 15:39:21 - ProcessKill 9672
-2022-12-05 15:39:21 - Shutdown exception
+2022-12-16 17:09:39 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-12-16 17:09:39 - Started 3316
+2022-12-16 17:48:08 - Stopping flightsservice.exe
+2022-12-16 17:48:08 - ProcessKill 3316
+2022-12-16 17:48:08 - Shutdown exception
 Message:A system shutdown is in progress.
 
 Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
@@ -14,19 +14,5 @@ Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInter
    at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
    at winsw.WrapperService.StopIt()
    at winsw.WrapperService.OnShutdown()
-2022-12-06 08:01:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2022-12-06 08:01:47 - Started 5080
-2022-12-06 11:24:20 - Stopping flightsservice.exe
-2022-12-06 11:24:20 - ProcessKill 5080
-2022-12-06 11:24:20 - Found child process: 5092 Name: conhost.exe
-2022-12-06 11:24:20 - Found child process: 5192 Name: node.exe
-2022-12-06 11:24:20 - Stopping process 5092
-2022-12-06 11:24:20 - Send SIGINT 5092
-2022-12-06 11:24:20 - SIGINT to 5092 failed - Killing as fallback
-2022-12-06 11:24:20 - Stopping process 5192
-2022-12-06 11:24:20 - Send SIGINT 5192
-2022-12-06 11:24:20 - SIGINT to 5192 failed - Killing as fallback
-2022-12-06 11:24:20 - Stopping process 5080
-2022-12-06 11:24:20 - Send SIGINT 5080
-2022-12-06 11:24:20 - SIGINT to 5080 failed - Killing as fallback
-2022-12-06 11:24:20 - Finished flightsservice.exe
+2022-12-17 08:11:27 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-12-17 08:11:27 - Started 812

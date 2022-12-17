@@ -1,40 +1,41 @@
 describe('Basic Operation of FlySharp App', () => {
 
-  beforeEach(()=>{
-    cy.request('DELETE', 'http://localhost:8080/flightserver/myflights' );
+  beforeEach(()=>{    
+    cy.visit('/');  // !IMPORTANT! this is needed - without it Cypress reports not being able to access localhost:4200
+    cy.request('DELETE', 'http://localhost:8080/flightserver/myflights' ); // Delete any flights held in myFlights
   });
 
-  it('Visits the initial project page', () => {
-    cy.visit('/')
-    cy.contains('Special Offer')
-  })
+  it('Visits the Home page', () => {
+    cy.visit('/');
+    cy.contains('Flight status information');
+  });
 
   it('Visits the buy flights page', () => {
-    cy.visit('/buy/')
-    cy.get('table').should('exist')
-    cy.get('app-flight-filter').should('exist')
-  })  
+    cy.visit('/buy/');
+    cy.get('table').should('exist');
+    cy.get('app-flight-filter').should('exist');
+  });  
 
   it('Should show 20 flights in the flights table', () => {
-    cy.visit('/buy/')
-    cy.get('table')
-    cy.get('app-flight-filter').should('exist')
-  })  
+    cy.visit('/buy/');
+    cy.get('table');
+    cy.get('app-flight-filter').should('exist');
+  });  
 
 
   it("should show 20 rows in table ", ()=> {
-    cy.visit('/buy/')
-    cy.get('table tbody tr').should('have.length', 20)
+    cy.visit('/buy/');
+    cy.get('table tbody tr').should('have.length', 20);
   });  
 
   it("should show the payment form when a Buy button is pressed", ()=> {
-    cy.visit('/buy/')
+    cy.visit('/buy/');
     cy.get(`table tbody tr:nth-child(2)`).find('button').click();    
-    cy.get('app-payment').should('exist')
+    cy.get('app-payment').should('exist');
   });    
 
   it("should display myFlights when a flight is purchased", ()=> {
-    cy.visit('/buy/')
+    cy.visit('/buy/');
     cy.get(`table tbody tr:nth-child(2)`).find('button').click();    
     cy.get('#expDate').should('be.visible').type('2099-01-01');
     cy.get('button[type="submit"]')
@@ -44,7 +45,7 @@ describe('Basic Operation of FlySharp App', () => {
   });    
 
   it("should add a second flight when it is purchased", ()=> {
-    cy.visit('/buy/')
+    cy.visit('/buy/');
     cy.get(`table tbody tr:nth-child(2)`).find('button').click();    
     cy.get('#expDate').should('be.visible').type('2099-01-01');
     cy.get('button[type="submit"]')
@@ -58,7 +59,7 @@ describe('Basic Operation of FlySharp App', () => {
       .should('be.visible')
       .click();    
     cy.url().should('match', /myflights/);  
-    cy.get('table tbody tr').should('exist').should('have.length', 2)
+    cy.get('table tbody tr').should('exist').should('have.length', 2);
   });
 
-})
+});

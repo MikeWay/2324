@@ -1,60 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/css/bootstrap.css';
 
-body {
-    margin: 2em;
+/* Styles to make the overall application responsive */
+
+mat-sidenav-content {
+  min-height: 400px;
+  margin: auto;
+}
+
+/* @media only screen and (min-width: 45em) {
+  mat-sidenav-content {
+    min-height: 400px;
+    margin-top: 1rem;
   }
-  
-  
-  .form-outline {
-      margin-right: 0;
-      margin-left: 0;
-      background-color: #fff;
-      border-color: #ddd;
-      border-width: 1px;
-      border-radius: 4px 4px 4px 4px;
-      box-shadow: none;
+} */
+
+/* @media only screen and (min-width: 60em) {
+  mat-sidenav-content {
+    margin-left: 2rem;
   }
-  
-  .dev-note {
-    font-weight: bold;
-    font-style: italic;
-    color: blue;
-  }
-  .disabled {
-    color: #ddd;
-  
-  }
-  
-  .form-label {
-    font-weight: 600;
-  }
-  
-  form *.ng-valid[required] {
-    border-left: 10px solid #42A948; /* green */
-  }
-  
-  form *.ng-invalid {
-    border-left: 10px solid #a94442; /* red */
-  }
-  
-  form *.ng-touched {
-    border-right: 10px solid yellow;
-  }
-  
-  form *.ng-dirty {
-    border-right: 10px solid blue;
-  }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+} */
+
+/* Form styles */
+.form-outline {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: none;
+}
 
 
+.disabled {
+  color: #ddd;
+
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+form *.ng-valid[required] {
+  border-left: 10px solid #42A948;
+  /* green */
+}
+
+form *.ng-invalid {
+  border-left: 10px solid #a94442;
+  /* red */
+}
+
+form *.ng-touched {
+  border-right: 10px solid yellow;
+}
+
+form *.ng-dirty {
+  border-right: 10px solid blue;
+}
+
+
+/* Styling for the payment dialogue. Has to go in the common CSS file as will not be loaded from component CSS! */
 mat-dialog-container#modal-component {
   border: 3px solid #c5c5c7;
   border-radius: 11px;
-  background-color: #c5c5c7;
 }
 
-.mat-mdc-dialog-container .mdc-dialog__surface {
-    background-color: #e9ecef;
-}
+/* Debugging styles */
+/* .row .debug-border {
+  border: 2px solid red;
+  background-color: pink;
+} */

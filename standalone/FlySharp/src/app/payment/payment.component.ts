@@ -28,7 +28,7 @@ export class PaymentComponent implements OnInit {
     cardType: new FormControl<string>('',{validators: Validators.required, nonNullable: true}),
     expDate: new FormControl<string>('', {validators: [Validators.required, Validators.min(6)], nonNullable: true})
 
-  })
+  });
 
   constructor( @Inject(MAT_DIALOG_DATA) flight: Flight,  public dialogRef: MatDialogRef<PaymentComponent>) { 
     this.selectedFlight = flight;
@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     //alert(JSON.stringify(this.payForm.value));
-    const payment = new FlightPayment(this.selectedFlight, this.payForm.value as Payment)
+    const payment = new FlightPayment(this.selectedFlight, this.payForm.value as Payment);
     this.paymentConfirmed.emit(payment);
     this.dialogRef.close(payment);
   }

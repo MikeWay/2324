@@ -1,14 +1,194 @@
 Flights server active. Waiting on http://localhost:8080/flightserver/flights
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
 Flights server active. Waiting on http://localhost:8080/flightserver/flights
-REQUEST: BODY { start: 0, num: 20, dest: '666' }
-GET: flights
-GET: flights
-REQUEST: BODY { start: 0, num: 20 }
-REQUEST: BODY { start: 0, num: 20, dest: 'JFK', origin: 'LHR' }
-REQUEST: BODY { start: 0, num: 20, dest: 'JFK' }
-REQUEST: BODY { start: 0, num: 20, dest: 'JFK' }
-REQUEST: BODY { start: 0, num: 20, dest: '666' }
-REQUEST: BODY { start: 0, num: 20, dest: 'JFK', origin: 'LHR' }
-REQUEST: BODY { start: 0, num: 20 }
-GET: flights
-GET: flights
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK
+received: {"airport":"JFK"}
+Airport now: JFK

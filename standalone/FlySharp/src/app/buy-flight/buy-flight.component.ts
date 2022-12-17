@@ -43,7 +43,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.originFilter = params['origin'];
-      this.destinationFilter = params['destination']});
+      this.destinationFilter = params['destination'];});
     this.loadFlights(0, 20);
   }
 
@@ -140,7 +140,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
       disableClose: true,
       id:"modal-component",
       data: this._selectedFlight
-    }
+    };
     // https://material.angular.io/components/dialog/overview
     const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
     modalDialogRef.afterClosed().subscribe((flightPayment: FlightPayment | null) => {

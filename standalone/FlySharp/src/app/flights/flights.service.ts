@@ -36,7 +36,7 @@ export class FlightsService {
       .set('start', start)
       .set('num', num);
     if(org) params = params.set('origin', org);
-    if(dest) params = params.set('dest', dest)
+    if(dest) params = params.set('dest', dest);
     console.log('QUERY' + JSON.stringify(params) + ' ' + params.toString());
     const resultObservable = this.http.get<Flight[]>(url, {params: params})
                               .pipe(catchError(this.handleError));

@@ -24,7 +24,7 @@ export class OrgDestSelectorComponent implements OnInit {
     { code: 'LAX', name: 'Los Angeles International' },
     { code: 'LHR', name: 'London Heathrow' },
     { code: 'NRT', name: 'Tokyo-Narita' }
-  ]
+  ];
 
   ngOnInit(): void {
 

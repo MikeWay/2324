@@ -16,7 +16,7 @@ describe('ScreenInfoService', () => {
   });
 
   it('should store screenWidth', () => {
-    service.screenWidth = 3.142
+    service.screenWidth = 3.142;
     expect(service.screenWidth).toBe(3.142);
   });
 });

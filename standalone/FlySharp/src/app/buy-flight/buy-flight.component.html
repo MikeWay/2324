@@ -1,77 +1,82 @@
-<div class="row">
-    <div class="col-md-1">&nbsp;</div>
-</div>
-<div class="row mr-4">
-    <div class="col-md-2 ml-3 p-1 bg-secondary text-white">
-        <span>Find Flights: </span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">&nbsp;</div>
     </div>
-    <div class="col-md-3 col-sm p-1 pl-4  bg-secondary text-white">
-        <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin' [initialValue]='originFilter'>
-        </app-flight-filter>
+    <div class="row mr-5 ml-3">
+        <div class="col-md-2  p-1 bg-secondary text-white ">
+            <span class="">Find Flights: </span>
+        </div>
+        <div class="col-md-3 col-sm p-1 pl-4  bg-secondary text-white">
+            <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin'
+                [initialValue]='originFilter'>
+            </app-flight-filter>
+        </div>
+        <div class="col-md-3 p-1 pl-4  bg-secondary text-white ">
+            <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination'
+                [initialValue]='destinationFilter'>
+            </app-flight-filter>
+        </div>
     </div>
-    <div class="col-md-3 p-1 pl-4  bg-secondary text-white">
-        <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination' [initialValue]='destinationFilter'>
-        </app-flight-filter>
+
+
+    <div class="row">
+        <div class="col-md-1">&nbsp;</div>
     </div>
-</div>
+    <div class="row">
+        <div class="col">
+            <h2 *ngIf="!showBuyFlights">Loading Flight Data</h2>
 
 
-<div class="row">
-    <div class="col-md-1">&nbsp;</div>
-</div>
-<div class="row">
-    <div class="col-md-8">
-<h2 *ngIf="!showBuyFlights">Loading Flight Data</h2>
-
-
-<h2 *ngIf="errorMessage" class="text-danger">{{errorMessage}}</h2>
-<table *ngIf="showBuyFlights" class="table table-bordered  table-condensed"> 
-    <thead>
-        <tr>
-            <th>&nbsp;</th>
-            <th>Flight</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let flight of flights">
-            <td><button (click)="buyFlight(flight)" class="btn btn-primary btn-sm">Buy</button></td>
-            <td>{{flight.flightNumber}}</td>
-            <td>{{flight.origin}}</td>
-            <td>{{flight.destination}}</td>
-            <td>{{flight.departDay}} {{flight.departTime}}</td>
-            <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
-            <td>{{flight.price | currencyConversion : state.displayCurrency.symbol : state.displayCurrency.rate}}</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-</div>
-
-<div class="row">
-    <div class="col-md-1">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" aria-label="Previous" (click)="onPrevious()">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-
-            <li class="page-item">
-                <a class="page-link" aria-label="Next" (click)="onNext()">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
+            <h2 *ngIf="errorMessage" class="text-danger">{{errorMessage}}</h2>
+            <table *ngIf="showBuyFlights" class="table table-bordered  table-condensed ">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Flight</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let flight of flights">
+                        <td><button (click)="buyFlight(flight)" class="btn btn-primary btn-sm">Buy</button></td>
+                        <td>{{flight.flightNumber}}</td>
+                        <td>{{flight.origin}}</td>
+                        <td>{{flight.destination}}</td>
+                        <td>{{flight.departDay}} {{flight.departTime}}</td>
+                        <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
+                        <td>{{flight.price | currencyConversion : state.displayCurrency.symbol :
+                            state.displayCurrency.rate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<a (click)="toggleFlightDisplay()" id="toggle">Toggle Flights</a>
+    <div class="row">
+        <div class="col-md-1  ">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" (click)="onPrevious()">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" (click)="onNext()">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+            <a (click)="toggleFlightDisplay()" id="toggle">Toggle Flights</a>
+        </div>
+    </div>
+
+</div>
 <!--<app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)">
 </app-payment>-->

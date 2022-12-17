@@ -11,7 +11,7 @@ describe('ApplicationStateService', () => {
   const mockFlightsService = jasmine.createSpyObj('FlightsService', {
     getFlights: FLIGHTS,
     getMyFlights: of(MYFLIGHTS)
-  })
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({

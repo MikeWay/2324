@@ -51,13 +51,13 @@ export function initAPIServer(): Koa {
     // app.use(jwtVal({ secret: PUBLIC_KEY }).unless({ path: [/^\/login/], method: 'OPTIONS' }));
 
     router.get('/flightserver(sec)?/allflights', async ctx => {
-        console.log("GET: allflights");
+        //console.log("GET: allflights");
         await send(ctx, './data/flights.json');
     });
 
     router.get('/flightserver(sec)?/flights', async ctx => {
-        console.log("GET: flights:" + ctx.URL);
-        console.log('QS:' + JSON.stringify(ctx.query));
+        //console.log("GET: flights:" + ctx.URL);
+        //console.log('QS:' + JSON.stringify(ctx.query));
         let params = ctx.query;
         if (params.start && params.num) {
             let args: Args = {
@@ -77,7 +77,7 @@ export function initAPIServer(): Koa {
    // TODO -- this probably needs to take the filter
     router.get('/flightserver(sec)?/numflights', async ctx => {
         //ctx.body = 'Hello World';
-        console.log("GET: numflights");
+        //console.log("GET: numflights");
         ctx.body = flights.length;
     });
 
@@ -90,7 +90,7 @@ export function initAPIServer(): Koa {
     // Adds flights to the collection of 'my' flights 
     router.post('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
         let flights = ctx.request.body as Flight[];
-        console.log(JSON.stringify(flights));
+       //console.log(JSON.stringify(flights));
         for( let f of flights){
             myFlights.push(f);
         }
@@ -100,7 +100,7 @@ export function initAPIServer(): Koa {
 
     // Adds flights to the collection of 'my' flights 
     router.delete('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
-        console.log('Removing all myflights');
+        //console.log('Removing all myflights');
         clearMyFlights();
         ctx.body = JSON.stringify(myFlights.length);
     });    
