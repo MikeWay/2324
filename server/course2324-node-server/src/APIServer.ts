@@ -7,7 +7,8 @@ import { processLoginAndIssueToken } from './jwt';
 import bodyParser from 'koa-bodyparser';
 import { Flight } from './flight';
 import { initWebSocket } from './socketServer';
-import { clearMyFlights, flights, myFlights } from './state';
+import { accountDetails, clearAccount, clearMyFlights, flights, myFlights, updateAccount } from './state';
+import { Account } from './Account';
 
 const app = new Koa();  // The web server instance
 
@@ -45,65 +46,14 @@ export function initAPIServer(): Koa {
         ctx.body = "REST data is served from /flightserver/allflights<br/>JWT Tokens are issued from /login";
     });
 
-    // Need to make sure that jwtValidation is only applied for paths which are not login AND always allow OPTIONS -- for the pre-flight 
 
-    // TODO - remove the comments from the line below to require tokens
-    // app.use(jwtVal({ secret: PUBLIC_KEY }).unless({ path: [/^\/login/], method: 'OPTIONS' }));
-
-    router.get('/flightserver(sec)?/allflights', async ctx => {
-        //console.log("GET: allflights");
-        await send(ctx, './data/flights.json');
-    });
-
-    router.get('/flightserver(sec)?/flights', async ctx => {
-        //console.log("GET: flights:" + ctx.URL);
-        //console.log('QS:' + JSON.stringify(ctx.query));
-        let params = ctx.query;
-        if (params.start && params.num) {
-            let args: Args = {
-                start: +params.start,
-                num: +params.num,
-                origin: params.origin as string,
-                dest: params.dest as string
-            }
-            let filteredFlights = filterFlights(flights, args);
-            ctx.body = JSON.stringify(filteredFlights);
-        } else {
-            ctx.body = JSON.stringify(flights.splice(0, 10));    // Default to 10 flights
-        }
-    });
-
-
-   // TODO -- this probably needs to take the filter
-    router.get('/flightserver(sec)?/numflights', async ctx => {
-        //ctx.body = 'Hello World';
-        //console.log("GET: numflights");
-        ctx.body = flights.length;
-    });
+    configureFlightListHandlers(router);
 
 
     // Fetches the collection of 'my' flights 
-    router.get('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
-        ctx.body = JSON.stringify(myFlights);
-    });    
+    configureMyFlightsHanders(router);
 
-    // Adds flights to the collection of 'my' flights 
-    router.post('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
-        let flights = ctx.request.body as Flight[];
-       //console.log(JSON.stringify(flights));
-        for( let f of flights){
-            myFlights.push(f);
-        }
-        ctx.body = JSON.stringify(myFlights.length);
-    });
-
-
-    // Adds flights to the collection of 'my' flights 
-    router.delete('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
-        //console.log('Removing all myflights');
-        clearMyFlights();
-        ctx.body = JSON.stringify(myFlights.length);
-    });    
+    configureAccountHandlers(router);
 
     router.get('/login', ctx => {
         ctx.body = `<form method='post' action='login'>
@@ -130,6 +80,109 @@ export function initAPIServer(): Koa {
     return app;
 
 }
+
+function configureFlightListHandlers(router: Router<any, {}>) {
+    router.get('/flightserver(sec)?/allflights', async (ctx) => {
+        //console.log("GET: allflights");
+        await send(ctx, './data/flights.json');
+    });
+
+    router.get('/flightserver(sec)?/flights', async (ctx) => {
+        //console.log("GET: flights:" + ctx.URL);
+        //console.log('QS:' + JSON.stringify(ctx.query));
+        let params = ctx.query;
+        if (params.start && params.num) {
+            let args: Args = {
+                start: +params.start,
+                num: +params.num,
+                origin: params.origin as string,
+                dest: params.dest as string
+            };
+            let filteredFlights = filterFlights(flights, args);
+            ctx.body = JSON.stringify(filteredFlights);
+        } else {
+            ctx.body = JSON.stringify(flights.slice(0, 10)); // Default to 10 flights
+        }
+    });
+
+
+    router.get('/flightserver(sec)?/numflights', async (ctx) => {
+        let params = ctx.query;
+        if (params.origin || params.dest) {
+            let args  = {
+                origin: params.origin as string,
+                dest: params.dest as string
+            };
+            let count = countFlights(flights, args);
+            ctx.body = count;
+        } else {
+            console.log(flights.length);
+            ctx.body = flights.length;
+        }
+    });
+}
+
+function configureMyFlightsHanders(router: Router<any, {}>) {
+    router.get('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
+        ctx.body = JSON.stringify(myFlights);
+    });
+
+    // Adds flights to the collection of 'my' flights 
+    router.post('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
+        let flights = ctx.request.body as Flight[];
+        //console.log(JSON.stringify(flights));
+        for (let f of flights) {
+            myFlights.push(f);
+        }
+        ctx.body = JSON.stringify(myFlights.length);
+    });
+
+
+    // Deletes all flights from the collection of 'my' flights 
+    router.delete('/flightserver(sec)?/myflights', async (ctx: Koa.Context) => {
+        //console.log('Removing all myflights');
+        clearMyFlights();
+        ctx.body = JSON.stringify(myFlights.length);
+    });
+}
+
+function configureAccountHandlers(router: Router){
+        // Fetches the current account details
+        router.get('/flightserver(sec)?/account', async (ctx: Koa.Context) => {
+            ctx.body = JSON.stringify(accountDetails);
+        });    
+    
+        // Sets the current values for accountDetails
+        router.post('/flightserver(sec)?/account', async (ctx: Koa.Context) => {
+            let account = ctx.request.body as Account;
+            updateAccount(account);
+            ctx.body = JSON.stringify(true);
+        });
+    
+    
+        // Resets the account details
+        router.delete('/flightserver(sec)?/account', async (ctx: Koa.Context) => {
+            clearAccount();
+            ctx.body = JSON.stringify(myFlights.length);
+        });    
+}
+
+function countFlights(flights: Flight[], args: {origin: string, dest: string}): number {
+    return flights.filter((flight) => {
+        if (args.dest) {
+            if (flight.destination !== args.dest) {
+                return false;
+            }
+        }
+        if (args.origin) {
+            if (flight.origin !== args.origin) {
+                return false;
+            }
+        }
+        return true;
+    }).length
+}
+
 
 function filterFlights(flights: Flight[], args: Args): Flight[] {
     return flights.filter((flight) => {

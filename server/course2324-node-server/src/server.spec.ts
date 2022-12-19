@@ -109,4 +109,30 @@ describe('API Server', () => {
     expect(flights[1].id).toBe(flight2.id);
   })    
 
+  it('should count flights', async () => {
+    let response = await axiosInstance.get('http://localhost:8080/flightserver/numflights');
+    const count = response.data as number;
+    expect(count).toBe(4732);
+  });
+
+  it('should count flights with an origin filter', async () => {
+    const QUERY_STRING = `?origin=JFK`;
+    let response = await axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+    const count = response.data as number;
+    expect(count).toBe(434);
+  });
+
+  it('should count flights with an destination filter', async () => {
+    const QUERY_STRING = `?dest=JFK`;
+    let response = await axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+    const count = response.data as number;
+    expect(count).toBe(329);
+  });  
+
+  it('should count flights with an org and destination filter', async () => {
+    const QUERY_STRING = `?dest=JFK&origin=LHR`;
+    let response = await axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+    const count = response.data as number;
+    expect(count).toBe(35);
+  });    
 });
