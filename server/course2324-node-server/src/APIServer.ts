@@ -67,7 +67,7 @@ export function initAPIServer(): Koa {
         .use(bodyParser())
         .use(cors({
             origin: '*',
-            allowMethods: ['GET', 'POST', 'DELETE']
+            allowMethods: ['GET', 'POST', 'PUT', 'DELETE']
         }))
         .use(router.routes());
 
@@ -88,8 +88,8 @@ function configureFlightListHandlers(router: Router<any, {}>) {
     });
 
     router.get('/flightserver(sec)?/flights', async (ctx) => {
-        //console.log("GET: flights:" + ctx.URL);
-        //console.log('QS:' + JSON.stringify(ctx.query));
+        console.log("GET: flights:" + ctx.URL);
+        console.log('QS:' + JSON.stringify(ctx.query));
         let params = ctx.query;
         if (params.start && params.num) {
             let args: Args = {
@@ -153,8 +153,9 @@ function configureAccountHandlers(router: Router){
         });    
     
         // Sets the current values for accountDetails
-        router.post('/flightserver(sec)?/account', async (ctx: Koa.Context) => {
+        router.put('/flightserver(sec)?/account', async (ctx: Koa.Context) => {
             let account = ctx.request.body as Account;
+            console.log(`Account added: ${account}`);
             updateAccount(account);
             ctx.body = JSON.stringify(true);
         });

@@ -17,12 +17,22 @@ const flight_1 = require("./flight");
 let axiosInstance;
 const flight = new flight_1.Flight(666, 'flightNumber', 'origin', 'destination', 'departDay', 'departTime', 'arriveDay', 'arriveTime', 99.99);
 const flight2 = new flight_1.Flight(667, 'flightNumber1', 'origin1', 'destination1', 'departDay1', 'departTime1', 'arriveDay1', 'arriveTime1', 99.99);
+const account1 = {
+    firstName: 'Maurice',
+    familyName: 'Mouse',
+    email: 'x@xx.com',
+    address1: 'Address 1',
+    address2: 'Address 2',
+    city: 'NYC',
+    postCode: 'ZIP999'
+};
 describe('API Server', () => {
     beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
         axiosInstance = yield axios_1.default.create({
             responseType: 'json',
         });
         yield axiosInstance.delete('http://localhost:8080/flightserver/myflights');
+        yield axiosInstance.delete('http://localhost:8080/flightserver/account');
     }));
     it('should get a response to GET - if the server is running!', () => __awaiter(void 0, void 0, void 0, function* () {
         let response = yield axiosInstance.get('http://localhost:8080/flightserver/flights');
@@ -102,5 +112,46 @@ describe('API Server', () => {
         let flights = response.data;
         expect(flights[0].id).toBe(flight.id);
         expect(flights[1].id).toBe(flight2.id);
+    }));
+    it('should count flights', () => __awaiter(void 0, void 0, void 0, function* () {
+        let response = yield axiosInstance.get('http://localhost:8080/flightserver/numflights');
+        const count = response.data;
+        expect(count).toBe(4732);
+    }));
+    it('should count flights with an origin filter', () => __awaiter(void 0, void 0, void 0, function* () {
+        const QUERY_STRING = `?origin=JFK`;
+        let response = yield axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+        const count = response.data;
+        expect(count).toBe(434);
+    }));
+    it('should count flights with an destination filter', () => __awaiter(void 0, void 0, void 0, function* () {
+        const QUERY_STRING = `?dest=JFK`;
+        let response = yield axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+        const count = response.data;
+        expect(count).toBe(329);
+    }));
+    it('should count flights with an org and destination filter', () => __awaiter(void 0, void 0, void 0, function* () {
+        const QUERY_STRING = `?dest=JFK&origin=LHR`;
+        let response = yield axiosInstance.get('http://localhost:8080/flightserver/numflights' + QUERY_STRING);
+        const count = response.data;
+        expect(count).toBe(35);
+    }));
+    it('should update account details', () => __awaiter(void 0, void 0, void 0, function* () {
+        let res = yield axiosInstance.put('http://localhost:8080/flightserver/account', JSON.stringify(account1), {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        expect(res.data).toBe(true);
+        res = yield axiosInstance.get('http://localhost:8080/flightserver/account');
+        const account = res.data;
+        expect(account).toEqual(account1);
+    }));
+    it('should fetch no account details until some have been added!', () => __awaiter(void 0, void 0, void 0, function* () {
+        let res = yield axiosInstance.get('http://localhost:8080/flightserver/account');
+        const account = res.data;
+        expect(account.firstName).toBeUndefined();
+        expect(account.familyName).toBeUndefined();
+        expect(account).toEqual({});
     }));
 });

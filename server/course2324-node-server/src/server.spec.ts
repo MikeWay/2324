@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { stopCoverage } from 'v8';
+import { Account } from './Account';
 import { Flight } from './flight';
 import { startServer, stopServer } from './server';
 import { flights } from './state';
@@ -7,6 +8,16 @@ import { flights } from './state';
 let axiosInstance: AxiosInstance;
 const flight = new Flight(666, 'flightNumber', 'origin', 'destination', 'departDay', 'departTime', 'arriveDay', 'arriveTime', 99.99);
 const flight2 = new Flight(667, 'flightNumber1', 'origin1', 'destination1', 'departDay1', 'departTime1', 'arriveDay1', 'arriveTime1', 99.99);
+
+const account1 =  {
+  firstName: 'Maurice',
+  familyName: 'Mouse',
+  email: 'x@xx.com',
+  address1: 'Address 1',
+  address2: 'Address 2',
+  city: 'NYC',
+  postCode: 'ZIP999'
+}
 
 describe('API Server', () => {
 
@@ -16,6 +27,7 @@ describe('API Server', () => {
       
     });
     await axiosInstance.delete('http://localhost:8080/flightserver/myflights');
+    await axiosInstance.delete('http://localhost:8080/flightserver/account');
   });
 
   it('should get a response to GET - if the server is running!', async () => {
@@ -135,4 +147,25 @@ describe('API Server', () => {
     const count = response.data as number;
     expect(count).toBe(35);
   });    
+
+  it('should update account details', async () => {
+    let res = await axiosInstance.put('http://localhost:8080/flightserver/account', JSON.stringify(account1), {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    expect(res.data).toBe(true);
+    res = await axiosInstance.get('http://localhost:8080/flightserver/account');
+    const account = res.data as Account
+    expect(account).toEqual(account1);
+  })  
+
+  it('should fetch no account details until some have been added!', async () => {
+    let res = await axiosInstance.get('http://localhost:8080/flightserver/account');
+    const account = res.data as Account
+    expect(account.firstName).toBeUndefined();
+    expect(account.familyName).toBeUndefined();
+    expect(account).toEqual({});
+  })  
+
 });
