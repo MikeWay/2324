@@ -3,6 +3,7 @@ import { Flight } from '../model/flight';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
+import { Account } from '../model/account';
 
 @Injectable({
   providedIn: 'root'
@@ -44,9 +45,12 @@ export class FlightsService {
   }
 
 
-  public getNumberOfFlights(): Observable<number> {
+  public getNumberOfFlights(origin?: string, destination?: string): Observable<number> {
+    let params = new HttpParams();
+    if(origin) params = params.set('origin', origin);
+    if(destination) params = params.set('dest', destination);
     const url = 'http://localhost:8080/flightserver/numflights';
-    return this.http.get<number>(url).pipe(catchError(this.handleError));
+    return this.http.get<number>(url, {params: params}).pipe(catchError(this.handleError));
   }
 
 
@@ -58,6 +62,18 @@ export class FlightsService {
   addMyFlight(flight: Flight): Observable<number> {
     const url = 'http://localhost:8080/flightserver/myflights';
     const resultObservable = this.http.post<number>(url, JSON.stringify(new Array<Flight>(flight)), {headers: this.headers})
+                              .pipe(catchError(this.handleError));
+    return resultObservable;
+  }
+
+  public getAccount(): Observable<Account> {
+    const url = 'http://localhost:8080/flightserver/account';
+    return this.http.get<Account>(url).pipe(catchError(this.handleError));
+  } 
+   
+  updateAccount(account: Account): Observable<number> {
+    const url = 'http://localhost:8080/flightserver/account';
+    const resultObservable = this.http.put<number>(url, JSON.stringify(account), {headers: this.headers})
                               .pipe(catchError(this.handleError));
     return resultObservable;
   }

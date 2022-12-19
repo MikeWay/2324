@@ -9,22 +9,22 @@
           <div class="col-md-2 col-xs-4 form-label">Flight#: </div>
           <div class="col-md-1 col-xs-8">{{selectedFlight.flightNumber}}</div>
           <div class="col-md-2 col-xs-4 form-label">Origin&nbsp;:</div>
-          <div class="col-md-1  col-xs-8">{{selectedFlight.origin}}</div>
+          <div class="col-md-2  col-xs-8">{{selectedFlight.origin}}</div>
           <div class="col-md-3 col-xs-4 form-label">Destination&nbsp;:</div>
           <div class="col-md-1  col-xs-8">{{selectedFlight.destination}}</div>
         </div>
         <div class="row">
-          <div class="col-md-3 col-xs-4 font-weight-bold">Departure: </div>
-          <div class="col-md-1 col-xs-4 form-label">Day: </div>
+          <div class="col-md-3 col-xs-4 form-label  font-weight-bold">Departure: </div>
+          <div class="col-md-2 col-xs-4 form-label">Day: </div>
           <div class="col-md-2 col-xs-8">{{selectedFlight.departDay}}</div>
-          <div class="col-md-2 col-xs-4 form-label">Time: </div>
+          <div class="col-md-3 col-xs-4 form-label">Time: </div>
           <div class="col-md-2  col-xs-8">{{selectedFlight.departTime}}</div>
         </div>
         <div class="row">
           <div class="col-md-3 col-xs-4 form-label font-weight-bold">Arrival: </div>
-          <div class="col-md-1 col-xs-4 form-label">Day: </div>
+          <div class="col-md-2 col-xs-4 form-label">Day: </div>
           <div class="col-md-2  col-xs-8">{{selectedFlight.arriveDay}}</div>
-          <div class="col-md-2 col-xs-4 form-label">Time: </div>
+          <div class="col-md-3 col-xs-4 form-label">Time: </div>
           <div class="col-md-2  col-xs-8">{{selectedFlight.arriveTime}}</div>
         </div>
       </div>
@@ -35,20 +35,20 @@
     <div class="panel col-md-12">
       <form [formGroup]="payForm" (ngSubmit)="onSubmit()">
         <div class="row">
-          <div class="form-group" class="col-md form-label">
-            <label for="name">Name</label>
+          <div class="form-group" class="col-md">
+            <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
 
-            <div class="form-group form-label mt-2">
-              <label for="email">Email</label>
+            <div class="form-group mt-2">
+              <label for="email"  class="form-label">Email</label>
               <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
               <div *ngIf="!payForm.controls.email.valid">You must provide a valid email address</div>
             </div>
 
           </div>
           <div class="col">
-            <div class="form-group col-md form-label">
-              <label for="address">Address</label>
+            <div class="form-group col-md">
+              <label for="address"  class="form-label">Address</label>
               <textarea class="form-control" id="address" formControlName="address" placeholder="Address"
                 rows="4"></textarea>
             </div>
@@ -56,19 +56,19 @@
         </div>
         <div class="row">
 
-          <div class="form-group col-md-5 form-label">
-            <label for="cardNum">Card Number</label>
+          <div class="form-group col-md-5">
+            <label for="cardNum"  class="form-label">Card Number</label>
             <input type="text" class="form-control" id="cardNum" formControlName="cardNum" placeholder="Card Number">
           </div>
-          <div class="form-group col-md-3 form-label">
-            <label for="cardType">Card Type</label>
+          <div class="form-group col-md-3">
+            <label for="cardType"  class="form-label">Card Type</label>
             <select type="text" class="form-control" id="cardType" formControlName="cardType" placeholder="Card Type">
               <option>VISA</option>
               <option>AMEX</option>
             </select>
           </div>
-          <div class="form-group col-md-4 form-label">
-            <label for="expDate">Card Expiry</label>
+          <div class="form-group col-md-4">
+            <label for="expDate"  class="form-label">Card Expiry</label>
             <input type="date" class="form-control" id="expDate" formControlName="expDate">
           </div>
 

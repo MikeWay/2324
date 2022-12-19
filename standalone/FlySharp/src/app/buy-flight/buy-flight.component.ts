@@ -23,6 +23,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
   flights: Flight[] = new Array<Flight>();
   showBuyFlights = false;
+  flightCount = 0;
   // tslint:disable-next-line: variable-name
   _selectedFlight: Flight | undefined;
 
@@ -60,6 +61,9 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
         this.showBuyFlights = true;
       },
       error: (error: string) => this.errorMessage = error
+    });
+    this.state.flightsCount$.subscribe({
+      next: (count) => this.flightCount = count
     });
   }
 
@@ -102,7 +106,10 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   }
 
   onNext(): void {
-    this.loadFlights(this.nextFlightIndex += 20, 20);
+    if(this.nextFlightIndex >= this.flightCount) return;
+    const numFlights = (this.nextFlightIndex + 20 >= this.flightCount)?this.flightCount - this.nextFlightIndex: 20;
+    this.loadFlights(this.nextFlightIndex, numFlights);
+    this.nextFlightIndex += numFlights;
   }
 
 
@@ -141,6 +148,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
       id:"modal-component",
       data: this._selectedFlight
     };
+
     // https://material.angular.io/components/dialog/overview
     const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
     modalDialogRef.afterClosed().subscribe((flightPayment: FlightPayment | null) => {

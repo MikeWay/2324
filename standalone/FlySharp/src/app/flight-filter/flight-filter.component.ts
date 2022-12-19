@@ -29,7 +29,10 @@ export class FlightFilterComponent {
   }  
 
   onFilterEnter( filterValue: string): void {
-    this.filterEmitter.emit(filterValue);
+    // Force filter to upper case
+    const filter = filterValue.toLocaleUpperCase();
+    this._initialValue = filter;
+    this.filterEmitter.emit(filter);
 
   }  
 }

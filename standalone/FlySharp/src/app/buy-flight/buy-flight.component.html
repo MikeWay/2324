@@ -2,19 +2,21 @@
     <div class="row">
         <div class="col-md-1">&nbsp;</div>
     </div>
-    <div class="row mr-5 ml-3">
-        <div class="col-md-2  p-1 bg-secondary text-white ">
+    <div class="card row mr-5 ml-3">
+        <div class="card-body col">
+
             <span class="">Find Flights: </span>
-        </div>
-        <div class="col-md-3 col-sm p-1 pl-4  bg-secondary text-white">
-            <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin'
-                [initialValue]='originFilter'>
-            </app-flight-filter>
-        </div>
-        <div class="col-md-3 p-1 pl-4  bg-secondary text-white ">
-            <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination'
-                [initialValue]='destinationFilter'>
-            </app-flight-filter>
+
+            <span class="ps-2">
+                <app-flight-filter (filterEmitter)="onOriginFilterChange($event)" label='Origin'
+                    [initialValue]='originFilter'>
+                </app-flight-filter>
+            </span>
+            <span class="ps-2">
+                <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" label='Destination'
+                    [initialValue]='destinationFilter'>
+                </app-flight-filter>
+            </span>
         </div>
     </div>
 
