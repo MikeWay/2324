@@ -1,2 +1,18 @@
 2022-12-19 17:02:16 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2022-12-19 17:02:16 - Started 7124
+2022-12-19 17:15:18 - Stopping flightsservice.exe
+2022-12-19 17:15:18 - ProcessKill 7124
+2022-12-19 17:15:18 - Shutdown exception
+Message:A system shutdown is in progress.
+
+Stacktrace:   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at System.Management.ManagementScope.InitializeGuts(Object o)
+   at System.Management.ManagementScope.Initialize()
+   at System.Management.ManagementObjectSearcher.Initialize()
+   at System.Management.ManagementObjectSearcher.Get()
+   at winsw.WrapperService.GetChildPids(Int32 pid)
+   at winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   at winsw.WrapperService.StopIt()
+   at winsw.WrapperService.OnShutdown()
+2022-12-21 08:00:27 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\course2324\server\course2324-node-server\node_modules\node-windows\lib\wrapper.js --file C:\course2324\server\course2324-node-server\dist\bundle.js --scriptoptions= --log "Flights Service wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2022-12-21 08:00:27 - Started 4372

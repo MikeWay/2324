@@ -113,19 +113,19 @@ describe('BuyFlightComponent', () => {
   });
 
   it('should set showBuyFlights to false when the link is clicked', () => {
-    el = fixture.debugElement.query(By.css('#toggle'));
+    el = fixture.debugElement.query(By.scss('#toggle'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
 
   it('should hide the flights table  when the link is clicked', () => {
     fixture.detectChanges();
-    let tableEle = fixture.debugElement.query(By.css('table'));
+    let tableEle = fixture.debugElement.query(By.scss('table'));
     expect(tableEle).toBeTruthy();
-    el = fixture.debugElement.query(By.css('#toggle'));
+    el = fixture.debugElement.query(By.scss('#toggle'));
     el.triggerEventHandler('click', null);
     fixture.detectChanges();
-    tableEle = fixture.debugElement.query(By.css('table'));
+    tableEle = fixture.debugElement.query(By.scss('table'));
     expect(tableEle).toBeFalsy();
   });
 });

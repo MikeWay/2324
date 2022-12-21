@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
             CurrencyConversionPipe, FlightFilterComponent 
             ],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  styleUrls: ['./buy-flight.component.scss']
 })
 export class BuyFlightComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name

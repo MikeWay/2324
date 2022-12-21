@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatButtonModule],
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
 

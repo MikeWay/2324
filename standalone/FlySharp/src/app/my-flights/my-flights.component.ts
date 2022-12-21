@@ -8,7 +8,7 @@ import { ApplicationStateService } from '../application-state/application-state.
   standalone: true,
   imports: [CommonModule],
   templateUrl: './my-flights.component.html',
-  styleUrls: ['./my-flights.component.css']
+  styleUrls: ['./my-flights.component.scss']
 })
 export class MyFlightsComponent {
   flights!: Flight[];

@@ -7,7 +7,7 @@ import { Currency } from '../model/curency';
 @Component({
   selector: 'app-currency',
   templateUrl: './currency.component.html',
-  styleUrls: ['./currency.component.css'],
+  styleUrls: ['./currency.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule]
   

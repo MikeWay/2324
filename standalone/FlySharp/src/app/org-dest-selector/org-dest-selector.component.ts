@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './org-dest-selector.component.html',
-  styleUrls: ['./org-dest-selector.component.css']
+  styleUrls: ['./org-dest-selector.component.scss']
 })
 
 export class OrgDestSelectorComponent implements OnInit {

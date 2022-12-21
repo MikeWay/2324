@@ -8,7 +8,7 @@ import { OrgDestSelectorComponent } from '../org-dest-selector/org-dest-selector
   standalone: true,
   imports: [CommonModule, FlightStatusComponent, OrgDestSelectorComponent],  
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 
 /*

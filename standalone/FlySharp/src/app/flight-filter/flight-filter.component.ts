@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './flight-filter.component.html',
-  styleUrls: ['./flight-filter.component.css']
+  styleUrls: ['./flight-filter.component.scss']
 })
 export class FlightFilterComponent {
   private _initialValue = '';

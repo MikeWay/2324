@@ -8,7 +8,7 @@ import { FlightStatusService } from './flight-status.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './flight-status.component.html',
-  styleUrls: ['./flight-status.component.css']
+  styleUrls: ['./flight-status.component.scss']
 })
 export class FlightStatusComponent implements OnInit {
   private socket: Subject<Record<string, string>> | undefined;
