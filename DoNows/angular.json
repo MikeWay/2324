@@ -1,0 +1,192 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "DoNow22": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now22",
+      "sourceRoot": "projects/do-now22/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now22",
+            "index": "projects/do-now22/src/index.html",
+            "main": "projects/do-now22/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now22/tsconfig.app.json",
+            "assets": [
+              "projects/do-now22/src/favicon.ico",
+              "projects/do-now22/src/assets"
+            ],
+            "styles": [
+              "projects/do-now22/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow22:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow22:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow22:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now22/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now22/src/favicon.ico",
+              "projects/do-now22/src/assets"
+            ],
+            "styles": [
+              "projects/do-now22/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "DoNow41": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now41",
+      "sourceRoot": "projects/do-now41/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now41",
+            "index": "projects/do-now41/src/index.html",
+            "main": "projects/do-now41/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now41/tsconfig.app.json",
+            "assets": [
+              "projects/do-now41/src/favicon.ico",
+              "projects/do-now41/src/assets"
+            ],
+            "styles": [
+              "projects/do-now41/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow41:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow41:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow41:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now41/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now41/src/favicon.ico",
+              "projects/do-now41/src/assets"
+            ],
+            "styles": [
+              "projects/do-now41/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
