@@ -5,21 +5,26 @@ import * as fs from "fs-extra";
 // var TARGET_DIR_ROOT = "C:\\Course2324\\DoNow_Solutions\\";
 
 const SRC_DIR_ROOT = ".";
-const TARGET_DIR_ROOT = "../../DoNow_Solutions/";
+const TARGET_DIR_ROOT = "..";
 
 
 console.log(process.argv);
 
-let exercise = process.argv[2];
+// let exercise = process.argv[2];
+//Identify the DoNow from the cwd
 
-let targetDir = TARGET_DIR_ROOT + exercise ;
-let destDir = targetDir + "/src";
-let srcDir = SRC_DIR_ROOT + "/src";
+const CWD = process.cwd();
+const DO_NOW = CWD.slice(CWD.lastIndexOf('\\') + 1);
 
-if(process.argv.length < 3){
-  console.log("You must supply a donow number as the target");
-  process.exit(1);
-}
+
+let destDir = `${TARGET_DIR_ROOT}\\${DO_NOW}_SOL` ;
+//let destDir = `${targetDir}_SOL`;
+let srcDir = SRC_DIR_ROOT;
+
+// if(process.argv.length < 3){
+//   console.log("You must supply a donow number as the target. e.g. DoNow22");
+//   process.exit(1);
+// }
 
 
 try {
@@ -28,7 +33,7 @@ try {
   fs.removeSync(destDir);
   fs.copySync(srcDir, destDir);
 
-  console.log("Copy to solution " + exercise + " complete");
+  console.log("Copy to solution " + DO_NOW + " complete");
  } catch (err) {
   console.log("Failed to copy to solution: " + err);
  }
