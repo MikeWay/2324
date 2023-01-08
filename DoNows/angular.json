@@ -457,6 +457,461 @@
           }
         }
       }
+    },
+    "DoNow22Sol": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now22-sol",
+      "sourceRoot": "projects/do-now22-sol/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now22-sol",
+            "index": "projects/do-now22-sol/src/index.html",
+            "main": "projects/do-now22-sol/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now22-sol/tsconfig.app.json",
+            "assets": [
+              "projects/do-now22-sol/src/favicon.ico",
+              "projects/do-now22-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now22-sol/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow22Sol:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow22Sol:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow22Sol:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now22-sol/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now22-sol/src/favicon.ico",
+              "projects/do-now22-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now22-sol/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "DoNow41Sol": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now41-sol",
+      "sourceRoot": "projects/do-now41-sol/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now41-sol",
+            "index": "projects/do-now41-sol/src/index.html",
+            "main": "projects/do-now41-sol/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now41-sol/tsconfig.app.json",
+            "assets": [
+              "projects/do-now41-sol/src/favicon.ico",
+              "projects/do-now41-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now41-sol/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow41Sol:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow41Sol:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow41Sol:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now41-sol/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now41-sol/src/favicon.ico",
+              "projects/do-now41-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now41-sol/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "DoNow51Sol": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now51-sol",
+      "sourceRoot": "projects/do-now51-sol/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now51-sol",
+            "index": "projects/do-now51-sol/src/index.html",
+            "main": "projects/do-now51-sol/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now51-sol/tsconfig.app.json",
+            "assets": [
+              "projects/do-now51-sol/src/favicon.ico",
+              "projects/do-now51-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now51-sol/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow51Sol:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow51Sol:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow51Sol:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now51-sol/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now51-sol/src/favicon.ico",
+              "projects/do-now51-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now51-sol/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "DoNow71Sol": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now71-sol",
+      "sourceRoot": "projects/do-now71-sol/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now71-sol",
+            "index": "projects/do-now71-sol/src/index.html",
+            "main": "projects/do-now71-sol/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now71-sol/tsconfig.app.json",
+            "assets": [
+              "projects/do-now71-sol/src/favicon.ico",
+              "projects/do-now71-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now71-sol/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow71Sol:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow71Sol:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow71Sol:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now71-sol/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now71-sol/src/favicon.ico",
+              "projects/do-now71-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now71-sol/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "DoNow81Sol": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/do-now81-sol",
+      "sourceRoot": "projects/do-now81-sol/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/do-now81-sol",
+            "index": "projects/do-now81-sol/src/index.html",
+            "main": "projects/do-now81-sol/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/do-now81-sol/tsconfig.app.json",
+            "assets": [
+              "projects/do-now81-sol/src/favicon.ico",
+              "projects/do-now81-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now81-sol/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "DoNow81Sol:build:production"
+            },
+            "development": {
+              "browserTarget": "DoNow81Sol:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "DoNow81Sol:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/do-now81-sol/tsconfig.spec.json",
+            "assets": [
+              "projects/do-now81-sol/src/favicon.ico",
+              "projects/do-now81-sol/src/assets"
+            ],
+            "styles": [
+              "projects/do-now81-sol/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "cli": {
