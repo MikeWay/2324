@@ -17,7 +17,7 @@ const CWD = process.cwd();
 const DO_NOW = CWD.slice(CWD.lastIndexOf('\\') + 1);
 
 
-let destDir = `${TARGET_DIR_ROOT}\\${DO_NOW}_SOL` ;
+let destDir = `${TARGET_DIR_ROOT}\\${DO_NOW}-sol` ;
 //let destDir = `${targetDir}_SOL`;
 let srcDir = SRC_DIR_ROOT;
 
