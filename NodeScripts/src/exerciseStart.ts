@@ -50,7 +50,7 @@ let TARGET_DIR_ROOT = ".";
 
 
 const SRC_DIR = "/src"
-const E2E_DIR = "/e2e"
+const E2E_DIR = "/cypress/e2e"
 
 console.log(`Exercise Start Script. Version: ${VERSION}`);
 let exercise = process.argv[2];
@@ -105,6 +105,17 @@ function doBackup(exercise : string){
 			  console.log('Child Process STDERR: '+stderr);
 		});
 	}
+	if(exercise === 'Ex2.2' ){
+		// Need to make sure that the npm Bootstrap package is intalled
+		console.log("Installing Bootstrap if needed");
+		cp.exec('npm install bootstrap', (error : Error,stdout,stderr) => {
+			if (error) {
+				console.log(error.stack);
+			  }
+			  console.log('Child Process STDOUT: '+stdout);
+			  console.log('Child Process STDERR: '+stderr);
+		});
+	}	
 }
 
 
