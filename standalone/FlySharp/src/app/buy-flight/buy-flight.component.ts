@@ -32,7 +32,8 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   errorMessage = '';
 
   conversionRate = 4.0;
-  nextFlightIndex = 20;
+  firstDisplayedFlightIndex = 0;
+  nextFlightToDisplayIndex = 0;
   numFlights = 0;
 
   private flightsSubscription: Subscription | undefined;
@@ -45,7 +46,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(params => {
       this.originFilter = params['origin'];
       this.destinationFilter = params['destination'];});
-    this.loadFlights(0, 20);
+    this.loadFlights(this.firstDisplayedFlightIndex, 20);
   }
 
   ngOnDestroy(): void {
@@ -59,6 +60,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
       next: (flights: Flight[]) => {
         this.flights = flights;
         this.showBuyFlights = true;
+        this.nextFlightToDisplayIndex = this.firstDisplayedFlightIndex + this.flights.length
       },
       error: (error: string) => this.errorMessage = error
     });
@@ -106,21 +108,22 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   }
 
   onNext(): void {
-    if(this.nextFlightIndex >= this.flightCount) return;
-    const numFlights = (this.nextFlightIndex + 20 >= this.flightCount)?this.flightCount - this.nextFlightIndex: 20;
-    this.loadFlights(this.nextFlightIndex, numFlights);
-    this.nextFlightIndex += numFlights;
+    if(this.firstDisplayedFlightIndex >= this.flightCount) return;
+    const numFlights = (this.nextFlightToDisplayIndex  + 20 >= this.flightCount)?this.flightCount - this.nextFlightToDisplayIndex: 20;
+    this.loadFlights(this.nextFlightToDisplayIndex, numFlights);
+    this.firstDisplayedFlightIndex = this.nextFlightToDisplayIndex;
+    this.nextFlightToDisplayIndex += numFlights;
   }
 
 
   onPrevious(): void {
     // Don't load flights pre 0
-    if (this.nextFlightIndex > 20) {
-      this.nextFlightIndex -= 20;
+    if (this.firstDisplayedFlightIndex > 20) {
+      this.firstDisplayedFlightIndex -= 20;
     } else {
-      this.nextFlightIndex = 0;
+      this.firstDisplayedFlightIndex = 0;
     }
-    this.loadFlights(this.nextFlightIndex, 20);
+    this.loadFlights(this.firstDisplayedFlightIndex, 20);
   }
 
   /**

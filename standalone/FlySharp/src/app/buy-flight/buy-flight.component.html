@@ -59,19 +59,17 @@
     </div>
 
     <div class="row">
-        <div class="col-md-1  ">
+        <div class="col-md-2  ">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" aria-label="Previous" (click)="onPrevious()">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
+                    <a class="page-link" [class.disabled]="firstDisplayedFlightIndex===0" aria-label="Previous" (click)="onPrevious()">
+                        <span>Previous</span>
                     </a>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" aria-label="Next" (click)="onNext()">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
+                    <a class="page-link" [class.disabled]="nextFlightToDisplayIndex >= flightCount" aria-label="Next" (click)="onNext()">                      
+                        <span>Next</span>
                     </a>
                 </li>
             </ul>
@@ -79,6 +77,8 @@
         </div>
     </div>
 
+    Next Flight to display ================={{nextFlightToDisplayIndex}}<br/>
+    Current first flight {{firstDisplayedFlightIndex}}
 </div>
 <!--<app-payment *ngIf='selectedFlight' [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)">
 </app-payment>-->
