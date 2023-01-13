@@ -101,8 +101,8 @@ function doBackup(exercise : string){
 			if (error) {
 				console.log(error.stack);
 			  }
-			  console.log('Child Process STDOUT: '+stdout);
-			  console.log('Child Process STDERR: '+stderr);
+			  if(stdout) console.log('Child Process STDOUT: '+stdout);
+			  if(stderr) console.log('Child Process STDERR: '+stderr);
 		});
 	}
 	if(exercise === 'Ex2.2' ){
@@ -112,8 +112,8 @@ function doBackup(exercise : string){
 			if (error) {
 				console.log(error.stack);
 			  }
-			  console.log('Child Process STDOUT: '+stdout);
-			  console.log('Child Process STDERR: '+stderr);
+			  if(stdout) console.log('NPM Child Process STDOUT: '+stdout);
+			  if(stderr) console.log('NPM Child Process STDERR: '+stderr);
 		});
 	}	
 }
