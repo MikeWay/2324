@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
 
@@ -11,9 +11,7 @@ describe('BuyFlightComponent', () => {
       declarations: [ BuyFlightComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,14 +1,16 @@
-import { HomeComponent } from './home/home.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent
+    AppComponent,
+    HomeComponent,
+    BuyFlightComponent
   ],
   imports: [
     BrowserModule,
