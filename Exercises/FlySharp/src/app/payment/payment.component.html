@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="selectedFlight">
     <div>
         <h3>Purchase this flight</h3>
     </div>
@@ -8,25 +8,25 @@
                 <div class="col  panel">
                     <div class="row">
                         <div class="col-md-2 col-xs-4 form-label">Flight#: </div>
-                        <div class="col-md-1 col-xs-8">TODO - Flight number</div>
+                        <div class="col-md-1 col-xs-8">{{selectedFlight.flightNumber}}</div>
                         <div class="col-md-2 col-xs-4 form-label">Origin&nbsp;:</div>
-                        <div class="col-md-2  col-xs-8">TODO - origin</div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.origin}}</div>
                         <div class="col-md-3 col-xs-4 form-label">Destination&nbsp;:</div>
-                        <div class="col-md-1  col-xs-8">TODO - Destination</div>
+                        <div class="col-md-1  col-xs-8">{{selectedFlight.destination}}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-xs-4 form-label  font-weight-bold">Departure: </div>
                         <div class="col-md-2 col-xs-4 form-label">Day: </div>
-                        <div class="col-md-2 col-xs-8">TODO - departDay</div>
+                        <div class="col-md-2 col-xs-8">{{selectedFlight.departDay}}</div>
                         <div class="col-md-3 col-xs-4 form-label">Time: </div>
-                        <div class="col-md-2  col-xs-8">TODO - departTime</div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.departTime}}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-3 col-xs-4 form-label font-weight-bold">Arrival: </div>
                         <div class="col-md-2 col-xs-4 form-label">Day: </div>
-                        <div class="col-md-2  col-xs-8">TODO - arriveDay</div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.arriveDay}}</div>
                         <div class="col-md-3 col-xs-4 form-label">Time: </div>
-                        <div class="col-md-2  col-xs-8">TODO - arriveTime</div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.arriveTime}}</div>
                     </div>
                 </div>
             </div>

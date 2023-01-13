@@ -9,10 +9,15 @@ import { Flight } from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
   flights! : Flight[];
+  selectedFlight: Flight | undefined;
   showBuyFlights = true;
 
   constructor(private stateService: ApplicationStateService){}
 
+  onFlightClick(flight : Flight): void {
+    this.selectedFlight = flight;
+
+}  
   
   onClickBuyFlights(){
     this.showBuyFlights = !this.showBuyFlights;

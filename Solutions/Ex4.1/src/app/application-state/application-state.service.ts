@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Flight } from '../model/flight';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-@Injectable()
-export class FlightsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class ApplicationStateService {
 
   constructor() { }
 
