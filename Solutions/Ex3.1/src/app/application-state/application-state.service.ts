@@ -7,10 +7,12 @@ import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 })
 export class ApplicationStateService {
 
+  flights = FLIGHTS;
+
   constructor() { }
 
   public getFlights(): Flight[] {
-    return FLIGHTS;
+    return this.flights;
   }
 
   public getMyFlights(): Flight[] {
