@@ -15,7 +15,11 @@ mat-sidenav-content {
     box-shadow: none;
   }
   
-  
+  .active {
+    font-weight: bolder;
+  }  
+
+
   .disabled {
     color: #ddd;
   }
