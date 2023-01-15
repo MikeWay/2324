@@ -1,28 +1,6 @@
-import { Component } from '@angular/core';
-
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-
-
-
-
-@Component({
-  selector: 'app-home',
-  template: ''
-})
-export class MockAppHomeComponent {
-
-}
-
-@Component({
-  selector: 'app-buy-flight',
-  template: ''
-})
-export class MockBuyFlightComponent {
-
-}
-
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -31,35 +9,27 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent, MockAppHomeComponent, MockBuyFlightComponent
+        AppComponent
       ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'Fly Sharp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app.title).toEqual('Fly Sharp');
   });
 
-  it('should have an app-home tag', () => {
+  it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('main app-home')).toBeTruthy();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Fly Sharp app is running!');
   });
-
-  it('should have an app-buy-flight tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('main app-buy-flight')).toBeTruthy();
-  });
-
 });

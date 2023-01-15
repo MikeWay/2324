@@ -14,7 +14,9 @@ mat-sidenav-content {
     border-radius: 4px 4px 4px 4px;
     box-shadow: none;
   }
-  
+  .active {
+    font-weight: bolder;
+  }  
   
   .disabled {
     color: #ddd;
