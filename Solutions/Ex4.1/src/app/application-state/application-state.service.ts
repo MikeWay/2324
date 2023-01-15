@@ -9,7 +9,6 @@ export class ApplicationStateService {
 
   flights = FLIGHTS;
 
-  constructor() { }
 
   public getFlights(): Flight[] {
     return this.flights;
