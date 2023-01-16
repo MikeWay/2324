@@ -1,62 +1,55 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightsService } from '../flights/flights.service';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  styleUrls: ['./buy-flight.component.scss']
 })
 export class BuyFlightComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-  _flights: Flight[] = new Array<Flight>();
+  _flights! : Flight[];
+  selectedFlight: Flight | undefined;
   showBuyFlights = true;
-  // tslint:disable-next-line: variable-name
-  _selectedFlight: Flight | undefined;
+  originFilter = '';
+  destinationFilter ='';
 
-  originFilter= '';
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute){}
 
-  constructor(private flightsService: FlightsService) { }
-
-  ngOnInit(): void {
-    this._flights = this.flightsService.getFlights();
+  loadFlights(start: number, count: number){
+    this.stateService.loadFlights(start, count, this.originFilter, this.destinationFilter);
+    this._flights = this.stateService.getFlights();
   }
-
-  onClickBuyFlights(): void {
-    this.showBuyFlights = !this.showBuyFlights;
-  }
-
-  onFlightClick(flight: Flight): void {
-    this._selectedFlight = flight;
-  }
-
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
-  }
-
-  set selectedFlight(flight: Flight | undefined) {
-    this._selectedFlight = flight;
-  }
-
-  onFilterChange(filterValue: string): void {
-    this.originFilter = filterValue;
-  }
-
-  /**
-   * Version of the flight getter that implements a simple filter
-   */
 
   get flights(): Flight[] {
-
-    if (this.originFilter) {
-      return this._flights.filter((flight: Flight) => {
-        return flight.origin.startsWith(this.originFilter as string);
-      });  // We know it's not undefined or null from the outer if
-    } else {
-      return this._flights;
-    }
+    this.loadFlights(0,20);
+    return this._flights;
   }
 
-}
+  onOriginFilterChange(filterValue: string): void {
+    this.originFilter = filterValue;
+  }  
 
+  onDestinationFilterChange(filterValue: string): void {
+    this.destinationFilter = filterValue;
+  }   
+
+  onFlightClick(flight : Flight): void {
+    this.selectedFlight = flight;
+
+}  
+  
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
+  }  
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.originFilter = params['origin'];
+      this.destinationFilter = params['destination'];
+    });
+  }  
+
+}
 
