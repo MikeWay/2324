@@ -1,12 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationStateService } from '../application-state/application-state.service';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { Flight } from '../model/flight';
+import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
   selector: 'app-buy-flight',
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss']
+  styleUrls: ['./buy-flight.component.scss'],
+  standalone: true,
+  imports: [CommonModule, PaymentComponent, FlightFilterComponent],  
 })
 export class BuyFlightComponent implements OnInit {
   _flights! : Flight[];

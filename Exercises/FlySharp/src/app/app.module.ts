@@ -11,9 +11,7 @@ import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        BuyFlightComponent
-        
+        HomeComponent        
     ],
     providers: [],
     bootstrap: [AppComponent],

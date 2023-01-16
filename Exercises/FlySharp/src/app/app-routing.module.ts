@@ -17,16 +17,20 @@ const routes: Routes = [
   },
   {
     path: 'buy',
-    component: BuyFlightComponent
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },
   {
     path: 'buy/:origin',
-    component: BuyFlightComponent
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },  
   {
     path: 'buy/:origin/:destination',
-    component: BuyFlightComponent
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },   
+
+  /*
+{path: 'admin', loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)}  
+  */
   {
     path: 'myflights',
     component: MyFlightsComponent
