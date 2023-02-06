@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApplicationStateService } from '../application-state/application-state.service';
-import { Currency } from '../model/curency';
+import { Currency } from '../model/currency';
 
 @Component({
   selector: 'app-currency',
