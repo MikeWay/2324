@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
+import { from } from 'rxjs';
 
 import { BuyFlightComponent } from './buy-flight.component';
 
@@ -8,7 +10,15 @@ describe('BuyFlightComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent ]
+      imports: [ BuyFlightComponent ],
+      providers:[
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{ id: 1 }]),
+          }
+        }
+      ]
     })
     .compileComponents();
 
