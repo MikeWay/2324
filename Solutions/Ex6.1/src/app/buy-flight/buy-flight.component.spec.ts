@@ -1,42 +1,11 @@
-import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FlightsService } from '../flights/flights.service';
-import { Flight } from '../model/flight';
-import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
+import { ActivatedRoute } from '@angular/router';
+import { from } from 'rxjs';
+import { ApplicationStateService } from '../application-state/application-state.service';
 
 import { BuyFlightComponent } from './buy-flight.component';
-
-
-@Component({
-  selector: 'app-flight-filter',
-  template: ''
-})
-class MockFlightFilterComponent {}
-
-@Component({
-  selector: 'app-payment',
-  template: ''
-})
-class MockPaymentComponent {
-  @Input() selectedFlight = null;
-}
-
-class MockFlightsService {
-
-  constructor() { }
-
-  public getFlights(): Flight[] {
-    return FLIGHTS;
-  }
-
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
-  }
-}
-
-
-let mockFlightsService: FlightsService;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -44,18 +13,26 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
-    mockFlightsService = jasmine.createSpyObj('FlightsService', {
-      getFlights: FLIGHTS,
-      getMyFlights: MYFLIGHTS
-    });
     await TestBed.configureTestingModule({
-      declarations: [BuyFlightComponent, MockFlightFilterComponent, MockPaymentComponent],
-      providers: [{provide: FlightsService, useValue: mockFlightsService }],
+      imports: [ BuyFlightComponent ],
+      providers:[
+        /* BuyFlightComponent takes an ActivatedRoute as a constructor argument. In our code we are accessing
+         the params of property ActivatedRoute. The useValue code below creates a very simple Observable as the 
+         value of params. It is adequate to meet the needs of the test so far
+         */   
+        {
+          provide: ApplicationStateService
+        },     
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{ id: 1 }]),
+          }
+        }
+      ]
     })
-      .compileComponents();
-  });
+    .compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -65,33 +42,24 @@ describe('BuyFlightComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have called getFlights() once', () => {
-    expect(mockFlightsService.getFlights).toHaveBeenCalledTimes(1);
-  });
-
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
-  });
+  });  
 
   it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
     component.onClickBuyFlights();
     expect(component.showBuyFlights).toBeFalsy();
-  });
+  });  
 
-  it('should set showBuyFlights to false when the  link is clicked', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is called', () => {
+    component.onClickBuyFlights();
+    component.onClickBuyFlights();
+    expect(component.showBuyFlights).toBeTruthy();
+  });  
+
+  it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
-  });
-
-  it('should hide the flights table when the link is clicked', () => {
-    fixture.detectChanges();
-    let tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeTruthy();
-    el = fixture.debugElement.query(By.css('a'));
-    el.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeFalsy();
-  });
+  });  
 });

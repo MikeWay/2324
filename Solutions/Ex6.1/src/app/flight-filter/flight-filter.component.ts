@@ -1,25 +1,36 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-flight-filter',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './flight-filter.component.html',
-  styleUrls: ['./flight-filter.component.css']
+  styleUrls: ['./flight-filter.component.scss']
 })
-export class FlightFilterComponent implements OnInit {
+export class FlightFilterComponent {
 
   @Output()
   filterEmitter = new EventEmitter<string>();
-
+  
   @Input()
   label = '';
 
-  constructor() { }
+  private _initialValue='';
 
-  ngOnInit(): void {
-  }
+  @Input()
+  set initialValue(value: string) {
+    if (value) {
+      this._initialValue = value;
+    }
+  }  
 
-  onFilterEnter( filterValue: string): void {
+  get initialValue(): string {
+    return this._initialValue;
+  }  
+
+  onFilterEnter(filterValue: string): void {
     this.filterEmitter.emit(filterValue);
-  }
 
+  }
 }

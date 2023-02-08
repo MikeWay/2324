@@ -1,18 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-payment',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent {
+  _selectedFlight: Flight | undefined;
 
-  @Input() selectedFlight: Flight | undefined;
-
-  constructor() { }
-
-  ngOnInit(): void {
+  @Input()
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
   }
 
+  set selectedFlight(flight: Flight | undefined){
+    this._selectedFlight = flight;
+  }
 }

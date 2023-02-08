@@ -1,25 +1,27 @@
-import { HomeComponent } from './home/home.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import { FlightsService } from './flights/flights.service';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentComponent } from "./payment/payment.component";
 import { FlightFilterComponent } from './flight-filter/flight-filter.component';
-import { AccountComponent } from './account/account.component';
-import { MyFlightsComponent } from './my-flights/my-flights.component';
+import { CurrencyComponent } from "./currency/currency.component";
 
 @NgModule({
-  declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, AccountComponent, MyFlightsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [FlightsService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        PaymentComponent,
+        FlightFilterComponent,
+        CurrencyComponent
+    ]
 })
 export class AppModule { }
