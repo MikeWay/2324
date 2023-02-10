@@ -5,7 +5,7 @@ import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 @Injectable(
 {
-  providedIn: null
+  providedIn: 'root'
 })
 
 export class ApplicationStateService {
