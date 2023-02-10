@@ -4,8 +4,29 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import { ApplicationStateService } from '../application-state/application-state.service';
+import { Flight } from '../model/flight';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { BuyFlightComponent } from './buy-flight.component';
+
+class MockApplicationStateService {
+
+  displayCurrency = { code: 'GBP', symbol: '£', rate: 1.0 };
+
+  flights = FLIGHTS;
+
+  public getFlights(): Flight[] {
+    return FLIGHTS;
+  }
+
+  public getMyFlights(): Flight[] {
+    return MYFLIGHTS;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  public loadFlights(start: number, count: number, origin?: string, destination?: string) {
+  }
+}
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -13,6 +34,7 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
+    
     await TestBed.configureTestingModule({
       imports: [ BuyFlightComponent ],
       providers:[
@@ -21,7 +43,8 @@ describe('BuyFlightComponent', () => {
          value of params. It is adequate to meet the needs of the test so far
          */   
         {
-          provide: ApplicationStateService
+          provide: ApplicationStateService,
+          useClass: MockApplicationStateService
         },     
         {
           provide: ActivatedRoute,
