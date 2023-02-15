@@ -1,35 +1,51 @@
-<div>
-    <div>
-        <h3>Purchase this flight</h3>
-    </div>
-    <div>
-        <div>
-            <div class="row">
-                <div class="col  panel">
-                    <div class="row">
-                        <div class="col-md-2 col-xs-4 form-label">Flight#: </div>
-                        <div class="col-md-1 col-xs-8">TODO - Flight number</div>
-                        <div class="col-md-2 col-xs-4 form-label">Origin&nbsp;:</div>
-                        <div class="col-md-2  col-xs-8">TODO - origin</div>
-                        <div class="col-md-3 col-xs-4 form-label">Destination&nbsp;:</div>
-                        <div class="col-md-1  col-xs-8">TODO - Destination</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 col-xs-4 form-label  font-weight-bold">Departure: </div>
-                        <div class="col-md-2 col-xs-4 form-label">Day: </div>
-                        <div class="col-md-2 col-xs-8">TODO - departDay</div>
-                        <div class="col-md-3 col-xs-4 form-label">Time: </div>
-                        <div class="col-md-2  col-xs-8">TODO - departTime</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 col-xs-4 form-label font-weight-bold">Arrival: </div>
-                        <div class="col-md-2 col-xs-4 form-label">Day: </div>
-                        <div class="col-md-2  col-xs-8">TODO - arriveDay</div>
-                        <div class="col-md-3 col-xs-4 form-label">Time: </div>
-                        <div class="col-md-2  col-xs-8">TODO - arriveTime</div>
-                    </div>
-                </div>
+<hr />
+  <div class="row mt-1">
+    <div class="panel col-md-12">
+      <form>
+        <div class="row">
+          <div class="form-group" class="col-md">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name"placeholder="Name">
+
+            <div class="form-group mt-2">
+              <label for="email"  class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Email">
+
             </div>
+
+          </div>
+          <div class="col">
+            <div class="form-group col-md">
+              <label for="address"  class="form-label">Address</label>
+              <textarea class="form-control" id="address" placeholder="Address"
+                rows="4"></textarea>
+            </div>
+          </div>
         </div>
+        <div class="row">
+
+          <div class="form-group col-md-5">
+            <label for="cardNum"  class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cardNum" placeholder="Card Number">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="cardType"  class="form-label">Card Type</label>
+            <select type="text" class="form-control" id="cardType" placeholder="Card Type">
+              <option>VISA</option>
+              <option>AMEX</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="expDate"  class="form-label">Card Expiry</label>
+            <input type="date" class="form-control" id="expDate" >
+          </div>
+
+        </div>
+      	<button type="submit" class="btn btn-secondary" required>Buy Flight</button>
+
+
+      </form>
+
     </div>
   </div>
+</div>
