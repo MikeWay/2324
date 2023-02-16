@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Flight } from '../model/flight';
-import { FlightPayment, PaymentComponent } from '../payment/payment.component';
+import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.component';
 import { CurrencyConversionPipe } from '../currency-conversion.pipe';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { ApplicationStateService } from '../application-state/application-state.service';
@@ -131,7 +131,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
    * @param payment
    */
 
-  flightPurchased(payment: FlightPayment): void {
+  flightPurchased(payment: FlightPaymentEvent): void {
       // Record Purchase -- maybe one day!
 
       // Update MyFlights
@@ -154,7 +154,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
 
     // https://material.angular.io/components/dialog/overview
     const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
-    modalDialogRef.afterClosed().subscribe((flightPayment: FlightPayment | null) => {
+    modalDialogRef.afterClosed().subscribe((flightPayment: FlightPaymentEvent | null) => {
       // Handle result from the Dialog - null if the dialog was dismissed
       if(flightPayment){
         this.flightPurchased(flightPayment);

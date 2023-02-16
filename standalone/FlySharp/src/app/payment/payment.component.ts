@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class PaymentComponent implements OnInit {
 
   @Input() selectedFlight!: Flight;
-  @Output() paymentConfirmed: EventEmitter<FlightPayment> = new EventEmitter();
+  @Output() paymentConfirmed: EventEmitter<FlightPaymentEvent> = new EventEmitter();
 
   model: Payment = new Payment();
 
@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     //alert(JSON.stringify(this.payForm.value));
-    const payment = new FlightPayment(this.selectedFlight, this.payForm.value as Payment);
+    const payment = new FlightPaymentEvent(this.selectedFlight, this.payForm.value as Payment);
     this.paymentConfirmed.emit(payment);
     this.dialogRef.close(payment);
   }
@@ -65,10 +65,10 @@ export class PaymentComponent implements OnInit {
   }  
 
   close() {
-    this.dialogRef.close(new FlightPayment(this.selectedFlight, this.payForm.value as Payment));
+    this.dialogRef.close(new FlightPaymentEvent(this.selectedFlight, this.payForm.value as Payment));
   }
 }
 
-export class FlightPayment {
+export class FlightPaymentEvent {
   constructor( public flight: Flight, public payment: Payment){}
 }
