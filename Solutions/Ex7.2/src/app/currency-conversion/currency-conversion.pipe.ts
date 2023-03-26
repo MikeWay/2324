@@ -1,14 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'currencyConversion'
+  name: 'currencyConversion',
+  standalone: true
 })
 export class CurrencyConversionPipe implements PipeTransform {
 
-  RATE = 0.8;
+  transform(value: number, symbol = '£', rate = 0.9): string {
 
-  transform(value: number, rate: number = 1.0): string {
-    return 'USD ' + (value * rate).toFixed(2);
+    return symbol + (value * rate).toFixed(2);
+
   }
 
 }

@@ -8,6 +8,7 @@
     "build": "tsc",
     "serve": "ts-node src/server.ts",
     "start": "nodemon",
+    "run-server": "node ./build/server.js",
     "prodbuild": "webpack --mode production",
     "install_service": "webpack --mode production & node ./install.js remove & node ./install.js",
     "uninstall": "node install.js remove",

@@ -1,34 +1,36 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
-import { AppComponent } from './app.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 import { HomeComponent } from './home/home.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 
 const routes: Routes = [
-  {
+	{
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
-  },
-  {
-    path: '',
-    component: AppComponent
-  },
+  },  
   {
     path: 'home',
     component: HomeComponent
   },
   {
     path: 'buy',
-    component: BuyFlightComponent,
-    pathMatch: 'prefix'
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },
   {
     path: 'buy/:origin',
-    component: BuyFlightComponent
-  },
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
+  },  
+  {
+    path: 'buy/:origin/:destination',
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
+  },   
+
+  /*
+{path: 'admin', loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)}  
+  */
   {
     path: 'myflights',
     component: MyFlightsComponent
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./accounts/accounts.module').then(mod => mod.AccountsModule)
+  },
+  {
+    path: '**',
+    component: HomeComponent
   }
 ];
 
