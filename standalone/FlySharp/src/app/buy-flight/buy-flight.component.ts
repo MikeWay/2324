@@ -6,7 +6,7 @@ import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.compone
 import { CurrencyConversionPipe } from '../currency-conversion.pipe';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { ApplicationStateService } from '../application-state/application-state.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -21,7 +21,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class BuyFlightComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line: variable-name
-  flights: Flight[] = new Array<Flight>();
+  //flights: Flight[] = new Array<Flight>();
+  flights$ : Observable<Flight[]> = this.state.flights$;
   showBuyFlights = false;
   flightCount = 0;
   // tslint:disable-next-line: variable-name
@@ -58,9 +59,8 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
     this.state.loadFlights(start, count, this.originFilter, this.destinationFilter);
     this.flightsSubscription = this.state.flights$.subscribe({
       next: (flights: Flight[]) => {
-        this.flights = flights;
         this.showBuyFlights = true;
-        this.nextFlightToDisplayIndex = this.firstDisplayedFlightIndex + this.flights.length
+        this.nextFlightToDisplayIndex = this.firstDisplayedFlightIndex + flights.length
       },
       error: (error: string) => this.errorMessage = error
     });
