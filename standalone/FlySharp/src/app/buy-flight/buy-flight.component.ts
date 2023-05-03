@@ -9,7 +9,7 @@ import { ApplicationStateService } from '../application-state/application-state.
 import { Observable, map, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
-const FLIGHTS_PER_PAGE = 10;
+const FLIGHTS_PER_PAGE = 20;
 export const SHOW_BUY_FLIGHTS_STATE = new InjectionToken<boolean>('ShowBuyFlightsState');
 
 @Component({
@@ -24,6 +24,7 @@ export const SHOW_BUY_FLIGHTS_STATE = new InjectionToken<boolean>('ShowBuyFlight
 export class BuyFlightComponent implements OnInit{
 
   showBuyFlights = true; 
+  flightCount = 0;
   _selectedFlight: Flight | undefined;
 
   originFilter = '';
@@ -47,10 +48,8 @@ export class BuyFlightComponent implements OnInit{
     return this.state.flights$.pipe(
       map((flights: Flight[]) => flights.filter((flight) => this.orgDestFilter(flight))),
       map((flights: Flight[]) => {
-        const flightCount = flights.length;
-        this.showNext = (this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE + 1) < flightCount;
-        this.showPrevious = this.firstDisplayedFlightIndex > 0;
-        const end = this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= flightCount ? this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE: flightCount;
+        this.flightCount = flights.length;
+        const end = this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount ? this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE: this.flightCount;
         return flights.slice(this.firstDisplayedFlightIndex,end)     
       }
     ));
@@ -61,6 +60,12 @@ export class BuyFlightComponent implements OnInit{
     this.activatedRoute.params.subscribe(params => {
       this.originFilter = params['origin'];
       this.destinationFilter = params['destination'];});
+
+  }
+
+  ngAfterContentChecked(): void {
+    this.showNext = (this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE + 1) < this.flightCount; 
+    this.showPrevious = this.firstDisplayedFlightIndex > 0;   
   }
 
   /**

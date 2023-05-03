@@ -75,17 +75,14 @@ class MockApplicationService {
   flightsData = FLIGHTS_25;
 
   constructor(){
-    this.flightsSubject.next(FLIGHTS);
+    this.setFlights(FLIGHTS_25);
   }
 
-  // loadFlights(start: number, count: number, origin?: string, destination?: string){
-  //   const f = this.flightsData.slice(start, start + count);
-  //   this.flightsSubject.next(f);
-  //   this.flightsCountSubject.next(this.flightsData.length);
+  setFlights(flights: Flight[]){
+    this.flightsSubject.next(flights);
+  }
 
-  // }
   getAccount = () => of({});
-
 
   displayCurrency = {'symbol': '£', rate: 1};
 }
@@ -98,19 +95,9 @@ describe('BuyFlightComponent', () => {
   let mockApplicationService = new MockApplicationService();   
 
 
-  // const applicationService = jasmine.createSpyObj('ApplicationStateService', ['getAccount', 'loadFlights'],
-  //   {
-  //     'flights$': of(FLIGHTS ),
-  //     'flightsCount$': of(FLIGHTS.length),
-  //     'displayCurrency': {'symbol': '£', rate: 1}
-  //   });
-  //   applicationService.getAccount.and.returnValue(of(''));
-  //   applicationService.loadFlights.and.returnValues(FLIGHTS.slice(0,2));
-  //   applicationService.flights$ = of(FLIGHTS.slice(0,2));
-
   beforeEach(async () => {
     mockApplicationService = new MockApplicationService();    
-//    spyOn(mockApplicationService, 'loadFlights').and.callThrough();
+
     await TestBed.configureTestingModule({
       declarations: [MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe],
       providers: [
@@ -179,7 +166,7 @@ describe('BuyFlightComponent', () => {
     expect(rows.length).toBe(20);
   });
 
-  xit('should load a second page of flights when next() is called', ()=> {
+  it('should load a second page of flights when next() is called', ()=> {
     fixture.detectChanges();
     component.onNext();
     fixture.detectChanges();
@@ -187,12 +174,12 @@ describe('BuyFlightComponent', () => {
     expect(rows.length).toBe(5);    
   });
 
-  xit('should have a flight number of FS1 in row 1', ()=> {  
+  it('should have a flight number of FS1 in row 1', ()=> {  
     fixture.detectChanges();
     expect(getTableCellData(fixture, 1, 2)).toBe("FS1");    
   }); 
 
-  xit('should have a flight number of FS21 in row 1 after next() is called', ()=> {
+  it('should have a flight number of FS21 in row 1 after next() is called', ()=> {
     
     fixture.detectChanges();
     component.onNext();
@@ -200,7 +187,7 @@ describe('BuyFlightComponent', () => {
     expect(getTableCellData(fixture, 1, 2)).toBe("FS21");    
   });  
 
-  xit('should show the 1st page of 20 flights when next() is followed by previous()', ()=> {
+  it('should show the 1st page of 20 flights when next() is followed by previous()', ()=> {
     fixture.detectChanges();
     component.onNext();
     fixture.detectChanges();
@@ -215,18 +202,18 @@ describe('BuyFlightComponent', () => {
 
 //mockApplicationService
 
-xit('should have a flight number of FS41 in row 1 after next() is called twice', ()=> {
-  mockApplicationService.flightsData = FLIGHTS_43;
+it('should have a flight number of FS41 in row 1 after next() is called twice', ()=> {
+  mockApplicationService.setFlights(FLIGHTS_43);
 //  mockApplicationService.loadFlights(0,20);  
   fixture.detectChanges();
   component.onNext();
   fixture.detectChanges();
   component.onNext();
-  fixture.detectChanges();  
+  fixture.detectChanges(); 
   expect(getTableCellData(fixture, 1, 2)).toBe("FS41");    
 });  
 
-xit('should have a flight number of FS21 in row 1 after next() is called twice then previous() once', ()=> {
+it('should have a flight number of FS21 in row 1 after next() is called twice then previous() once', ()=> {
   mockApplicationService.flightsData = FLIGHTS_43;
 //  mockApplicationService.loadFlights(0,20);  
   fixture.detectChanges();
