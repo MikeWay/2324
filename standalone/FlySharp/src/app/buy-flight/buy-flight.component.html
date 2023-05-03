@@ -62,13 +62,14 @@
         <div class="col-md-2  ">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" [class.disabled]="firstDisplayedFlightIndex===0" aria-label="Previous" (click)="onPrevious()">
+                    <a class="page-link" [class.disabled]="!showPrevious" aria-label="Previous" (click)="onPrevious()">
                         <span>Previous</span>
                     </a>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" [class.disabled]="nextFlightToDisplayIndex >= flightCount" aria-label="Next" (click)="onNext()">                      
+                    <!--                     <a class="page-link" [class.disabled]="nextFlightToDisplayIndex >= flightCount" aria-label="Next" (click)="onNext()">                      -->
+                    <a class="page-link" [class.disabled]="!showNext" aria-label="Next" (click)="onNext()">                      
                         <span>Next</span>
                     </a>
                 </li>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject} from 'rxjs';
+import { ReplaySubject, switchMap, take} from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { FlightsService } from '../flights/flights.service';
 import { Account } from '../model/account';
@@ -19,6 +19,8 @@ import { Flight } from '../model/flight';
 export class ApplicationStateService {
   // Cache of myFlights
   myFlights: Flight[] = new Array<Flight>();
+  // Cache of available flights
+  flightCache: Flight[] = new Array<Flight>();
 
   // Subjects used to replay the data if the params have not changed
   private flightsSubject = new ReplaySubject<Flight[]>(1);
@@ -26,7 +28,7 @@ export class ApplicationStateService {
   private flightsCountSubject = new ReplaySubject<number>(1);
 
   // Observables that will be consumed by the client
-  flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
+  _flights$: Observable<Flight[]> = this.flightsSubject.asObservable();
   flightsCount$: Observable<number> = this.flightsCountSubject.asObservable();
   myFlights$: Observable<Flight[]> = this.myFlightsSubject.asObservable();
 
@@ -42,29 +44,48 @@ export class ApplicationStateService {
   constructor(private flightsService: FlightsService) { 
     // Pre-load any myflights from the server
     flightsService.getMyFlights().subscribe((flights:Flight[]) => this.myFlights=flights);
+    this.loadAllFlights();
     this.loadMyFlights();
   }
 
-  public loadFlights(start: number, count: number, origin?: string, destination?: string){
-    if(start === this.lastStart && count === this .lastCount && origin === this.lastOrigin && destination === this.lastDestination){
-      // If the parameters have not changed then don't do a new fetch
-      return;
-    }
-    this.lastStart = start;
-    this .lastCount = count;
-    this.lastOrigin = origin;
-    this.lastDestination = destination;
-    this.flightsService.getChunkOfFlights(start, count, origin, destination).subscribe({
-      next: (flights: Flight[]) => {
-        this.flightsSubject.next(flights);
-      }
-    });
-    this.flightsService.getNumberOfFlights(origin, destination).subscribe({
-      next: count => this.flightsCountSubject.next(count)
-    });
-
+  /*
+    Revised strategy: loadFlights triggers loading of flights from back end.
+    FlightsService then loads in batches of 10 into AppState service
+    AppService holds the values in a ReplaySubject
+    Filtering takes place client side using Observable- Filter
+   */
+  private loadAllFlights(origin?: string, destination?: string){
+    console.log("Load all flights");
+    this.flightsService.getNumberOfFlights(origin, destination).pipe(
+                    take(1),
+                    switchMap((totalFlightCount: number)=>{
+                      console.log(`There are ${totalFlightCount} flights available`);
+                        const start = 0;
+                        const count = 10;   
+                        this.getFlights(start,count,totalFlightCount,origin,destination);                 
+                        return this.flights$;
+                    })).subscribe();
   } 
 
+private getFlights(start: number, count: number, totalFlightCount: number, origin?: string, destination?: string){
+  this.flightsService.getFlights(start, count, origin, destination).subscribe({
+    next: (flights: Flight[]) => {
+      totalFlightCount = totalFlightCount - flights.length;
+      console.log(`Pushing flight (cache now ${this.flightCache.length})`);
+      flights.forEach(flight => this.flightCache.push(flight));
+      if(flights.length > 0){
+        this.getFlights(start+count, count, totalFlightCount, origin, destination);
+      }
+      console.log(`Calling next() on flightsSubject cache size = ${this.flightCache.length}`);
+      this.flightsSubject.next(this.flightCache);
+    }
+  });
+}
+
+get flights$(){
+  //return of(this.flightCache.filter((flight) => flight.origin === 'LHR'));
+  return this._flights$;
+}
   public loadMyFlights(){
     this.flightsService.getMyFlights().subscribe({
       next: (flights: Flight[]) => {
@@ -91,4 +112,11 @@ export class ApplicationStateService {
     return this.flightsService.updateAccount(account);
   }
 
+  /**
+   * Creates a new observable from the current content of the flight cache
+   */
+  // get flights$(): Observable<Flight[]>{
+  //   console.log(`Getter for flight$ (${this.flightCache.length})`);
+  //   return of(this.flightCache);
+  // }
 }

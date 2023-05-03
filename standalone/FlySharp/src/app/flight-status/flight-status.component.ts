@@ -20,10 +20,10 @@ export class FlightStatusComponent implements OnInit {
 
   ngOnInit(): void {
     this.socket = this.flightStatusService.connect('ws://localhost:8081');
-    this.socket.subscribe(
-      dataFromServer => this.flightStatus = dataFromServer as unknown as string,  // Cast needed as input to Socket is Record and subscription is a string!
-      err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
-    );
+    this.socket.subscribe({
+      next: dataFromServer => this.flightStatus = dataFromServer as unknown as string,  // Cast needed as input to Socket is Record and subscription is a string!
+      error: err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
+    });
     this.socket.next({ airport: 'JFK' });
   }
 }

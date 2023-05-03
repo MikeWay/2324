@@ -14,23 +14,26 @@ export class FlightsService {
   constructor(private http: HttpClient) { }
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  public getFlights(): Observable<Flight[]> {
+  /**
+   * Loads all the flights from the server. Potentially slow over poor link and/or large number of flights
+   * @returns An Observable<Flight[]> providing access to all of the loaded flights
+   */
+  public getAllFlights(): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/allflights';
 
     return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
-  // @Deprecated!
-  // public getChunkOfFlightsUsingPost( start: number, num: number, org?: string, dest?: string): Observable<Flight[]> {
-  //   const url = 'http://localhost:8080/flightserver/flights';
-  //   const data = {start, num};
-  //   const resultObservable = this.http.post<Flight[]>(url, JSON.stringify(data), {headers: this.headers})
-  //                             .pipe(catchError(this.handleError));
-  //   return resultObservable;
-  // }
+/**
+ * Loads a block of flights
+ * @param start Index of 1st flight to load
+ * @param num The number of flights to load
+ * @param org Optional origin filter
+ * @param dest Optional destination filter
+ * @returns An Observable containing the loaded array of flights
+ */
 
-
-  public getChunkOfFlights( start: number, num: number, org?: string, dest?: string): Observable<Flight[]> {
+  public getFlights( start: number, num: number, org?: string, dest?: string): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/flights';
     
     let params = new HttpParams()

@@ -6,9 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { AppComponent } from './app.component';
-import { ApplicationStateService } from './application-state/application-state.service';
 
 @Component({
   selector: 'app-home',

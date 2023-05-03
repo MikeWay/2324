@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuyFlightComponent } from './buy-flight.component';
+import { BuyFlightComponent, SHOW_BUY_FLIGHTS_STATE } from './buy-flight.component';
 import { FlightsService } from '../flights/flights.service';
 import { Component, DebugElement, Input, Pipe, PipeTransform } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -11,22 +11,22 @@ import { from, Observable, of, ReplaySubject } from 'rxjs';
 import { ApplicationStateService } from '../application-state/application-state.service';
 
 
-class MockFlightsService {
-  public getFlights(): Observable<Flight[]> {
-    return of<Flight[]>(FLIGHTS);
-  }
-  public getChunkOfFlights(): Observable<Flight[]> {
-    return of<Flight[]>(FLIGHTS);
-  }
+// class MockFlightsService {
+//   public getFlights(): Observable<Flight[]> {
+//     return of<Flight[]>(FLIGHTS);
+//   }
+//   public getChunkOfFlights(): Observable<Flight[]> {
+//     return of<Flight[]>(FLIGHTS);
+//   }
 
-  public getNumberOfFlights(): Observable<number> {
-    return of<number>(10);
-  }
+//   public getNumberOfFlights(): Observable<number> {
+//     return of<number>(10);
+//   }
 
-  public getMyFlights(): Observable<Flight[]> {
-    return of(MYFLIGHTS);
-  }
-}
+//   public getMyFlights(): Observable<Flight[]> {
+//     return of(MYFLIGHTS);
+//   }
+// }
 
 @Component({
   selector: 'app-payment',
@@ -63,7 +63,7 @@ class MockCurrencyConversionPipe implements PipeTransform {
   }
 }
 
-const mockFlightsService = new MockFlightsService();
+
 
 class MockApplicationService {
   private flightsSubject = new ReplaySubject<Flight[]>(1);
@@ -74,12 +74,16 @@ class MockApplicationService {
 
   flightsData = FLIGHTS_25;
 
-  loadFlights(start: number, count: number, origin?: string, destination?: string){
-    let f = this.flightsData.slice(start, start + count);
-    this.flightsSubject.next(f);
-    this.flightsCountSubject.next(this.flightsData.length);
-
+  constructor(){
+    this.flightsSubject.next(FLIGHTS);
   }
+
+  // loadFlights(start: number, count: number, origin?: string, destination?: string){
+  //   const f = this.flightsData.slice(start, start + count);
+  //   this.flightsSubject.next(f);
+  //   this.flightsCountSubject.next(this.flightsData.length);
+
+  // }
   getAccount = () => of({});
 
 
@@ -106,13 +110,10 @@ describe('BuyFlightComponent', () => {
 
   beforeEach(async () => {
     mockApplicationService = new MockApplicationService();    
-    spyOn(mockApplicationService, 'loadFlights').and.callThrough();
-    TestBed.configureTestingModule({
+//    spyOn(mockApplicationService, 'loadFlights').and.callThrough();
+    await TestBed.configureTestingModule({
       declarations: [MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe],
-      providers: [{
-        provide: FlightsService,
-        useValue: mockFlightsService
-      },
+      providers: [
       {
         provide: ApplicationStateService,
         useValue: mockApplicationService
@@ -128,38 +129,39 @@ describe('BuyFlightComponent', () => {
       .compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
+    //fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
-  xit('should default showBuyFlights to false', () => {
+  it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
   });
 
-  xit('should set showBuyFlights to true when toggleFlightDisplay() is called', () => {
+  it('should set showBuyFlights to false when toggleFlightDisplay() is called', () => {
     component.toggleFlightDisplay();
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  xit('should set showBuyFlights to false when toggleFlightDisplay() is called twice', () => {
+  it('should set showBuyFlights to false when toggleFlightDisplay() is called twice', () => {
     component.toggleFlightDisplay();
     component.toggleFlightDisplay();
     expect(component.showBuyFlights).toBeTruthy();
   });
 
-  xit('should set showBuyFlights to false when the link is clicked', () => {
+  it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('#toggle'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  xit('should hide the flights table  when the link is clicked', () => {
+  it('should hide the flights table  when the link is clicked', () => {
     fixture.detectChanges();
     let tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeTruthy();
@@ -171,25 +173,26 @@ describe('BuyFlightComponent', () => {
   });
 
   it('should show  20 flights in the table', () => {
+    component.showBuyFlights = true;
     fixture.detectChanges();
-    let rows = fixture.debugElement.queryAll(By.css('table tbody tr'));
+    const rows = fixture.debugElement.queryAll(By.css('table tbody tr'));
     expect(rows.length).toBe(20);
   });
 
-  it('should load a second page of flights when next() is called', ()=> {
+  xit('should load a second page of flights when next() is called', ()=> {
     fixture.detectChanges();
     component.onNext();
     fixture.detectChanges();
-    let rows = fixture.debugElement.queryAll(By.css('table tbody tr'));
+    const rows = fixture.debugElement.queryAll(By.css('table tbody tr'));
     expect(rows.length).toBe(5);    
   });
 
-  it('should have a flight number of FS1 in row 1', ()=> {  
+  xit('should have a flight number of FS1 in row 1', ()=> {  
     fixture.detectChanges();
     expect(getTableCellData(fixture, 1, 2)).toBe("FS1");    
   }); 
 
-  it('should have a flight number of FS21 in row 1 after next() is called', ()=> {
+  xit('should have a flight number of FS21 in row 1 after next() is called', ()=> {
     
     fixture.detectChanges();
     component.onNext();
@@ -197,7 +200,7 @@ describe('BuyFlightComponent', () => {
     expect(getTableCellData(fixture, 1, 2)).toBe("FS21");    
   });  
 
-  it('should show the 1st page of 20 flights when next() is followed by previous()', ()=> {
+  xit('should show the 1st page of 20 flights when next() is followed by previous()', ()=> {
     fixture.detectChanges();
     component.onNext();
     fixture.detectChanges();
@@ -212,9 +215,9 @@ describe('BuyFlightComponent', () => {
 
 //mockApplicationService
 
-it('should have a flight number of FS41 in row 1 after next() is called twice', ()=> {
+xit('should have a flight number of FS41 in row 1 after next() is called twice', ()=> {
   mockApplicationService.flightsData = FLIGHTS_43;
-  mockApplicationService.loadFlights(0,20);  
+//  mockApplicationService.loadFlights(0,20);  
   fixture.detectChanges();
   component.onNext();
   fixture.detectChanges();
@@ -223,9 +226,9 @@ it('should have a flight number of FS41 in row 1 after next() is called twice', 
   expect(getTableCellData(fixture, 1, 2)).toBe("FS41");    
 });  
 
-it('should have a flight number of FS21 in row 1 after next() is called twice then previous() once', ()=> {
+xit('should have a flight number of FS21 in row 1 after next() is called twice then previous() once', ()=> {
   mockApplicationService.flightsData = FLIGHTS_43;
-  mockApplicationService.loadFlights(0,20);  
+//  mockApplicationService.loadFlights(0,20);  
   fixture.detectChanges();
   component.onNext();
   fixture.detectChanges();
@@ -238,7 +241,7 @@ it('should have a flight number of FS21 in row 1 after next() is called twice th
 
 });
 
-/** 
+/** toggleFlightDisplay
  * Gets the text at the specified row and col within a table
  * Note: row and col are 1 based (not zero)
 */

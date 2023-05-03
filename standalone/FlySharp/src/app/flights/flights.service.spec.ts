@@ -34,7 +34,7 @@ describe('FlightsService', () => {
   it('should do something with HTTP!)', inject([FlightsService], (service: FlightsService) => {
     //
     // expect(service.getFlights().length).toBe(5);
-    service.getFlights().subscribe((flights: Flight[]) => {
+    service.getAllFlights().subscribe((flights: Flight[]) => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
     });
 
@@ -59,7 +59,7 @@ describe('FlightsService', () => {
   }));
 
   it('should get a chunk of flights',inject([FlightsService], (service: FlightsService) => {
-    service.getChunkOfFlights(0,20).subscribe({
+    service.getFlights(0,20).subscribe({
       next: (flights: Flight[])=>{
         expect(flights).toEqual(FLIGHTS);
       }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, InjectionToken, OnInit, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Flight } from '../model/flight';
@@ -6,9 +6,11 @@ import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.compone
 import { CurrencyConversionPipe } from '../currency-conversion.pipe';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { ApplicationStateService } from '../application-state/application-state.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
+const FLIGHTS_PER_PAGE = 10;
+export const SHOW_BUY_FLIGHTS_STATE = new InjectionToken<boolean>('ShowBuyFlightsState');
 
 @Component({
   selector: 'app-buy-flight',
@@ -19,13 +21,9 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './buy-flight.component.html',
   styleUrls: ['./buy-flight.component.scss']
 })
-export class BuyFlightComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line: variable-name
-  //flights: Flight[] = new Array<Flight>();
-  flights$ : Observable<Flight[]> = this.state.flights$;
-  showBuyFlights = false;
-  flightCount = 0;
-  // tslint:disable-next-line: variable-name
+export class BuyFlightComponent implements OnInit{
+
+  showBuyFlights = true; 
   _selectedFlight: Flight | undefined;
 
   originFilter = '';
@@ -36,37 +34,48 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
   firstDisplayedFlightIndex = 0;
   nextFlightToDisplayIndex = 0;
   numFlights = 0;
+  showNext = false;
+  showPrevious = false;
 
-  private flightsSubscription: Subscription | undefined;
+  constructor(public state: ApplicationStateService, 
+                private activatedRoute: ActivatedRoute, 
+                private router: Router, 
+                public matDialog: MatDialog)  
+    {}
 
+  get flights$(): Observable<Flight[]>{
+    return this.state.flights$.pipe(
+      map((flights: Flight[]) => flights.filter((flight) => this.orgDestFilter(flight))),
+      map((flights: Flight[]) => {
+        const flightCount = flights.length;
+        this.showNext = (this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE + 1) < flightCount;
+        this.showPrevious = this.firstDisplayedFlightIndex > 0;
+        const end = this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= flightCount ? this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE: flightCount;
+        return flights.slice(this.firstDisplayedFlightIndex,end)     
+      }
+    ));
+  }
 
-  constructor(public state: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router, public matDialog: MatDialog) { }
-
-
+  
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.originFilter = params['origin'];
       this.destinationFilter = params['destination'];});
-    this.loadFlights(this.firstDisplayedFlightIndex, 20);
   }
 
-  ngOnDestroy(): void {
-    if(this.flightsSubscription){
-      this.flightsSubscription.unsubscribe();
+  /**
+   * Origin/destination filter function.
+   * @param flight 
+   * @returns true if the flight matches the origin and destination
+   */
+  private orgDestFilter(flight: Flight): boolean{
+    if(this.originFilter && this.originFilter !== ''){
+      if(flight.origin !== this.originFilter) return false;
     }
-  }
-  private loadFlights(start: number, count: number) {
-    this.state.loadFlights(start, count, this.originFilter, this.destinationFilter);
-    this.flightsSubscription = this.state.flights$.subscribe({
-      next: (flights: Flight[]) => {
-        this.showBuyFlights = true;
-        this.nextFlightToDisplayIndex = this.firstDisplayedFlightIndex + flights.length
-      },
-      error: (error: string) => this.errorMessage = error
-    });
-    this.state.flightsCount$.subscribe({
-      next: (count) => this.flightCount = count
-    });
+    if(this.destinationFilter && this.destinationFilter !== ''){
+      if(flight.destination !== this.destinationFilter) return false;
+    }
+    return true;
   }
 
   toggleFlightDisplay(): void {
@@ -75,7 +84,7 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
 
   buyFlight(flight: Flight): void {
     this._selectedFlight = flight;
-    this.openModal();
+    this.openModalBuyFlightDialog();
   }
 
   get selectedFlight(): Flight | undefined {
@@ -99,31 +108,24 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
-    this.loadFlights(0, 20);
   }
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
-    this.loadFlights(0, 20);
   }
 
   onNext(): void {
-    if(this.firstDisplayedFlightIndex >= this.flightCount) return;
-    const numFlights = (this.nextFlightToDisplayIndex  + 20 >= this.flightCount)?this.flightCount - this.nextFlightToDisplayIndex: 20;
-    this.loadFlights(this.nextFlightToDisplayIndex, numFlights);
-    this.firstDisplayedFlightIndex = this.nextFlightToDisplayIndex;
-    this.nextFlightToDisplayIndex += numFlights;
+    this.firstDisplayedFlightIndex += FLIGHTS_PER_PAGE;
   }
 
 
   onPrevious(): void {
     // Don't load flights pre 0
-    if (this.firstDisplayedFlightIndex > 20) {
-      this.firstDisplayedFlightIndex -= 20;
+    if (this.firstDisplayedFlightIndex > FLIGHTS_PER_PAGE) {
+      this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
     } else {
       this.firstDisplayedFlightIndex = 0;
     }
-    this.loadFlights(this.firstDisplayedFlightIndex, 20);
   }
 
   /**
@@ -132,19 +134,13 @@ export class BuyFlightComponent implements OnInit, OnDestroy {
    */
 
   flightPurchased(payment: FlightPaymentEvent): void {
-      // Record Purchase -- maybe one day!
-
       // Update MyFlights
       this.state.addMyFlight(payment.flight);
-      this.router.navigate(['/myflights']);
-      // .subscribe({
-      //   next: (data) => this.router.navigate(['/myflights']),
-      //   error: (msg: string) => this.errorMessage = msg
-      // });     
+      this.router.navigate(['/myflights']);  
   }
 
 
-  openModal() {
+  openModalBuyFlightDialog() {
     const dialogConfig = {
     // The user can't close the dialog by clicking outside its body
       disableClose: true,
