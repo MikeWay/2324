@@ -46,7 +46,7 @@ export class BuyFlightComponent implements OnInit{
 
   get flights$(): Observable<Flight[]>{
     return this.state.flights$.pipe(
-      map((flights: Flight[]) => flights.filter((flight) => this.orgDestFilter(flight))),
+      map((flights: Flight[]) => flights.filter((flight) => this.orginDestinationFilter(flight))),
       map((flights: Flight[]) => {
         this.flightCount = flights.length;
         const end = this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount ? this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE: this.flightCount;
@@ -58,8 +58,8 @@ export class BuyFlightComponent implements OnInit{
   
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.originFilter = params['origin'];
-      this.destinationFilter = params['destination'];});
+      if(params['origin']) this.originFilter = params['origin'];
+      if(params['destination']) this.destinationFilter = params['destination'];});
 
   }
 
@@ -73,12 +73,12 @@ export class BuyFlightComponent implements OnInit{
    * @param flight 
    * @returns true if the flight matches the origin and destination
    */
-  private orgDestFilter(flight: Flight): boolean{
-    if(this.originFilter && this.originFilter !== ''){
-      if(flight.origin !== this.originFilter) return false;
+  private orginDestinationFilter(flight: Flight): boolean{
+    if(this.originFilter !== ''){
+      if(!flight.origin.startsWith(this.originFilter)) return false;
     }
     if(this.destinationFilter && this.destinationFilter !== ''){
-      if(flight.destination !== this.destinationFilter) return false;
+      if(!flight.destination.startsWith(this.destinationFilter)) return false;
     }
     return true;
   }

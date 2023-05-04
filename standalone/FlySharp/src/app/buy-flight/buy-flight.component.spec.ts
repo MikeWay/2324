@@ -200,11 +200,10 @@ describe('BuyFlightComponent', () => {
 
   });
 
-//mockApplicationService
+
 
 it('should have a flight number of FS41 in row 1 after next() is called twice', ()=> {
   mockApplicationService.setFlights(FLIGHTS_43);
-//  mockApplicationService.loadFlights(0,20);  
   fixture.detectChanges();
   component.onNext();
   fixture.detectChanges();
@@ -215,7 +214,7 @@ it('should have a flight number of FS41 in row 1 after next() is called twice', 
 
 it('should have a flight number of FS21 in row 1 after next() is called twice then previous() once', ()=> {
   mockApplicationService.flightsData = FLIGHTS_43;
-//  mockApplicationService.loadFlights(0,20);  
+ 
   fixture.detectChanges();
   component.onNext();
   fixture.detectChanges();
