@@ -8,24 +8,25 @@ import { Flight } from '../model/flight';
   styleUrls: ['./buy-flight.component.scss']
 })
 export class BuyFlightComponent implements OnInit {
-  flights! : Flight[];
-  selectedFlight: Flight | undefined;
+
+  flights!: Flight[];
   showBuyFlights = true;
+  selectedFlight: Flight | undefined;
 
-  constructor(private stateService: ApplicationStateService){}
+  constructor(private stateService: ApplicationStateService) { }
 
-  onFlightClick(flight : Flight): void {
-    this.selectedFlight = flight;
-
-}  
-  
-  onClickBuyFlights(){
+  onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
-  }  
-
-  ngOnInit(): void {
-    this.flights = this.stateService.getFlights();    
   }
 
+
+  onFlightClick(flight: Flight): void {
+    this.selectedFlight = flight;
+  }
+  
+  ngOnInit(): void {
+    this.flights = this.stateService.getFlights()
+  }
 }
+
 

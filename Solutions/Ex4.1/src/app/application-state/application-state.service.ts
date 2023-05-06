@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Flight } from '../model/flight';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
+import { Flight } from '../model/flight';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationStateService {
+  private _flights = FLIGHTS;
 
-  flights = FLIGHTS;
-
-
-  public getFlights(): Flight[] {
-    return this.flights;
+  getFlights(): Flight[] {
+    return this._flights;
   }
 
-  public getMyFlights(): Flight[] {
+  get myFlights(): Flight[] {
     return MYFLIGHTS;
   }
 }

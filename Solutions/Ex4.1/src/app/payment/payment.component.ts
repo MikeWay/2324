@@ -11,5 +11,4 @@ import { Flight } from '../model/flight';
 })
 export class PaymentComponent {
   @Input() selectedFlight: Flight | undefined;
-
 }
