@@ -8,9 +8,7 @@ import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    BuyFlightComponent
+    AppComponent, HomeComponent, BuyFlightComponent
   ],
   imports: [
     BrowserModule,
