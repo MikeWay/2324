@@ -106,47 +106,13 @@
               "src/**/*.html"
             ]
           }
-        },
-        "cypress-run": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "FlySharp:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "FlySharp:serve:production"
-            }
-          }
-        },
-        "cypress-open": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "watch": true,
-            "headless": false
-          }
-        },
-        "e2e": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "FlySharp:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "FlySharp:serve:production"
-            }
-          }
         }
       }
     }
   },
   "cli": {
     "schematicCollections": [
-      "@cypress/schematic",
-      "@angular-eslint/schematics",
-      "@schematics/angular"
-    ],
-    "analytics": "4a23902e-5d13-4942-840b-c428d6dce1e6"
+      "@angular-eslint/schematics"
+    ]
   }
 }
