@@ -1,29 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Flight } from '../model/flight';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
+import { Flight } from '../model/flight';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationStateService {
+  private _flights = FLIGHTS;
 
-  flights = FLIGHTS;
-
-  public getFlights(): Flight[] {
-    return this.flights;
+  getFlights(): Flight[] {
+    return this._flights;
   }
 
-  public getMyFlights(): Flight[] {
+  get myFlights(): Flight[] {
     return MYFLIGHTS;
   }
-
-  public loadFlights(start: number, count: number, origin?: string, destination?: string){
-    if (origin) {
-      this.flights = FLIGHTS.filter((flight: Flight) => {
-        return flight.origin.startsWith(origin as string);
-      });
-    } else {
-      this.flights = FLIGHTS;
-    }
-  }  
 }
