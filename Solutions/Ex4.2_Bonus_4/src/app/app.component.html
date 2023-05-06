@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button (click)='toggleNavbar()' class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }"  id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item" ><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item" ><a class="nav-link" href="#">Buy Flights</a></li>
+          <li class="nav-item" ><a class="nav-link" href="#">My Flights</a></li>
+          <li class="nav-item" ><a class="nav-link" href="#">Account</a></li>
+      </ul>     
+  </div>
+</nav>
+<main class="container-fluid d-flex h-100 flex-column">
+  <app-home></app-home>
+  <app-buy-flight></app-buy-flight>  
+</main>
