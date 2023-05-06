@@ -7,43 +7,45 @@ import { Flight } from '../model/flight';
   templateUrl: './buy-flight.component.html',
   styleUrls: ['./buy-flight.component.scss']
 })
-export class BuyFlightComponent {
-  _flights! : Flight[];
-  selectedFlight: Flight | undefined;
-  showBuyFlights = true;
-  originFilter = '';
-  destinationFilter ='';
+export class BuyFlightComponent implements OnInit {
 
-  constructor(private stateService: ApplicationStateService){}
+  _flights!: Flight[];
+  showBuyFlights = true;
+  selectedFlight: Flight | undefined;
+  originFilter = '';
+
+  constructor(private stateService: ApplicationStateService) { }
 
 	
-  loadFlights(start: number, count: number){
-    this.stateService.loadFlights(start, count, this.originFilter, this.destinationFilter);
-    this._flights = this.stateService.getFlights();
-  }
-
   get flights(): Flight[] {
-    this.loadFlights(0,20);
-    return this._flights;
+    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
+ 
   }
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
-  }  
+  }
 
-  onDestinationFilterChange(filterValue: string): void {
-    this.destinationFilter = filterValue;
-  }   
-
-  onFlightClick(flight : Flight): void {
-    this.selectedFlight = flight;
-
-}  
-  
-  onClickBuyFlights(){
+  onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
+  }
+
+  onFlightClick(flight: Flight): void {
+    this.selectedFlight = flight;
+  }
+
+
+  ngOnInit(): void {
+    this._flights = this.stateService.getFlights()
+  }
+
+	
+  private orginDestinationFilter(flight: Flight): boolean {
+    if(this.originFilter !== ''){
+      if(!flight.origin.startsWith(this.originFilter)) return false;  
+    }
+    return true;
   }  
-
-
 }
+
 
