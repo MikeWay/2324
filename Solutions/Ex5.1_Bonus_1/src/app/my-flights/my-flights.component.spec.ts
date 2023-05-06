@@ -6,12 +6,10 @@ describe('MyFlightsComponent', () => {
   let component: MyFlightsComponent;
   let fixture: ComponentFixture<MyFlightsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ MyFlightsComponent ]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [MyFlightsComponent]
+    });
     fixture = TestBed.createComponent(MyFlightsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
