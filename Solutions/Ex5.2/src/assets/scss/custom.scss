@@ -17,7 +17,7 @@ mat-sidenav-content {
   
   .active {
     font-weight: bolder;
-  }
+  }  
   
   .disabled {
     color: #ddd;
@@ -42,7 +42,4 @@ mat-sidenav-content {
   
   html, body { height: 100%; }
   body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-  .active {
-    font-weight: bolder;
-  }
+  main {margin-top: 2em}
