@@ -17,11 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'buy',
-    component: BuyFlightComponent
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },
   {
     path: 'buy/:origin/:destination',
-    component: BuyFlightComponent
+    loadComponent: () => import('./buy-flight/buy-flight.component').then(mod => mod.BuyFlightComponent)
   },  
   {
     path: 'myflights',
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    component: AccountComponent
+    loadChildren: () => import('./accounts/accounts.module').then(mod => mod.AccountsModule)
   },
   {
     path: '**',
