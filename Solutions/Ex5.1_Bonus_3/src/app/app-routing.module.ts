@@ -6,9 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 
 const routes: Routes = [
-	{
+  {
     path: '',
-    redirectTo: '/home',
+    component: HomeComponent,
     pathMatch: 'full'
   },  
   {
@@ -20,13 +20,9 @@ const routes: Routes = [
     component: BuyFlightComponent
   },
   {
-    path: 'buy/:origin',
-    component: BuyFlightComponent
-  },  
-  {
     path: 'buy/:origin/:destination',
     component: BuyFlightComponent
-  },   
+  },  
   {
     path: 'myflights',
     component: MyFlightsComponent

@@ -1,17 +1,7 @@
-<app-flight-filter (filterEmitter) = "onOriginFilterChange($event)" label="origin" [initialValue]="originFilter"></app-flight-filter>
-<app-flight-filter (filterEmitter) = "onDestinationFilterChange($event)" label="destination"></app-flight-filter>
-<table *ngIf="showBuyFlights" class="table table-condensed table-responsive">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Flight</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Price</th>
-        </tr>
-    </thead>    
+<app-flight-filter (filterEmitter) = "onOriginFilterChange($event)" label="Origin" [initialValue]='originFilter'></app-flight-filter>
+<app-flight-filter (filterEmitter) = "onDestinationFilterChange($event)" label="Destination" [initialValue]='destinationFilter'></app-flight-filter>
+<table class="table table-condensed table-responsive" *ngIf="showBuyFlights">
+    <thead><tr><th></th><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
     <tbody>
         <tr *ngFor="let flight of flights">
             <td><button (click)="onFlightClick(flight)" class="btn btn-primary btn-sm">Buy</button></td>
