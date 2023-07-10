@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'Fly Sharp';
   navbarOpen = false;
 
-  toggleNavbar() {
+  toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
-  }  
+  }
 }

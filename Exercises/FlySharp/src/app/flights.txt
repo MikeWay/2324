@@ -1,17 +1,3 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-buy-flight',
-  templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss']
-})
-export class BuyFlightComponent {
-
-  flights = FLIGHTS;
-  showBuyFlights = false;
-
-}
-
 const FLIGHTS = [
   {id: 11, flightNumber : 'FS1298', origin: 'LAX', destination : 'LHR', departDay : 'Monday',
   departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 99.99},
