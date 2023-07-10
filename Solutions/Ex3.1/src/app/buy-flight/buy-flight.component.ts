@@ -9,18 +9,19 @@ import { Flight } from '../model/flight';
 })
 export class BuyFlightComponent implements OnInit {
 
-  flights! : Flight[]; 
+  flights!: Flight[] ;
   showBuyFlights = true;
 
   constructor(private stateService: ApplicationStateService){}
-	
+
+
   onClickBuyFlights(){
     this.showBuyFlights = !this.showBuyFlights;
-  }  
+  }
 
   ngOnInit(): void {
-    this.flights = this.stateService.getFlights()
+    this.flights = this.stateService.getFlights(); 
   }  
-}
 
+}
 
