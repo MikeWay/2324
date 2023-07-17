@@ -11,6 +11,8 @@ export class BuyFlightComponent implements OnInit {
 
   flights!: Flight[] ;
   showBuyFlights = true;
+  selectedFlight: Flight | undefined;
+
 
   constructor(private stateService: ApplicationStateService){}
 
@@ -19,6 +21,10 @@ export class BuyFlightComponent implements OnInit {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
+  onFlightClick(flight: Flight){
+    this.selectedFlight = flight;
+  }
+  
   ngOnInit(): void {
     this.flights = this.stateService.getFlights(); 
   }  

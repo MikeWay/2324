@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { BuyFlightComponent } from './buy-flight/buy-flight.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PaymentComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

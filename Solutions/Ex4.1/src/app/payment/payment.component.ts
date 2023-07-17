@@ -10,5 +10,8 @@ import { Flight } from '../model/flight';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
-  @Input() selectedFlight: Flight | undefined;
+
+	@Input() 
+  selectedFlight: Flight | undefined;
+
 }
