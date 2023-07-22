@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./flight-filter.component.scss']
 })
 export class FlightFilterComponent {
+  @Input()
+  label='';
 
   @Output()
   filterEmitter = new EventEmitter<string>();

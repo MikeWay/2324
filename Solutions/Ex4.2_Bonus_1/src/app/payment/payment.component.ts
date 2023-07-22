@@ -10,14 +10,16 @@ import { Flight } from '../model/flight';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
-  _selectedFlight: Flight | undefined;
+
+	
+  private _selectedFlight: Flight | undefined;
 
   @Input()
-  get selectedFlight(): Flight| undefined {
+  public get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
+  public set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
+  }
 
-  set selectedFlight(flight: Flight | undefined) {
-    this._selectedFlight = flight;
-  }  
 }
