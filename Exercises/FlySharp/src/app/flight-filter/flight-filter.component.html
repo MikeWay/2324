@@ -1,1 +1,8 @@
-Filter Flights by {{label}}:<p><input #filter (keyup)="onFilterEnter(filter.value)"></p>
+<div class="row">
+    <div class="col-md-2 ">
+        Filter flights by {{label}}:
+    </div>
+    <div class="col-md-2 ">
+        <input #filter (keyup)="onFilterEnter(filter.value)">
+    </div>
+</div>
