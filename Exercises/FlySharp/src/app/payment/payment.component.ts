@@ -13,7 +13,8 @@ export class PaymentComponent {
 
 	
   private _selectedFlight: Flight | undefined;
-  
+
+  @Input()
   public get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }

@@ -6,13 +6,14 @@ import { Flight } from '../model/flight';
   providedIn: 'root'
 })
 export class ApplicationStateService {
-  private _flights = FLIGHTS;
 
-  getFlights(): Flight[] {
+  _flights = FLIGHTS;
+
+  public getFlights(): Flight[]{
     return this._flights;
   }
 
-  get myFlights(): Flight[] {
+  get myFlights() : Flight[]{
     return MYFLIGHTS;
-  }
+}
 }
