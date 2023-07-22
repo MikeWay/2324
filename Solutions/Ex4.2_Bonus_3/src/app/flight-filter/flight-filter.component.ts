@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 })
 export class FlightFilterComponent {
   @Input()
-  label = '';
+  label='';
+
   @Output()
   filterEmitter = new EventEmitter<string>();
-	
-  onFilterEnter( filterValue : string): void {
-    this.filterEmitter.emit(filterValue);
 
+  onFilterEnter(filterValue: string): void {
+    this.filterEmitter.emit(filterValue);
   }
 }
