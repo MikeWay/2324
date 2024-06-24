@@ -1,0 +1,6 @@
+Modules are no longer created by ng new
+
+CN: The bootsrap process no longer loads a module...
+CN: @Component decorator changed for start component -- imports RouterOutlet
+CN / MA: May need to discuss app.config.ts
+CN: bootstrapModule is now bootstrapApplication -- 
