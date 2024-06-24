@@ -4,7 +4,7 @@ import * as fs from "fs-extra";
 // var SRC_DIR_ROOT = "C:\\Course2324\\DoNows\\";
 // var TARGET_DIR_ROOT = "C:\\Course2324\\DoNow_Solutions\\";
 
-const SRC_DIR_ROOT = ".";
+const SRC_DIR_ROOT = "."; // CWD
 const TARGET_DIR_ROOT = "..";
 
 
@@ -14,10 +14,10 @@ console.log(process.argv);
 //Identify the DoNow from the cwd
 
 const CWD = process.cwd();
-const DO_NOW = CWD.slice(CWD.lastIndexOf('\\') + 1);
+const DO_NOW = CWD.slice(CWD.lastIndexOf('/') + 1);
 
 
-let destDir = `${TARGET_DIR_ROOT}\\${DO_NOW}-sol` ;
+let destDir = `${TARGET_DIR_ROOT}/${DO_NOW}-sol` ;
 //let destDir = `${targetDir}_SOL`;
 let srcDir = SRC_DIR_ROOT;
 
