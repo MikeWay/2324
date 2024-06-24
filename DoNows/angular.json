@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow22:build:production"
+              "buildTarget": "DoNow22:build:production"
             },
             "development": {
-              "browserTarget": "DoNow22:build:development"
+              "buildTarget": "DoNow22:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow22:build"
+            "buildTarget": "DoNow22:build"
           }
         },
         "test": {
@@ -151,10 +151,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow41:build:production"
+              "buildTarget": "DoNow41:build:production"
             },
             "development": {
-              "browserTarget": "DoNow41:build:development"
+              "buildTarget": "DoNow41:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -162,7 +162,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow41:build"
+            "buildTarget": "DoNow41:build"
           }
         },
         "test": {
@@ -242,10 +242,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow51:build:production"
+              "buildTarget": "DoNow51:build:production"
             },
             "development": {
-              "browserTarget": "DoNow51:build:development"
+              "buildTarget": "DoNow51:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -253,7 +253,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow51:build"
+            "buildTarget": "DoNow51:build"
           }
         },
         "test": {
@@ -333,10 +333,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow71:build:production"
+              "buildTarget": "DoNow71:build:production"
             },
             "development": {
-              "browserTarget": "DoNow71:build:development"
+              "buildTarget": "DoNow71:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -344,7 +344,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow71:build"
+            "buildTarget": "DoNow71:build"
           }
         },
         "test": {
@@ -424,10 +424,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow81:build:production"
+              "buildTarget": "DoNow81:build:production"
             },
             "development": {
-              "browserTarget": "DoNow81:build:development"
+              "buildTarget": "DoNow81:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -435,7 +435,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow81:build"
+            "buildTarget": "DoNow81:build"
           }
         },
         "test": {
@@ -515,10 +515,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow22Sol:build:production"
+              "buildTarget": "DoNow22Sol:build:production"
             },
             "development": {
-              "browserTarget": "DoNow22Sol:build:development"
+              "buildTarget": "DoNow22Sol:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -526,7 +526,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow22Sol:build"
+            "buildTarget": "DoNow22Sol:build"
           }
         },
         "test": {
@@ -606,10 +606,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow41Sol:build:production"
+              "buildTarget": "DoNow41Sol:build:production"
             },
             "development": {
-              "browserTarget": "DoNow41Sol:build:development"
+              "buildTarget": "DoNow41Sol:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -617,7 +617,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow41Sol:build"
+            "buildTarget": "DoNow41Sol:build"
           }
         },
         "test": {
@@ -697,10 +697,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow51Sol:build:production"
+              "buildTarget": "DoNow51Sol:build:production"
             },
             "development": {
-              "browserTarget": "DoNow51Sol:build:development"
+              "buildTarget": "DoNow51Sol:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -708,7 +708,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow51Sol:build"
+            "buildTarget": "DoNow51Sol:build"
           }
         },
         "test": {
@@ -788,10 +788,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow71Sol:build:production"
+              "buildTarget": "DoNow71Sol:build:production"
             },
             "development": {
-              "browserTarget": "DoNow71Sol:build:development"
+              "buildTarget": "DoNow71Sol:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -799,7 +799,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow71Sol:build"
+            "buildTarget": "DoNow71Sol:build"
           }
         },
         "test": {
@@ -879,10 +879,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "DoNow81Sol:build:production"
+              "buildTarget": "DoNow81Sol:build:production"
             },
             "development": {
-              "browserTarget": "DoNow81Sol:build:development"
+              "buildTarget": "DoNow81Sol:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -890,7 +890,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DoNow81Sol:build"
+            "buildTarget": "DoNow81Sol:build"
           }
         },
         "test": {
