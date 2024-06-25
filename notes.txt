@@ -1,3 +1,5 @@
 Module stuff has changed. All the notes around the bootstrap have to changed
 
-NEXT: Test DN22
+CN: Remove Module stuff from C2 -- shift to C6
+CN: Need to address standalone and imports prior to EX2.1
+//NEXT: Test DN22
