@@ -1,5 +1,12 @@
+CN: Need a quick mention of SASS / SCSS early on 
 Module stuff has changed. All the notes around the bootstrap have to changed
 
 CN: Remove Module stuff from C2 -- shift to C6
 CN: Need to address standalone and imports prior to EX2.1
 //NEXT: Test DN22
+
+EX 2.2 Need to use new for / if
+
+NEXT continue working on 2.2 from step 22. Verify that the steps use @for
+
+CN: Pre ex2.2 must show both @for and @if template constructs (Known as @for block and @if block)
