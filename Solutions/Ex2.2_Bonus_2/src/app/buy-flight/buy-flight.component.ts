@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss']
+  styleUrl: './buy-flight.component.scss'
 })
 export class BuyFlightComponent {
 
   flights = FLIGHTS;
-  showBuyFlights = false;
+  showBuyFlights=false;
 
-  onClickBuyFlights(){
-    this.showBuyFlights = !this.showBuyFlights;
-  }
-
+  onClickBuyFlights() {
+    this.showBuyFlights = ! this.showBuyFlights;
+  }  
 }
 
 const FLIGHTS = [
