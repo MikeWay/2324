@@ -7,16 +7,12 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, BuyFlightComponent, NgClass],
+  imports: [RouterOutlet, HomeComponent, BuyFlightComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
 
   title = 'Fly Sharp';
-  navbarOpen = false;
 
-  toggleNavBar() {
-    this.navbarOpen = ! this.navbarOpen;
-  }
 }
