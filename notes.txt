@@ -10,3 +10,4 @@ EX 2.2 Need to use new for / if
 NEXT continue working on 2.2 from step 22. Verify that the steps use @for
 
 CN: Pre ex2.2 must show both @for and @if template constructs (Known as @for block and @if block)
+CN: [ngClass] -- need to import NgClass for the binding to work
