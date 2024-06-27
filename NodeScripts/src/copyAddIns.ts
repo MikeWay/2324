@@ -20,6 +20,6 @@ if(process.argv.length < 3){
 
 console.log("Copy from " + srcDir + " to " + TARGET_DIR_ROOT);
 
-fs.copy(srcDir, TARGET_DIR_ROOT,  (err: Error) => {if (err) console.log("Failure" + err)});
+fs.copySync(srcDir, TARGET_DIR_ROOT);
 
 console.log("Copy add ins to exercise " + exercise + " complete");

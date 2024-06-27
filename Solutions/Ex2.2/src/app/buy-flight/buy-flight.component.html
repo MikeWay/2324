@@ -1,18 +1,17 @@
 @if (showBuyFlights){
-    <table>
-        <tbody>
-            @for (flight of flights; track flight.id) {
-            <tr>
-                <td>{{flight.flightNumber}}</td>
-                <td>{{flight.origin}}</td>
-                <td>{{flight.destination}}</td>
-                <td>{{flight.departDay}} {{flight.departTime}}</td>
-                <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
-
-                <td>{{flight.price}}</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+<table>
+    <tbody>
+        @for (flight of flights; track flight.id) {
+        <tr>
+            <td>{{flight.flightNumber}}</td>
+            <td>{{flight.origin}}</td>
+            <td>{{flight.destination}}</td>
+            <td>{{flight.departDay}} {{flight.departTime}}</td>
+            <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
+            <td>{{flight.price}}</td>
+        </tr>
+        }
+    </tbody>
+</table>
 }
-<a (click)="showBuyFlights = !showBuyFlights" href='#'>Toggle Flights</a>
+<a href='#' (click)="showBuyFlights = !showBuyFlights">Toggle Flights</a>

@@ -8,13 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './buy-flight.component.scss'
 })
 export class BuyFlightComponent {
-
-  flights = FLIGHTS;
-  showBuyFlights=false;
-
-  onClickBuyFlights() {
-    this.showBuyFlights = ! this.showBuyFlights;
-  }  
+  flights= FLIGHTS;
+  showBuyFlights = false;
 }
 
 const FLIGHTS = [
