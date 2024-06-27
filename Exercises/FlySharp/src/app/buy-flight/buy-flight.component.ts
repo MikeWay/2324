@@ -10,6 +10,10 @@ import { Component } from '@angular/core';
 export class BuyFlightComponent {
   flights= FLIGHTS;
   showBuyFlights = false;
+
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
+  }
 }
 
 const FLIGHTS = [
