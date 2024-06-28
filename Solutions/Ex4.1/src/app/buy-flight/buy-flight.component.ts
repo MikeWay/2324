@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
+import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [PaymentComponent],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss']
+  styleUrl: './buy-flight.component.scss'
 })
 export class BuyFlightComponent implements OnInit {
-
-  flights!: Flight[] ;
+  flights!: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
 
+  constructor(private stateService: ApplicationStateService)
+  {}
 
-  constructor(private stateService: ApplicationStateService){}
-
+  onFlightClick(flight: Flight){
+    this.selectedFlight = flight;
+  }
 
   onClickBuyFlights(){
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  onFlightClick(flight: Flight){
-    this.selectedFlight = flight;
-  }
-  
   ngOnInit(): void {
-    this.flights = this.stateService.getFlights(); 
+    this.flights = this.stateService.getFlights();  
   }  
-
 }
+
 

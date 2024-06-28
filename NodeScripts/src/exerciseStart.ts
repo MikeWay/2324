@@ -11,7 +11,7 @@ const EX_MAPPINGS = {
     "Ex2.2": "Ex2.1_Bonus",
     "Ex3.1": "Ex2.2_Bonus_3",
     "Ex4.1": "Ex3.1",
-	"Ex4.2": "Ex4.1_Bonus",
+	"Ex4.2": "Ex4.1_Bonus_1",
     // "Ex4.2": "Ex4.1_Bonus_2",
     "Ex5.1": "Ex4.2_Bonus_4",
     "Ex5.2": "Ex5.1_Bonus_3",
