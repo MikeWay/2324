@@ -3,6 +3,7 @@ import { ApplicationStateService } from '../application-state/application-state.
 import { Flight } from '../model/flight';
 import { PaymentComponent } from '../payment/payment.component';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-buy-flight',
@@ -18,7 +19,7 @@ export class BuyFlightComponent implements OnInit {
   originFilter = '';
   destinationFilter = '';
 
-  constructor(private stateService: ApplicationStateService)
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute)
   {}
 
   onFlightClick(flight: Flight){
@@ -55,6 +56,7 @@ export class BuyFlightComponent implements OnInit {
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  
+    this.activatedRoute.params.subscribe(params => {this.originFilter = params['origin'] !== undefined ? params['origin'] : ''});
   }  
 }
 
