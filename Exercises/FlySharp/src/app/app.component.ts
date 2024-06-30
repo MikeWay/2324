@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {NgClass} from '@angular/common'
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, BuyFlightComponent, NgClass],
+  imports: [RouterOutlet, HomeComponent, BuyFlightComponent, NgClass, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

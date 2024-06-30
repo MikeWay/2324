@@ -6,10 +6,12 @@ describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [BuyFlightComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [BuyFlightComponent]
+    })
+    .compileComponents();
+
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
