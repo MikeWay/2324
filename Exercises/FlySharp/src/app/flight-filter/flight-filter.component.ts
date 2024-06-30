@@ -10,6 +10,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class FlightFilterComponent {
   @Input()
   label = '';
+
+  @Input()
+  initialValue='';
   
   @Output()
   filterEmitter = new EventEmitter<string>();
