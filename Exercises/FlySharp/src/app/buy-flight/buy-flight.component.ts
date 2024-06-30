@@ -56,7 +56,10 @@ export class BuyFlightComponent implements OnInit {
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  
-    this.activatedRoute.params.subscribe(params => {this.originFilter = params['origin'] !== undefined ? params['origin'] : ''});
+    this.activatedRoute.params.subscribe(params => {
+      this.originFilter = params['origin'] !== undefined ? params['origin'] : '';
+      this.destinationFilter = params['destination'] !== undefined ? params['destination'] : '';
+    });
   }  
 }
 

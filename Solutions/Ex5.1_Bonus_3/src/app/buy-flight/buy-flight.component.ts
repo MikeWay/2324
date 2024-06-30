@@ -1,27 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
+import { PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [PaymentComponent, FlightFilterComponent],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss']
+  styleUrl: './buy-flight.component.scss'
 })
 export class BuyFlightComponent implements OnInit {
-
   _flights!: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
   destinationFilter = '';
 
-  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute) { }
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute)
+  {}
 
-	
-  get flights(): Flight[] {
-    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
- 
+  onFlightClick(flight: Flight){
+    this.selectedFlight = flight;
+  }
+
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
   }
 
   onOriginFilterChange(filterValue: string): void {
@@ -32,34 +38,28 @@ export class BuyFlightComponent implements OnInit {
     this.destinationFilter = filterValue;
   }  
 
-  onClickBuyFlights() {
-    this.showBuyFlights = !this.showBuyFlights;
+  get flights(): Flight[] {
+    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
   }
 
-  onFlightClick(flight: Flight): void {
-    this.selectedFlight = flight;
-  }
-
-
-  ngOnInit(): void {
-    this._flights = this.stateService.getFlights();
-    this.activatedRoute.params.subscribe({
-      next: params => {
-        this.originFilter = params['origin']?params['origin']:''
-        this.destinationFilter = params['destination']?params['destination']:''
-      }
-    })
-  }
-
-	
   private orginDestinationFilter(flight: Flight): boolean {
+
+    if(this.originFilter === '' && this.destinationFilter === '') return true;
     if(this.originFilter !== ''){
-      if(!flight.origin.startsWith(this.originFilter)) return false;  
+        if(!flight.origin.startsWith(this.originFilter)) return false;
     }
     if(this.destinationFilter !== ''){
-      if(!flight.destination.startsWith(this.destinationFilter)) return false;  
-    }    
+      if(!flight.destination.startsWith(this.destinationFilter)) return false;
+    }
     return true;
+  }
+
+  ngOnInit(): void {
+    this._flights = this.stateService.getFlights();  
+    this.activatedRoute.params.subscribe(params => {
+      this.originFilter = params['origin'] !== undefined ? params['origin'] : '';
+      this.destinationFilter = params['destination'] !== undefined ? params['destination'] : '';
+    });
   }  
 }
 
