@@ -7,7 +7,7 @@ CN: Need to address standalone and imports prior to EX2.1
 
 EX 2.2 Need to use new for / if
 
-NEXT continue working on 2.2 from step 22. Verify that the steps use @for
+
 
 CN: Pre ex2.2 must show both @for and @if template constructs (Known as @for block and @if block)
 CN: [ngClass] -- need to import NgClass for the binding to work
@@ -18,3 +18,8 @@ EX5.2
 1) Convert AccountsComponent to not standalone - before Step 3
 2) Need to look at the whole module load thing!
 3) Seems to work - needs tidy. Look at deffered component load for the 2nd bonus
+
+CN: Prior to 5.2 we need to discuss non-standalone components
+CN: Some of the stuff from earlier in the course ref modules will be needed here
+
+NEXT Finish Testing 5.2 Bonus_1 (the bit about @defer)
