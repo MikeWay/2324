@@ -13,3 +13,8 @@ CN: Pre ex2.2 must show both @for and @if template constructs (Known as @for blo
 CN: [ngClass] -- need to import NgClass for the binding to work
 
 CN: Router changes (see Ex5.1) due to non using a module. Loaded in app.config
+
+EX5.2
+1) Convert AccountsComponent to not standalone - before Step 3
+2) Need to look at the whole module load thing!
+3) Seems to work - needs tidy. Look at deffered component load for the 2nd bonus
