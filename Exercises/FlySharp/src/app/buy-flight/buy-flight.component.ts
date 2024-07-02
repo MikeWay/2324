@@ -4,11 +4,12 @@ import { Flight } from '../model/flight';
 import { PaymentComponent } from '../payment/payment.component';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { ActivatedRoute } from '@angular/router';
+import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
 @Component({
   selector: 'app-buy-flight',
   standalone: true,
-  imports: [PaymentComponent, FlightFilterComponent],
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
@@ -42,8 +43,17 @@ export class BuyFlightComponent implements OnInit {
     return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
   }
 
-  private orginDestinationFilter(flight: Flight): boolean {
+  get currencySymbol(): string {
+    return this.stateService.displayCurrency.symbol
+  }
 
+ 
+
+  get currencyRate(): number {
+    return this.stateService.displayCurrency.rate
+  }  
+
+  private orginDestinationFilter(flight: Flight): boolean {
     if(this.originFilter === '' && this.destinationFilter === '') return true;
     if(this.originFilter !== ''){
         if(!flight.origin.startsWith(this.originFilter)) return false;
@@ -53,6 +63,8 @@ export class BuyFlightComponent implements OnInit {
     }
     return true;
   }
+
+
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  

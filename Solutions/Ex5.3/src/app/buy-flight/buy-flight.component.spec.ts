@@ -8,7 +8,7 @@ describe('BuyFlightComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent ]
+      imports: [BuyFlightComponent]
     })
     .compileComponents();
 

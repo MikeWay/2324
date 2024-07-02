@@ -8,7 +8,7 @@ describe('FlightFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ FlightFilterComponent ]
+      imports: [FlightFilterComponent]
     })
     .compileComponents();
 

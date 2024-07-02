@@ -13,7 +13,7 @@
             <td>{{flight.destination}}</td>
             <td>{{flight.departDay}} {{flight.departTime}}</td>
             <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
-            <td>{{flight.price}}</td>
+            <td>{{flight.price | currencyConversion : currencySymbol : currencyRate}}</td>
         </tr>
         }
     </tbody>
