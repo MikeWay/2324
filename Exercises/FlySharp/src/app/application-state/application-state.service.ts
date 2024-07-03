@@ -17,7 +17,7 @@ export class ApplicationStateService {
   
    
   
-    displayCurrency: Currency = this.currencies[1];  
+    displayCurrency: Currency = this.currencies[2];  
 
   public getFlights(): Flight[] {
     return this._flights;
