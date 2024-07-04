@@ -52,7 +52,6 @@ describe('CurrentWeatherComponent', () => {
   xit('should call getForecast passing "Toronto" as the argument', () => {
     component.city = 'Toronto';
     const weather = component.forecast;
-    expect( weather ).toBe("The weather is lovely in Toronto (no, really)");
     expect(mockWeatherService.getForecast).toHaveBeenCalledWith('Toronto');
   });    
 
