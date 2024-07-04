@@ -12,18 +12,22 @@ describe('CurrentWeatherComponent', () => {
 
   beforeEach(async () => {
   // TODO 1 Uncomment the next line to create a Spy object  for the WeatherService
-  // mockWeatherService = jasmine.createSpyObj('WeatherService',['getForecast']);    
+  //mockWeatherService = jasmine.createSpyObj('WeatherService',['getForecast']);    
 
   // TODO 5 - Do this at the end! Remove the comments around the next 3 lines of code to enable the functionality
   // for the getForecast()
   // mockWeatherService.getForecast.and.callFake((city: string) => {
   //   return `Some weather ${city}`;
-  // });
+  // });The weather is lovely in Toronto (no, really)
 
   await TestBed.configureTestingModule({
       imports: [ CurrentWeatherComponent ],
-// TODO 2 - Uncomment the next line to provide the fake weather service  
-    //  providers: [{provide: WeatherService, useValue: mockWeatherService}]
+    }).overrideComponent(CurrentWeatherComponent, { 
+      remove: {providers: [WeatherService]}, // This code removes the real WeatherService from the dependency injector
+      add:{
+  // TODO 2 - Uncomment the next line to provide the fake weather service          
+        providers: [{provide: WeatherService, useValue: mockWeatherService}]
+      }
     })
     .compileComponents();
   });
@@ -47,6 +51,7 @@ describe('CurrentWeatherComponent', () => {
   xit('should call getForecast passing "Toronto" as the argument', () => {
     component.city = 'Toronto';
     const weather = component.forecast;
+    expect( weather ).toBe("The weather is lovely in Toronto (no, really)");
     expect(mockWeatherService.getForecast).toHaveBeenCalledWith('Toronto');
   });    
 

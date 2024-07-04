@@ -4,7 +4,6 @@ import { WeatherService } from '../weather/weather.service';
 @Component({
   selector: 'app-current-weather',
   standalone: true,
-  providers: [WeatherService],
   templateUrl: './current-weather.component.html',
   styleUrls: ['./current-weather.component.css']
 })

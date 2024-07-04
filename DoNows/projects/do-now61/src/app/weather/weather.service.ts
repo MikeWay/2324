@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: null
+  providedIn: 'root'
 })
 export class WeatherService {
 

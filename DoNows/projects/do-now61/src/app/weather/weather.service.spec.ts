@@ -7,7 +7,6 @@ describe('WeatherService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WeatherService]
     });
     service = TestBed.inject(WeatherService);
   });
