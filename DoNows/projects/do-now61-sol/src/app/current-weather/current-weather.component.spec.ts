@@ -23,10 +23,10 @@ describe('CurrentWeatherComponent', () => {
   await TestBed.configureTestingModule({
       imports: [ CurrentWeatherComponent ],
     }).overrideComponent(CurrentWeatherComponent, { 
-      // TODO 2 - Uncomment the next line to remove the real WeatherService from the dependency injector
+  // TODO 2 - Uncomment the next line to remove the real WeatherService from the dependency injector      
       remove: {providers: [WeatherService]}, 
       add:{
-      // TODO 3 - Uncomment the next line to provide the fake weather service          
+  // TODO 3 - Uncomment the next line to provide the fake weather service          
         providers: [{provide: WeatherService, useValue: mockWeatherService}]
       }
     })
