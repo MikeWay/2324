@@ -1,39 +1,31 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
-
-
-@Component({
-  selector: 'app-current-weather',
-  template:''
-})
-class MockWeatherComponent {
-  
-}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      declarations: [
+        AppComponent
+      ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'DoNow61' title`, () => {
+  it(`should have as title 'DoNow51'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('DoNow61');
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('DoNow51');
   });
 
-  it('should render title', () => {
+  it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Current Weather');
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to DoNow51!');
   });
 });
