@@ -29,3 +29,5 @@ NEXT Finish Testing 5.2 Bonus_1 (the bit about @defer)
 CN: Need to discuss overrideComponent() for testing standalone components prior to DN61
 
 CN and MA: Need to consider how usefull the DN62 actually is
+
+CN: Prior to ex6.1 must show diff of test module for standalone vs module based.
