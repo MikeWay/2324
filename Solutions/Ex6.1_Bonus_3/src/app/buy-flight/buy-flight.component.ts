@@ -1,70 +1,78 @@
-import { CommonModule } from '@angular/common';
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ApplicationStateService } from '../application-state/application-state.service';
-import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
-import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
 import { Flight } from '../model/flight';
 import { PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute } from '@angular/router';
+import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
 @Component({
   selector: 'app-buy-flight',
-  templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.scss'],
   standalone: true,
-  imports: [CommonModule, PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],  
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],
+  templateUrl: './buy-flight.component.html',
+  styleUrl: './buy-flight.component.scss'
 })
 export class BuyFlightComponent implements OnInit {
-  _flights! : Flight[];
-  selectedFlight: Flight | undefined;
+  _flights!: Flight[];
   showBuyFlights = true;
+  selectedFlight: Flight | undefined;
   originFilter = '';
-  destinationFilter ='';
+  destinationFilter = '';
 
-  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute){}
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute)
+  {}
 
-  
-  get currencySymbol(): string {
-    return this.stateService.displayCurrency.symbol
+  onFlightClick(flight: Flight){
+    this.selectedFlight = flight;
   }
 
-  get currencyRate(): number {
-    return this.stateService.displayCurrency.rate
-  }
-
-  loadFlights(start: number, count: number){
-    this.stateService.loadFlights(start, count, this.originFilter, this.destinationFilter);
-    this._flights = this.stateService.getFlights();
-  }
-
-  get flights(): Flight[] {
-    this.loadFlights(0,20);
-    return this._flights;
+  onClickBuyFlights(){
+    this.showBuyFlights = !this.showBuyFlights;
   }
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
-  }  
+  }
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
-  }   
-
-  onFlightClick(flight : Flight): void {
-    this.selectedFlight = flight;
-
-}  
-  
-  onClickBuyFlights(){
-    this.showBuyFlights = !this.showBuyFlights;
   }  
+
+  get flights(): Flight[] {
+    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
+  }
+
+  get currencySymbol(): string {
+    return this.stateService.displayCurrency.symbol
+  }
+
+ 
+
+  get currencyRate(): number {
+    return this.stateService.displayCurrency.rate
+  }  
+
+  private orginDestinationFilter(flight: Flight): boolean {
+    if(this.originFilter === '' && this.destinationFilter === '') return true;
+    if(this.originFilter !== ''){
+        if(!flight.origin.startsWith(this.originFilter)) return false;
+    }
+    if(this.destinationFilter !== ''){
+      if(!flight.destination.startsWith(this.destinationFilter)) return false;
+    }
+    return true;
+  }
+
+
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.originFilter = params['origin'];
-      this.destinationFilter = params['destination'];
+    this._flights = this.stateService.getFlights();  
+    this.activatedRoute.params.subscribe(params => {
+      this.originFilter = params['origin'] !== undefined ? params['origin'] : '';
+      this.destinationFilter = params['destination'] !== undefined ? params['destination'] : '';
     });
   }  
-
 }
+
 
