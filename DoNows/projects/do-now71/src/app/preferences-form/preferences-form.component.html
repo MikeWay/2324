@@ -4,26 +4,29 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" required [(ngModel)]="model.name" name="name" id="name" >
-  
       </div>
+    
       <div class="form-group">
         <label for="location">Location</label>
         <input type="text" class="form-control" required [(ngModel)]="model.location" name="location" id="location">
-  
       </div>
   
   
       <div class="form-group">
         <label for="tempUnits">Temperature Units</label>
         <select class="form-control" required [(ngModel)]="model.temperatureUnits" name="temperatureUnits" id="tempUnits">
-          <option *ngFor="let unit of temperatureUnits" [value]="unit">{{unit}}</option>
+            @for(unit of temperatureUnits; track unit){
+                <option [value]="unit">{{unit}}</option>
+            }
         </select>
       </div>
   
       <div class="form-group">
         <label for="speedUnits" >Speed Units</label>
         <select class="form-control" required [(ngModel)]="model.speedUnits" name="speedUnits" id="speedUnits">
-          <option *ngFor="let unit of speedUnits" [value]="unit">{{unit}}</option>
+            @for(unit of speedUnits; track unit){
+                <option [value]="unit">{{unit}}</option>
+            }
         </select>
       </div>
   
