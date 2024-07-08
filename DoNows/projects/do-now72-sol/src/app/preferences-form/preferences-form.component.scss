@@ -1,0 +1,61 @@
+/*
+
+input.ng-pristine{
+    display:block;
+    color: blue;
+} 
+
+input.ng-dirty{
+    display:block;
+    color: blueviolet;
+} 
+
+input.ng-valid{
+
+    border-left: 2px solid #42A948;
+}
+
+input.ng-invalid{
+    border-left: 10px solid #a94442;
+}
+
+input.ng-touched{
+    border-right: 10px solid #0c98f5;
+}
+
+input.ng-untouched{
+    border-right: 2px solid #f8f550;
+}
+*/
+form {
+    width: 30em;
+    margin-left: 2em;
+  }
+  
+  label {
+    color: #B4886B;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
+  }
+  label:after { content: ": " }
+  
+  input, select {
+    float: right;
+    width: 20em;
+  }
+  
+  .form-group {
+    padding-top: 1em;
+    margin-bottom: 1em;
+    clear: both;
+  
+  }
+  
+  button {
+    float: right;
+  }
+  
+  
+  
