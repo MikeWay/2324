@@ -1,15 +1,32 @@
 /*
-.ng-valid[required] {
-  border-left: 5px solid #42A948;
+
+input.ng-pristine{
+    display:block;
+    color: blue;
+} 
+
+input.ng-dirty{
+    display:block;
+    color: blueviolet;
+} 
+
+input.ng-valid{
+
+    border-left: 2px solid #42A948;
 }
 
-form *.ng-invalid {
-  border-left: 5px solid #a94442;
+input.ng-invalid{
+    border-left: 10px solid #a94442;
 }
 
+input.ng-touched{
+    border-right: 10px solid #0c98f5;
+}
 
+input.ng-untouched{
+    border-right: 2px solid #f8f550;
+}
 */
-
 form {
     width: 30em;
     margin-left: 2em;
