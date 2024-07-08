@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Preferences } from '../model/preferences';
 import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-preferences-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, JsonPipe],
   templateUrl: './preferences-form.component.html',
   styleUrl: './preferences-form.component.scss'
 })
