@@ -32,3 +32,6 @@ CN and MA: Need to consider how usefull the DN62 actually is
 
 CN: Prior to ex6.1 must show diff of test module for standalone vs module based.
 CN: Prior to ex6.1 discuss Partials
+
+MA: Need to rationalise file paths across entire MA
+CN: C7 Improve discussion of Template vs Reactive forms
