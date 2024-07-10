@@ -20,6 +20,16 @@ export class BuyFlightComponent implements OnInit {
   constructor(private stateService: ApplicationStateService)
   {}
 
+  get flights(){
+    this.loadFlights(0,20);
+    return this._flights;
+  }
+
+  loadFlights(start: number, count: number){
+    this.stateService.loadFlights(start,count,this.originFilter);
+    this._flights = this.stateService._flights;
+  }
+
   onFlightClick(flight: Flight){
     this.selectedFlight = flight;
   }
@@ -30,16 +40,6 @@ export class BuyFlightComponent implements OnInit {
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
-  }
-
-  get flights(): Flight[] {
-    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
-  }
-
-  private orginDestinationFilter(flight: Flight): boolean {
-    if (this.originFilter === '') return true;
-    if(flight.origin.startsWith(this.originFilter)) return true;
-      return false;
   }
 
   ngOnInit(): void {
