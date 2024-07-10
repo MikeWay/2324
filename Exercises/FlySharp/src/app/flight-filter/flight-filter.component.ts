@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-flight-filter',
@@ -8,12 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './flight-filter.component.scss'
 })
 export class FlightFilterComponent {
-  @Input()
-  label = '';
-
-  @Input()
-  initialValue='';
-  
   @Output()
   filterEmitter = new EventEmitter<string>();
 

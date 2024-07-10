@@ -6,9 +6,9 @@ export const FLIGHTS: Flight[] = [
     departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 499.99},
     {id: 13, flightNumber : 'FS1211', origin: 'LHR', destination : 'ARN', departDay : 'Wednesday',
     departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 399.99},
-  {id: 13, flightNumber : 'FS2211', origin: 'LHR', destination : 'NRT', departDay : 'Wednesday',
+  {id: 14, flightNumber : 'FS2211', origin: 'LHR', destination : 'NRT', departDay : 'Wednesday',
     departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 999.99},
-  {id: 13, flightNumber : 'FS2211', origin: 'NRT', destination : 'LHR', departDay : 'Thursday',
+  {id: 1, flightNumber : 'FS2211', origin: 'NRT', destination : 'LHR', departDay : 'Thursday',
     departTime : '09:00', arriveDay : 'Monday', arriveTime : '09:00', price : 699.99},
 ];
 
