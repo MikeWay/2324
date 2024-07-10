@@ -7,7 +7,7 @@ import { FlightFilterComponent } from '../flight-filter/flight-filter.component'
 @Component({
   selector: 'app-buy-flight',
   standalone: true,
-  imports: [PaymentComponent,FlightFilterComponent],
+  imports: [PaymentComponent, FlightFilterComponent],
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
@@ -16,6 +16,7 @@ export class BuyFlightComponent implements OnInit {
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
+  destinationFilter = '';
 
   constructor(private stateService: ApplicationStateService)
   {}
@@ -26,7 +27,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
   loadFlights(start: number, count: number){
-    this.stateService.loadFlights(start,count,this.originFilter);
+    this.stateService.loadFlights(start,count,this.originFilter, this.destinationFilter);
     this._flights = this.stateService._flights;
   }
 
@@ -40,6 +41,10 @@ export class BuyFlightComponent implements OnInit {
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
+  }
+
+  onDestinationFilterChange(filterValue: string): void {
+    this.destinationFilter = filterValue;
   }  
 
   ngOnInit(): void {

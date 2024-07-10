@@ -18,7 +18,7 @@ export class ApplicationStateService {
   }  
 
 	
-  public loadFlights(start: number, count: number, origin?: string){
+  public loadFlights(start: number, count: number, origin?: string, destination?: string){
 
     this._flights = FLIGHTS; // Simulate load from Web service
     if (origin) {
@@ -26,5 +26,10 @@ export class ApplicationStateService {
           return flight.origin.startsWith(origin as string);
       });
     }
+    if (destination) {
+      this._flights = this._flights.filter((flight: Flight) => {
+          return flight.destination.startsWith(destination as string);
+      });
+    }    
   }
 }

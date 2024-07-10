@@ -27,7 +27,7 @@ export class BuyFlightComponent implements OnInit {
   }
 
   loadFlights(start: number, count: number){
-    this.stateService.loadFlights(start,count,this.originFilter);
+    this.stateService.loadFlights(start,count,this.originFilter, this.destinationFilter);
     this._flights = this.stateService._flights;
   }
 
@@ -42,6 +42,10 @@ export class BuyFlightComponent implements OnInit {
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
   }
+
+  onDestinationFilterChange(filterValue: string): void {
+    this.destinationFilter = filterValue;
+  }  
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  
