@@ -7,7 +7,7 @@ import { Flight } from '../model/flight';
 })
 export class ApplicationStateService {
 
-  _flights = FLIGHTS;
+  _flights = new Array<Flight>();
 
   public getFlights(): Flight[] {
     return this._flights;
@@ -16,4 +16,20 @@ export class ApplicationStateService {
   public getMyFlights(): Flight[] {
     return MYFLIGHTS;
   }  
+
+	
+  public loadFlights(start: number, count: number, origin?: string, destination?: string){
+
+    this._flights = FLIGHTS; // Simulate load from Web service
+    if (origin) {
+      this._flights = this._flights.filter((flight: Flight) => {
+          return flight.origin.startsWith(origin as string);
+      });
+    }
+    if (destination) {
+      this._flights = this._flights.filter((flight: Flight) => {
+          return flight.destination.startsWith(destination as string);
+      });
+    }    
+  }
 }
