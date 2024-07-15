@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Flight } from '../model/flight';
+import { ApplicationStateService } from '../application-state/application-state.service';
 
 @Component({
   selector: 'app-my-flights',
@@ -9,5 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./my-flights.component.scss']
 })
 export class MyFlightsComponent {
+  flights: Flight[];
+  error = '';
+ 
+  constructor(public state: ApplicationStateService) {
+    this.flights = state._myFlights;
+  }
 
 }
