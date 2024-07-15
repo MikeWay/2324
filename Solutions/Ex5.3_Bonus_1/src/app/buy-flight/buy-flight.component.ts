@@ -22,7 +22,15 @@ export class BuyFlightComponent implements OnInit {
 
   constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute)
   {}
+  get flights(){
+    this.loadFlights(0,20);
+    return this._flights;
+  }
 
+  loadFlights(start: number, count: number){
+    this.stateService.loadFlights(start,count,this.originFilter, this.destinationFilter);
+    this._flights = this.stateService._flights;
+  }
   onFlightClick(flight: Flight){
     this.selectedFlight = flight;
   }
@@ -39,32 +47,13 @@ export class BuyFlightComponent implements OnInit {
     this.destinationFilter = filterValue;
   }  
 
-  get flights(): Flight[] {
-    return this._flights.filter(flight => this.orginDestinationFilter(flight)? flight : null);
-  }
-
   get currencySymbol(): string {
     return this.stateService.displayCurrency.symbol
   }
-
  
-
   get currencyRate(): number {
     return this.stateService.displayCurrency.rate
   }  
-
-  private orginDestinationFilter(flight: Flight): boolean {
-    if(this.originFilter === '' && this.destinationFilter === '') return true;
-    if(this.originFilter !== ''){
-        if(!flight.origin.startsWith(this.originFilter)) return false;
-    }
-    if(this.destinationFilter !== ''){
-      if(!flight.destination.startsWith(this.destinationFilter)) return false;
-    }
-    return true;
-  }
-
-
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  
