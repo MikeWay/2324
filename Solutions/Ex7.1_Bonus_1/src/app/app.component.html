@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button (click)='toggleNavbar()' class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button (click)="toggleNavbar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <div class="collapse navbar-collapse"  [ngClass]="{ 'show': navbarOpen }" id="navbarSupportedContent"  >
+  <div [ngClass]="{'show': navbarOpen}" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-          <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="/home">Home</a></li>
-          <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="buy">Buy Flights</a></li>
-          <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="myflights">My Flights</a></li>
-          <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="account">Account</a></li>
+          <li class="nav-item" routerLinkActive="active"><a routerLink='/home' class="nav-link" >Home</a></li>
+          <li class="nav-item" routerLinkActive="active" ><a routerLink='/buy' class="nav-link" >Buy Flights</a></li>
+          <li class="nav-item" routerLinkActive="active" ><a routerLink='/myflights' class="nav-link" >My Flights</a></li>
+          <li  class="nav-item" routerLinkActive="active" ><a routerLink='/account' class="nav-link" >Account</a></li>
       </ul>     
   </div>
   <div>
-    <app-currency></app-currency>
-  </div>
+    <app-currency-selector></app-currency-selector>
+  </div>  
 </nav>
 <main class="container-fluid d-flex h-100 flex-column">
   <router-outlet></router-outlet>
