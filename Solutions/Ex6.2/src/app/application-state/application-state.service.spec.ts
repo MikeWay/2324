@@ -15,11 +15,16 @@ describe('ApplicationStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return XX flights from getFlights', () => {
+  it('should return 0 flights from getFlights if loadFlights has not been called', () => {
+    expect(service.getFlights().length).toBe(0);
+  });
+
+  it('should return 5 flights from getFlights', () => {
+    service.loadFlights(0,5)
     expect(service.getFlights().length).toBe(5);
   });
   
-  it('should return XX flights from getMyFlights', () => {
+  it('should return 2 flights from getMyFlights', () => {
     expect(service.getMyFlights().length).toBe(2);
   });  
 });
