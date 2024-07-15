@@ -20,4 +20,4 @@
 </table>
 }
 <a href='#' (click)="onClickBuyFlights()">Toggle Flights</a>
-<app-payment [selectedFlight]="selectedFlight"></app-payment>
+<app-payment [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)"></app-payment>

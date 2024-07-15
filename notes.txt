@@ -35,3 +35,5 @@ CN: Prior to ex6.1 discuss Partials
 
 MA: Need to rationalise file paths across entire MA
 CN: C7 Improve discussion of Template vs Reactive forms
+
+CN: C7 -- Architecture ref ex7.1

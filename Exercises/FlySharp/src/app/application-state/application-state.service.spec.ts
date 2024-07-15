@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { ApplicationStateService } from './application-state.service';
-import { count } from 'rxjs';
 
 describe('ApplicationStateService', () => {
   let service: ApplicationStateService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [ApplicationStateService]
+    });
     service = TestBed.inject(ApplicationStateService);
   });
 
@@ -15,16 +17,17 @@ describe('ApplicationStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return 0 flights from getFlights if loadFlights has not been called', () => {
-    expect(service.getFlights().length).toBe(0);
+  it(`should return ${FLIGHTS.length} flights from getFlights()`, () => {
+    expect(service.getFlights().length).toBe(FLIGHTS.length);
   });
 
-  it('should return 5 flights from getFlights', () => {
-    service.loadFlights(0,5)
-    expect(service.getFlights().length).toBe(5);
+  it(`should return ${MYFLIGHTS.length} flights from getMyFlights()`, () => {
+    expect(service.getMyFlights().length).toBe(MYFLIGHTS.length);
   });
-  
-  it('should return 2 flights from getMyFlights', () => {
-    expect(service.getMyFlights().length).toBe(2);
-  });  
+
+  it(`should return 1 flight from getFlights() after a call to loadFlights`, () => {
+    service.loadFlights(0,20,'NRT');
+    expect(service.getFlights().length).toBe(1);
+  });
+
 });

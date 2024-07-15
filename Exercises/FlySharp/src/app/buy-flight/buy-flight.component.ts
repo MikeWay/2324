@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
-import { PaymentComponent } from '../payment/payment.component';
+import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.component';
 import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
 @Component({
@@ -20,7 +20,7 @@ export class BuyFlightComponent implements OnInit {
   originFilter = '';
   destinationFilter = '';
 
-  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute)
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router)
   {}
   get flights(){
     this.loadFlights(0,20);
@@ -54,6 +54,11 @@ export class BuyFlightComponent implements OnInit {
   get currencyRate(): number {
     return this.stateService.displayCurrency.rate
   }  
+
+  flightPurchased(paymentEvent: FlightPaymentEvent){
+    this.stateService.addMyFlight(paymentEvent.flight);
+    this.router.navigate(['/myflights']);
+  }
 
   ngOnInit(): void {
     this._flights = this.stateService.getFlights();  
