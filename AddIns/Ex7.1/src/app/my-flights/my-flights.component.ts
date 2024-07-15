@@ -11,9 +11,11 @@ import { ApplicationStateService } from '../application-state/application-state.
   styleUrls: ['./my-flights.component.scss']
 })
 export class MyFlightsComponent {
-  flights!: Flight[];
+  flights: Flight[];
   error = '';
  
-  constructor(public state: ApplicationStateService) {}
+  constructor(public state: ApplicationStateService) {
+    this.flights = state._myFlights;
+  }
 
 }
