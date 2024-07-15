@@ -19,7 +19,7 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
-    spyAppState = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', ['getFlights', 'getMyFlights'],
+    spyAppState = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', ['getFlights', 'getMyFlights','loadFlights'],
       {
         displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
       });
