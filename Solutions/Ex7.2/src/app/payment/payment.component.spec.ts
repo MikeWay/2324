@@ -8,7 +8,7 @@ describe('PaymentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ PaymentComponent ]
+      imports: [PaymentComponent]
     })
     .compileComponents();
 

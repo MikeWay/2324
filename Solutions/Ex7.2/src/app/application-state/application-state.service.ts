@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Currency } from 'currency';
+import { Currency } from '../model/currency';
 import { Flight } from '../model/flight';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
@@ -10,7 +10,7 @@ import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 export class ApplicationStateService {
 
-  myFlights: Flight[] = new Array<Flight>();
+  _myFlights: Flight[] = new Array<Flight>();
 
   currencies: Currency[] = [
     { code: 'GBP', symbol: '£', rate: 1.0 },
@@ -21,18 +21,22 @@ export class ApplicationStateService {
 
   displayCurrency: Currency = this.currencies[1];
 
-  flights = FLIGHTS;
+  _flights = FLIGHTS;
 
   constructor(){
     this.myFlights.push(...MYFLIGHTS);
   }
 
-  public getFlights(): Flight[] {
-    return this.flights;
+  public get flights(): Flight[] {
+    return this._flights;
   }
 
-  public getMyFlights(): Flight[] {
-    return this.myFlights;
+  public getFlights(): Flight[]{
+    return this._flights;
+  }
+
+  public get myFlights(): Flight[] {
+    return this._myFlights;
   }
 
   addMyFlight(flight: Flight): number {
@@ -41,14 +45,14 @@ export class ApplicationStateService {
   }   
 
   public loadFlights(start: number, count: number, origin?: string, destination?: string) {
-    this.flights = FLIGHTS;
+    this._flights = FLIGHTS;
     if (origin) {
-      this.flights = FLIGHTS.filter((flight: Flight) => {
+      this._flights = FLIGHTS.filter((flight: Flight) => {
         return flight.origin.startsWith(origin as string);
       });
     }
     if (destination) {
-      this.flights = this.flights.filter((flight: Flight) => {
+      this._flights = this._flights.filter((flight: Flight) => {
         return flight.destination.startsWith(destination as string);
       });
     }
