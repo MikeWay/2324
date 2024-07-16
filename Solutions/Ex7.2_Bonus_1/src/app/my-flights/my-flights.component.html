@@ -2,14 +2,15 @@
 <table class="table table-bordered">
     <thead><tr><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th></tr></thead>
     <tbody>
-    <tr *ngFor="let flight of (state.myFlights)" >
+    <tr *ngFor="let flight of flights" >
       <td>{{flight.flightNumber}}</td>
       <td>{{flight.origin}}</td>
       <td>{{flight.destination}}</td>
       <td>{{flight.departDay}}</td>
       <td>{{flight.departTime}}</td>
       <td>{{flight.arriveDay}}</td>
-      <td>{{flight.arriveTime}}</td>    
+      <td>{{flight.arriveTime}}</td>
+      <td>{{flight.price}}</td>
     </tr>
     </tbody>
   </table>

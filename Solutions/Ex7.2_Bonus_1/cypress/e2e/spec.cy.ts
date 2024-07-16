@@ -1,5 +1,5 @@
 describe('Home Page Test', () => {
-  it('Visits the initial project page', () => {
+  it('Loads  the Home page', () => {
     cy.visit('/')
     cy.contains('Special Offer')
   })
@@ -8,5 +8,4 @@ describe('Home Page Test', () => {
     cy.visit('/');
     cy.get('h1').contains('Special Offer of the month 10% off all round-the-World flights');
   })
-  
 })
