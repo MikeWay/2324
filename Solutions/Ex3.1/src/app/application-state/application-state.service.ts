@@ -9,11 +9,11 @@ export class ApplicationStateService {
 
   _flights = FLIGHTS;
 
-  public getFlights(): Flight[] {
+  public get flights() : Flight[]{
     return this._flights;
-  }
+ }
 
-  public getMyFlights(): Flight[] {
+  public get myFlights(): Flight[] {
     return MYFLIGHTS;
   }  
 }
