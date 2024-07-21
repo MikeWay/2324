@@ -9,6 +9,13 @@ import { Currency } from '../model/currency';
 export class ApplicationStateService {
 
   _flights = new Array<Flight>();
+  currencies: Currency[] = [{ code: 'GBP', symbol: '£', rate: 1.0 },
+    { code: 'USD', symbol: '$', rate: 0.9 },
+    { code: 'EUR', symbol: '€', rate: 0.92 },  
+    { code: 'SEK', symbol: 'kr ', rate: 12.0 }
+  ];
+  
+  displayCurrency: Currency = this.currencies[1];  
 
   constructor() {
     this.loadFlights();
