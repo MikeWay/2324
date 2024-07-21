@@ -11,9 +11,8 @@ export class FlightFilterComponent {
   @Output()
   filterEmitter = new EventEmitter<string>();
 
-	
-  onFilterEnter( filterValue : string): void {
-    this.filterEmitter.emit(filterValue);
+  onFilterEnter(filterValue: string): void {
+    this.filterEmitter.emit(filterValue.toLocaleUpperCase());
+  }
 
-  }  
 }

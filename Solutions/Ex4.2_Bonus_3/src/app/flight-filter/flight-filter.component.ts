@@ -8,15 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './flight-filter.component.scss'
 })
 export class FlightFilterComponent {
-  @Input()
-  label = '';
-  
   @Output()
   filterEmitter = new EventEmitter<string>();
+  @Input()
+  label ='';
 
-	
-  onFilterEnter( filterValue : string): void {
-    this.filterEmitter.emit(filterValue);
-
-  }  
+  onFilterEnter(filterValue: string): void {
+    this.filterEmitter.emit(filterValue.toLocaleUpperCase());
+  }
 }
