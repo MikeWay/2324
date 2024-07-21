@@ -9,34 +9,19 @@ import { Currency } from '../model/currency';
 export class ApplicationStateService {
 
   _flights = new Array<Flight>();
-  currencies: Currency[] = [{ code: 'GBP', symbol: '£', rate: 1.0 },
-    { code: 'USD', symbol: '$', rate: 0.9 },
-    { code: 'EUR', symbol: '€', rate: 0.92 },  
-    { code: 'SEK', symbol: 'kr ', rate: 12.0 }
-  ];
-  
-  displayCurrency: Currency = this.currencies[1];  
 
-  public getFlights(): Flight[] {
+  constructor() {
+    this.loadFlights();
+  }
+  public get flights(): Flight[] {
     return this._flights;
   }
 
-  public getMyFlights(): Flight[] {
+  public get myFlights(): Flight[] {
     return MYFLIGHTS;
   }  
 	
-  public loadFlights(start: number, count: number, origin?: string, destination?: string){
-
+  private loadFlights(){
     this._flights = FLIGHTS; // Simulate load from Web service
-    if (origin) {
-      this._flights = this._flights.filter((flight: Flight) => {
-          return flight.origin.startsWith(origin as string);
-      });
-    }
-    if (destination) {
-      this._flights = this._flights.filter((flight: Flight) => {
-          return flight.destination.startsWith(destination as string);
-      });
-    }    
   }  
 }
