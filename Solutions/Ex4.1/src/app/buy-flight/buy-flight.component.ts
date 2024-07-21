@@ -10,13 +10,17 @@ import { PaymentComponent } from '../payment/payment.component';
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent implements OnInit {
-  flights!: Flight[];
+export class BuyFlightComponent {
+
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
 
   constructor(private stateService: ApplicationStateService)
   {}
+
+  get flights(){
+    return this.stateService.flights;
+  }  
 
   onFlightClick(flight: Flight){
     this.selectedFlight = flight;
@@ -26,9 +30,7 @@ export class BuyFlightComponent implements OnInit {
     this.showBuyFlights = !this.showBuyFlights;
   }
 
-  ngOnInit(): void {
-    this.flights = this.stateService.getFlights();  
-  }  
+ 
 }
 
 
