@@ -44,7 +44,7 @@ export class BuyFlightComponent {
   get currencySymbol(): string {
     return this.stateService.displayCurrency.symbol
   }
-
+ 
   get currencyRate(): number {
     return this.stateService.displayCurrency.rate
   }  
