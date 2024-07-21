@@ -53,6 +53,8 @@ export class ApplicationStateService {
     FlightsService then loads in batches of 10 into AppState service
     AppService holds the values in a ReplaySubject
     Filtering takes place client side using Observable- Filter
+
+    ! Origin and Dest are never supplied to this method !
    */
   private loadFlights(origin?: string, destination?: string) {
     console.log("Load all flights");
