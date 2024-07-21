@@ -11,8 +11,7 @@ import { FlightFilterComponent } from '../flight-filter/flight-filter.component'
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent implements OnInit {
-  _flights!: Flight[];
+export class BuyFlightComponent {
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
@@ -22,13 +21,7 @@ export class BuyFlightComponent implements OnInit {
   {}
 
   get flights(){
-    this.loadFlights(0,20);
-    return this._flights;
-  }
-
-  loadFlights(start: number, count: number){
-    this.stateService.loadFlights(start,count,this.originFilter, this.destinationFilter);
-    this._flights = this.stateService._flights;
+    return this.stateService.flights.filter((flight)=>this.originDestinationFilter(flight));
   }
 
   onFlightClick(flight: Flight){
@@ -47,8 +40,14 @@ export class BuyFlightComponent implements OnInit {
     this.destinationFilter = filterValue;
   }  
 
-  ngOnInit(): void {
-    this._flights = this.stateService.getFlights();  
+  originDestinationFilter(flight: Flight): boolean {
+    if(this.originFilter != ''){
+      if(!flight.origin.startsWith(this.originFilter))return false;
+    }
+    if(this.destinationFilter != ''){
+      if(!flight.destination.startsWith(this.destinationFilter))return false;
+    }    
+    return true;
   }  
 }
 
