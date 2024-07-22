@@ -4,45 +4,35 @@ import { BuyFlightComponent } from './buy-flight.component';
 import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Flight } from '../model/flight';
-import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 import { ApplicationStateService } from '../application-state/application-state.service';
-// class MockApplicationStateService {
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
-//   displayCurrency = { code: 'GBP', symbol: '£', rate: 1.0 };
-//   _flights = FLIGHTS;
-
-//   public get flights(): Flight[] {
-//     return FLIGHTS;
-//   }
-
-//   public get myFlights(): Flight[] {
-//     return MYFLIGHTS;
-//   }
-
-//   public loadFlights() {
-//   }
+// const stateServiceStub: Partial<ApplicationStateService> = {
+//   flights: FLIGHTS,
+//   displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
 // }
+
+let spyApplicationStateService = null;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
-  let mockApplicationStateService: ApplicationStateService| null = null;
 
   beforeEach(async () => {
-
-    mockApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
+    spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
       {
-        flights: FLIGHTS,
-        myFlights: MYFLIGHTS,
-        displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+          flights: FLIGHTS,
+          myFlights: MYFLIGHTS,
+          displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
       });
-
+  
     await TestBed.configureTestingModule({
       imports: [BuyFlightComponent],
-      providers: [provideRouter([]), { provide: ApplicationStateService, useValue: mockApplicationStateService }]
-    })
+      providers: [provideRouter([])]
+    }).overrideComponent(BuyFlightComponent,
+      { set: { providers: [{ provide: ApplicationStateService, useValue: spyApplicationStateService }] } }
+    )
       .compileComponents();
 
     fixture = TestBed.createComponent(BuyFlightComponent);
@@ -86,7 +76,7 @@ describe('BuyFlightComponent', () => {
     expect(tableEle).toBeFalsy();
   });
 
-  it('should have called getFlights() once', () => {
+  it('should have a currency symbol of £', () => {
     expect(component.currencySymbol).toBe('£');
-  });  
+  });
 });
