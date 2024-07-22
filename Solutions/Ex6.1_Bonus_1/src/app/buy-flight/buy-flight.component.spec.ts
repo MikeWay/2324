@@ -4,25 +4,6 @@ import { BuyFlightComponent } from './buy-flight.component';
 import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Flight } from '../model/flight';
-import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
-import { ApplicationStateService } from '../application-state/application-state.service';
-class MockApplicationStateService {
-
-  displayCurrency = { code: 'GBP', symbol: '£', rate: 1.0 };
-  _flights = FLIGHTS;
-
-  public get flights(): Flight[] {
-    return FLIGHTS;
-  }
-
-  public get myFlights(): Flight[] {
-    return MYFLIGHTS;
-  }
-
-  public loadFlights() {
-  }
-}
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -32,7 +13,7 @@ describe('BuyFlightComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BuyFlightComponent],
-      providers: [provideRouter([]), {provide: ApplicationStateService, useClass: MockApplicationStateService}]
+      providers: [provideRouter([])]
     })
       .compileComponents();
 
@@ -75,6 +56,5 @@ describe('BuyFlightComponent', () => {
     fixture.detectChanges();
     tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeFalsy();
-
   });  
 });
