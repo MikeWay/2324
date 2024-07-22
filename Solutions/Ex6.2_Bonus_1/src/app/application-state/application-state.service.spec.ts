@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ApplicationStateService } from './application-state.service';
-import { count } from 'rxjs';
+import { FLIGHTS } from '../model/mock-flights';
 
 describe('ApplicationStateService', () => {
   let service: ApplicationStateService;
@@ -15,16 +15,7 @@ describe('ApplicationStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return 0 flights from getFlights if loadFlights has not been called', () => {
-    expect(service.getFlights().length).toBe(0);
-  });
-
-  it('should return 5 flights from getFlights', () => {
-    service.loadFlights(0,5)
-    expect(service.getFlights().length).toBe(5);
-  });
-  
-  it('should return 2 flights from getMyFlights', () => {
-    expect(service.getMyFlights().length).toBe(2);
+  it('should have set the flights property to FLIGHTS', () => {
+    expect(service.flights).toEqual(FLIGHTS);
   });  
 });
