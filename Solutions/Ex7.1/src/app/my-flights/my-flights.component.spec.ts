@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { FlightsService } from '../flights/flights.service';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
 import { MyFlightsComponent } from './my-flights.component';
@@ -17,7 +16,6 @@ describe('MyFlightsComponent', () => {
     });
 
     await TestBed.configureTestingModule({
-      providers: [{provide: FlightsService, useValue: mockFlightsService}],
       imports: [ MyFlightsComponent ]
     })
     .compileComponents();

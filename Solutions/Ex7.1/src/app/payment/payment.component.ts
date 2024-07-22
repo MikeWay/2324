@@ -14,7 +14,7 @@ export class PaymentComponent {
   private _selectedFlight: Flight | undefined;
   model: Payment = new Payment();
 
-  @Input()
+  @Input() 
   get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
