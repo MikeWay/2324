@@ -16,7 +16,7 @@ export class PaymentComponent {
   @Output()
   paymentConfirmed: EventEmitter<FlightPaymentEvent> = new EventEmitter<FlightPaymentEvent>();
 
-  @Input()
+  @Input() 
   get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
@@ -34,7 +34,7 @@ export class PaymentComponent {
   }
 
 }
-	
+
 export class FlightPaymentEvent {
   constructor( public flight: Flight, public payment: Payment){}
 }

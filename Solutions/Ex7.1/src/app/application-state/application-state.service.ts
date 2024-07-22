@@ -27,7 +27,7 @@ export class ApplicationStateService {
   }
 
   public get myFlights(): Flight[] {
-    return MYFLIGHTS;
+    return this._myFlights;
   }  
 
   addMyFlight(flight: Flight): number {
