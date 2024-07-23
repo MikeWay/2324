@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAccount = exports.clearAccount = exports.accountDetails = exports.clearMyFlights = exports.myFlights = exports.flights = void 0;
 // The flights array
 const fs_1 = __importDefault(require("fs"));
-let flightsAsJSON = fs_1.default.readFileSync('./data/flights.json', 'utf8');
+const flightsAsJSON = fs_1.default.readFileSync('./data/flights.json', 'utf8');
 // The base list of flights
 exports.flights = JSON.parse(flightsAsJSON);
 // Flights added by the API

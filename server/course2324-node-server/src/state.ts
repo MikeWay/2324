@@ -4,7 +4,7 @@ import { Account } from './Account';
 import { Flight } from './flight';
 
 
-let flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
+const flightsAsJSON = fs.readFileSync('./data/flights.json', 'utf8');
 
 // The base list of flights
 export const flights: Flight[] = JSON.parse(flightsAsJSON);

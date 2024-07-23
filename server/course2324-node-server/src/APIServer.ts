@@ -82,6 +82,14 @@ export function initAPIServer(): Koa {
 }
 
 function configureFlightListHandlers(router: Router<any, {}>) {
+
+    router.get('/flightserver(sec)?/allflightsSlow', async (ctx) => {
+        for(let flight of flights){
+            ctx.body+=JSON.stringify(flight);
+            await sleep(10);    // Even though we sleep for 10mS per flight, nothing is output until the response is complete
+        };     
+    });
+
     router.get('/flightserver(sec)?/allflights', async (ctx) => {
         //console.log("GET: allflights");
         await send(ctx, './data/flights.json');
@@ -201,6 +209,13 @@ function filterFlights(flights: Flight[], args: Args): Flight[] {
     }).slice(args.start, args.start + args.num);
 }
 
+function sleep(delay: number): Promise<void> {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, delay);
+    });
+  }
 
 
 interface Args {

@@ -72,6 +72,13 @@ function initAPIServer() {
 }
 exports.initAPIServer = initAPIServer;
 function configureFlightListHandlers(router) {
+    router.get('/flightserver(sec)?/allflightsSlow', (ctx) => __awaiter(this, void 0, void 0, function* () {
+        for (let flight of state_1.flights) {
+            ctx.body += JSON.stringify(flight);
+            yield sleep(10);
+        }
+        ;
+    }));
     router.get('/flightserver(sec)?/allflights', (ctx) => __awaiter(this, void 0, void 0, function* () {
         //console.log("GET: allflights");
         yield (0, koa_send_1.default)(ctx, './data/flights.json');
@@ -138,6 +145,7 @@ function configureAccountHandlers(router) {
     // Sets the current values for accountDetails
     router.put('/flightserver(sec)?/account', (ctx) => __awaiter(this, void 0, void 0, function* () {
         let account = ctx.request.body;
+        console.log(`Account added: ${account}`);
         (0, state_1.updateAccount)(account);
         ctx.body = JSON.stringify(true);
     }));
@@ -176,4 +184,11 @@ function filterFlights(flights, args) {
         }
         return true;
     }).slice(args.start, args.start + args.num);
+}
+function sleep(delay) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, delay);
+    });
 }
