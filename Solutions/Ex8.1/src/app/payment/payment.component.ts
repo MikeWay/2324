@@ -1,42 +1,47 @@
-import { formatDate } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Flight } from '../model/flight';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Payment } from '../model/payment';
+import { formatDate, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
+  standalone: true,
+  imports: [ReactiveFormsModule,JsonPipe],
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  styleUrl: './payment.component.scss'
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit{
 
-  @Input() selectedFlight: Flight | undefined;
-
+  private _selectedFlight: Flight | undefined;
   model: Payment = new Payment();
-  payForm = this.formBuilder.group({
-    name: ['', [Validators.required,Validators.minLength(5)]],
-    address: ['', Validators.required],
-    email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]],
-    cardNum: ['', Validators.required],
-    cardType: ['', Validators.required],
-    expDate: ['', Validators.required],
+  payForm =  new FormGroup({
+    name: new FormControl<string>('',{validators: [Validators.required,Validators.minLength(5)], nonNullable: true}),
+    address: new FormControl<string>('',{validators: [Validators.required,Validators.minLength(10), Validators.maxLength(128)], nonNullable: true}),
+    email: new FormControl<string>('',{validators: [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")], nonNullable: true}),
+    cardNum: new FormControl<string>('',{validators: [Validators.required,Validators.minLength(13)], nonNullable: true}),
+    cardType: new FormControl<string>('',{validators: Validators.required, nonNullable: true}),
+    expDate: new FormControl<string>('', {validators: Validators.required, nonNullable: true})
   });
 
-  constructor(private formBuilder : FormBuilder) { }
+  @Output()
+  paymentConfirmed: EventEmitter<FlightPaymentEvent> = new EventEmitter<FlightPaymentEvent>();
 
-  ngOnInit(): void {
-    this.buildSampleModel();
-    this.payForm.setValue(this.model);
+  @Input() 
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
   }
-
+  set selectedFlight(flight: Flight | undefined) {
+    this._selectedFlight = flight;
+  }
   get jsonModel(): string {
     return JSON.stringify(this.model);
   }
 
-
-  onSubmit(): void {
-    alert(JSON.stringify(this.payForm.value));
+  onSubmit() {
+    if(this._selectedFlight){
+      this.paymentConfirmed.emit(new FlightPaymentEvent(this._selectedFlight, this.payForm.value as Payment));
+    }
   }
 
   private buildSampleModel(): void {
@@ -46,6 +51,14 @@ export class PaymentComponent implements OnInit {
     this.model.cardNum = '1234123412341234';
     this.model.cardType = 'VISA';
     this.model.expDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-
   }  
+
+  ngOnInit(): void {
+    this.buildSampleModel();
+    this.payForm.setValue(this.model);  }  
+}
+
+export class FlightPaymentEvent {
+  constructor( public flight: Flight, public payment: Payment){}
+  
 }

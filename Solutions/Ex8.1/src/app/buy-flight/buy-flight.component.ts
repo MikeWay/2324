@@ -1,65 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FlightsService } from '../flights/flights.service';
+import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
+import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-  _flights: Flight[] = new Array<Flight>();
-  showBuyFlights = false;
-  // tslint:disable-next-line: variable-name
-  _selectedFlight: Flight | undefined;
-
+export class BuyFlightComponent {
+  showBuyFlights = true;
+  selectedFlight: Flight | undefined;
   originFilter = '';
   destinationFilter = '';
-  errorMessage = '';
 
-  conversionRate = 4.0;
-
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
-    this.flightsService.getFlights().subscribe({
-      next: (flights: Flight[]) => {
-        this._flights = flights;
-        this.showBuyFlights = true;
-      },
-      error: (error: any) => this.errorMessage = error
-    });
-    
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router)
+  {}
+  get flights(){
+    return this.stateService.flights.filter((flight)=>this.originDestinationFilter(flight));
   }
 
-  onClickBuyFlights(): void {
+  get errorMessage(){
+    return this.stateService.error;
+  }
+
+  onFlightClick(flight: Flight){
+    this.selectedFlight = flight;
+  }
+
+  onClickBuyFlights(){
     this.showBuyFlights = !this.showBuyFlights;
-  }
-
-  onFlightClick(flight: Flight): void {
-    this._selectedFlight = flight;
-  }
-
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
-  }
-
-  set selectedFlight(flight: Flight | undefined) {
-    this._selectedFlight = flight;
-  }
-
-  set conversionRateString(strRate: string) {
-    if (strRate.length > 0) {
-      this.conversionRate = parseFloat(strRate);
-      if (isNaN(this.conversionRate)) {
-        this.conversionRate = 1.0;
-      }
-    } else {
-      this.conversionRate = 1.0;
-    }
   }
 
   onOriginFilterChange(filterValue: string): void {
@@ -68,27 +43,30 @@ export class BuyFlightComponent implements OnInit {
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
+  }  
+
+  get currencySymbol(): string {
+    return this.stateService.displayCurrency.symbol
   }
+ 
+  get currencyRate(): number {
+    return this.stateService.displayCurrency.rate
+  }  
 
-  /**
-   * Version of the flight getter that implements a simple filter
-   */
+  flightPurchased(paymentEvent: FlightPaymentEvent){
+    this.stateService.addMyFlight(paymentEvent.flight);
+    this.router.navigate(['/myflights']);
+  }  
 
-  get flights(): Flight[] {
-    let flights = this._flights;
-    if (this.originFilter) {
-      flights = this._flights.filter((flight: Flight) => {
-        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
-      });
+  originDestinationFilter(flight: Flight): boolean {
+    if(this.originFilter != ''){
+      if(!flight.origin.startsWith(this.originFilter))return false;
     }
-    if (this.destinationFilter) {
-      flights = flights.filter((flight: Flight) => {
-        return flight.destination.startsWith(this.destinationFilter as string);
-      });
-    }
-    return flights;
-  }
-
+    if(this.destinationFilter != ''){
+      if(!flight.destination.startsWith(this.destinationFilter))return false;
+    }    
+    return true;
+  }  
 }
 
 

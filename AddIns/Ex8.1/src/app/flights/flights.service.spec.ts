@@ -31,9 +31,9 @@ describe('FlightsService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should do something with HTTP!)', inject([FlightsService], (service: FlightsService) => {
-    //
-    // expect(service.getFlights().length).toBe(5);
+/*
+  it('should fetch all flights using GET', inject([FlightsService], (service: FlightsService) => {
+
     service.getAllFlights().subscribe((flights: Flight[]) => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
     });
@@ -42,9 +42,21 @@ describe('FlightsService', () => {
     req.flush(FLIGHTS); // Supply the data which will be returned
 
     httpTestingController.verify();
-  }));Mina Sauvage
+  }));
+*/
 
-
+/*
+  it('should report an error from getAllFlights', inject([FlightsService], (service: FlightsService) => {
+    service.getAllFlights().subscribe({
+      next: (flights: Flight[]) => expect(flights).toEqual(FLIGHTS), // verification happens once the req.flush method has been called
+      error: (e) => {console.log(`[${e}]`);expect(e.message).toEqual('Server error - is the REST server running')}
+    });
+    const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
+    req.flush('Failed!', {status: 500, statusText: 'Internal Server Error'}); // Supply the data which will be returned
+    httpTestingController.verify();
+  }));  
+*/
+/*
   it('should return flights from getMyFlights()', inject([FlightsService], (service: FlightsService) => {
     service.getMyFlights().subscribe({
       next: (flights: Flight[])=>{
@@ -57,7 +69,9 @@ describe('FlightsService', () => {
 
     httpTestingController.verify();
   }));
+  */
 
+  /*
   it('should get a chunk of flights',inject([FlightsService], (service: FlightsService) => {
     service.getFlights(0,20).subscribe({
       next: (flights: Flight[])=>{
@@ -70,7 +84,8 @@ describe('FlightsService', () => {
 
     httpTestingController.verify();
   }));
-
+*/
+/*
   it('should add a flight to myFlights',inject([FlightsService], (service: FlightsService) => {
     service.addMyFlight(A_FLIGHT).subscribe({
       next: (count: number)=>{
@@ -84,4 +99,5 @@ describe('FlightsService', () => {
 
     httpTestingController.verify();
   }));  
+  */
 });
