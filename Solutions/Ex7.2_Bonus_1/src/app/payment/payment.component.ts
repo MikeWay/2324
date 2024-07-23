@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit{
   @Output()
   paymentConfirmed: EventEmitter<FlightPaymentEvent> = new EventEmitter<FlightPaymentEvent>();
 
-  @Input()
+  @Input() 
   get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
@@ -57,7 +57,7 @@ export class PaymentComponent implements OnInit{
     this.buildSampleModel();
     this.payForm.setValue(this.model);  }  
 }
-	
+
 export class FlightPaymentEvent {
   constructor( public flight: Flight, public payment: Payment){}
   
