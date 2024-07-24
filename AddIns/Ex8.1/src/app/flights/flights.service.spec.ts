@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { FlightsService } from '../flights/flights.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
+import {HttpClient, provideHttpClient} from '@angular/common/http';
 import {Flight} from '../model/flight';
 import {FLIGHTS} from '../model/mock-flights';
 
@@ -15,10 +15,8 @@ describe('FlightsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
       ],
-
-      providers: [FlightsService]
+      providers: [FlightsService, provideHttpClient(),provideHttpClientTesting()]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
     //httpClient = TestBed.inject(HttpClient);
@@ -36,6 +34,7 @@ describe('FlightsService', () => {
 
     service.getAllFlights().subscribe((flights: Flight[]) => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called
+      
     });
 
     const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
@@ -52,6 +51,7 @@ describe('FlightsService', () => {
       error: (e) => {console.log(`[${e}]`);expect(e.message).toEqual('Server error - is the REST server running')}
     });
     const req = httpTestingController.expectOne('http://localhost:8080/flightserver/allflights');
+    expect(req.request.method).toBe('GET');
     req.flush('Failed!', {status: 500, statusText: 'Internal Server Error'}); // Supply the data which will be returned
     httpTestingController.verify();
   }));  
@@ -95,9 +95,10 @@ describe('FlightsService', () => {
     const req = httpTestingController.expectOne('http://localhost:8080/flightserver/myflights');
     expect(req.request.method).toEqual('POST');
     expect(JSON.parse(req.request.body)).toEqual([A_FLIGHT]);
+    expect(req.request.headers.get('Content-Type')).toBe('application/json');
     req.flush(1); // Supply the data which will be returned
 
     httpTestingController.verify();
   }));  
-  */
+*/
 });
