@@ -1,36 +1,26 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { Flight } from '../model/flight';
-import { MYFLIGHTS } from '../model/mock-flights';
+import { catchError, Observable, throwError } from 'rxjs';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FlightsService {
 
   constructor(private http: HttpClient) { }
 
-  public getFlights(): Observable<Flight[]> {
-    // const url = 'http://localhost:8080/flightserver/flights';
-    const url = 'http://localhost:8080/flightserver/allflights';
+  public getAllFlights(): Observable<Flight[]>{
+    const url = "http://localhost:8080/flightserver/allflights";
     return this.http.get<Flight[]>(url).pipe(catchError(this.handleError));
   }
 
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
-  }
-
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if (error.error instanceof ErrorEvent) {
-      // Client error
-      console.error('Http communication error:', error.error.message);
+  private handleError(error: HttpErrorResponse): Observable<never>{
+    if(error.status == 0){
+      console.error(`HTTP Communication Error: ${error.error.message}` );
     } else {
-      // Server error
-      console.error(`Server error: ${error.status}. Message body: ${error.message}`);
+      console.error(`Server Error: ${error.status} ${error.error}` );
     }
-    return throwError('Server error - is the REST  server running?');
+    return throwError(() => new Error('Server error - is the REST server running?'));
   }
 }
