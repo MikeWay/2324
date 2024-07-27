@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+
+import { CurrencySelectorComponent } from './currency-selector.component';
+import { ApplicationStateService } from '../application-state/application-state.service';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
-import { MyFlightsComponent } from './my-flights.component';
-import { ApplicationStateService } from '../application-state/application-state.service';
-
-describe('MyFlightsComponent', () => {
-  let component: MyFlightsComponent;
-  let fixture: ComponentFixture<MyFlightsComponent>;
+describe('CurrencySelectorComponent', () => {
+  let component: CurrencySelectorComponent;
+  let fixture: ComponentFixture<CurrencySelectorComponent>;
 
   beforeEach(async () => {
     const spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
@@ -15,15 +14,14 @@ describe('MyFlightsComponent', () => {
           flights: FLIGHTS,
           myFlights: MYFLIGHTS,
           displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
-      });
-
+      });    
     await TestBed.configureTestingModule({
-      imports: [ MyFlightsComponent ]
-    }).overrideComponent(MyFlightsComponent,
+      imports: [CurrencySelectorComponent]
+    }).overrideComponent(CurrencySelectorComponent,
       { set: { providers: [{ provide: ApplicationStateService, useValue: spyApplicationStateService }] } })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MyFlightsComponent);
+    fixture = TestBed.createComponent(CurrencySelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
