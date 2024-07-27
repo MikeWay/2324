@@ -40,3 +40,19 @@ CN: C7 -- Architecture ref ex7.1
 
 CN: C8 - explain provision of HttpClient in app Config
 CN:C8 Order of provideHttpClient(),provideHttpClientTesting() is critical
+
+**** Issue with Cypress vs Jasmine in VSCode
+
+Need to do this:
+Add   "exclude": [
+    "cypress/**/*.ts",
+    "cypress.config.ts"
+  ]
+  to tsconfig.json
+
+  Add this to cypress/tsconfig.json:
+  "include": [
+    "**/*.ts",
+    "../cypress.config.ts"
+  ],
+  "exclude": []

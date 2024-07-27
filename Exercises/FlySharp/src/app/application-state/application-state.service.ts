@@ -23,6 +23,7 @@ export class ApplicationStateService {
 
   constructor(private flightsService: FlightsService) {
     this.loadFlights();
+    this.loadMyFlights();
   }
   public get flights(): Flight[] {
     return this._flights;
@@ -34,15 +35,29 @@ export class ApplicationStateService {
 
   addMyFlight(flight: Flight): number {
     this.myFlights.push(flight);
+    this.flightsService.addMyFlight(flight).subscribe({});
     return this.myFlights.length;
   }   
 
   private loadFlights(){
     this.error='';
-    this.flightsService.getAllFlights().subscribe({
-      next: (flights)=> this._flights = flights,
-      error: (e) => this.error = e.message,
-      complete: ()=> this.error = '' 
-    })
+    this.flightsService.getAllFlights().subscribe(
+      {
+        next: (flights) => this._flights = flights,
+        error: (err) => this.error = err,
+        complete: () => this.error = ''
+      }
+    )
   }  
+
+  private loadMyFlights(){
+    this.error='';
+    this.flightsService.getMyFlights().subscribe(
+      {
+        next: (flights) => this._myFlights = flights,
+        error: (err) => this.error = err,
+        complete: () => this.error = ''
+      }
+    )
+  }    
 }

@@ -1,7 +1,7 @@
 @if (showBuyFlights){
     <app-flight-filter label="Origin" (filterEmitter) = "onOriginFilterChange($event)" [initialValue]='originFilter'></app-flight-filter>
     <app-flight-filter label="Destination" (filterEmitter) = "onDestinationFilterChange($event)" [initialValue]='destinationFilter'></app-flight-filter>
-    @if(errorMessage){<h2 class="bg-danger text-danger">{{errorMessage}}</h2>}
+    @if(errorMessage){<h2 class="text-danger">{{errorMessage}}</h2>}
     <table class="table table-condensed table-responsive">
     <thead><tr><th></th><th>Flight</th><th>From</th><th>To</th><th>Departure</th><th>Arrival</th><th>Price</th></tr></thead>
     
@@ -19,5 +19,9 @@
         }
     </tbody>
 </table>
+<div width="80%">
+    <button (click)="onPrevious()" class="btn btn-secondary float-left">Previous</button> <button (click)="onNext()" class="btn btn-secondary float-right">Next</button> 
+</div>
 }
+<a href='#' (click)="onClickBuyFlights()">Toggle Flights</a>
 <app-payment [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)"></app-payment>
