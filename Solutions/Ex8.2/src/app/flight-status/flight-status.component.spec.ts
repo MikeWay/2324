@@ -52,7 +52,7 @@ describe('FlightStatusComponent', () => {
 
 
     await TestBed.configureTestingModule({
-      declarations: [FlightStatusComponent],
+      imports: [FlightStatusComponent],
       providers: [{ provide: FlightStatusService, useValue: mockFlightStatusService }]
     })
       .compileComponents();

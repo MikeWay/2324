@@ -8,9 +8,10 @@ export class FlightStatusService {
 
   constructor() { }
 
-  connect(url: string): WebSocketSubject<any> {
-    const myWebSocket: WebSocketSubject<any> =
-      webSocket(url);
+
+  public connect(url: string): WebSocketSubject<any> {
+    const myWebSocket: WebSocketSubject<any> = webSocket(url);
     return myWebSocket;
+
   }
 }

@@ -4,6 +4,7 @@ import { FlightStatusService } from './flight-status.service';
 
 @Component({
   selector: 'app-flight-status',
+  standalone: true,
   templateUrl: './flight-status.component.html',
   styleUrls: ['./flight-status.component.css']
 })
@@ -13,16 +14,18 @@ export class FlightStatusComponent implements OnInit {
 
   public flightStatus = 'All flights are currently on time';
 
-  constructor(private flightStatusService: FlightStatusService) { }
+  constructor(private flightStatusService: FlightStatusService ) { }
 
 
+	
   ngOnInit(): void {
     this.socket = this.flightStatusService.connect('ws://localhost:8081');
     this.socket.subscribe(
-      dataFromServer => this.flightStatus = dataFromServer,
-      err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
+       dataFromServer => { this.flightStatus = dataFromServer },
+       err => console.error(`Web socket connection error: ${JSON.stringify(err)}`)
     );
-    this.socket.next({ airport: 'JFK' });
-  }
+
+    this.socket.next({airport: 'JFK'});
+}
 
 }
