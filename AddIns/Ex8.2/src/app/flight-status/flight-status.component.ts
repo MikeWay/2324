@@ -14,7 +14,7 @@ export class FlightStatusComponent implements OnInit {
 
   public flightStatus = 'All flights are currently on time';
 
-  constructor(private flightStatusService: FlightStatusService ) { }
+  constructor() { }
 
 
   ngOnInit(): void {
