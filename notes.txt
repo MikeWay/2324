@@ -56,3 +56,6 @@ Add   "exclude": [
     "../cypress.config.ts"
   ],
   "exclude": []
+
+
+CN/EX8.2 Note that the websocket subscribe does not work with the new format for subscribe. (May be in notes already)
