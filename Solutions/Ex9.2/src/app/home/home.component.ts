@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { FlightStatusComponent } from "../flight-status/flight-status.component";
+import { OrgDestSelectorComponent } from "../org-dest-selector/org-dest-selector.component";
+
 
 @Component({
   selector: 'app-home',
-  template: `<h1>Special Offer of the month {{specialOffer}}</h1><br/>
-  <app-flight-status></app-flight-status>`,
+    standalone: true,
+    imports: [FlightStatusComponent, OrgDestSelectorComponent ],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   specialOffer = '10% off all round-the-World flights';

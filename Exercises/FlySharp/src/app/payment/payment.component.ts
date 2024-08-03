@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Flight } from '../model/flight';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Payment } from '../model/payment';
 import { formatDate, JsonPipe } from '@angular/common';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [ReactiveFormsModule,JsonPipe],
+  imports: [ReactiveFormsModule,JsonPipe,MatDialogModule,MatDialogTitle, MatDialogContent],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.scss'
 })
@@ -23,6 +24,10 @@ export class PaymentComponent implements OnInit{
     cardType: new FormControl<string>('',{validators: Validators.required, nonNullable: true}),
     expDate: new FormControl<string>('', {validators: Validators.required, nonNullable: true})
   });
+
+  constructor( @Inject(MAT_DIALOG_DATA) flight: Flight,  public dialogRef: MatDialogRef<PaymentComponent>) { 
+    this.selectedFlight = flight;
+  }
 
   @Output()
   paymentConfirmed: EventEmitter<FlightPaymentEvent> = new EventEmitter<FlightPaymentEvent>();

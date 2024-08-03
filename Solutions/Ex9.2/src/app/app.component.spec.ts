@@ -1,60 +1,43 @@
-import { Component } from '@angular/core';
-
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
-
-
-
-@Component({
-  selector: 'app-home',
-  template: ''
-})
-export class MockAppHomeComponent {
-
-}
-
-@Component({
-  selector: 'app-buy-flight',
-  template: ''
-})
-export class MockBuyFlightComponent {
-
-}
-
+import { provideRouter } from '@angular/router';
+import { ApplicationStateService } from './application-state/application-state.service';
+import { FLIGHTS, MYFLIGHTS } from './model/mock-flights';
 
 describe('AppComponent', () => {
+
+  const spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
+    {
+        flights: FLIGHTS,
+        myFlights: MYFLIGHTS,
+        displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+    });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent, MockAppHomeComponent, MockBuyFlightComponent
-      ],
-    }).compileComponents();
+      imports: [AppComponent],
+      providers:[provideRouter([])]
+    }).overrideComponent(AppComponent,
+      { set: { providers: [{ provide: ApplicationStateService, useValue: spyApplicationStateService }] } })
+      .compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Fly Sharp'`, () => {
+  it(`should have the 'Fly Sharp' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app.title).toEqual('Fly Sharp');
   });
 
-  it('should have an router-outlet tag', () => {
+  it('should have a <router-outlet>', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('main router-outlet')).toBeTruthy();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('router-outlet')).toBeDefined();
   });
-
-
-
 });

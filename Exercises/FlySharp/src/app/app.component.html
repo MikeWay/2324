@@ -1,20 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button (click)="toggleNavbar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div [ngClass]="{'show': navbarOpen}" class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item" routerLinkActive="active"><a routerLink='/home' class="nav-link" >Home</a></li>
-          <li class="nav-item" routerLinkActive="active" ><a routerLink='/buy' class="nav-link" >Buy Flights</a></li>
-          <li class="nav-item" routerLinkActive="active" ><a routerLink='/myflights' class="nav-link" >My Flights</a></li>
-          <li  class="nav-item" routerLinkActive="active" ><a routerLink='/account' class="nav-link" >Account</a></li>
-      </ul>     
-  </div>
-  <div>
-    <app-currency-selector></app-currency-selector>
-  </div>  
-</nav>
-<main class="container-fluid d-flex h-100 flex-column">
-  <router-outlet></router-outlet>
-</main>
+<mat-toolbar color="primary">
+  <mat-icon (click)="nav.toggle()">menu</mat-icon>
+  <span class='title'>FlySharp</span>
+  <span class="spacer"></span>
+  <span appTime='white' class="label label-primary"></span>
+  <span class="spacer"></span><app-currency-selector></app-currency-selector>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #nav>
+    <mat-nav-list>
+      <a mat-list-item class="nav-link" routerLink='/home' (click)="nav.toggle()">Home</a>
+      <a mat-list-item class="nav-link" routerLink='/buy' (click)="nav.toggle()">Buy Flights</a>
+      <a mat-list-item class="nav-link" routerLink='/myflights' (click)="nav.toggle()">My Flights</a>
+      <a mat-list-item class="nav-link" routerLink='/account' (click)="nav.toggle()">Account</a>
+   </mat-nav-list>    
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>    
+  </mat-sidenav-content>
+</mat-sidenav-container>

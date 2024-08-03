@@ -6,11 +6,15 @@ import { FlightFilterComponent } from '../flight-filter/flight-filter.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
+import {MatCardModule} from '@angular/material/card'
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog'
+
 const FLIGHTS_PER_PAGE = 10;
 @Component({
   selector: 'app-buy-flight',
   standalone: true,
-  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe,MatCardModule,MatButtonModule],
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
@@ -26,7 +30,10 @@ export class BuyFlightComponent {
   flightCount = 0;
 
 
-  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private stateService: ApplicationStateService, 
+              private activatedRoute: ActivatedRoute, 
+              private router: Router,
+              public matDialog: MatDialog) { }
 
   get flights() {
     const filteredFlights = this.stateService.flights.filter((flight) => this.originDestinationFilter(flight));
@@ -38,8 +45,17 @@ export class BuyFlightComponent {
     return this.stateService.error;
   }
 
+  get enableNextBut(): boolean {
+    return this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount;
+  }
+
+  get enablePreviousBut(): boolean {
+    return this.firstDisplayedFlightIndex > 0;
+  }
+
   onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
+    this.openModalBuyFlightDialog();
   }
 
   onClickBuyFlights() {
@@ -62,6 +78,7 @@ export class BuyFlightComponent {
       this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
     }
   }
+
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
@@ -88,6 +105,26 @@ export class BuyFlightComponent {
       if (!flight.destination.startsWith(this.destinationFilter)) return false;
     }
     return true;
+  }
+
+  openModalBuyFlightDialog() {
+    const dialogConfig = {
+    // The user can't close the dialog by clicking outside its body
+      disableClose: true,
+      id:"modal-component",
+      data: this.selectedFlight,
+      height: '100px',
+      width: '100px'
+    };
+
+    // https://material.angular.io/components/dialog/overview
+    const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
+    modalDialogRef.afterClosed().subscribe((flightPayment: FlightPaymentEvent | null) => {
+      // Handle result from the Dialog - null if the dialog was dismissed
+      if(flightPayment){
+        this.flightPurchased(flightPayment);
+      }
+    });  
   }
 }
 

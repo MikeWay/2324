@@ -1,114 +1,106 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FlightsService } from '../flights/flights.service';
+import { ApplicationStateService } from '../application-state/application-state.service';
 import { Flight } from '../model/flight';
+import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
+import {MatCardModule} from '@angular/material/card'
+import {MatButtonModule} from '@angular/material/button';
+
+const FLIGHTS_PER_PAGE = 10;
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe,MatCardModule,MatButtonModule],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-  _flights: Flight[] = new Array<Flight>();
-  showBuyFlights = false;
-  // tslint:disable-next-line: variable-name
-  _selectedFlight: Flight | undefined;
-
+export class BuyFlightComponent {
+  showBuyFlights = true;
+  selectedFlight: Flight | undefined;
   originFilter = '';
   destinationFilter = '';
-  errorMessage = '';
 
-  conversionRate = 4.0;
-  nextFlightIndex = 20;
-  numFlights = 0;
+  firstDisplayedFlightIndex = 0;
+  showNext = false;
+  showPrevious = false;
+  flightCount = 0;
 
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.originFilter = params['origin']);
-    this.flightsService.getChunkOfFlights(0, 20).subscribe(
-      (flights: Flight[]) => {
-        this._flights = flights;
-        this.showBuyFlights = true;
-      },
-      (error: any) => this.errorMessage = error
-    );
+  get flights() {
+    const filteredFlights = this.stateService.flights.filter((flight) => this.originDestinationFilter(flight));
+    this.flightCount = filteredFlights.length;
+    return filteredFlights.slice(this.firstDisplayedFlightIndex, this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE);
   }
 
-  onClickBuyFlights(): void {
+  get errorMessage() {
+    return this.stateService.error;
+  }
+
+  get enableNextBut(): boolean {
+    return this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount;
+  }
+
+  get enablePreviousBut(): boolean {
+    return this.firstDisplayedFlightIndex > 0;
+  }
+
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
+  }
+
+  onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
-  }
-
-  onFlightClick(flight: Flight): void {
-    this._selectedFlight = flight;
-  }
-
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
-  }
-
-  set selectedFlight(flight: Flight | undefined) {
-    this._selectedFlight = flight;
-  }
-
-  set conversionRateString(strRate: string) {
-    if (strRate.length > 0) {
-      this.conversionRate = parseFloat(strRate);
-      if (isNaN(this.conversionRate)) {
-        this.conversionRate = 1.0;
-      }
-    } else {
-      this.conversionRate = 1.0;
-    }
   }
 
   onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
   }
 
+  onNext(){
+    if(this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount){
+      this.firstDisplayedFlightIndex += FLIGHTS_PER_PAGE;
+    }
+
+  }
+
+  onPrevious(){
+    if(this.firstDisplayedFlightIndex >= FLIGHTS_PER_PAGE){
+      this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
+    }
+  }
+
+
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
   }
 
-  onNext(): void {
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex += 20, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
-      (error: any) => this.errorMessage = error);
+  get currencySymbol(): string {
+    return this.stateService.displayCurrency.symbol
   }
 
-  onPrevious(): void {
-    // Don't load flights pre 0
-    if (this.nextFlightIndex > 20) {
-      this.nextFlightIndex -= 20;
-    } else {
-      this.nextFlightIndex = 0;
-    }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error);
+  get currencyRate(): number {
+    return this.stateService.displayCurrency.rate
   }
 
-  /**
-   * Version of the flight getter that implements a simple filter
-   */
-
-  get flights(): Flight[] {
-    let flights = this._flights;
-    if (this.originFilter) {
-      flights = this._flights.filter((flight: Flight) => {
-        return flight.origin.startsWith(this.originFilter as string); // Cast OK as we know it's not undefined or null from the outer if
-      });
-    }
-    if (this.destinationFilter) {
-      flights = flights.filter((flight: Flight) => {
-        return flight.destination.startsWith(this.destinationFilter as string);
-      });
-    }
-    return flights;
+  flightPurchased(paymentEvent: FlightPaymentEvent) {
+    this.stateService.addMyFlight(paymentEvent.flight);
+    this.router.navigate(['/myflights']);
   }
 
+  originDestinationFilter(flight: Flight): boolean {
+    if (this.originFilter != '') {
+      if (!flight.origin.startsWith(this.originFilter)) return false;
+    }
+    if (this.destinationFilter != '') {
+      if (!flight.destination.startsWith(this.destinationFilter)) return false;
+    }
+    return true;
+  }
 }
 
 
