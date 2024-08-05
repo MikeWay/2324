@@ -1,38 +1,14 @@
 @if (showBuyFlights){
-<mat-card appearance="outlined">
-    <mat-card-content>
-        <app-flight-filter label="Origin" (filterEmitter)="onOriginFilterChange($event)"
-            [initialValue]='originFilter'></app-flight-filter>
-        <app-flight-filter label="Destination" (filterEmitter)="onDestinationFilterChange($event)"
-            [initialValue]='destinationFilter'></app-flight-filter>
-    </mat-card-content>
-</mat-card>
-@if(errorMessage){
-<mat-card appearance="outlined">
-    <mat-card-content>
-        <h2 class="text-danger">{{errorMessage}}</h2>
-    </mat-card-content>
-</mat-card>
-}
-<mat-card appearance="outlined">
-    <mat-card-content>
-<table class="table table-condensed table-responsive">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Flight</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-
+    <app-flight-filter label="Origin" (filterEmitter) = "onOriginFilterChange($event)" [initialValue]='originFilter'></app-flight-filter>
+    <app-flight-filter label="Destination" (filterEmitter) = "onDestinationFilterChange($event)" [initialValue]='destinationFilter'></app-flight-filter>
+    @if(errorMessage){<h2 class="text-danger">{{errorMessage}}</h2>}
+    <table class="table table-condensed table-responsive">
+    <thead><tr><th></th><th>Flight</th><th>From</th><th>To</th><th>Departure</th><th>Arrival</th><th>Price</th></tr></thead>
+    
     <tbody>
         @for (flight of flights; track flight.id) {
         <tr>
-            <td><button mat-raised-button (click)="onFlightClick(flight)" >Buy</button></td>
+            <td><button (click)="onFlightClick(flight)" class="btn btn-primary btn-sm">Buy</button></td>
             <td>{{flight.flightNumber}}</td>
             <td>{{flight.origin}}</td>
             <td>{{flight.destination}}</td>
@@ -44,13 +20,8 @@
     </tbody>
 </table>
 <div width="80%">
-    <button mat-raised-button (click)="onPrevious()" [disabled]="!enablePreviousBut">Previous</button> <button mat-raised-button (click)="onNext()"
-        [disabled]="!enableNextBut">Next</button>
+    <button (click)="onPrevious()" class="btn btn-secondary float-left">Previous</button> <button (click)="onNext()" class="btn btn-secondary float-right">Next</button> 
 </div>
-</mat-card-content>
-</mat-card>
-    
-
 }
 <a href='#' (click)="onClickBuyFlights()">Toggle Flights</a>
 <app-payment [selectedFlight]="selectedFlight" (paymentConfirmed)="flightPurchased($event)"></app-payment>

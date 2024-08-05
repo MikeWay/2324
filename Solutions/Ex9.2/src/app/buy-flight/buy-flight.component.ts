@@ -6,14 +6,11 @@ import { FlightFilterComponent } from '../flight-filter/flight-filter.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
 
-import {MatCardModule} from '@angular/material/card'
-import {MatButtonModule} from '@angular/material/button';
-
 const FLIGHTS_PER_PAGE = 10;
 @Component({
   selector: 'app-buy-flight',
   standalone: true,
-  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe,MatCardModule,MatButtonModule],
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe],
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
@@ -41,14 +38,6 @@ export class BuyFlightComponent {
     return this.stateService.error;
   }
 
-  get enableNextBut(): boolean {
-    return this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount;
-  }
-
-  get enablePreviousBut(): boolean {
-    return this.firstDisplayedFlightIndex > 0;
-  }
-
   onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
   }
@@ -73,7 +62,6 @@ export class BuyFlightComponent {
       this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
     }
   }
-
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
