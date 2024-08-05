@@ -1,71 +1,93 @@
-<div *ngIf="selectedFlight">
-  <h3>Purchase this flight</h3>
-  <div class="row">
-    <div class="col-md-2 col-xs-4 form-label">Flight Number : </div>
-    <div class="col-md-1 col-xs-8">{{selectedFlight.flightNumber}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Origin&nbsp;:</div>
-    <div class="col-md-1  col-xs-8">{{selectedFlight.origin}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Destination&nbsp;:</div>
-    <div class="col-md-1  col-xs-8">{{selectedFlight.destination}}</div>
-  </div>
-  <div class="row">
-    <h4 class="col-md-1 col-xs-4 form-label">Departure: </h4>
-  </div>
-  <div class="row">
-    <div class="col-md-1 col-xs-4 form-label">Day: </div>
-    <div class="col-md-1 col-xs-8">{{selectedFlight.departDay}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Time: </div>
-    <div class="col-md-1  col-xs-8">{{selectedFlight.departTime}}</div>
-  </div>
-  <div class="row">
-    <h4 class="col-md-1 col-xs-4 form-label">Arrive: </h4>
-  </div>
-  <div class="row">
-    <div class="col-md-1 col-xs-4 form-label">Day: </div>
-    <div class="col-md-1  col-xs-8">{{selectedFlight.arriveDay}}</div>
-    <div class="col-md-1 col-xs-4 form-label">Time: </div>
-    <div class="col-md-1  col-xs-8">{{selectedFlight.arriveTime}}</div>
-  </div>
+@if(selectedFlight){
+<div>
+    <div>
+        <h3>Purchase this flight</h3>
+    </div>
+    <div>
+        <div>
+            <div class="row">
+                <div class="col  panel">
+                    <div class="row">
+                        <div class="col-md-2 col-xs-4 form-label">Flight#: </div>
+                        <div class="col-md-1 col-xs-8">{{selectedFlight.flightNumber}}</div>
+                        <div class="col-md-2 col-xs-4 form-label">Origin&nbsp;:</div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.origin}}</div>
+                        <div class="col-md-3 col-xs-4 form-label">Destination&nbsp;:</div>
+                        <div class="col-md-1  col-xs-8">{{selectedFlight.destination}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-4 form-label  font-weight-bold">Departure: </div>
+                        <div class="col-md-2 col-xs-4 form-label">Day: </div>
+                        <div class="col-md-2 col-xs-8">{{selectedFlight.departDay}}</div>
+                        <div class="col-md-3 col-xs-4 form-label">Time: </div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.departTime}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-4 form-label font-weight-bold">Arrival: </div>
+                        <div class="col-md-2 col-xs-4 form-label">Day: </div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.arriveDay}}</div>
+                        <div class="col-md-3 col-xs-4 form-label">Time: </div>
+                        <div class="col-md-2  col-xs-8">{{selectedFlight.arriveTime}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-  <div class="form-outline col-md-12">
-    <form [formGroup]="payForm" (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" >
-      </div>
-
-      <div class="form-group">
-        <label for="address">Address</label>
-        <textarea class="form-control" id="address" formControlName="address" placeholder="Address" rows="4" ></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
-        <div *ngIf="!payForm.controls.email.valid">You must provide a valid email address</div>        
-      </div>
-
-      <div class="form-group">
-        <label for="cardNum">Card Number</label>
-        <input type="text" class="form-control" id="cardNum" formControlName="cardNum" placeholder="Card Number" >
-      </div>
-      <div class="form-group">
-        <label for="cardType">Card Type</label>
-        <select type="text" class="form-control" id="cardType" formControlName="cardType" placeholder="Card Type" >
-          <option>VISA</option>
-          <option>AMEX</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="expDate">Card Expiry</label>
-        <input type="date" class="form-control" id="expDate" formControlName="expDate"  >
-      </div>
-      <button type="submit" class="btn btn-secondary" [disabled]="!payForm.valid">Buy Flight</button>
-    </form>
-
-  </div>
+<hr />
+<div class="row mt-1">
+    <div class="panel col-md-12">
+        <form [formGroup]="payForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="form-group" class="col-md">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" formControlName="name" id="name"
+                        placeholder="Name" >
+                    <div class="form-group mt-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input  type="email" class="form-control" formControlName="email" id="email"
+                            placeholder="Email" >
+                        @if(!payForm.controls.email.valid){                            
+                            <div>You must provide a valid email address</div>
+                        }
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group col-md">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea  class="form-control" formControlName="address" id="address"
+                            placeholder="Address" rows="4" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-5">
+                    <label for="cardNum" class="form-label">Card Number</label>
+                    <input  type="text" class="form-control" formControlName="cardNum" id="cardNum"
+                        placeholder="Card Number" >
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cardType" class="form-label">Card Type</label>
+                    <select  type="text" class="form-control" formControlName="cardType" id="cardType"
+                        placeholder="Card Type">
+                        <option>VISA</option>
+                        <option>AMEX</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="expDate" class="form-label">Card Expiry</label>
+                    <input  type="date" class="form-control" formControlName="expDate" id="expDate" >
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-4">
+                        <button type="submit" class="btn btn-primary" [disabled]="!payForm.valid">Buy
+                            Flight</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <p>Form value: {{ payForm.value | json }}</p>
+}

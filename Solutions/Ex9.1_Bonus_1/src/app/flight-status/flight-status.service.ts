@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,9 @@ export class FlightStatusService {
 
   constructor() { }
 
-  connect(url: string): WebSocketSubject<any> {
-    const myWebSocket: WebSocketSubject<any> =
-      webSocket(url);
+
+  public connect(url: string): WebSocketSubject<any> {
+    const myWebSocket: WebSocketSubject<any> = webSocket(url);
     return myWebSocket;
   }
 }
