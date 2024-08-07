@@ -59,3 +59,8 @@ Add   "exclude": [
 
 
 CN/EX8.2 Note that the websocket subscribe does not work with the new format for subscribe. (May be in notes already)
+
+For Material: need to make sure the slides show the code we need incluing:
+GridList
+Card
+CDK Layout - Breakpoint
