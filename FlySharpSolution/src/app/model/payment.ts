@@ -1,8 +1,9 @@
 export class Payment {
-  name: string;
-  address: string;
-  email: string;
-  cardNum: string;
-  cardType: string;
-  expDate: Date;
+  constructor(
+    public name: string = '',
+    public address: string = '',
+    public email: string = '',
+    public cardNum: string = '',
+    public cardType: string = '',
+    public expDate: string = ''){}
 }

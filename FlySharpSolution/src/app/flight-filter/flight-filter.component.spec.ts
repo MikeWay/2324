@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FlightFilterComponent } from './flight-filter.component';
 
@@ -6,14 +6,12 @@ describe('FlightFilterComponent', () => {
   let component: FlightFilterComponent;
   let fixture: ComponentFixture<FlightFilterComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FlightFilterComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FlightFilterComponent]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(FlightFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,121 +1,116 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ApplicationStateService } from '../application-state/application-state.service';
+import { Flight } from '../model/flight';
+import { FlightPaymentEvent, PaymentComponent } from '../payment/payment.component';
+import { FlightFilterComponent } from '../flight-filter/flight-filter.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 
-import {FlightsService} from '../flights/flights.service';
-import {Flight} from '../model/flight';
-
+const FLIGHTS_PER_PAGE = 10;
 @Component({
   selector: 'app-buy-flight',
+  standalone: true,
+  imports: [PaymentComponent, FlightFilterComponent, CurrencyConversionPipe, MatButtonModule, MatCardModule],
   templateUrl: './buy-flight.component.html',
-  styleUrls: ['./buy-flight.component.css']
+  styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent implements OnInit {
-  // Next line stops tslint complaining about the _ at the start of the variable name
-  // tslint:disable-next-line
-  _flights: Flight[];
+export class BuyFlightComponent {
   showBuyFlights = true;
-  selectedFlight: Flight;
-  errorMessage: string;
-  originFilter: string = null;
-  destinationFilter: string = null;
-conversionRate = 4.0;
+  selectedFlight: Flight | undefined;
+  originFilter = '';
+  destinationFilter = '';
 
-  nextFlightIndex = 20;
-  numFlights = 0;
+  firstDisplayedFlightIndex = 0;
+  showNext = false;
+  showPrevious = false;
+  flightCount = 0;
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
-  onFilterChange(filterValue: string): void {
+  constructor(private stateService: ApplicationStateService, private activatedRoute: ActivatedRoute, private router: Router, private matDialog: MatDialog) { }
+
+  get flights() {
+    const filteredFlights = this.stateService.flights.filter((flight) => this.originDestinationFilter(flight));
+    this.flightCount = filteredFlights.length;
+    return filteredFlights.slice(this.firstDisplayedFlightIndex, this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE);
+  }
+
+  get errorMessage() {
+    return this.stateService.error;
+  }
+
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
+    this.openModalBuyFlightDialog();    
+  }
+
+  onClickBuyFlights() {
+    this.showBuyFlights = !this.showBuyFlights;
+  }
+
+  onOriginFilterChange(filterValue: string): void {
     this.originFilter = filterValue;
+  }
+
+  onNext(){
+    if(this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount){
+      this.firstDisplayedFlightIndex += FLIGHTS_PER_PAGE;
+    }
+
+  }
+
+  onPrevious(){
+    if(this.firstDisplayedFlightIndex >= FLIGHTS_PER_PAGE){
+      this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
+    }
   }
 
   onDestinationFilterChange(filterValue: string): void {
     this.destinationFilter = filterValue;
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if (typeof params.origin !== 'undefined' ) {
-        this.originFilter = params.origin;
-      }
-    });
-
-
-    const flightStream = this.flightsService.getChunkOfFlights(0, 20);
-    flightStream.subscribe(
-      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error
-    );
-
-    // Get the number of flights available
-    this.flightsService.getNumberOfFlights().subscribe(
-      num => {console.log(num); this.numFlights = num; },
-      (error: string) => this.errorMessage = error);
+  get currencySymbol(): string {
+    return this.stateService.displayCurrency.symbol
   }
 
-  onClickBuyFlights(): void {
-    this.showBuyFlights = !this.showBuyFlights;
+  get currencyRate(): number {
+    return this.stateService.displayCurrency.rate
   }
 
+  flightPurchased(paymentEvent: FlightPaymentEvent) {
+    this.stateService.addMyFlight(paymentEvent.flight);
+    this.router.navigate(['/myflights']);
+  }
 
-  onNext(): void {
-
-    let numFlights = 20;
-    if (this.nextFlightIndex + numFlights > this.numFlights) {
-      numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
+  originDestinationFilter(flight: Flight): boolean {
+    if (this.originFilter != '') {
+      if (!flight.origin.startsWith(this.originFilter)) return false;
     }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error);
-    if (this.nextFlightIndex <= this.numFlights) {
-      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
+    if (this.destinationFilter != '') {
+      if (!flight.destination.startsWith(this.destinationFilter)) return false;
     }
+    return true;
   }
 
-  onPrevious(): void {
-      // Don't load flights pre 0
-    if (this.nextFlightIndex > 20) {
-      this.nextFlightIndex -= 20;
-    } else {
-      this.nextFlightIndex = 0;
+  openModalBuyFlightDialog(){
+    const dialogConfig = {
+      disableClose: true,
+      id:"payment-dlg",
+      data: this.selectedFlight,
+      width: '600px',
+      height: '600px',
+  };
+  const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
+  modalDialogRef.afterClosed().subscribe((flightPayment: FlightPaymentEvent | null) => {
+    if(flightPayment){
+       this.flightPurchased(flightPayment);
     }
-    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
-      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
-      (error: string) => this.errorMessage = error);
+});
+
+
   }
-
-  get flights(): Flight[] {
-    if (this.originFilter != null || this.destinationFilter != null) {
-      return this._flights.map((flight) => {
-        let match = true;
-        if (this.originFilter != null) {
-          match = flight.origin.startsWith(this.originFilter);
-        }
-        if (!match) {
-          return null;
-        }
-        if (match && this.destinationFilter != null) {
-          match = flight.destination.startsWith(this.destinationFilter);
-          if (match) {
-            return flight;
-          } else {
-            return null;
-          }
-        } else {
-          return flight;
-        }
-        // the filter expression stops empty elements being returned (drops the null elements)
-      }).filter(x => !!x);
-    } else {
-      return this._flights;
-    }
-  }
-
-
-  onFlightClick(flight: Flight): void {
-    this.selectedFlight = flight;
-  }
-
-
 }
+
 

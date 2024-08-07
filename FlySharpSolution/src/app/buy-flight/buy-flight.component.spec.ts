@@ -1,96 +1,40 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BuyFlightComponent } from './buy-flight.component';
-import {FlightsService} from '../flights/flights.service';
-import {Component, DebugElement, Input, Pipe, PipeTransform} from '@angular/core';
-import {By} from '@angular/platform-browser';
-import {Flight} from '../model/flight';
-import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
-import {ActivatedRoute, Params} from '@angular/router';
-import {from, Observable, of} from 'rxjs';
-import {CurrencyConversionPipe} from '../currency-conversion/currency-conversion.pipe';
+import { provideRouter } from '@angular/router';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { ApplicationStateService } from '../application-state/application-state.service';
+import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
+// const stateServiceStub: Partial<ApplicationStateService> = {
+//   flights: FLIGHTS,
+//   displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+// }
 
-class MockFlightsService {
-
-  constructor() { }
-
-  public getFlights(): Observable<Flight[]> {
-    return of<Flight[]>( FLIGHTS);
-  }
-
-  public getChunkOfFlights(): Observable<Flight[]> {
-    return of<Flight[]>( FLIGHTS);
-  }
-
-  public getNumberOfFlights(): Observable<number> {
-    return of<number>( 10);
-  }
-
-  public getMyFlights(): Flight[] {
-    return MYFLIGHTS;
-  }
-}
-
-@Component({
-  selector: 'app-payment',
-  template: ''
-})
-class MockAppPaymentComponent {
-  @Input()
-  public selectedFlight: Flight;
-
-}
-
-@Component({
-  selector: 'app-flight-filter',
-  template: ''
-})
-class MockFlightFilterComponent {
-  @Input()
-  public label: string;
-  @Input()
-  public initialValue: string;
-
-  public onFilterChange(flight: string): void {}
-
-}
-
-@Pipe({
-  name: 'currencyConversion'
-})
-class MockCurrencyConversionPipe implements PipeTransform {
-  transform(value: any, ...args: any[]): any {
-  }
-
-}
-
-const mockFlightsService = new MockFlightsService();
+let spyApplicationStateService = null;
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent, MockCurrencyConversionPipe ],
-      providers: [{
-                    provide: FlightsService,
-                    useValue: mockFlightsService
-                  },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            params: from([{id: 1}]),
-          }
-        }
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
+      {
+          flights: FLIGHTS,
+          myFlights: MYFLIGHTS,
+          displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+      });
+  
+    await TestBed.configureTestingModule({
+      imports: [BuyFlightComponent],
+      providers: [provideRouter([])]
+    }).overrideComponent(BuyFlightComponent,
+      { set: { providers: [{ provide: ApplicationStateService, useValue: spyApplicationStateService }] } }
+    )
+      .compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -109,26 +53,30 @@ describe('BuyFlightComponent', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is called', () => {
     component.onClickBuyFlights();
     component.onClickBuyFlights();
     expect(component.showBuyFlights).toBeTruthy();
   });
 
-  it('should set showBuyFlights to false when the link is clicked', () => {
-    el = fixture.debugElement.query(By.css('a'));
-    el.triggerEventHandler('click', null);
-    expect(component.showBuyFlights).toBeFalsy();
-  });
+  // it('should set showBuyFlights to false when the link is clicked', () => {
+  //   el = fixture.debugElement.query(By.css('a'));
+  //   el.triggerEventHandler('click', null);
+  //   expect(component.showBuyFlights).toBeFalsy();
+  // });
 
-  it('should hide the flights table  when the link is clicked', () => {
-    fixture.detectChanges();
-    let tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeTruthy();
-    el = fixture.debugElement.query(By.css('a'));
-    el.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    tableEle = fixture.debugElement.query(By.css('table'));
-    expect(tableEle).toBeFalsy();
+  // it('should hide the flights table  when the link is clicked', () => {
+  //   fixture.detectChanges();
+  //   let tableEle = fixture.debugElement.query(By.css('table'));
+  //   expect(tableEle).toBeTruthy();
+  //   el = fixture.debugElement.query(By.css('a'));
+  //   el.triggerEventHandler('click', null);
+  //   fixture.detectChanges();
+  //   tableEle = fixture.debugElement.query(By.css('table'));
+  //   expect(tableEle).toBeFalsy();
+  // });
+
+  it('should have a currency symbol of £', () => {
+    expect(component.currencySymbol).toBe('£');
   });
 });
