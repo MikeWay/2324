@@ -64,3 +64,5 @@ For Material: need to make sure the slides show the code we need incluing:
 GridList
 Card
 CDK Layout - Breakpoint
+
+C9: Bundle sizes: analyzer: https://esbuild.github.io/analyze/

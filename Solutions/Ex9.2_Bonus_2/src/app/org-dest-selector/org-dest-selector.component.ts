@@ -35,10 +35,7 @@ export class OrgDestSelectorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['buy', {
-      origin: this.flightSearchForm.controls['origin'].value,
-      destination: this.flightSearchForm.controls['destination'].value
-    }]);
+    this.router.navigate(['buy',this.flightSearchForm.controls['origin'].value, this.flightSearchForm.controls['destination'].value]);
   }
 
 
