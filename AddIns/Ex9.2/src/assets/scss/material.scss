@@ -27,6 +27,10 @@ $theme: mat.define-theme(
   }
 }
 
+mat-card {
+  padding: 1em;
+}
+
 :root {
   @include mat.all-component-themes($theme);
   @include theme($theme);
