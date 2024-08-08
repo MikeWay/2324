@@ -16,7 +16,7 @@ const FLIGHTS_PER_PAGE = 10;
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent {
+export class BuyFlightComponent implements OnInit {
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
@@ -90,6 +90,16 @@ export class BuyFlightComponent {
       if (!flight.destination.startsWith(this.destinationFilter)) return false;
     }
     return true;
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params)=> {
+      if(params['origin'] !== undefined){
+        this.originFilter = params['origin'];
+      }
+      if(params['destination'] !== undefined){
+        this.destinationFilter = params['destination'];
+      }});      
   }
 }
 

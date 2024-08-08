@@ -17,7 +17,7 @@ const FLIGHTS_PER_PAGE = 10;
   templateUrl: './buy-flight.component.html',
   styleUrl: './buy-flight.component.scss'
 })
-export class BuyFlightComponent {
+export class BuyFlightComponent implements OnInit {
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
@@ -43,7 +43,7 @@ export class BuyFlightComponent {
 
   onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
-    this.openModalBuyFlightDialog();    
+    this.openModalBuyFlightDialog();
   }
 
   onClickBuyFlights() {
@@ -54,15 +54,15 @@ export class BuyFlightComponent {
     this.originFilter = filterValue;
   }
 
-  onNext(){
-    if(this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount){
+  onNext() {
+    if (this.firstDisplayedFlightIndex + FLIGHTS_PER_PAGE <= this.flightCount) {
       this.firstDisplayedFlightIndex += FLIGHTS_PER_PAGE;
     }
 
   }
 
-  onPrevious(){
-    if(this.firstDisplayedFlightIndex >= FLIGHTS_PER_PAGE){
+  onPrevious() {
+    if (this.firstDisplayedFlightIndex >= FLIGHTS_PER_PAGE) {
       this.firstDisplayedFlightIndex -= FLIGHTS_PER_PAGE;
     }
   }
@@ -94,22 +94,33 @@ export class BuyFlightComponent {
     return true;
   }
 
-  openModalBuyFlightDialog(){
+  openModalBuyFlightDialog() {
     const dialogConfig = {
       disableClose: true,
-      id:"payment-dlg",
+      id: "payment-dlg",
       data: this.selectedFlight,
       width: '600px',
       height: '600px',
+    };
+    const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
+    modalDialogRef.afterClosed().subscribe((flightPayment: FlightPaymentEvent | null) => {
+      if (flightPayment) {
+        this.flightPurchased(flightPayment);
+      }
+    })
   };
-  const modalDialogRef = this.matDialog.open(PaymentComponent, dialogConfig);
-  modalDialogRef.afterClosed().subscribe((flightPayment: FlightPaymentEvent | null) => {
-    if(flightPayment){
-       this.flightPurchased(flightPayment);
-    }
-});
 
 
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['origin'] !== undefined) {
+        this.originFilter = params['origin'];
+      }
+      if (params['destination'] !== undefined) {
+        this.destinationFilter = params['destination'];
+      }
+    });
   }
 }
 
