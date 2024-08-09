@@ -1,13 +1,13 @@
 CN: Need a quick mention of SASS / SCSS early on 
 Module stuff has changed. All the notes around the bootstrap have to changed
 
-CN: Remove Module stuff from C2 -- shift to C6
+DONE CN: Remove Module stuff from C2 -- shift to C6
 CN: Need to address standalone and imports prior to EX2.1
 //NEXT: Test DN22
 
 EX 2.2 Need to use new for / if
 
-
+ 
 
 CN: Pre ex2.2 must show both @for and @if template constructs (Known as @for block and @if block)
 CN: [ngClass] -- need to import NgClass for the binding to work
@@ -20,6 +20,7 @@ EX5.2
 3) Seems to work - needs tidy. Look at deffered component load for the 2nd bonus
 
 CN: Prior to 5.2 we need to discuss non-standalone components
+CN: Explain difference with dependencis when using modules
 CN: Some of the stuff from earlier in the course ref modules will be needed here
 
 CN: Somewhere we need to make sure that the ApplicationStateService is in a diagram to give some context. (C3 ?)
