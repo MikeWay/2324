@@ -7,33 +7,23 @@ import { By } from '@angular/platform-browser';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { FLIGHTS } from '../model/mock-flights';
 
+	
 const stateServiceStub: Partial<ApplicationStateService> = {
   flights: FLIGHTS,
-  displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+  displayCurrency: { code: 'USD', symbol: '$', rate: 0.9 }
 }
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
   let fixture: ComponentFixture<BuyFlightComponent>;
   let el: DebugElement;
-
-  /*
-      await TestBed.configureTestingModule({
-        imports: [BuyFlightComponent],
-        providers: [provideRouter([])]
-      }).overrideComponent(BuyFlightComponent,
-        { set: { providers: [{ provide: ApplicationStateService, useValue: spyAppState }] } }
-      )
-  */
-
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BuyFlightComponent],
-      providers: [provideRouter([])]
-    }).overrideComponent(BuyFlightComponent,
-      { set: { providers: [{ provide: ApplicationStateService, useValue: stateServiceStub }] } }
-    )
-      .compileComponents();
+      providers: [provideRouter([]),{ provide: ApplicationStateService, useValue: stateServiceStub }]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(BuyFlightComponent);
     component = fixture.componentInstance;
@@ -46,25 +36,25 @@ describe('BuyFlightComponent', () => {
 
   it('should default showBuyFlights to true', () => {
     expect(component.showBuyFlights).toBeTruthy();
-  });
+  });  
 
   it('should set showBuyFlights to false when onClickBuyFlights() is called', () => {
     component.onClickBuyFlights();
     expect(component.showBuyFlights).toBeFalsy();
-  });
+  });  
 
-  it('should set showBuyFlights to true when onClickBuyFlights() is called', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is called twice', () => {
     component.onClickBuyFlights();
     component.onClickBuyFlights();
     expect(component.showBuyFlights).toBeTruthy();
-  });
+  });  
 
   it('should set showBuyFlights to false when the link is clicked', () => {
     el = fixture.debugElement.query(By.css('a'));
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
-
+    
   it('should hide the flights table  when the link is clicked', () => {
     fixture.detectChanges();
     let tableEle = fixture.debugElement.query(By.css('table'));
@@ -74,9 +64,9 @@ describe('BuyFlightComponent', () => {
     fixture.detectChanges();
     tableEle = fixture.debugElement.query(By.css('table'));
     expect(tableEle).toBeFalsy();
-  });
+  });  
 
-  it('should have a currency symbol of £', () => {
-    expect(component.currencySymbol).toBe('£');
-  });
+  it('should have a currency symbol of $', () => {
+    expect(component.currencySymbol).toBe('$');
+  });  
 });
