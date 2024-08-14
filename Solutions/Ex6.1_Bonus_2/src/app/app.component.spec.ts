@@ -6,7 +6,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers:[provideRouter([])]
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 
@@ -22,10 +22,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Fly Sharp');
   });
 
+	
   it('should have a <router-outlet>', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(AppComponent);  
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('router-outlet')).toBeDefined();
-  });
+   });
 });

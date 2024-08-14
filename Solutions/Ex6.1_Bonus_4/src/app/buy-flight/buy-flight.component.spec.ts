@@ -7,12 +7,11 @@ import { By } from '@angular/platform-browser';
 import { ApplicationStateService } from '../application-state/application-state.service';
 import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
 
-// const stateServiceStub: Partial<ApplicationStateService> = {
-//   flights: FLIGHTS,
-//   displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
-// }
 
-let spyApplicationStateService = null;
+const stateServiceStub: Partial<ApplicationStateService> = {
+  flights: FLIGHTS,
+  displayCurrency: { code: 'USD', symbol: '$', rate: 0.9 }
+}
 
 describe('BuyFlightComponent', () => {
   let component: BuyFlightComponent;
@@ -20,19 +19,18 @@ describe('BuyFlightComponent', () => {
   let el: DebugElement;
 
   beforeEach(async () => {
-    spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
+
+    let spyApplicationStateService = jasmine.createSpyObj<ApplicationStateService>('MockApplicationStateService', [],
       {
-          flights: FLIGHTS,
-          myFlights: MYFLIGHTS,
-          displayCurrency: { code: 'GBP', symbol: '£', rate: 1.0 }
+        flights: FLIGHTS,
+        myFlights: MYFLIGHTS,
+        displayCurrency: { code: 'USD', symbol: '$', rate: 0.9 }
+
       });
-  
     await TestBed.configureTestingModule({
       imports: [BuyFlightComponent],
-      providers: [provideRouter([])]
-    }).overrideComponent(BuyFlightComponent,
-      { set: { providers: [{ provide: ApplicationStateService, useValue: spyApplicationStateService }] } }
-    )
+      providers: [provideRouter([]), { provide: ApplicationStateService, useValue: spyApplicationStateService }]
+    })
       .compileComponents();
 
     fixture = TestBed.createComponent(BuyFlightComponent);
@@ -53,7 +51,7 @@ describe('BuyFlightComponent', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should set showBuyFlights to true when onClickBuyFlights() is called', () => {
+  it('should set showBuyFlights to true when onClickBuyFlights() is called twice', () => {
     component.onClickBuyFlights();
     component.onClickBuyFlights();
     expect(component.showBuyFlights).toBeTruthy();
@@ -76,7 +74,7 @@ describe('BuyFlightComponent', () => {
     expect(tableEle).toBeFalsy();
   });
 
-  it('should have a currency symbol of £', () => {
-    expect(component.currencySymbol).toBe('£');
+  it('should have a currency symbol of $', () => {
+    expect(component.currencySymbol).toBe('$');
   });
 });
