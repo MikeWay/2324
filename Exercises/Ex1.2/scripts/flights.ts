@@ -14,7 +14,11 @@
 
 
 // TODO examine code to update the DOM
+// @ts-ignore
 document.getElementById('number').innerHTML = theFlight.flightNumber;
+// @ts-ignore
 document.getElementById('destination').innerHTML = theFlight.destination;
+// @ts-ignore
 document.getElementById('price').innerHTML = theFlight.price + "";
+// @ts-ignore
 document.getElementById('totalPrice').innerHTML = flightInfo.getTotalPrice() + "";
