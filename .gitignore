@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 /Backup
 /Node
-# /Exercises/FlySharp -- Temporarily removed for testing
+/Exercises/FlySharp
 /Exercises/FS2
 /temp
 /DoNows_Orig

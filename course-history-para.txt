@@ -1,0 +1,7 @@
+This is a fairly ambitious redevelopment of the course which as well as brnging the course up to Angular 18 restructures the architecture of the 
+course load and incorporates Angular Material into the solution.
+
+Some of the most significant changes:
+
+Now uses @if @for style control blocks instead of *ngIf etc.
+Testing is moved later in the course 

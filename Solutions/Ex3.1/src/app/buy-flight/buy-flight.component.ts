@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApplicationStateService } from '../application-state/application-state.service';
-import { Flight } from '../model/flight';
+
 
 @Component({
   selector: 'app-buy-flight',
