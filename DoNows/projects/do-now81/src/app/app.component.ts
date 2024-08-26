@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { of, asyncScheduler, fromEvent, generate, merge, Observable, Subscription, timer, interval  } from 'rxjs';
 import { take, map, tap, reduce, mapTo, concatAll, mergeAll, exhaust, filter, distinct, groupBy, mergeMap, pairwise, min, count } from 'rxjs/operators';
@@ -5,6 +6,7 @@ import { take, map, tap, reduce, mapTo, concatAll, mergeAll, exhaust, filter, di
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [AsyncPipe],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
