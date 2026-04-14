@@ -3,5 +3,11 @@ course load and incorporates Angular Material into the solution.
 
 Some of the most significant changes:
 
+The case study has been restructured to use a State Service
+The case study is now built primarily with Standalone components
+Module coverage has been removed from the early chapters and now appears soley in chapter 5
 Now uses @if @for style control blocks instead of *ngIf etc.
 Testing is moved later in the course 
+Material coverage has been increased
+Exercise 8.1 (Http) is now Test Driven
+
