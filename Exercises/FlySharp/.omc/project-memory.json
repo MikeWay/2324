@@ -1,0 +1,195 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776254744923,
+  "projectRoot": "/home/mjrw/course2324/Exercises/FlySharp",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@angular/core",
+        "version": "21.2.0",
+        "category": "frontend"
+      },
+      {
+        "name": "vitest",
+        "version": "4.0.8",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run start",
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "watch": "ng build --watch --configuration development",
+      "test": "ng test",
+      "lint": "ng lint"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "cypress": {
+      "path": "cypress",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776254744917,
+      "keyFiles": []
+    },
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 0,
+      "lastAccessed": 1776254744921,
+      "keyFiles": []
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1776254744921,
+      "keyFiles": [
+        "favicon.ico"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 3,
+      "lastAccessed": 1776254744921,
+      "keyFiles": [
+        "index.html",
+        "main.ts",
+        "styles.scss"
+      ]
+    },
+    "src/app": {
+      "path": "src/app",
+      "purpose": "Application code",
+      "fileCount": 10,
+      "lastAccessed": 1776254744922,
+      "keyFiles": [
+        "app.component.html",
+        "app.component.scss",
+        "app.component.spec.ts"
+      ]
+    },
+    "src/assets": {
+      "path": "src/assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1776254744923,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/app/buy-flight/buy-flight.ts",
+      "accessCount": 14,
+      "lastAccessed": 1776265528420,
+      "type": "file"
+    },
+    {
+      "path": "src/app/buy-flight/buy-flight.html",
+      "accessCount": 12,
+      "lastAccessed": 1776265532315,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.html",
+      "accessCount": 6,
+      "lastAccessed": 1776257395149,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.component.html",
+      "accessCount": 4,
+      "lastAccessed": 1776255566948,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.component.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776255572569,
+      "type": "file"
+    },
+    {
+      "path": "src/app/payment/payment.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776265917243,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776257400732,
+      "type": "file"
+    },
+    {
+      "path": "src/app/payment/payment.html",
+      "accessCount": 3,
+      "lastAccessed": 1776265517748,
+      "type": "file"
+    },
+    {
+      "path": "src/app/application-state/application-state.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776258054552,
+      "type": "file"
+    },
+    {
+      "path": "src/app/home/home.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776254767899,
+      "type": "file"
+    },
+    {
+      "path": "src/app/payment/payment.html.txt",
+      "accessCount": 1,
+      "lastAccessed": 1776265517199,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
