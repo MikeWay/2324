@@ -1,5 +1,7 @@
 @if (showBuyFlights) {
-  <table>
+  <app-flight-filter [label]="'Origin'" [initialValue]="originFilter" (filterEmitter)="onOriginFilterChange($event)"></app-flight-filter>
+  <app-flight-filter [label]="'Destination'" [initialValue]="destinationFilter" (filterEmitter)="onDestinationFilterChange($event)"></app-flight-filter>
+  <table class="table table-condensed table-responsive">
     <thead>
       <tr>
         <th></th>
@@ -19,7 +21,7 @@
         <td>{{flight.destination}}</td>
         <td>{{flight.departDay}} {{flight.departTime}}</td>
         <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
-        <td>{{flight.price}}</td>
+        <td>{{flight.price | currencyConversion : currencySymbol : currencyRate}}</td>
       </tr>
     }
   </table>

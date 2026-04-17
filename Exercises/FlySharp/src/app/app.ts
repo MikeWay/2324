@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home';
-import { BuyFlight } from './buy-flight/buy-flight';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CurrencySelector } from './currency-selector/currency-selector';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, BuyFlight, NgClass],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgClass, CurrencySelector],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

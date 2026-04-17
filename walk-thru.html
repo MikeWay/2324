@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Course Walk-Through Notes</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="course-walk-through-notes">Course Walk-Through Notes</h1>
+<h2 id="environment">Environment</h2>
+<ul>
+<li><strong>Angular CLI</strong>: 21.2.7 (global, at <code>/usr/local/bin/ng</code> → symlinked to <code>/home/mjrw/n/bin/ng</code>)</li>
+<li><strong>Node.js</strong>: v24.0.0</li>
+<li><strong>OS</strong>: Linux (Ubuntu)</li>
+<li>TYPESCRIPT</li>
+</ul>
+<hr>
+<h2 id="practice-12-creating-an-angular-application">Practice 1.2: Creating an Angular Application</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/012%20Practice1.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/012 Practice1.2.html</a></p>
+<h3 id="issues--differences">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong><code>ng new</code> interactive prompts differ from exercise</strong></p>
+<ul>
+<li>Exercise (Steps 6-9) expects four interactive prompts:
+<ul>
+<li>Step 6: Share data with Google? → N</li>
+<li>Step 7: Stylesheet format? → Sass (SCSS)</li>
+<li>Step 8: Server-Side Rendering / SSG? → N</li>
+<li>Step 9: AI tool? → None</li>
+</ul>
+</li>
+<li>With CLI v21, the analytics question does not appear (telemetry is handled differently).</li>
+<li>The <strong>AI tool selection</strong> prompt (Step 9) is <strong>new in Angular 21</strong> — not mentioned in the exercise, and not present in older CLI versions.</li>
+<li>Workaround: Pass <code>--style=scss --ssr=false</code> flags to skip prompts 7 and 8. The AI tool prompt still appears interactively and must be answered manually (select <code>None</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ng add @angular-eslint/schematics</code> installs <code>angular-eslint</code> (not <code>@angular-eslint/schematics</code>)</strong></p>
+<ul>
+<li>With CLI v21, the package that gets installed is <code>angular-eslint@21.3.1</code> (the unified package), not the older <code>@angular-eslint/schematics</code> scoped package.</li>
+<li>The command <code>ng add @angular-eslint/schematics</code> still works (the alias resolves correctly), but the exercise should note this version difference.</li>
+<li>Previously (with CLI v14), running <code>ng add @angular-eslint/schematics</code> would resolve to <code>@angular-eslint/schematics@1.0.0</code> (incompatible), partially modifying <code>package.json</code> before failing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generated file names use short naming convention</strong></p>
+<ul>
+<li>Angular 21 generates: <code>app.ts</code>, <code>app.html</code>, <code>app.spec.ts</code>, <code>app.scss</code>, <code>app.config.ts</code>, <code>app.routes.ts</code></li>
+<li>Older Angular generated: <code>app.component.ts</code>, <code>app.component.html</code>, etc.</li>
+<li>The <code>app-routes.ts</code> name mentioned in Exercise 1.1 (Step 9) is also wrong: Angular 21 generates <code>app.routes.ts</code> (dot separator, not hyphen).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ng serve -o</code> cannot open a browser on Linux without a desktop environment</strong></p>
+<ul>
+<li>The <code>-o</code> flag attempts to open <code>http://localhost:4200</code> in a browser.</li>
+<li>On a headless Linux VM this silently fails; the dev server still starts correctly.</li>
+<li>Students on a Windows VM will see Chrome open automatically as expected.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working">Verified Working</h3>
+<ul>
+<li><code>ng new FlySharp --style=scss --ssr=false</code> → succeeds, no errors</li>
+<li><code>ng add @angular-eslint/schematics --skip-confirmation</code> → succeeds, installs <code>angular-eslint@21.3.1</code></li>
+<li><code>ng build</code> → succeeds with exit code 0 (no errors, only Bootstrap Sass deprecation warnings if Bootstrap is added)</li>
+</ul>
+<h2 id="exercise-11-developing-an-angular-application">Exercise 1.1: Developing an Angular Application</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/014%20Ex1.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/014 Ex1.1.html</a></p>
+<h3 id="issues--differences-1">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 9: File list — <code>app-routes.ts</code> should be <code>app.routes.ts</code></strong></p>
+<ul>
+<li>Exercise lists the file as <code>app-routes.ts</code> (hyphen before <code>routes</code>).</li>
+<li>Angular 21 generates <code>app.routes.ts</code> (dot separator). Minor typo in the exercise.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 11: References <code>app.component.ts</code> — should be <code>app.ts</code></strong></p>
+<ul>
+<li>Exercise says &quot;Open <code>app.component.ts</code>&quot; but the file is <code>app.ts</code> in Angular 21.</li>
+<li>The exercise has been partially updated (Step 9 correctly lists <code>app.ts</code>) but Step 11 still uses the old name.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 22: <code>ng test</code> uses Vitest, not Karma</strong></p>
+<ul>
+<li>Exercise implies a Karma browser window opens showing test results.</li>
+<li>Angular 21 uses <strong>Vitest</strong> — tests run headlessly in the terminal, no browser window.</li>
+<li>Output format differs: Vitest shows coloured pass/fail in the terminal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 24: &quot;Three instances of 'FlySharp'&quot; — there is only ONE</strong></p>
+<ul>
+<li>Exercise says to change &quot;all three instances of <code>'FlySharp'</code>&quot; in <code>app.spec.ts</code>.</li>
+<li>Angular 21's generated spec contains only <strong>one</strong> instance: <code>toContain('Hello, FlySharp')</code>.</li>
+<li>The fix is: change <code>'Hello, FlySharp'</code> → <code>'Fly Sharp'</code> (both replacing the name and removing <code>Hello, </code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 24: &quot;Remove Hello, text near line 21&quot;</strong></p>
+<ul>
+<li>The generated spec has <code>toContain('Hello, FlySharp')</code> at line 21.</li>
+<li>After the template change (Step 18), the <code>h1</code> renders <code>Fly Sharp</code> with no &quot;Hello,&quot;.</li>
+<li>Correct fix: change the <code>toContain</code> argument from <code>'Hello, FlySharp'</code> to <code>'Fly Sharp'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 18: Template uses <code>{{title()}}</code> not <code>{{title}}</code></strong></p>
+<ul>
+<li>Because <code>title</code> is an Angular Signal (<code>signal('Fly Sharp')</code>), it must be invoked as <code>title()</code> in the template.</li>
+<li>The exercise correctly shows <code>{{title()}}</code> — this is correct for Angular 21.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>RouterOutlet</code> import becomes unused after replacing the template</strong></p>
+<ul>
+<li>The generated <code>app.ts</code> imports <code>RouterOutlet</code> (used in the default template's <code>&lt;router-outlet /&gt;</code>).</li>
+<li>After replacing <code>app.html</code> with the simple <code>&lt;div class='content'&gt;</code> template, <code>RouterOutlet</code> is no longer used, triggering a lint warning (<code>All imports are unused</code>).</li>
+<li>Students should either remove the <code>RouterOutlet</code> import from <code>app.ts</code>, or keep <code>&lt;router-outlet /&gt;</code> in the template. The exercise doesn't mention this.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>app.config.ts</code> includes <code>provideBrowserGlobalErrorListeners()</code> — new in Angular 21</strong></p>
+<ul>
+<li>The exercise (Step 10) describes <code>app.config.ts</code> as having &quot;change detection and routing&quot; configuration.</li>
+<li>Angular 21 generates an additional provider: <code>provideBrowserGlobalErrorListeners()</code> from <code>@angular/core</code>.</li>
+<li>This is not mentioned in the exercise. It captures unhandled browser errors — a new Angular 21 feature.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-1">Verified Working</h3>
+<ul>
+<li><code>app.ts</code> title changed from <code>signal('FlySharp')</code> to <code>signal('Fly Sharp')</code> ✓</li>
+<li><code>app.html</code> replaced with <code>&lt;div class='content'&gt;&lt;h1&gt;{{title()}}&lt;/h1&gt;...&lt;/div&gt;</code> ✓</li>
+<li><code>ng test --watch=false</code> → <strong>2 passed</strong> after spec fix ✓</li>
+</ul>
+<hr>
+<h2 id="exercise-21-creating-an-angular-component">Exercise 2.1: Creating an Angular Component</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/024%20Ex2.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/024 Ex2.1.html</a></p>
+<h3 id="issues--differences-2">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 3: File is now correctly named <code>home.ts</code> (exercise updated)</strong></p>
+<ul>
+<li>The exercise now correctly says to create <code>home.ts</code>, matching Angular 21's short naming convention.</li>
+<li>Import path in <code>app.ts</code> is <code>'./home/home'</code> (not <code>'./home/home.component'</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 6: <code>standalone: true</code> is redundant in Angular 19+</strong></p>
+<ul>
+<li>Exercise instructs adding <code>standalone: true</code> to the <code>@Component</code> decorator.</li>
+<li>In Angular 19+, components are standalone by default; the property is no longer needed.</li>
+<li>Harmless to include; the exercise correctly shows it for teaching purposes.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>RouterOutlet</code> unused warning</strong></p>
+<ul>
+<li><code>app.ts</code> imports <code>RouterOutlet</code> but our simplified <code>app.html</code> has no <code>&lt;router-outlet&gt;</code>.</li>
+<li>Angular compiler emits <code>NG8113: RouterOutlet is not used within the template of App</code>.</li>
+<li>Non-breaking. Exercise doesn't mention it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Step 17: AddIn <code>bootstrap.scss</code> must use <code>@import</code> not <code>@use</code></strong></p>
+<ul>
+<li>If <code>bootstrap.scss</code> uses Sass <code>@use</code> syntax, Bootstrap 5.3.x's internal <code>@import</code> chain creates a circular module dependency (<code>functions → variables → variables-dark → functions</code>), causing a fatal build error: <code>Module loop: this module is already being loaded.</code></li>
+<li>The AddIn has been fixed to use <code>@import</code> syntax, which works correctly (with deprecation warnings).</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Step 17: Bootstrap Sass deprecation warnings (non-blocking)</strong></p>
+<ul>
+<li>After switching to <code>@import</code>, Bootstrap's SCSS produces ~277 deprecation warnings (deprecated <code>@import</code> rules, <code>darken()</code> etc.).</li>
+<li>Build still <strong>succeeds</strong> (exit code 0) — warnings are non-blocking.</li>
+<li>Exercise doesn't mention these; students may be alarmed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Step 17: <code>cpAddIns Ex2.1</code> must be run from the FlySharp project directory</strong></p>
+<ul>
+<li>The script resolves paths relative to cwd. Must be run from <code>Exercises/FlySharp</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-2">Verified Working</h3>
+<ul>
+<li><code>home/home.ts</code> created with <code>HomeComponent</code>, selector <code>app-home</code>, inline template ✓</li>
+<li><code>app.html</code> updated: <code>&lt;span&gt;</code> replaced with <code>&lt;app-home&gt;&lt;/app-home&gt;</code> ✓</li>
+<li><code>app.ts</code> updated: <code>HomeComponent</code> imported from <code>'./home/home'</code> and added to <code>imports</code> array ✓</li>
+<li><code>bootstrap.scss</code> converted to <code>@import</code> syntax to fix module loop ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+</ul>
+<hr>
+<h2 id="exercise-22-displaying-repeating-data">Exercise 2.2: Displaying Repeating Data</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/026%20Ex%202.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/026 Ex 2.2.html</a></p>
+<h3 id="issues--differences-3">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 4: <code>ng generate component BuyFlight</code> generates <code>buy-flight.ts</code>, not <code>buy-flight.component.ts</code></strong></p>
+<ul>
+<li>Angular 21 uses short naming: <code>buy-flight.ts</code>, <code>buy-flight.html</code>, <code>buy-flight.scss</code>, <code>buy-flight.spec.ts</code>.</li>
+<li>Exercise Step 5 correctly says &quot;Open <code>buy-flight.ts</code>&quot;, but Step 8 still says &quot;Paste at end of <code>buy-flight.component.ts</code>&quot; — inconsistency within the exercise.</li>
+<li>Similarly Step 10 says &quot;Open <code>buy-flight.component.html</code>&quot; — should be <code>buy-flight.html</code>.</li>
+<li>Class name generated is <code>BuyFlight</code> (not <code>BuyFlightComponent</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 17/19: Mixed references to <code>app.component.html</code> and <code>app.ts</code></strong></p>
+<ul>
+<li>Step 17 says to add <code>&lt;app-buy-flight&gt;</code> to <code>app.component.html</code> — but Angular 21 uses <code>app.html</code>.</li>
+<li>Step 19 correctly says &quot;Add <code>BuyFlight</code> to imports array in <code>app.ts</code>&quot; — <code>app.ts</code> is the right file in Angular 21.</li>
+<li>The exercise is partially updated: template step still uses old name, imports step uses new name.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>cpAddIns Ex2.2</code> correctly targets <code>app.html</code> when exStart preserves Angular 21 files</strong></p>
+<ul>
+<li>When <code>exStart Ex2.2</code> copies from <code>Solutions/Ex2.1_Bonus</code> and preserves Angular 21 files, the AddIn correctly writes the navbar to <code>src/app/app.html</code> (used by <code>app.ts</code>).</li>
+<li>No workaround needed if the exStart solution uses Angular 21 naming throughout.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Steps 46-47: <code>table-condensed</code> is a Bootstrap 3 class, not Bootstrap 5</strong></p>
+<ul>
+<li>Bootstrap 5 does not have <code>table-condensed</code>; the equivalent is <code>table-sm</code>.</li>
+<li>Using <code>table-condensed</code> has no effect (silently ignored) with Bootstrap 5.3.x.</li>
+<li><code>table-responsive</code> in Bootstrap 5 should be on a wrapping <code>&lt;div&gt;</code>, not the <code>&lt;table&gt;</code> itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Steps 37-45: Exercise references <code>app.component.html</code>/<code>app.component.ts</code> — should be <code>app.html</code>/<code>app.ts</code></strong></p>
+<ul>
+<li>The bonus navbar steps still use the old file names.</li>
+<li>In Angular 21, these changes go into <code>app.html</code> and <code>app.ts</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bonus Steps 46-47: <code>table-condensed</code> is a Bootstrap 3 class, not Bootstrap 5</strong></p>
+<ul>
+<li>Bootstrap 5 does not have <code>table-condensed</code>; the equivalent is <code>table-sm</code>.</li>
+<li>Using <code>table-condensed</code> has no effect (silently ignored) with Bootstrap 5.3.x.</li>
+<li><code>table-responsive</code> in Bootstrap 5 should be on a wrapping <code>&lt;div&gt;</code>, not the <code>&lt;table&gt;</code> itself.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-3">Verified Working</h3>
+<ul>
+<li><code>ng generate component BuyFlight</code> → generates <code>buy-flight.ts</code> with class <code>BuyFlight</code> ✓</li>
+<li><code>cpAddIns Ex2.2</code> → copies <code>flights.txt</code> and updates <code>app.html</code> with navbar ✓</li>
+<li><code>FLIGHTS</code> const + <code>flights</code> and <code>showBuyFlights</code> fields added to <code>buy-flight.ts</code> ✓</li>
+<li><code>buy-flight.html</code> built with <code>@if</code>, <code>@for</code>, <code>&lt;thead&gt;</code>, CSS classes, method-based toggle link ✓</li>
+<li><code>app.html</code> updated with <code>&lt;app-buy-flight&gt;</code>, <code>(click)=&quot;toggleNavbar()&quot;</code>, <code>[ngClass]=&quot;{ 'show': navbarOpen }&quot;</code> ✓</li>
+<li><code>app.ts</code> imports <code>BuyFlight</code> and <code>NgClass</code>; <code>navbarOpen</code>/<code>toggleNavbar()</code> added ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+</ul>
+<hr>
+<h2 id="exercise-31-injecting-a-service">Exercise 3.1: Injecting a Service</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/035%20Ex%203.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/035 Ex 3.1.html</a></p>
+<h3 id="issues--differences-4">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 9: Still references <code>application-state.service.ts</code> — should be <code>application-state.ts</code></strong></p>
+<ul>
+<li>Exercise Steps 5, 6, 15 have been updated to use Angular 21 short naming (<code>application-state.ts</code>, <code>buy-flight.ts</code>, <code>ApplicationState</code>).</li>
+<li>Step 9 still says &quot;Return to <code>application-state.service.ts</code>&quot; — this is a remaining inconsistency.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generated class name is <code>ApplicationState</code> (no <code>Service</code> suffix) — exercise now correctly uses this</strong></p>
+<ul>
+<li>Steps 16 now correctly says <code>ApplicationState</code> (previously said <code>ApplicationStateService</code>).</li>
+<li>Import path is <code>'../application-state/application-state'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>No constructor is generated — nothing to delete</strong></p>
+<ul>
+<li>Angular 21 generates the service with no constructor. The exercise no longer mentions deleting one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 17-18: Constructor injection still works; <code>inject()</code> function is the Angular 19+ preferred alternative</strong></p>
+<ul>
+<li><code>constructor(private stateService: ApplicationState) {}</code> compiles and works correctly.</li>
+<li>Angular 19+ introduced the <code>inject()</code> function as a preferred alternative, but constructor injection remains fully supported.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-4">Verified Working</h3>
+<ul>
+<li><code>ng generate service ApplicationState --flat=false</code> → generates <code>application-state.ts</code> with class <code>ApplicationState</code> ✓</li>
+<li><code>cpAddIns Ex3.1</code> → populates <code>src/app/model/</code> with <code>flight.ts</code> and <code>mock-flights.ts</code> ✓</li>
+<li><code>application-state.ts</code> updated with <code>_flights</code>, <code>flights</code> getter, <code>myFlights</code> getter ✓</li>
+<li><code>buy-flight.ts</code> updated: constructor injects <code>ApplicationState</code>, <code>flights</code> getter delegates to service, <code>showBuyFlights = true</code>, old <code>FLIGHTS</code> const removed ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+</ul>
+<hr>
+<h2 id="exercise-41-implementing-input-bindings">Exercise 4.1: Implementing Input Bindings</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/042%20Ex%204.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/042 Ex 4.1.html</a></p>
+<h3 id="issues--differences-5">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 4: <code>ng generate component Payment</code> generates <code>payment.ts</code>, not <code>payment.component.ts</code></strong></p>
+<ul>
+<li>Angular 21 short naming: <code>payment.ts</code>, <code>payment.html</code>, <code>payment.scss</code>, <code>payment.spec.ts</code>.</li>
+<li>Exercise Steps 6 and 8 now correctly reference <code>payment.html</code> and <code>payment.ts</code> (exercise updated).</li>
+<li>Generated class name is <code>Payment</code> (not <code>PaymentComponent</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 5: AddIn file is now <code>payment.html.txt</code> (previously <code>payment.component.html.txt</code>)</strong></p>
+<ul>
+<li>Exercise updated to match Angular 21 naming.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 16: Exercise shows <code>PaymentComponent</code> in imports snippet — should be <code>Payment</code></strong></p>
+<ul>
+<li>The class generated is <code>Payment</code>; the exercise snippet still uses the old <code>PaymentComponent</code> name.</li>
+<li>Also shows <code>standalone: true</code> which is redundant in Angular 19+.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 25: Linter warning about <code>?.</code> inside <code>@if</code> block</strong></p>
+<ul>
+<li>Safe navigation operators (<code>?.</code>) generate linter warnings inside <code>@if</code> blocks because the type is narrowed — guaranteed non-null/undefined within the block.</li>
+<li>Replace <code>?.</code> with <code>.</code> once content is wrapped in <code>@if (selectedFlight)</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-5">Verified Working</h3>
+<ul>
+<li><code>ng generate component Payment</code> → generates <code>payment.ts</code> with class <code>Payment</code> ✓</li>
+<li><code>cpAddIns Ex4.1</code> → copies <code>payment.html.txt</code> with Bootstrap grid layout ✓</li>
+<li><code>payment.html</code> updated with <code>@if (selectedFlight)</code> wrapper, interpolation using <code>.</code> (not <code>?.</code>) ✓</li>
+<li><code>payment.ts</code> updated with <code>@Input() selectedFlight: Flight | undefined</code> ✓</li>
+<li><code>buy-flight.ts</code> imports <code>Payment</code>, adds <code>selectedFlight</code> field and <code>onFlightClick()</code> method ✓</li>
+<li><code>buy-flight.html</code> adds Buy button column, empty <code>&lt;th&gt;</code>, <code>&lt;app-payment [selectedFlight]=&quot;selectedFlight&quot;&gt;</code> ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+<li><strong>Bonus</strong>: <code>payment.ts</code> refactored to <code>@Input()</code> getter/setter with <code>_selectedFlight</code> backing field ✓</li>
+</ul>
+<hr>
+<h2 id="exercise-42-event-handling">Exercise 4.2: Event Handling</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/044%20Ex%204.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/044 Ex 4.2.html</a></p>
+<h3 id="issues--differences-6">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 4: <code>ng generate component FlightFilter</code> generates <code>flight-filter.ts</code>, not <code>flight-filter.component.ts</code></strong></p>
+<ul>
+<li>Angular 21 short naming: <code>flight-filter.ts</code>, <code>flight-filter.html</code> etc.</li>
+<li>Exercise Steps 5, 6, 9 reference <code>flight-filter.component.html</code>/<code>.ts</code> — use <code>flight-filter.html</code>/<code>.ts</code>.</li>
+<li>Generated class name is <code>FlightFilter</code> (not <code>FlightFilterComponent</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 10-12: Exercise references <code>buy-flight.component.ts</code>/<code>.html</code> and <code>FlightFilterComponent</code> — all Angular 21 names differ</strong></p>
+<ul>
+<li>Import is <code>FlightFilter</code> from <code>'../flight-filter/flight-filter'</code>.</li>
+<li>Template file is <code>buy-flight.html</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 14-15: <code>application-state.service.ts</code> → <code>application-state.ts</code></strong></p>
+<ul>
+<li>The exercise adds a <code>constructor()</code> + <code>loadFlights()</code> method to the service.</li>
+<li>Angular 21 generates no constructor, consistent with previous exercise findings.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 15: Constructor injection in service is fine; <code>inject()</code> preferred in Angular 19+</strong></p>
+<ul>
+<li>The service constructor here takes no arguments, so no DI difference.</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-6">Verified Working</h3>
+<ul>
+<li><code>ng generate component FlightFilter</code> → generates <code>flight-filter.ts</code> with class <code>FlightFilter</code> ✓</li>
+<li><code>flight-filter.html</code> → filter label + <code>&lt;input #filter (keyup.enter)=&quot;onFilterEnter(filter.value)&quot;&gt;</code> ✓</li>
+<li><code>flight-filter.ts</code> → <code>@Output() filterEmitter</code>, <code>onFilterEnter()</code> emitting uppercased value ✓</li>
+<li><code>application-state.ts</code> → <code>_flights = new Array&lt;Flight&gt;()</code>, <code>loadFlights()</code>, constructor ✓</li>
+<li><code>buy-flight.ts</code> → imports <code>FlightFilter</code>, <code>originFilter</code>, <code>onOriginFilterChange()</code>, filtered <code>flights</code> getter, <code>originDestinationFilter()</code> ✓</li>
+<li><code>buy-flight.html</code> → <code>&lt;app-flight-filter (filterEmitter)=&quot;onOriginFilterChange($event)&quot;&gt;</code> inside <code>@if</code> block ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+<li><strong>Bonus Step 19</strong>: <code>keyup.enter</code> → <code>keyup</code> for per-keystroke filtering ✓</li>
+<li><strong>Bonus Steps 20-22</strong>: <code>@Input() label</code> added to <code>FlightFilter</code>; template uses <code>{{label}}</code>; parent binds <code>[label]=&quot;'Origin'&quot;</code> ✓</li>
+<li><strong>Bonus Steps 23-24</strong>: Second <code>&lt;app-flight-filter [label]=&quot;'Destination'&quot;&gt;</code> added; <code>destinationFilter</code>/<code>onDestinationFilterChange()</code> added; <code>originDestinationFilter()</code> updated for dual filtering ✓</li>
+</ul>
+<h2 id="exercise-51-integrating-the-component-router">Exercise 5.1: Integrating the Component Router</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/052%20Ex%205.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/052 Ex 5.1.html</a></p>
+<h3 id="issues--differences-7">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Steps 1-2: Generated components use short naming</strong></p>
+<ul>
+<li><code>ng generate component Account</code> → <code>account.ts</code>, class <code>Account</code> (not <code>AccountComponent</code>)</li>
+<li><code>ng generate component MyFlights</code> → <code>my-flights.ts</code>, class <code>MyFlights</code> (not <code>MyFlightsComponent</code>)</li>
+<li>Exercise route snippets now correctly use <code>Home</code>, <code>BuyFlight</code>, <code>MyFlights</code>, <code>Account</code> (exercise updated).</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 5: Route file correctly named <code>app.routes.ts</code> in exercise (updated)</strong></p>
+<ul>
+<li>Exercise now references <code>app.routes.ts</code>. Previously said <code>app-routes.ts</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 8-9: Template and component files correctly named <code>app.html</code>/<code>app.ts</code> (updated)</strong></p>
+<ul>
+<li>Exercise now references <code>app.html</code> and <code>app.ts</code>. No remaining file-naming issues here.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 10: Add <code>RouterLinkActive</code> at the same time as <code>RouterLink</code></strong></p>
+<ul>
+<li>Exercise mentions <code>RouterLink</code> at step 10, then <code>routerLinkActive</code> at step 14 — cleaner to import both together.</li>
+<li><code>HomeComponent</code> and <code>BuyFlight</code> can be removed from <code>app.ts</code> imports since they're no longer in the template.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 12: Still references <code>app-routing.module.ts</code> — should be <code>app.routes.ts</code></strong></p>
+<ul>
+<li>Exercise step 12 (default redirect) says &quot;In <code>app-routing.module.ts</code>&quot; — this is the only remaining old reference.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 12: Default redirect can be added with initial routes rather than as a separate step</strong></p>
+</li>
+</ol>
+<h3 id="verified-working-7">Verified Working</h3>
+<ul>
+<li><code>ng generate component Account</code> → <code>account.ts</code> / <code>Account</code> ✓</li>
+<li><code>ng generate component MyFlights</code> → <code>my-flights.ts</code> / <code>MyFlights</code> ✓</li>
+<li><code>app.routes.ts</code> updated with all routes + default redirect, using Angular 21 class names ✓</li>
+<li><code>app.html</code> updated: <code>routerLink</code>, <code>routerLinkActive=&quot;active&quot;</code> on <code>&lt;li&gt;</code>, <code>&lt;router-outlet&gt;</code> replacing component elements ✓</li>
+<li><code>app.ts</code> updated: <code>RouterLink</code>, <code>RouterLinkActive</code>, <code>RouterOutlet</code> in imports; <code>HomeComponent</code>/<code>BuyFlight</code> removed ✓</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+<li><strong>Bonus Step 17</strong>: <code>{ path: 'buy/:origin' }</code> route added; <code>BuyFlight</code> injects <code>ActivatedRoute</code>, reads <code>origin</code> param in constructor and assigns to <code>originFilter</code> if present ✓</li>
+</ul>
+<h2 id="exercise-52-creating-a-feature-module">Exercise 5.2: Creating a Feature Module</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/053%20Ex%205.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/053 Ex 5.2.html</a></p>
+<h3 id="issues--differences-8">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 2: <code>standalone</code> is implicit (true) in Angular 21 — must explicitly set <code>standalone: false</code></strong></p>
+<ul>
+<li>In Angular 21, components are standalone by default; there is no <code>standalone: true</code> in generated code.</li>
+<li>To move a component into an NgModule, add <code>standalone: false</code> explicitly and remove the <code>imports: []</code> array.</li>
+<li>Exercise says &quot;adding <code>standalone: true</code>&quot; — this is a typo; it should be <code>standalone: false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 6: Exercise uses <code>AccountComponent</code> but Angular 21 class is <code>Account</code></strong></p>
+<ul>
+<li>The route snippet in step 6 references <code>AccountComponent</code>; the correct Angular 21 class name is <code>Account</code>.</li>
+<li>Import path is <code>'../account/account'</code> (short filename, no <code>.component.</code>).</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-8">Verified Working</h3>
+<ul>
+<li><code>ng generate module accounts --routing=true</code> → <code>accounts-module.ts</code> / <code>AccountsModule</code> ✓</li>
+<li><code>account.ts</code> updated: <code>standalone: false</code>, <code>imports[]</code> removed ✓</li>
+<li><code>accounts-module.ts</code> updated: <code>Account</code> in <code>declarations[]</code> ✓</li>
+<li><code>app.routes.ts</code> updated: <code>account</code> path uses <code>loadChildren</code> with dynamic <code>import()</code> ✓</li>
+<li><code>accounts-routing-module.ts</code> updated: <code>Account</code> route at <code>path: ''</code> ✓</li>
+<li><strong>Bonus steps 8-10</strong>: Browser/DevTools verification — chunk file loads on Account tab click ✓ (manual)</li>
+<li><strong>Bonus steps 11-16</strong>: <code>MyFlightsWrapper</code> component wraps <code>MyFlights</code> with <code>@defer (on hover)</code> / <code>@placeholder (minimum 2000ms)</code>; <code>myflights</code> route points to <code>MyFlightsWrapper</code> ✓
+<ul>
+<li>Note: <code>minimum</code> duration belongs on <code>@placeholder</code>, not <code>@defer</code></li>
+</ul>
+</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+</ul>
+<h2 id="exercise-53-creating-a-custom-pipe">Exercise 5.3: Creating a Custom Pipe</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/055%20Ex%205.3.html">https://adaptalearn.learningtree.com/Output/2324f1dev/055 Ex 5.3.html</a></p>
+<h3 id="issues--differences-9">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 3: <code>ng generate pipe</code> generates <code>currency-conversion-pipe.ts</code> (not <code>currency-conversion.pipe.ts</code>)</strong></p>
+<ul>
+<li>Angular 21 short naming: <code>currency-conversion-pipe.ts</code>, class <code>CurrencyConversionPipe</code></li>
+<li>Import path: <code>'../currency-conversion/currency-conversion-pipe'</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 6 and 11: Exercise says <code>BuyFlightComponent</code> — Angular 21 class is <code>BuyFlight</code></strong></p>
+<ul>
+<li>Step 6 says &quot;add <code>CurrencyConversionPipe</code> to the <code>BuyFlightComponent</code> <code>imports</code>&quot; — class is <code>BuyFlight</code></li>
+<li>Step 11 says &quot;Add get methods to the <code>BuyFlightComponent</code> class&quot; — class is <code>BuyFlight</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 13-15: Manual browser verification steps — no code changes</strong></p>
+<ul>
+<li>Change <code>displayCurrency</code> to <code>this.currencies[1]</code> to verify pipe works with USD, then restore as desired</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-9">Verified Working</h3>
+<ul>
+<li><code>ng generate pipe currencyConversion --flat=false</code> → <code>currency-conversion-pipe.ts</code> / <code>CurrencyConversionPipe</code> ✓</li>
+<li><code>cpAddIns Ex5.3</code> → copies <code>src/app/model/currency.ts</code> ✓</li>
+<li><code>currency-conversion-pipe.ts</code>: <code>transform(value: number, symbol: string = '£', rate: number = 0.9): string</code> returning <code>symbol + (value * rate).toFixed(2)</code> ✓</li>
+<li><code>buy-flight.ts</code>: <code>CurrencyConversionPipe</code> imported from <code>'../currency-conversion/currency-conversion-pipe'</code>, added to <code>imports[]</code>; <code>currencySymbol</code> and <code>currencyRate</code> getters added ✓</li>
+<li><code>buy-flight.html</code>: price cell uses <code>{{flight.price | currencyConversion : currencySymbol : currencyRate}}</code> ✓</li>
+<li><code>application-state.ts</code>: <code>Currency</code> imported from <code>'../model/currency'</code>; <code>currencies[]</code> array and <code>displayCurrency</code> property added ✓</li>
+<li><strong>Bonus step 16</strong>: <code>CurrencySelector</code> component created with <code>ApplicationState</code> as public <code>state</code> field, <code>@Input()</code> getter/setter for <code>currency</code>, and <code>currencyChange(currCode: string)</code> method; template uses <code>&lt;select&gt;</code> with <code>@for</code> options and <code>[value]</code>/<code>[selected]</code> bindings; added to <code>app.html</code> inside <code>&lt;nav&gt;</code> and <code>app.ts</code> imports ✓
+<ul>
+<li>Exercise says <code>CurrencySelectorComponent</code> / <code>ApplicationStateService</code> — Angular 21: <code>CurrencySelector</code> / <code>ApplicationState</code></li>
+</ul>
+</li>
+<li><code>ng build</code> → succeeds (Bootstrap Sass deprecation warnings only) ✓</li>
+</ul>
+<h2 id="exercise-61-unit-testing">Exercise 6.1: Unit Testing</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/063%20Ex6.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/063 Ex6.1.html</a></p>
+<h3 id="issues--differences-10">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 5: No <code>xit</code> tests to rename — Angular 21 generates <code>it</code> directly</strong></p>
+<ul>
+<li>Exercise expects three <code>xit</code> tests in <code>app.component.spec.ts</code> to rename to <code>it</code></li>
+<li>Angular 21 generates <code>app.spec.ts</code> with <code>it</code> tests already (no <code>xit</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Exercise references old file names throughout</strong></p>
+<ul>
+<li><code>app.component.spec.ts</code> → <code>app.spec.ts</code></li>
+<li><code>buy-flight.component.spec.ts</code> → <code>buy-flight.spec.ts</code></li>
+<li><code>account.component.spec.ts</code> → <code>account.spec.ts</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Exercise references old class names</strong></p>
+<ul>
+<li><code>AppComponent</code> → <code>App</code></li>
+<li><code>BuyFlightComponent</code> → <code>BuyFlight</code></li>
+<li><code>AccountComponent</code> → <code>Account</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Step 13: <code>account.spec.ts</code> must use <code>declarations</code> (not <code>imports</code>) because <code>Account</code> is <code>standalone: false</code></strong></p>
+<ul>
+<li><code>Account</code> was set to <code>standalone: false</code> in Ex5.2 when moved into <code>AccountsModule</code></li>
+<li>Using <code>declarations</code> is correct for NgModule-declared components</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 10: No <code>xit</code> to rename in <code>buy-flight.spec.ts</code> — already <code>it</code></strong></p>
+</li>
+<li>
+<p><strong><code>ng test</code> uses Vitest (not Karma/Jasmine) in Angular 21</strong></p>
+<ul>
+<li><code>ng test --watch=false</code> runs tests once and exits</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-10">Verified Working</h3>
+<ul>
+<li><code>app.spec.ts</code>: <code>provideRouter([])</code> added to providers; &quot;should render title&quot; replaced with &quot;should have a <code>&lt;router-outlet&gt;</code>&quot; test ✓</li>
+<li><code>buy-flight.spec.ts</code>: <code>provideRouter([])</code> added; <code>DebugElement</code>/<code>By</code> imported; 4 new tests added (<code>showBuyFlights</code> default, toggle once, toggle twice, link click) ✓</li>
+<li><code>account.spec.ts</code>: <code>imports</code> changed to <code>declarations</code> ✓</li>
+<li><code>ng test --watch=false</code> → 15 tests pass across 10 test files ✓</li>
+</ul>
+<hr>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

@@ -4,11 +4,10 @@ import { of, asyncScheduler, fromEvent, generate, merge, Observable, Subscriptio
 import { take, map, tap, reduce, mapTo, concatAll, mergeAll, exhaust, filter, distinct, groupBy, mergeMap, pairwise, min, count } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [AsyncPipe],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    imports: [AsyncPipe],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'Observables';

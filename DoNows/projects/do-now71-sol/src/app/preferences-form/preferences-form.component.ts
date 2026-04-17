@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-preferences-form',
-  standalone: true,
-  imports: [FormsModule, JsonPipe],
-  templateUrl: './preferences-form.component.html',
-  styleUrl: './preferences-form.component.scss'
+    selector: 'app-preferences-form',
+    imports: [FormsModule, JsonPipe],
+    templateUrl: './preferences-form.component.html',
+    styleUrl: './preferences-form.component.scss'
 })
 export class PreferencesFormComponent {
   temperatureUnits = ['F', 'C', 'K'];

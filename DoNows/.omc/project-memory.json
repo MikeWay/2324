@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776409679843,
+  "projectRoot": "/home/mjrw/course2324/DoNows",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@angular/core",
+        "version": "19.2.21",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": null,
+    "devCommand": "npm run start",
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "watch": "ng build --watch --configuration development",
+      "test": "ng test"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "projects": {
+      "path": "projects",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776409679833,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1776409711714,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

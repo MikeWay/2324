@@ -4,8 +4,9 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'app-current-weather',
-  template:''
+    selector: 'app-current-weather',
+    template: '',
+    standalone: false
 })
 class MockWeatherComponent {
   

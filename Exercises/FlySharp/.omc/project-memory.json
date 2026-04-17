@@ -126,20 +126,56 @@
   "hotPaths": [
     {
       "path": "src/app/buy-flight/buy-flight.ts",
-      "accessCount": 14,
-      "lastAccessed": 1776265528420,
+      "accessCount": 30,
+      "lastAccessed": 1776346054127,
       "type": "file"
     },
     {
       "path": "src/app/buy-flight/buy-flight.html",
-      "accessCount": 12,
-      "lastAccessed": 1776265532315,
+      "accessCount": 25,
+      "lastAccessed": 1776346055459,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.routes.ts",
+      "accessCount": 14,
+      "lastAccessed": 1776340837423,
       "type": "file"
     },
     {
       "path": "src/app/app.html",
-      "accessCount": 6,
-      "lastAccessed": 1776257395149,
+      "accessCount": 11,
+      "lastAccessed": 1776346800511,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-filter/flight-filter.html",
+      "accessCount": 8,
+      "lastAccessed": 1776333121827,
+      "type": "file"
+    },
+    {
+      "path": "src/app/application-state/application-state.ts",
+      "accessCount": 8,
+      "lastAccessed": 1776346060117,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.ts",
+      "accessCount": 8,
+      "lastAccessed": 1776346800212,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-filter/flight-filter.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776333120675,
+      "type": "file"
+    },
+    {
+      "path": "src/app/account/account.ts",
+      "accessCount": 5,
+      "lastAccessed": 1776347195564,
       "type": "file"
     },
     {
@@ -161,9 +197,33 @@
       "type": "file"
     },
     {
-      "path": "src/app/app.ts",
-      "accessCount": 3,
-      "lastAccessed": 1776257400732,
+      "path": "src/app/accounts/accounts-module.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776335856321,
+      "type": "file"
+    },
+    {
+      "path": "src/app/accounts/accounts-routing-module.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776335860229,
+      "type": "file"
+    },
+    {
+      "path": "src/app/currency-conversion/currency-conversion-pipe.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776346047710,
+      "type": "file"
+    },
+    {
+      "path": "src/app/buy-flight/buy-flight.spec.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776349007008,
+      "type": "file"
+    },
+    {
+      "path": "src/app/account/account.spec.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776349314991,
       "type": "file"
     },
     {
@@ -173,9 +233,45 @@
       "type": "file"
     },
     {
-      "path": "src/app/application-state/application-state.ts",
+      "path": "src/app/my-flights-wrapper/my-flights-wrapper.html",
+      "accessCount": 3,
+      "lastAccessed": 1776340848108,
+      "type": "file"
+    },
+    {
+      "path": "src/app/my-flights-wrapper/my-flights-wrapper.ts",
       "accessCount": 2,
-      "lastAccessed": 1776258054552,
+      "lastAccessed": 1776340833559,
+      "type": "file"
+    },
+    {
+      "path": "src/app/model/currency.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776346030991,
+      "type": "file"
+    },
+    {
+      "path": "src/app/currency-selector/currency-selector.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776346791161,
+      "type": "file"
+    },
+    {
+      "path": "src/app/currency-selector/currency-selector.html",
+      "accessCount": 2,
+      "lastAccessed": 1776346808750,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1776347173028,
+      "type": "directory"
+    },
+    {
+      "path": "src/app/app.spec.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776347209307,
       "type": "file"
     },
     {
@@ -189,6 +285,24 @@
       "accessCount": 1,
       "lastAccessed": 1776265517199,
       "type": "file"
+    },
+    {
+      "path": "src/app/my-flights/my-flights.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776340821583,
+      "type": "file"
+    },
+    {
+      "path": "src/app",
+      "accessCount": 1,
+      "lastAccessed": 1776343448957,
+      "type": "directory"
+    },
+    {
+      "path": "src",
+      "accessCount": 1,
+      "lastAccessed": 1776344685521,
+      "type": "directory"
     }
   ],
   "userDirectives": []

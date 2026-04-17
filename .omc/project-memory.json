@@ -1,0 +1,194 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776409770494,
+  "projectRoot": "/home/mjrw/course2324",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "AddIns": {
+      "path": "AddIns",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776409770489,
+      "keyFiles": []
+    },
+    "Backup": {
+      "path": "Backup",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776409770490,
+      "keyFiles": []
+    },
+    "Data": {
+      "path": "Data",
+      "purpose": "Data files",
+      "fileCount": 1,
+      "lastAccessed": 1776409770490,
+      "keyFiles": [
+        "flights.json"
+      ]
+    },
+    "DoNows": {
+      "path": "DoNows",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1776409770490,
+      "keyFiles": [
+        "README.md",
+        "angular.json",
+        "package-lock.json",
+        "package.json",
+        "tsconfig.json"
+      ]
+    },
+    "Exercises": {
+      "path": "Exercises",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1776409770490,
+      "keyFiles": [
+        "Notes.txt",
+        "package-lock.json",
+        "package.json"
+      ]
+    },
+    "FlySharpSolution": {
+      "path": "FlySharpSolution",
+      "purpose": null,
+      "fileCount": 9,
+      "lastAccessed": 1776409770491,
+      "keyFiles": [
+        "README.md",
+        "angular.json",
+        "package-lock.json",
+        "package.json",
+        "tsconfig.app.json"
+      ]
+    },
+    "NodeScripts": {
+      "path": "NodeScripts",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1776409770491,
+      "keyFiles": [
+        "README.md",
+        "hack.cmd",
+        "ngUpdate_DoNows.cmd",
+        "package-lock.json",
+        "package.json"
+      ]
+    },
+    "Samples": {
+      "path": "Samples",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776409770491,
+      "keyFiles": []
+    },
+    "Solutions": {
+      "path": "Solutions",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1776409770491,
+      "keyFiles": [
+        "sols.txt"
+      ]
+    },
+    "init_scripts": {
+      "path": "init_scripts",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1776409770491,
+      "keyFiles": [
+        "copyIntoSolutions.cmd",
+        "dirs.txt",
+        "makeLinks.cmd",
+        "moveassets.cmd"
+      ]
+    },
+    "server": {
+      "path": "server",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1776409770491,
+      "keyFiles": []
+    },
+    "www": {
+      "path": "www",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1776409770491,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "DoNows/node_modules": {
+      "path": "DoNows/node_modules",
+      "purpose": "Dependencies",
+      "fileCount": 1,
+      "lastAccessed": 1776409770492,
+      "keyFiles": []
+    },
+    "FlySharpSolution/dist": {
+      "path": "FlySharpSolution/dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 0,
+      "lastAccessed": 1776409770493,
+      "keyFiles": []
+    },
+    "FlySharpSolution/node_modules": {
+      "path": "FlySharpSolution/node_modules",
+      "purpose": "Dependencies",
+      "fileCount": 1,
+      "lastAccessed": 1776409770493,
+      "keyFiles": []
+    },
+    "NodeScripts/dist": {
+      "path": "NodeScripts/dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 14,
+      "lastAccessed": 1776409770494,
+      "keyFiles": [
+        "copyAddIns.js",
+        "copyAddIns.js.map",
+        "copyFromSolution.js"
+      ]
+    },
+    "NodeScripts/node_modules": {
+      "path": "NodeScripts/node_modules",
+      "purpose": "Dependencies",
+      "fileCount": 1,
+      "lastAccessed": 1776409770494,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
