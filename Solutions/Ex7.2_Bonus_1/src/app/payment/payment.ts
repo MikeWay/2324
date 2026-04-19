@@ -16,9 +16,9 @@ export class Payment implements OnInit {
 
   payForm = new FormGroup({
     name: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(5)], nonNullable: true }),
-    address: new FormControl<string>('', { validators: [Validators.required, Validators.maxLength(128)], nonNullable: true }),
-    email: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-    cardNum: new FormControl<string>('', { validators: [Validators.required ], nonNullable: true }),
+    address: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(128)], nonNullable: true }),
+    email: new FormControl<string>('', { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')], nonNullable: true }),
+    cardNum: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(13)], nonNullable: true }),
     cardType: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
     expDate: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
   });
