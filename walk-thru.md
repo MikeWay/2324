@@ -7,6 +7,11 @@
 - **OS**: Linux (Ubuntu)
 - TYPESCRIPT
 
+No version of Cypress is installed in: /home/mjrw/.cache/Cypress/15.14.0/Cypress
+
+Please reinstall Cypress by running: cypress install
+
+npx cypress install
 ---
 
 ## Practice 1.2: Creating an Angular Application
@@ -418,6 +423,103 @@
 - `app.spec.ts`: `provideRouter([])` added to providers; "should render title" replaced with "should have a `<router-outlet>`" test ✓
 - `buy-flight.spec.ts`: `provideRouter([])` added; `DebugElement`/`By` imported; 4 new tests added (`showBuyFlights` default, toggle once, toggle twice, link click) ✓
 - `account.spec.ts`: `imports` changed to `declarations` ✓
-- `ng test --watch=false` → 15 tests pass across 10 test files ✓
+- `ng test --watch=false` → 16 tests pass across 10 test files ✓
+- **Bonus steps 29–36**: DOM test added to `buy-flight.spec.ts` — verifies table hidden after link click using `fixture.detectChanges()`, `By.css('table')`, and `triggerEventHandler` ✓
+- **Bonus steps 37–39**: `stateServiceStub` mock added (type `Partial<ApplicationState>`) with `FLIGHTS` and USD `displayCurrency`; provided via `{ provide: ApplicationState, useValue: stateServiceStub }`; `'should have a currency symbol of $'` test added ✓
+  - Exercise uses `ApplicationStateService` / `BuyFlightComponent` — Angular 21: `ApplicationState` / `BuyFlight`
+- **Bonus steps 41–43**: `stateServiceStub` replaced with inline object; `flightsSpy: any = vi.fn().mockReturnValue(FLIGHTS)` created in `beforeEach`; `flights` defined as object-literal getter `get flights() { return flightsSpy(); }` so component's `.filter()` works; `import { vi } from 'vitest'` added; new test asserts `component.flights` equals `FLIGHTS` and `flightsSpy` was called ✓
+  - `vi.fn()` return type is `Mock<...>` — declare `flightsSpy: any` to avoid TypeScript callable error
+- `ng test --watch=false` → 18 tests pass across 10 test files ✓
+
+
+## Practice 6.1: Mocking with Jasmine Spy
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/061%20Practice6.1.html
+
+### Issues / Differences
+
+1. **DoNows uses Vitest, not Jasmine — `jasmine.createSpyObj` does not exist**
+   - TODO 1: `jasmine.createSpyObj('Weather', ['getForecast'])` → `{ getForecast: vi.fn() }` (import `vi` from `'vitest'`)
+   - TODO 5: `.and.callFake((city) => ...)` → `.mockImplementation((city) => ...)`
+   - `toHaveBeenCalled()` / `toHaveBeenCalledWith()` are compatible — no change needed
+
+2. **`ng test` project name is case-sensitive**
+   - Correct command: `ng test DoNow61` (not `do-now61`)
+   - `--watch=false` flag is not supported in this workspace; omit it (Vitest exits after one run)
+
+### Verified Working
+
+- `current-weather.spec.ts`: all 5 TODOs implemented with Vitest equivalents ✓
+- `ng test DoNow61` → 8 tests pass across 3 files ✓
 
 ---
+
+## Ex6.2: Cypress E2E Testing
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/068%20Ex6.2.html
+
+### Steps Completed
+
+1. Installed Cypress via `ng add @cypress/schematic --skip-confirmation`
+2. Modified `cypress/e2e/spec.cy.ts` — "Home Page Test" with 2 tests (home page loads, h1 contains Special Offer text)
+3. Created `cypress/e2e/nav.cy.ts` — "Navigation between pages of FlySharp App" with 6 tests
+
+### Issues / Differences
+
+1. **`ng add @cypress/schematic` requires terminal confirmation**
+   - Fix: `printf "Y\nN\n" | ng add @cypress/schematic --skip-confirmation`
+
+2. **Steps 4–7 (running Cypress GUI) are manual browser steps**
+   - Run `ng e2e` from the FlySharp directory to launch Cypress
+   - Select Chrome, then run the test specs from the Cypress UI
+
+### Test Files
+
+- `cypress/e2e/spec.cy.ts`: Home page loads, h1 Special Offer text
+- `cypress/e2e/nav.cy.ts`: 6 nav tests — home, 4 nav links, buy flights page, 5 table rows, my flights page, account page
+
+### Manual Verification Required
+
+- Steps 4–7 and step 25: run `ng e2e` to open Cypress browser runner and verify tests pass visually
+
+### Issues / Differences (updated)
+
+3. **`table tbody tr` selector returns 0 rows even though rows are visible**
+   - Angular's `@for` block inserts `<tr>` elements directly into `<table>` via DOM API (not HTML parsing), so no implicit `<tbody>` is created
+   - Fix: add explicit `<tbody>` tags wrapping the `@for` block in `buy-flight.html`
+
+### Verified Working
+
+- `spec.cy.ts`: 2 tests pass (home page loads, h1 Special Offer text) ✓
+- `nav.cy.ts`: 6 tests pass (home, 4 nav links, buy flights page, 5 table rows, my flights, account) ✓
+- All 8 Cypress tests pass headless with `npx cypress run --browser electron` ✓
+
+## Ex7.1: Template-Driven Forms
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/075%20Ex7.1.html
+
+### Steps Completed
+
+- Steps 5–7: Added `FormsModule` to `payment.ts` imports; added `model` field and `jsonModel` getter
+- Steps 8–10: Appended form HTML from `payment.html.txt` inside the `@if` block; added `ngModel` bindings; added `{{jsonModel}}` debug output
+- Steps 12–14: Added `required` to all inputs/textarea/select; disabled submit with `[disabled]="!paymentForm.form.valid"`
+- Steps 15–17: Added `(ngSubmit)="onSubmit()"` to form; added `onSubmit()` method with `alert(this.jsonModel)`
+
+### Issues / Differences
+
+1. **`Payment` class name conflict** — component class and model class both named `Payment`
+   - Fix: `import { Payment as PaymentModel } from '../model/payment'` in `payment.ts`
+
+2. **`exStart Ex7.1` resets spec files to old Angular naming**
+   - `application-state.spec.ts` reset to import `ApplicationStateService` from `./application-state.service` — fixed to `ApplicationState` from `./application-state`
+   - `my-flights.spec.ts` reset to import `MyFlightsComponent` from `./my-flights.component` and use `jasmine` — fixed to `MyFlights` from `./my-flights`
+
+3. **New `ApplicationState` (from cpAddIns) changes defaults**
+   - `displayCurrency` now defaults to `currencies[1]` (USD, not GBP)
+   - `_myFlights` starts empty (not MYFLIGHTS); `addMyFlight()` method added
+   - Updated `application-state.spec.ts` tests accordingly
+
+### Verified Working
+
+- `ng build` → no errors ✓
+- `ng test --watch=false` → 24 tests pass across 10 files ✓

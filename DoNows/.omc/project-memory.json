@@ -71,9 +71,33 @@
   },
   "hotPaths": [
     {
+      "path": "angular.json",
+      "accessCount": 13,
+      "lastAccessed": 1776413707541,
+      "type": "file"
+    },
+    {
+      "path": "projects/do-now61/src/app/current-weather/current-weather.component.spec.ts",
+      "accessCount": 5,
+      "lastAccessed": 1776417392997,
+      "type": "file"
+    },
+    {
+      "path": "projects/do-now61/tsconfig.spec.json",
+      "accessCount": 4,
+      "lastAccessed": 1776416923549,
+      "type": "file"
+    },
+    {
       "path": "package.json",
       "accessCount": 1,
       "lastAccessed": 1776409711714,
+      "type": "file"
+    },
+    {
+      "path": "projects/do-now22/tsconfig.spec.json",
+      "accessCount": 1,
+      "lastAccessed": 1776413636910,
       "type": "file"
     }
   ],

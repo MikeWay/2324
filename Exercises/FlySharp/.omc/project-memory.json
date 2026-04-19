@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776254744923,
+  "lastScanned": 1776445610826,
   "projectRoot": "/home/mjrw/course2324/Exercises/FlySharp",
   "techStack": {
     "languages": [
@@ -31,6 +31,11 @@
         "name": "vitest",
         "version": "4.0.8",
         "category": "testing"
+      },
+      {
+        "name": "cypress",
+        "version": "15.14.0",
+        "category": "testing"
       }
     ],
     "packageManager": "npm",
@@ -47,7 +52,10 @@
       "build": "ng build",
       "watch": "ng build --watch --configuration development",
       "test": "ng test",
-      "lint": "ng lint"
+      "lint": "ng lint",
+      "e2e": "ng e2e",
+      "cypress:open": "cypress open",
+      "cypress:run": "cypress run"
     }
   },
   "conventions": {
@@ -73,22 +81,24 @@
     "cypress": {
       "path": "cypress",
       "purpose": null,
-      "fileCount": 0,
-      "lastAccessed": 1776254744917,
-      "keyFiles": []
+      "fileCount": 1,
+      "lastAccessed": 1776445610820,
+      "keyFiles": [
+        "tsconfig.json"
+      ]
     },
     "dist": {
       "path": "dist",
       "purpose": "Distribution/build output",
       "fileCount": 0,
-      "lastAccessed": 1776254744921,
+      "lastAccessed": 1776445610824,
       "keyFiles": []
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1776254744921,
+      "lastAccessed": 1776445610824,
       "keyFiles": [
         "favicon.ico"
       ]
@@ -97,212 +107,101 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 3,
-      "lastAccessed": 1776254744921,
+      "lastAccessed": 1776445610824,
       "keyFiles": [
         "index.html",
         "main.ts",
         "styles.scss"
       ]
     },
+    "cypress/fixtures": {
+      "path": "cypress/fixtures",
+      "purpose": "Test fixtures",
+      "fileCount": 1,
+      "lastAccessed": 1776445610825,
+      "keyFiles": [
+        "example.json"
+      ]
+    },
     "src/app": {
       "path": "src/app",
       "purpose": "Application code",
-      "fileCount": 10,
-      "lastAccessed": 1776254744922,
+      "fileCount": 7,
+      "lastAccessed": 1776445610825,
       "keyFiles": [
-        "app.component.html",
-        "app.component.scss",
-        "app.component.spec.ts"
+        "app.config.ts",
+        "app.html",
+        "app.routes.ts"
       ]
     },
     "src/assets": {
       "path": "src/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776254744923,
+      "lastAccessed": 1776445610825,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "src/app/buy-flight/buy-flight.ts",
-      "accessCount": 30,
-      "lastAccessed": 1776346054127,
+      "path": "src/app/my-flights/my-flights.spec.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776517564824,
+      "type": "file"
+    },
+    {
+      "path": "cypress/e2e/spec.cy.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776446617203,
       "type": "file"
     },
     {
       "path": "src/app/buy-flight/buy-flight.html",
-      "accessCount": 25,
-      "lastAccessed": 1776346055459,
-      "type": "file"
-    },
-    {
-      "path": "src/app/app.routes.ts",
-      "accessCount": 14,
-      "lastAccessed": 1776340837423,
-      "type": "file"
-    },
-    {
-      "path": "src/app/app.html",
-      "accessCount": 11,
-      "lastAccessed": 1776346800511,
-      "type": "file"
-    },
-    {
-      "path": "src/app/flight-filter/flight-filter.html",
-      "accessCount": 8,
-      "lastAccessed": 1776333121827,
-      "type": "file"
-    },
-    {
-      "path": "src/app/application-state/application-state.ts",
-      "accessCount": 8,
-      "lastAccessed": 1776346060117,
-      "type": "file"
-    },
-    {
-      "path": "src/app/app.ts",
-      "accessCount": 8,
-      "lastAccessed": 1776346800212,
-      "type": "file"
-    },
-    {
-      "path": "src/app/flight-filter/flight-filter.ts",
-      "accessCount": 7,
-      "lastAccessed": 1776333120675,
-      "type": "file"
-    },
-    {
-      "path": "src/app/account/account.ts",
-      "accessCount": 5,
-      "lastAccessed": 1776347195564,
-      "type": "file"
-    },
-    {
-      "path": "src/app/app.component.html",
-      "accessCount": 4,
-      "lastAccessed": 1776255566948,
-      "type": "file"
-    },
-    {
-      "path": "src/app/app.component.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776255572569,
+      "accessCount": 2,
+      "lastAccessed": 1776494525027,
       "type": "file"
     },
     {
       "path": "src/app/payment/payment.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776265917243,
-      "type": "file"
-    },
-    {
-      "path": "src/app/accounts/accounts-module.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776335856321,
-      "type": "file"
-    },
-    {
-      "path": "src/app/accounts/accounts-routing-module.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776335860229,
-      "type": "file"
-    },
-    {
-      "path": "src/app/currency-conversion/currency-conversion-pipe.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776346047710,
-      "type": "file"
-    },
-    {
-      "path": "src/app/buy-flight/buy-flight.spec.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776349007008,
-      "type": "file"
-    },
-    {
-      "path": "src/app/account/account.spec.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776349314991,
+      "accessCount": 2,
+      "lastAccessed": 1776517458263,
       "type": "file"
     },
     {
       "path": "src/app/payment/payment.html",
-      "accessCount": 3,
-      "lastAccessed": 1776265517748,
-      "type": "file"
-    },
-    {
-      "path": "src/app/my-flights-wrapper/my-flights-wrapper.html",
-      "accessCount": 3,
-      "lastAccessed": 1776340848108,
-      "type": "file"
-    },
-    {
-      "path": "src/app/my-flights-wrapper/my-flights-wrapper.ts",
       "accessCount": 2,
-      "lastAccessed": 1776340833559,
+      "lastAccessed": 1776517469793,
       "type": "file"
     },
     {
-      "path": "src/app/model/currency.ts",
+      "path": "src/app/application-state/application-state.spec.ts",
       "accessCount": 2,
-      "lastAccessed": 1776346030991,
+      "lastAccessed": 1776517539084,
       "type": "file"
     },
     {
-      "path": "src/app/currency-selector/currency-selector.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776346791161,
-      "type": "file"
-    },
-    {
-      "path": "src/app/currency-selector/currency-selector.html",
-      "accessCount": 2,
-      "lastAccessed": 1776346808750,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 2,
-      "lastAccessed": 1776347173028,
-      "type": "directory"
-    },
-    {
-      "path": "src/app/app.spec.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776347209307,
-      "type": "file"
-    },
-    {
-      "path": "src/app/home/home.ts",
+      "path": "cypress/e2e/nav.cy.ts",
       "accessCount": 1,
-      "lastAccessed": 1776254767899,
+      "lastAccessed": 1776446622969,
       "type": "file"
     },
     {
-      "path": "src/app/payment/payment.html.txt",
+      "path": "src/app/buy-flight/buy-flight.ts",
       "accessCount": 1,
-      "lastAccessed": 1776265517199,
+      "lastAccessed": 1776494475847,
       "type": "file"
     },
     {
-      "path": "src/app/my-flights/my-flights.ts",
+      "path": "cypress/screenshots/nav.cy.ts/Navigation between pages of FlySharp App -- Has 5 rows in the table on the Buy Flights page (failed).png",
       "accessCount": 1,
-      "lastAccessed": 1776340821583,
+      "lastAccessed": 1776494507917,
       "type": "file"
     },
     {
-      "path": "src/app",
+      "path": "src/app/application-state/application-state.ts",
       "accessCount": 1,
-      "lastAccessed": 1776343448957,
-      "type": "directory"
-    },
-    {
-      "path": "src",
-      "accessCount": 1,
-      "lastAccessed": 1776344685521,
-      "type": "directory"
+      "lastAccessed": 1776517528975,
+      "type": "file"
     }
   ],
   "userDirectives": []

@@ -147,7 +147,9 @@
 <li><strong>OS</strong>: Linux (Ubuntu)</li>
 <li>TYPESCRIPT</li>
 </ul>
-<hr>
+<p>No version of Cypress is installed in: /home/mjrw/.cache/Cypress/15.14.0/Cypress</p>
+<p>Please reinstall Cypress by running: cypress install</p>
+<h2 id="npx-cypress-install">npx cypress install</h2>
 <h2 id="practice-12-creating-an-angular-application">Practice 1.2: Creating an Angular Application</h2>
 <p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/012%20Practice1.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/012 Practice1.2.html</a></p>
 <h3 id="issues--differences">Issues / Differences</h3>
@@ -700,9 +702,79 @@
 <li><code>app.spec.ts</code>: <code>provideRouter([])</code> added to providers; &quot;should render title&quot; replaced with &quot;should have a <code>&lt;router-outlet&gt;</code>&quot; test ✓</li>
 <li><code>buy-flight.spec.ts</code>: <code>provideRouter([])</code> added; <code>DebugElement</code>/<code>By</code> imported; 4 new tests added (<code>showBuyFlights</code> default, toggle once, toggle twice, link click) ✓</li>
 <li><code>account.spec.ts</code>: <code>imports</code> changed to <code>declarations</code> ✓</li>
-<li><code>ng test --watch=false</code> → 15 tests pass across 10 test files ✓</li>
+<li><code>ng test --watch=false</code> → 16 tests pass across 10 test files ✓</li>
+<li><strong>Bonus steps 29–36</strong>: DOM test added to <code>buy-flight.spec.ts</code> — verifies table hidden after link click using <code>fixture.detectChanges()</code>, <code>By.css('table')</code>, and <code>triggerEventHandler</code> ✓</li>
+<li><strong>Bonus steps 37–39</strong>: <code>stateServiceStub</code> mock added (type <code>Partial&lt;ApplicationState&gt;</code>) with <code>FLIGHTS</code> and USD <code>displayCurrency</code>; provided via <code>{ provide: ApplicationState, useValue: stateServiceStub }</code>; <code>'should have a currency symbol of $'</code> test added ✓
+<ul>
+<li>Exercise uses <code>ApplicationStateService</code> / <code>BuyFlightComponent</code> — Angular 21: <code>ApplicationState</code> / <code>BuyFlight</code></li>
+</ul>
+</li>
+<li><strong>Bonus steps 41–43</strong>: <code>stateServiceStub</code> replaced with inline object; <code>flightsSpy: any = vi.fn().mockReturnValue(FLIGHTS)</code> created in <code>beforeEach</code>; <code>flights</code> defined as object-literal getter <code>get flights() { return flightsSpy(); }</code> so component's <code>.filter()</code> works; <code>import { vi } from 'vitest'</code> added; new test asserts <code>component.flights</code> equals <code>FLIGHTS</code> and <code>flightsSpy</code> was called ✓
+<ul>
+<li><code>vi.fn()</code> return type is <code>Mock&lt;...&gt;</code> — declare <code>flightsSpy: any</code> to avoid TypeScript callable error</li>
+</ul>
+</li>
+<li><code>ng test --watch=false</code> → 18 tests pass across 10 test files ✓</li>
+</ul>
+<h2 id="practice-61-mocking-with-jasmine-spy">Practice 6.1: Mocking with Jasmine Spy</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/061%20Practice6.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/061 Practice6.1.html</a></p>
+<h3 id="issues--differences-11">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>DoNows uses Vitest, not Jasmine — <code>jasmine.createSpyObj</code> does not exist</strong></p>
+<ul>
+<li>TODO 1: <code>jasmine.createSpyObj('Weather', ['getForecast'])</code> → <code>{ getForecast: vi.fn() }</code> (import <code>vi</code> from <code>'vitest'</code>)</li>
+<li>TODO 5: <code>.and.callFake((city) =&gt; ...)</code> → <code>.mockImplementation((city) =&gt; ...)</code></li>
+<li><code>toHaveBeenCalled()</code> / <code>toHaveBeenCalledWith()</code> are compatible — no change needed</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ng test</code> project name is case-sensitive</strong></p>
+<ul>
+<li>Correct command: <code>ng test DoNow61</code> (not <code>do-now61</code>)</li>
+<li><code>--watch=false</code> flag is not supported in this workspace; omit it (Vitest exits after one run)</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-11">Verified Working</h3>
+<ul>
+<li><code>current-weather.spec.ts</code>: all 5 TODOs implemented with Vitest equivalents ✓</li>
+<li><code>ng test DoNow61</code> → 8 tests pass across 3 files ✓</li>
 </ul>
 <hr>
+<h2 id="ex62-cypress-e2e-testing">Ex6.2: Cypress E2E Testing</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/068%20Ex6.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/068 Ex6.2.html</a></p>
+<h3 id="steps-completed">Steps Completed</h3>
+<ol>
+<li>Installed Cypress via <code>ng add @cypress/schematic --skip-confirmation</code></li>
+<li>Modified <code>cypress/e2e/spec.cy.ts</code> — &quot;Home Page Test&quot; with 2 tests (home page loads, h1 contains Special Offer text)</li>
+<li>Created <code>cypress/e2e/nav.cy.ts</code> — &quot;Navigation between pages of FlySharp App&quot; with 6 tests</li>
+</ol>
+<h3 id="issues--differences-12">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong><code>ng add @cypress/schematic</code> requires terminal confirmation</strong></p>
+<ul>
+<li>Fix: <code>printf &quot;Y\nN\n&quot; | ng add @cypress/schematic --skip-confirmation</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Steps 4–7 (running Cypress GUI) are manual browser steps</strong></p>
+<ul>
+<li>Run <code>ng e2e</code> from the FlySharp directory to launch Cypress</li>
+<li>Select Chrome, then run the test specs from the Cypress UI</li>
+</ul>
+</li>
+</ol>
+<h3 id="test-files">Test Files</h3>
+<ul>
+<li><code>cypress/e2e/spec.cy.ts</code>: Home page loads, h1 Special Offer text</li>
+<li><code>cypress/e2e/nav.cy.ts</code>: 6 nav tests — home, 4 nav links, buy flights page, 5 table rows, my flights page, account page</li>
+</ul>
+<h3 id="manual-verification-required">Manual Verification Required</h3>
+<ul>
+<li>Steps 4–7 and step 25: run <code>ng e2e</code> to open Cypress browser runner and verify tests pass visually</li>
+</ul>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             

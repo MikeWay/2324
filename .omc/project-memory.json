@@ -189,6 +189,25 @@
       "keyFiles": []
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "DoNows/projects/do-now61/src/app/current-weather/current-weather.spec.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776428336597,
+      "type": "file"
+    },
+    {
+      "path": "Exercises/FlySharp/src/app/buy-flight/buy-flight.spec.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776428282831,
+      "type": "file"
+    },
+    {
+      "path": "DoNows/projects/do-now61/src/app/current-weather/current-weather.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776428290492,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

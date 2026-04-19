@@ -1,0 +1,32 @@
+@if (showBuyFlights) {
+  <app-flight-filter [label]="'Origin'" [initialValue]="originFilter" (filterEmitter)="onOriginFilterChange($event)"></app-flight-filter>
+  <app-flight-filter [label]="'Destination'" [initialValue]="destinationFilter" (filterEmitter)="onDestinationFilterChange($event)"></app-flight-filter>
+  <table class="table table-condensed table-responsive">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Flight</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Departs</th>
+        <th>Arrives</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (flight of flights; track flight.id) {
+        <tr>
+          <td><button (click)="onFlightClick(flight)" class="btn btn-primary btn-sm">Buy</button></td>
+          <td>{{flight.flightNumber}}</td>
+          <td>{{flight.origin}}</td>
+          <td>{{flight.destination}}</td>
+          <td>{{flight.departDay}} {{flight.departTime}}</td>
+          <td>{{flight.arriveDay}} {{flight.arriveTime}}</td>
+          <td>{{flight.price | currencyConversion : currencySymbol : currencyRate}}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+<a href='#' (click)="onClickBuyFlights()">Toggle Flights</a>
+<app-payment [selectedFlight]="selectedFlight"></app-payment>
