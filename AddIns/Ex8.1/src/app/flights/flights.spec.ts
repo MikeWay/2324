@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { FlightsService } from '../flights/flights.service';
+import { Flights } from '../flights/flights';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { Flight } from '../model/flight';
 import { FLIGHTS } from '../model/mock-flights';
 
-describe('FlightsService', () => {
+describe('Flights', () => {
 
   let httpTestingController: HttpTestingController;
 
@@ -18,7 +18,7 @@ describe('FlightsService', () => {
     TestBed.configureTestingModule({
       imports: [
       ],
-      providers: [FlightsService, provideHttpClient(), provideHttpClientTesting()]
+      providers: [Flights, provideHttpClient(), provideHttpClientTesting()]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
   });
@@ -26,12 +26,12 @@ describe('FlightsService', () => {
 
 
 
-  it('should be created', inject([FlightsService], (service: FlightsService) => {
+  it('should be created', inject([Flights], (service: Flights) => {
     expect(service).toBeTruthy();
   }));
 
 /*
-  it('should fetch all flights using GET', inject([FlightsService], (service: FlightsService) => {
+  it('should fetch all flights using GET', inject([Flights], (service: Flights) => {
 
     service.getAllFlights().subscribe((flights: Flight[]) => {
       expect(flights).toEqual(FLIGHTS); // verification happens once the req.flush method has been called     
@@ -44,9 +44,9 @@ describe('FlightsService', () => {
 */
 
 /*
-  it('should report an error from getAllFlights', inject([FlightsService], (service: FlightsService) => {
+  it('should report an error from getAllFlights', inject([Flights], (service: Flights) => {
     service.getAllFlights().subscribe({
-      next: (flights: Flight[]) => fail("An error should have been thrown"),
+      next: (flights: Flight[]) => { throw new Error("An error should have been thrown"); },
       error: (e) => {
         console.log(`[${e}]`);
         expect(e.message).toEqual('Server error - is the REST server running?')
@@ -58,7 +58,7 @@ describe('FlightsService', () => {
   }));
 */
 /*
-  it('should return flights from getMyFlights()', inject([FlightsService], (service: FlightsService) => {
+  it('should return flights from getMyFlights()', inject([Flights], (service: Flights) => {
     service.getMyFlights().subscribe({
       next: (flights: Flight[]) => {
         expect(flights).toEqual(FLIGHTS);
@@ -72,7 +72,7 @@ describe('FlightsService', () => {
   }));
 */
 /*
-  it('should report an error from addMyFlight', inject([FlightsService], (service: FlightsService) => {
+  it('should report an error from addMyFlight', inject([Flights], (service: Flights) => {
     service.getMyFlights().subscribe({
       next: (flights) => fail("An error should have been thrown"),
       error: (e) => {
@@ -86,7 +86,7 @@ describe('FlightsService', () => {
   }));
 */
 /*
-  it('should add a flight to myFlights', inject([FlightsService], (service: FlightsService) => {
+  it('should add a flight to myFlights', inject([Flights], (service: Flights) => {
     service.addMyFlight(A_FLIGHT).subscribe({
       next: (count: number) => {
         expect(count).toEqual(1);
@@ -102,7 +102,7 @@ describe('FlightsService', () => {
   }));
 */
 /*
-  it('should report an error from addMyFlight', inject([FlightsService], (service: FlightsService) => {
+  it('should report an error from addMyFlight', inject([Flights], (service: Flights) => {
     service.addMyFlight(A_FLIGHT).subscribe({
       next: (count: number) => fail("An error should have been thrown"),
       error: (e) => {
