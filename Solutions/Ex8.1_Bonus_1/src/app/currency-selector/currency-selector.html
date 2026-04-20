@@ -1,0 +1,5 @@
+<select name="currencySelector" (change)="currencyChange(select.value)" #select>
+  @for (c of state.currencies; track c.code) {
+    <option [value]="c.code" [selected]="c.code===state.displayCurrency.code">{{c.symbol}}</option>
+  }
+</select>

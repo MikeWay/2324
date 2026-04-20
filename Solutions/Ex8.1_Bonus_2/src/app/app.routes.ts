@@ -1,46 +1,15 @@
 import { Routes } from '@angular/router';
-import { AccountComponent } from './account/account.component';
-import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import { HomeComponent } from './home/home.component';
-import { MyFlightsComponent } from './my-flights/my-flights.component';
-import { MyFlightsWrapperComponent } from './my-flights-wrapper/my-flights-wrapper.component';
+import { Home } from './home/home';
+import { BuyFlight } from './buy-flight/buy-flight';
+import { MyFlightsWrapper } from './my-flights-wrapper/my-flights-wrapper';
 
 export const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'buy',
-        component: BuyFlightComponent
-    },
-    {
-        path: 'buy/:origin',
-        component: BuyFlightComponent
-    },    
-    {
-        path: 'buy/:origin/:destination',
-        component: BuyFlightComponent
-    },     
-    {
-        path: 'myflights',
-        component: MyFlightsWrapperComponent
-    },
-    {
-        path: 'account',
-        loadChildren: () => import('./accounts/accounts.module').then(mod => mod.AccountsModule)
-    },
-
-    {
-
-        path: '**',
-        component: HomeComponent
-    },
-
-
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: Home },
+  { path: 'buy', component: BuyFlight },
+  { path: 'buy/:origin', component: BuyFlight },
+  { path: 'buy/:origin/:destination', component: BuyFlight },
+  { path: 'myflights', component: MyFlightsWrapper },
+  { path: 'account', loadChildren: () => import('./accounts/accounts-module').then(mod => mod.AccountsModule) },
+  { path: '**', component: Home }
 ];

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
-import { HomeComponent } from './home/home.component';
+import { Home } from './home/home.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 import { MyFlightsWrapperComponent } from './my-flights-wrapper/my-flights-wrapper.component';
 
@@ -13,7 +13,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: Home
     },
     {
         path: 'buy',
@@ -39,7 +39,7 @@ export const routes: Routes = [
     {
 
         path: '**',
-        component: HomeComponent
+        component: Home
     },
 
 

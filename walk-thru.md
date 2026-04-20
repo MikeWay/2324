@@ -7,6 +7,8 @@
 - **OS**: Linux (Ubuntu)
 - TYPESCRIPT
 
+MUST UPDATE the Node Scripts on the server
+
 No version of Cypress is installed in: /home/mjrw/.cache/Cypress/15.14.0/Cypress
 
 Please reinstall Cypress by running: cypress install
@@ -500,26 +502,141 @@ npx cypress install
 
 ### Steps Completed
 
-- Steps 5–7: Added `FormsModule` to `payment.ts` imports; added `model` field and `jsonModel` getter
-- Steps 8–10: Appended form HTML from `payment.html.txt` inside the `@if` block; added `ngModel` bindings; added `{{jsonModel}}` debug output
-- Steps 12–14: Added `required` to all inputs/textarea/select; disabled submit with `[disabled]="!paymentForm.form.valid"`
-- Steps 15–17: Added `(ngSubmit)="onSubmit()"` to form; added `onSubmit()` method with `alert(this.jsonModel)`
+- Steps 5–7: Added `FormsModule` to `payment.ts` imports; added `model` field (`PaymentModel`) and `jsonModel` getter
+- Steps 8–10: Appended form HTML from `payment.html.txt` inside the `@if` block; added `ngModel` bindings on all fields; added `{{jsonModel}}` debug output
+- Steps 12–13: Added `required` to all inputs/textarea/select; disabled submit with `[disabled]="!paymentForm.form.valid"`
+- Steps 15–16: Added `(ngSubmit)="onSubmit()"` to form tag; added `onSubmit()` method with `alert(this.jsonModel)`
+- Steps 18–22 (Bonus): Added `FlightPaymentEvent` class to `payment.ts`; added `@Output() paymentConfirmed` emitter; `onSubmit()` emits event instead of alert; `BuyFlight.flightPurchased()` calls `addMyFlight()` and navigates to `/myflights`; `buy-flight.html` binds `(paymentConfirmed)="flightPurchased($event)"`
 
 ### Issues / Differences
 
-1. **`Payment` class name conflict** — component class and model class both named `Payment`
-   - Fix: `import { Payment as PaymentModel } from '../model/payment'` in `payment.ts`
+1. **Model class is `PaymentModel`, not `Payment`** — exercise step 6 says `model: Payment = new Payment()`, but `cpAddIns` provides `PaymentModel` from `model/payment.ts` to avoid a naming clash with the `Payment` component class
+   - Fix: use `model: PaymentModel = new PaymentModel()` and import `PaymentModel` from `'../model/payment'`
 
-2. **`exStart Ex7.1` resets spec files to old Angular naming**
-   - `application-state.spec.ts` reset to import `ApplicationStateService` from `./application-state.service` — fixed to `ApplicationState` from `./application-state`
-   - `my-flights.spec.ts` reset to import `MyFlightsComponent` from `./my-flights.component` and use `jasmine` — fixed to `MyFlights` from `./my-flights`
+2. **`payment.component.html.txt` leftover in payment folder** — `exStart` copies this old-naming file alongside the new `payment.html.txt`; it is harmless but may confuse students looking for the AddIn file
+   - The exercise step correctly references `payment.html.txt` (new name)
 
-3. **New `ApplicationState` (from cpAddIns) changes defaults**
-   - `displayCurrency` now defaults to `currencies[1]` (USD, not GBP)
-   - `_myFlights` starts empty (not MYFLIGHTS); `addMyFlight()` method added
-   - Updated `application-state.spec.ts` tests accordingly
+3. **Stray `1` at end of `my-flights.spec.ts`** — line 26 contains a bare `1` character; does not affect tests but should be removed from the AddIn
 
 ### Verified Working
 
 - `ng build` → no errors ✓
-- `ng test --watch=false` → 24 tests pass across 10 files ✓
+- `ng test --watch=false` → 20 tests pass across 10 files ✓ (including bonus)
+
+
+## Ex7.2: Reactive Forms
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/076%20Ex%207.2.html
+
+### Steps Completed
+
+- Step 4: Replaced `FormsModule` with `ReactiveFormsModule` in `payment.ts`
+- Steps 5–6: Created `payForm = new FormGroup({...})` with `FormControl` for all 6 fields, each with `nonNullable: true` and `Validators.required`
+- Steps 7–12: Updated `payment.html` — `[formGroup]="payForm"`, `[disabled]="!payForm.valid"`, removed `required`/`ngModel`/`name=`, added `formControlName=`, replaced `{{jsonModel}}` with `{{ payForm.value | json }}`
+- Step 13: Added `JsonPipe` to component `imports`
+- Steps 15–18: Added `buildSampleModel()`, `ngOnInit()`, and `payForm.setValue(this.model)`
+- Step 20: `onSubmit()` emits `payForm.value as PaymentModel`
+- Step 21: Email validation feedback div using `@if (!payForm.controls.email.valid)`
+- Steps 23/25–26 (Bonus): `minLength(5)` on name; `minLength(10)/maxLength(128)` on address; `minLength(13)` on cardNum; email regex pattern validator
+
+### Issues / Differences
+
+1. **No `AddIns/Ex7.2` directory** — `cpAddIns Ex7.2` fails with ENOENT; this is expected, no AddIns needed for this exercise
+
+2. **`exStart Ex7.2` sources from `Solutions/Ex7.1_Bonus_1`** — starting state is the completed Ex7.1 Bonus (template-driven form with `FlightPaymentEvent`); students need to replace `FormsModule` with `ReactiveFormsModule` as step 4 instructs
+
+### Verified Working
+
+- `ng build` → no errors ✓
+- `ng test --watch=false` → 20 tests pass across 10 files ✓
+
+
+## Ex8.1: Communicating With a REST Server
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/085%20Ex%208.1.html
+
+### Steps Completed
+
+- Step 4: `ng generate service flights/flights --flat` generates `flights.ts`/`Flights` — AddIns now use Angular 21 naming so this works directly; manually created `flights.ts` to avoid spec file conflict from AddIn pre-populating it
+- Steps 7 & 13: Uncommented both test blocks in `flights.spec.ts`; fixed `fail()` to `{ throw new Error(...); }`
+- Steps 9–12: Implemented `Flights` with `HttpClient`, `getAllFlights()`, `handleError()` with `catchError`/`throwError`
+- Step 10: Added `provideHttpClient()` to `app.config.ts` providers
+- Steps 14–17: Added `getMyFlights()` (GET to `/myflights`)
+- Steps 19–21: Updated `ApplicationState` to inject `Flights`, added `error` property, async `loadFlights()`
+- Steps 22–24: Added `errorMessage` getter to `BuyFlight`; `@if(errorMessage)` error display in template
+- Steps 25–28: Server-dependent steps (run app, stop/start Flights Service) — not automatable; verified via build
+
+### Issues / Differences
+
+1. **`ng generate service` conflicts with AddIn pre-placed spec file**
+   - `cpAddIns Ex8.1` places `flights.spec.ts` before code generation, so `ng generate` would overwrite it
+   - Fix: create `flights.ts` manually without running `ng generate`
+
+2. **`fail()` is Jasmine-only — not available in Vitest**
+   - AddIn spec uses `fail("An error should have been thrown")` inside subscribe `next` callbacks
+   - Fix: replace with block form `{ throw new Error("An error should have been thrown"); }` — arrow expression form (`() => throw ...`) is a syntax error
+
+3. **`application-state.spec.ts` must be updated to mock `Flights`**
+   - Old spec used sync mock data; `ApplicationState` now loads flights asynchronously via `Flights`
+   - Fix: provide `{ provide: Flights, useValue: { getAllFlights: vi.fn().mockReturnValue(of(FLIGHTS)), getMyFlights: vi.fn().mockReturnValue(of([])), addMyFlight: vi.fn().mockReturnValue(of(1)) } }` in `TestBed`
+
+### Verified Working (core steps)
+
+- `ng build` → no errors ✓
+- `ng test --watch=false` → 23 tests pass across 11 files ✓
+
+### Bonus Steps (29–44)
+
+- Steps 29–33: Added pagination to `BuyFlight` — `FLIGHTS_PER_PAGE=10` module-level const, `firstDisplayedFlightIndex`, `flightCount`, `flights` getter uses `slice()`, `onNext()`/`onPrevious()` methods, Previous/Next buttons in template
+- Steps 36–41: `addMyFlight()` POST with `JSON.stringify([flight])` body and `HttpHeaders({'Content-Type':'application/json'})`; all 6 bonus tests uncommented with `throw` syntax fixes
+- Steps 42–43: `ApplicationState.addMyFlight()` pushes to `_myFlights` then calls `flightsService.addMyFlight().subscribe({})`; `loadMyFlights()` called from constructor
+- Step 44: Updated `application-state.spec.ts` mock to include `getMyFlights` and `addMyFlight` stubs
+
+**AddIns (`Ex8.1_b1`) — issues:**
+- `cpAddIns Ex8.1_b1` overwrites `application-state.spec.ts` with old `FlightsService`/`flights.service` references — fix both the import and the `provide:` token to use `Flights` from `'../flights/flights'`
+- `cpAddIns Ex8.1_b1` places an `app.spec.ts` that calls `app.title()` directly — this fails if `title` is declared `protected` in `app.ts`; fix by removing `protected` from `readonly title = signal('Fly Sharp')`
+
+**Verified Working (full exercise including bonus):**
+- `ng build` → no errors ✓
+- `ng test --watch=false` → 24 tests pass across 11 files ✓
+
+
+## Ex8.2: WebSocket Communication
+
+**Exercise URL**: https://adaptalearn.learningtree.com/Output/2324f1dev/087%20Ex%208.2.html
+
+### Steps Completed
+
+- Step 2: `cpAddIns Ex8.2` — brings in `flight-status` component skeleton and service spec
+- Steps 3–4: Created `FlightStatusService` manually as `flight-status.service.ts` (Angular 21 would name `ng g s FlightStatus` as `FlightStatus`, conflicting with the existing component; manual file avoids the clash)
+- Step 5: `FlightStatusService.connect(url)` returns `webSocket(url)` — import `webSocket` from `rxjs/webSocket`
+- Steps 6–7: `FlightStatus` component (already scaffolded): inject `FlightStatusService`, `flightStatus = 'All flights are currently on time'`, `ngOnInit` calls `connect()`, subscribes, calls `socket.next({ airport: 'JFK' })`
+- Steps 8–9: Uncommented tests in `flight-status.spec.ts` and `flight-status.service.spec.ts`; rewrote spec from Jasmine to Vitest (see Issues below)
+- Steps 10: Add `FlightStatus` to app routes / home page — added to `app.routes.ts` (`Home` not `HomeComponent`), imported in `home.html`
+- Step 11: Run app — manual step
+
+### Issues / Differences
+
+1. **`cpAddIns Ex8.2` overwrites `app.ts` with old NgModule `AppModule` style**
+   - Fix: restore standalone `App` component (same as Ex8.1 state): `readonly title = signal('Fly Sharp')`, `navbarOpen`, `toggleNavbar()`
+   - Also fix `AddIns/Ex8.2/src/app/app.ts` so future `cpAddIns` doesn't repeat this
+
+2. **Service naming conflict**
+   - `ng g s FlightStatus` in Angular 21 would generate class `FlightStatus`, clashing with the existing component
+   - Fix: manually create `flight-status.service.ts` with class `FlightStatusService`
+
+3. **`app.routes.ts` used `HomeComponent`** (old naming) — fix all occurrences to `Home`
+
+4. **`flight-status.spec.ts` — Jasmine → Vitest migration**
+   - Replace `jasmine.createSpy()` with `vi.fn()`
+   - Remove `jasmine-marbles` (Jasmine-only); replace `cold()`/`getTestScheduler()` with plain `Subject<any>`
+   - Mock structure: `{ connect: vi.fn().mockReturnValue({ subscribe: (next, error) => mockSubject.subscribe({ next, error }), next: nextSpy }) }`
+
+5. **NG0100: ExpressionChangedAfterItHasBeenCheckedError** — Angular 21 dev-mode throws this when external data arrives via a mock Subject outside the zone
+   - For property-only tests: remove the `fixture.detectChanges()` call after emitting — just emit and assert the property directly
+   - For DOM tests: use `fixture.componentRef.changeDetectorRef.detectChanges()` (raw CDR) instead of `fixture.detectChanges()` — bypasses Angular's double-check verification pass
+
+### Verified Working
+
+- `ng build` → no errors ✓
+- `ng test --watch=false` → 32 tests pass across 13 files ✓

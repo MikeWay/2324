@@ -1,0 +1,137 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776601852012,
+  "projectRoot": "/home/mjrw/course2324/server/course2324-node-server",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "koa",
+        "version": "2.13.4",
+        "category": "backend"
+      },
+      {
+        "name": "jasmine",
+        "version": "4.5.0",
+        "category": "testing"
+      },
+      {
+        "name": "webpack",
+        "version": "5.75.0",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run start",
+    "scripts": {
+      "lint": "tslint --project tsconfig.json --format stylish",
+      "build": "tsc",
+      "serve": "ts-node src/server.ts",
+      "start": "nodemon",
+      "run-server": "node ./build/server.js",
+      "prodbuild": "webpack --mode production",
+      "install_service": "webpack --mode production & node ./install.js remove & node ./install.js",
+      "uninstall": "node install.js remove",
+      "test": "tsc && jasmine --config=./spec/support/jasmine.json"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase/PascalCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "spec",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "build": {
+      "path": "build",
+      "purpose": "Build output",
+      "fileCount": 8,
+      "lastAccessed": 1776601852005,
+      "keyFiles": [
+        "APIServer.js",
+        "Account.js",
+        "flight.js",
+        "jwt.js",
+        "server.js"
+      ]
+    },
+    "data": {
+      "path": "data",
+      "purpose": "Data files",
+      "fileCount": 2,
+      "lastAccessed": 1776601852006,
+      "keyFiles": [
+        "fewFlights.json",
+        "flights.json"
+      ]
+    },
+    "security": {
+      "path": "security",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1776601852010,
+      "keyFiles": [
+        "private.key",
+        "public.key"
+      ]
+    },
+    "spec": {
+      "path": "spec",
+      "purpose": "Test specifications",
+      "fileCount": 0,
+      "lastAccessed": 1776601852011,
+      "keyFiles": []
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 8,
+      "lastAccessed": 1776601852011,
+      "keyFiles": [
+        "APIServer.ts",
+        "Account.ts",
+        "flight.ts",
+        "jwt.ts",
+        "server.spec.ts"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

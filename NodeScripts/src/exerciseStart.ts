@@ -156,6 +156,23 @@ try {
 	console.log("Failure copying to ex dir" + err);
 }
 
+// Suppress Sass deprecation warnings in angular.json
+const angularJsonPath = TARGET_DIR_ROOT + '/angular.json';
+if (fs.existsSync(angularJsonPath)) {
+	const oldStylesEntry = '"styles": ["src/styles.scss"]';
+	const newStylesEntry = `"styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import", "global-builtin", "color-functions", "legacy-js-api", "if-function"]
+              }
+            }`;
+	const angularJson = fs.readFileSync(angularJsonPath, 'utf8');
+	if (angularJson.includes(oldStylesEntry) && !angularJson.includes('silenceDeprecations')) {
+		console.log("Modifying angular.json to suppress Sass deprecation warnings");
+		fs.writeFileSync(angularJsonPath, angularJson.replace(oldStylesEntry, newStylesEntry), 'utf8');
+	}
+}
+
 console.log("Setting up " + exercise + " complete");
 
 

@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home';
+import { Home } from './home/home';
 import { BuyFlight } from './buy-flight/buy-flight';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, BuyFlight, NgClass],
+  imports: [RouterOutlet, Home, BuyFlight, NgClass],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

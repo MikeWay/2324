@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgClass} from '@angular/common'
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { Home } from './home/home.component';
 import { BuyFlightComponent } from './buy-flight/buy-flight.component';
 import { CurrencySelectorComponent } from './currency-selector/currency-selector.component';
 import { TimeDirective } from './time/time.directive';
@@ -9,7 +9,7 @@ import { TimeDirective } from './time/time.directive';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, BuyFlightComponent, NgClass, RouterLink, CurrencySelectorComponent, TimeDirective],
+  imports: [RouterOutlet, Home, BuyFlightComponent, NgClass, RouterLink, CurrencySelectorComponent, TimeDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

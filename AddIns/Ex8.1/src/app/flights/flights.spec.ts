@@ -74,7 +74,7 @@ describe('Flights', () => {
 /*
   it('should report an error from addMyFlight', inject([Flights], (service: Flights) => {
     service.getMyFlights().subscribe({
-      next: (flights) => fail("An error should have been thrown"),
+      next: (flights) => { throw new Error("An error should have been thrown"); },
       error: (e) => {
         console.log(`[${e}]`);
         expect(e.message).toEqual('Server error - is the REST server running?')
@@ -104,7 +104,7 @@ describe('Flights', () => {
 /*
   it('should report an error from addMyFlight', inject([Flights], (service: Flights) => {
     service.addMyFlight(A_FLIGHT).subscribe({
-      next: (count: number) => fail("An error should have been thrown"),
+      next: (count: number) => { throw new Error("An error should have been thrown"); },
       error: (e) => {
         console.log(`[${e}]`);
         expect(e.message).toEqual('Server error - is the REST server running?')

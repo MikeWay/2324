@@ -13,7 +13,7 @@ import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class Home {
   specialOffer = '10% off all round-the-World flights';
   isSmallScreen = false;
 

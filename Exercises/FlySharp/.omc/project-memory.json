@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776445610826,
+  "lastScanned": 1776600571459,
   "projectRoot": "/home/mjrw/course2324/Exercises/FlySharp",
   "techStack": {
     "languages": [
@@ -82,7 +82,7 @@
       "path": "cypress",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776445610820,
+      "lastAccessed": 1776600571454,
       "keyFiles": [
         "tsconfig.json"
       ]
@@ -91,14 +91,14 @@
       "path": "dist",
       "purpose": "Distribution/build output",
       "fileCount": 0,
-      "lastAccessed": 1776445610824,
+      "lastAccessed": 1776600571457,
       "keyFiles": []
     },
     "public": {
       "path": "public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1776445610824,
+      "lastAccessed": 1776600571457,
       "keyFiles": [
         "favicon.ico"
       ]
@@ -107,7 +107,7 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 3,
-      "lastAccessed": 1776445610824,
+      "lastAccessed": 1776600571457,
       "keyFiles": [
         "index.html",
         "main.ts",
@@ -118,7 +118,7 @@
       "path": "cypress/fixtures",
       "purpose": "Test fixtures",
       "fileCount": 1,
-      "lastAccessed": 1776445610825,
+      "lastAccessed": 1776600571458,
       "keyFiles": [
         "example.json"
       ]
@@ -127,7 +127,7 @@
       "path": "src/app",
       "purpose": "Application code",
       "fileCount": 7,
-      "lastAccessed": 1776445610825,
+      "lastAccessed": 1776600571459,
       "keyFiles": [
         "app.config.ts",
         "app.html",
@@ -138,69 +138,123 @@
       "path": "src/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776445610825,
+      "lastAccessed": 1776600571459,
       "keyFiles": []
     }
   },
   "hotPaths": [
     {
-      "path": "src/app/my-flights/my-flights.spec.ts",
-      "accessCount": 4,
-      "lastAccessed": 1776517564824,
-      "type": "file"
-    },
-    {
-      "path": "cypress/e2e/spec.cy.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776446617203,
-      "type": "file"
-    },
-    {
-      "path": "src/app/buy-flight/buy-flight.html",
-      "accessCount": 2,
-      "lastAccessed": 1776494525027,
-      "type": "file"
-    },
-    {
-      "path": "src/app/payment/payment.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776517458263,
-      "type": "file"
-    },
-    {
-      "path": "src/app/payment/payment.html",
-      "accessCount": 2,
-      "lastAccessed": 1776517469793,
-      "type": "file"
-    },
-    {
-      "path": "src/app/application-state/application-state.spec.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776517539084,
-      "type": "file"
-    },
-    {
-      "path": "cypress/e2e/nav.cy.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776446622969,
+      "path": "src/app/flight-status/flight-status.spec.ts",
+      "accessCount": 13,
+      "lastAccessed": 1776673697494,
       "type": "file"
     },
     {
       "path": "src/app/buy-flight/buy-flight.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776494475847,
+      "accessCount": 11,
+      "lastAccessed": 1776670597581,
       "type": "file"
     },
     {
-      "path": "cypress/screenshots/nav.cy.ts/Navigation between pages of FlySharp App -- Has 5 rows in the table on the Buy Flights page (failed).png",
-      "accessCount": 1,
-      "lastAccessed": 1776494507917,
+      "path": "src/app/application-state/application-state.spec.ts",
+      "accessCount": 10,
+      "lastAccessed": 1776670629874,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.config.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776670582966,
+      "type": "file"
+    },
+    {
+      "path": "src/app/buy-flight/buy-flight.html",
+      "accessCount": 7,
+      "lastAccessed": 1776670602021,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flights/flights.spec.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776670616542,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776673052429,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flights/flights.ts",
+      "accessCount": 6,
+      "lastAccessed": 1776670569274,
       "type": "file"
     },
     {
       "path": "src/app/application-state/application-state.ts",
+      "accessCount": 6,
+      "lastAccessed": 1776670587888,
+      "type": "file"
+    },
+    {
+      "path": "angular.json",
+      "accessCount": 4,
+      "lastAccessed": 1776612843148,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.routes.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776673006221,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776673006401,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.spec.ts",
       "accessCount": 1,
-      "lastAccessed": 1776517528975,
+      "lastAccessed": 1776619008522,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.spec.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1776669750427,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.html",
+      "accessCount": 1,
+      "lastAccessed": 1776669821692,
+      "type": "file"
+    },
+    {
+      "path": "src/app/app.html",
+      "accessCount": 1,
+      "lastAccessed": 1776669822876,
+      "type": "file"
+    },
+    {
+      "path": "src/app/home/home.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776672653458,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.service.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776673006318,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.service.spec.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776673006571,
       "type": "file"
     }
   ],

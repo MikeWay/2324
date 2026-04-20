@@ -1,4 +1,4 @@
-import { HomeComponent } from './home/home.component';
+import { Home } from './home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
+    AppComponent, Home, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, FlightStatusComponent
   ],
   imports: [
     BrowserModule,

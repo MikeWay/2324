@@ -147,6 +147,7 @@
 <li><strong>OS</strong>: Linux (Ubuntu)</li>
 <li>TYPESCRIPT</li>
 </ul>
+<p>MUST UPDATE the Node Scripts on the server</p>
 <p>No version of Cypress is installed in: /home/mjrw/.cache/Cypress/15.14.0/Cypress</p>
 <p>Please reinstall Cypress by running: cypress install</p>
 <h2 id="npx-cypress-install">npx cypress install</h2>
@@ -774,6 +775,139 @@
 <h3 id="manual-verification-required">Manual Verification Required</h3>
 <ul>
 <li>Steps 4–7 and step 25: run <code>ng e2e</code> to open Cypress browser runner and verify tests pass visually</li>
+</ul>
+<h3 id="issues--differences-updated">Issues / Differences (updated)</h3>
+<ol start="3">
+<li><strong><code>table tbody tr</code> selector returns 0 rows even though rows are visible</strong>
+<ul>
+<li>Angular's <code>@for</code> block inserts <code>&lt;tr&gt;</code> elements directly into <code>&lt;table&gt;</code> via DOM API (not HTML parsing), so no implicit <code>&lt;tbody&gt;</code> is created</li>
+<li>Fix: add explicit <code>&lt;tbody&gt;</code> tags wrapping the <code>@for</code> block in <code>buy-flight.html</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-12">Verified Working</h3>
+<ul>
+<li><code>spec.cy.ts</code>: 2 tests pass (home page loads, h1 Special Offer text) ✓</li>
+<li><code>nav.cy.ts</code>: 6 tests pass (home, 4 nav links, buy flights page, 5 table rows, my flights, account) ✓</li>
+<li>All 8 Cypress tests pass headless with <code>npx cypress run --browser electron</code> ✓</li>
+</ul>
+<h2 id="ex71-template-driven-forms">Ex7.1: Template-Driven Forms</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/075%20Ex7.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/075 Ex7.1.html</a></p>
+<h3 id="steps-completed-1">Steps Completed</h3>
+<ul>
+<li>Steps 5–7: Added <code>FormsModule</code> to <code>payment.ts</code> imports; added <code>model</code> field (<code>PaymentModel</code>) and <code>jsonModel</code> getter</li>
+<li>Steps 8–10: Appended form HTML from <code>payment.html.txt</code> inside the <code>@if</code> block; added <code>ngModel</code> bindings on all fields; added <code>{{jsonModel}}</code> debug output</li>
+<li>Steps 12–13: Added <code>required</code> to all inputs/textarea/select; disabled submit with <code>[disabled]=&quot;!paymentForm.form.valid&quot;</code></li>
+<li>Steps 15–16: Added <code>(ngSubmit)=&quot;onSubmit()&quot;</code> to form tag; added <code>onSubmit()</code> method with <code>alert(this.jsonModel)</code></li>
+<li>Steps 18–22 (Bonus): Added <code>FlightPaymentEvent</code> class to <code>payment.ts</code>; added <code>@Output() paymentConfirmed</code> emitter; <code>onSubmit()</code> emits event instead of alert; <code>BuyFlight.flightPurchased()</code> calls <code>addMyFlight()</code> and navigates to <code>/myflights</code>; <code>buy-flight.html</code> binds <code>(paymentConfirmed)=&quot;flightPurchased($event)&quot;</code></li>
+</ul>
+<h3 id="issues--differences-13">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Model class is <code>PaymentModel</code>, not <code>Payment</code></strong> — exercise step 6 says <code>model: Payment = new Payment()</code>, but <code>cpAddIns</code> provides <code>PaymentModel</code> from <code>model/payment.ts</code> to avoid a naming clash with the <code>Payment</code> component class</p>
+<ul>
+<li>Fix: use <code>model: PaymentModel = new PaymentModel()</code> and import <code>PaymentModel</code> from <code>'../model/payment'</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>payment.component.html.txt</code> leftover in payment folder</strong> — <code>exStart</code> copies this old-naming file alongside the new <code>payment.html.txt</code>; it is harmless but may confuse students looking for the AddIn file</p>
+<ul>
+<li>The exercise step correctly references <code>payment.html.txt</code> (new name)</li>
+</ul>
+</li>
+<li>
+<p><strong>Stray <code>1</code> at end of <code>my-flights.spec.ts</code></strong> — line 26 contains a bare <code>1</code> character; does not affect tests but should be removed from the AddIn</p>
+</li>
+</ol>
+<h3 id="verified-working-13">Verified Working</h3>
+<ul>
+<li><code>ng build</code> → no errors ✓</li>
+<li><code>ng test --watch=false</code> → 20 tests pass across 10 files ✓ (including bonus)</li>
+</ul>
+<h2 id="ex72-reactive-forms">Ex7.2: Reactive Forms</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/076%20Ex%207.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/076 Ex 7.2.html</a></p>
+<h3 id="steps-completed-2">Steps Completed</h3>
+<ul>
+<li>Step 4: Replaced <code>FormsModule</code> with <code>ReactiveFormsModule</code> in <code>payment.ts</code></li>
+<li>Steps 5–6: Created <code>payForm = new FormGroup({...})</code> with <code>FormControl</code> for all 6 fields, each with <code>nonNullable: true</code> and <code>Validators.required</code></li>
+<li>Steps 7–12: Updated <code>payment.html</code> — <code>[formGroup]=&quot;payForm&quot;</code>, <code>[disabled]=&quot;!payForm.valid&quot;</code>, removed <code>required</code>/<code>ngModel</code>/<code>name=</code>, added <code>formControlName=</code>, replaced <code>{{jsonModel}}</code> with <code>{{ payForm.value | json }}</code></li>
+<li>Step 13: Added <code>JsonPipe</code> to component <code>imports</code></li>
+<li>Steps 15–18: Added <code>buildSampleModel()</code>, <code>ngOnInit()</code>, and <code>payForm.setValue(this.model)</code></li>
+<li>Step 20: <code>onSubmit()</code> emits <code>payForm.value as PaymentModel</code></li>
+<li>Step 21: Email validation feedback div using <code>@if (!payForm.controls.email.valid)</code></li>
+<li>Steps 23/25–26 (Bonus): <code>minLength(5)</code> on name; <code>minLength(10)/maxLength(128)</code> on address; <code>minLength(13)</code> on cardNum; email regex pattern validator</li>
+</ul>
+<h3 id="issues--differences-14">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>No <code>AddIns/Ex7.2</code> directory</strong> — <code>cpAddIns Ex7.2</code> fails with ENOENT; this is expected, no AddIns needed for this exercise</p>
+</li>
+<li>
+<p><strong><code>exStart Ex7.2</code> sources from <code>Solutions/Ex7.1_Bonus_1</code></strong> — starting state is the completed Ex7.1 Bonus (template-driven form with <code>FlightPaymentEvent</code>); students need to replace <code>FormsModule</code> with <code>ReactiveFormsModule</code> as step 4 instructs</p>
+</li>
+</ol>
+<h3 id="verified-working-14">Verified Working</h3>
+<ul>
+<li><code>ng build</code> → no errors ✓</li>
+<li><code>ng test --watch=false</code> → 20 tests pass across 10 files ✓</li>
+</ul>
+<h2 id="ex81-communicating-with-a-rest-server">Ex8.1: Communicating With a REST Server</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/085%20Ex%208.1.html">https://adaptalearn.learningtree.com/Output/2324f1dev/085 Ex 8.1.html</a></p>
+<h3 id="steps-completed-3">Steps Completed</h3>
+<ul>
+<li>Step 4: <code>ng generate service flights/flights --flat</code> generates <code>flights.ts</code>/<code>Flights</code> — AddIns now use Angular 21 naming so this works directly; manually created <code>flights.ts</code> to avoid spec file conflict from AddIn pre-populating it</li>
+<li>Steps 7 &amp; 13: Uncommented both test blocks in <code>flights.spec.ts</code>; fixed <code>fail()</code> to <code>{ throw new Error(...); }</code></li>
+<li>Steps 9–12: Implemented <code>Flights</code> with <code>HttpClient</code>, <code>getAllFlights()</code>, <code>handleError()</code> with <code>catchError</code>/<code>throwError</code></li>
+<li>Step 10: Added <code>provideHttpClient()</code> to <code>app.config.ts</code> providers</li>
+<li>Steps 14–17: Added <code>getMyFlights()</code> (GET to <code>/myflights</code>)</li>
+<li>Steps 19–21: Updated <code>ApplicationState</code> to inject <code>Flights</code>, added <code>error</code> property, async <code>loadFlights()</code></li>
+<li>Steps 22–24: Added <code>errorMessage</code> getter to <code>BuyFlight</code>; <code>@if(errorMessage)</code> error display in template</li>
+<li>Steps 25–28: Server-dependent steps (run app, stop/start Flights Service) — not automatable; verified via build</li>
+</ul>
+<h3 id="issues--differences-15">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong><code>ng generate service</code> conflicts with AddIn pre-placed spec file</strong></p>
+<ul>
+<li><code>cpAddIns Ex8.1</code> places <code>flights.spec.ts</code> before code generation, so <code>ng generate</code> would overwrite it</li>
+<li>Fix: create <code>flights.ts</code> manually without running <code>ng generate</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>fail()</code> is Jasmine-only — not available in Vitest</strong></p>
+<ul>
+<li>AddIn spec uses <code>fail(&quot;An error should have been thrown&quot;)</code> inside subscribe <code>next</code> callbacks</li>
+<li>Fix: replace with block form <code>{ throw new Error(&quot;An error should have been thrown&quot;); }</code> — arrow expression form (<code>() =&gt; throw ...</code>) is a syntax error</li>
+</ul>
+</li>
+<li>
+<p><strong><code>application-state.spec.ts</code> must be updated to mock <code>Flights</code></strong></p>
+<ul>
+<li>Old spec used sync mock data; <code>ApplicationState</code> now loads flights asynchronously via <code>Flights</code></li>
+<li>Fix: provide <code>{ provide: Flights, useValue: { getAllFlights: vi.fn().mockReturnValue(of(FLIGHTS)), getMyFlights: vi.fn().mockReturnValue(of([])), addMyFlight: vi.fn().mockReturnValue(of(1)) } }</code> in <code>TestBed</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-core-steps">Verified Working (core steps)</h3>
+<ul>
+<li><code>ng build</code> → no errors ✓</li>
+<li><code>ng test --watch=false</code> → 23 tests pass across 11 files ✓</li>
+</ul>
+<h3 id="bonus-steps-2944">Bonus Steps (29–44)</h3>
+<ul>
+<li>Steps 29–33: Added pagination to <code>BuyFlight</code> — <code>FLIGHTS_PER_PAGE=10</code> module-level const, <code>firstDisplayedFlightIndex</code>, <code>flightCount</code>, <code>flights</code> getter uses <code>slice()</code>, <code>onNext()</code>/<code>onPrevious()</code> methods, Previous/Next buttons in template</li>
+<li>Steps 36–41: <code>addMyFlight()</code> POST with <code>JSON.stringify([flight])</code> body and <code>HttpHeaders({'Content-Type':'application/json'})</code>; all 6 bonus tests uncommented with <code>throw</code> syntax fixes</li>
+<li>Steps 42–43: <code>ApplicationState.addMyFlight()</code> pushes to <code>_myFlights</code> then calls <code>flightsService.addMyFlight().subscribe({})</code>; <code>loadMyFlights()</code> called from constructor</li>
+<li>Step 44: Updated <code>application-state.spec.ts</code> mock to include <code>getMyFlights</code> and <code>addMyFlight</code> stubs</li>
+</ul>
+<p><strong>AddIns (<code>Ex8.1_b1</code>) — updated for Vitest:</strong></p>
+<ul>
+<li><code>cpAddIns Ex8.1_b1</code> spec files were updated in <code>AddIns/Ex8.1_b1</code> to use Vitest: <code>jasmine.createSpyObj</code> → plain object mocks with <code>vi.fn()</code>; old <code>.component.spec.ts</code> naming fixed; <code>app.spec.ts</code> <code>app.title</code> → <code>app.title()</code> (Angular 21 signal)</li>
+</ul>
+<p><strong>Verified Working (full exercise including bonus):</strong></p>
+<ul>
+<li><code>ng build</code> → no errors ✓</li>
+<li><code>ng test --watch=false</code> → 27 tests pass across 11 files ✓</li>
 </ul>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>

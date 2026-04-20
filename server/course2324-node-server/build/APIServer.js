@@ -75,7 +75,7 @@ function configureFlightListHandlers(router) {
     router.get('/flightserver(sec)?/allflightsSlow', (ctx) => __awaiter(this, void 0, void 0, function* () {
         for (let flight of state_1.flights) {
             ctx.body += JSON.stringify(flight);
-            yield sleep(10);
+            yield sleep(10); // Even though we sleep for 10mS per flight, nothing is output until the response is complete
         }
         ;
     }));

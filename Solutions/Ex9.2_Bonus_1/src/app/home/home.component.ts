@@ -12,6 +12,6 @@ import { MatCardModule } from '@angular/material/card';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class Home {
   specialOffer = '10% off all round-the-World flights';
 }

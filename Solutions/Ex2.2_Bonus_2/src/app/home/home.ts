@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `<h1>Special Offer of the month {{specialOffer}}</h1>`
 })
-export class HomeComponent {
+export class Home {
   specialOffer = "10% off all round-the-World flights";
 }
