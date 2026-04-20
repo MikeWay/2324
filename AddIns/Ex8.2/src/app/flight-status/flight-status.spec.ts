@@ -1,68 +1,41 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, } from '@angular/core/testing';
-import { Observable, of, Subject, Subscription } from 'rxjs';
-import { getTestScheduler, cold } from 'jasmine-marbles';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Subject } from 'rxjs';
 
 import { FlightStatus } from './flight-status';
-import { FlightStatus } from './flight-status';
+import { FlightStatusService } from '../flight-status-service/flight-status.service';
 import { By } from '@angular/platform-browser';
-import { WebSocketSubject } from 'rxjs/webSocket';
 
 const testStatus = 'Too windy to fly';
-
-/** A mock of the Subject returned by the flight status service.
- * It's just a marbles based observable with a dummy next method
- */
-class MockSubject {
-  subscribe(next: any, error: any): Subscription {
-    return cold('---a-b', { a: 'Wet', b: testStatus }).subscribe({ next, error });
-  }
-  next(msg: object): void { }
-}
-
-// tslint:disable-next-line: variable-name
-const _mockSubject = new MockSubject();
-
-
-/** A mock of the flight status service */
-class MockFlightStatus {
-
-  constructor(public mockSubject: MockSubject) { }
-
-  connect(): any {
-    return this.mockSubject;
-  }
-}
 
 describe('FlightStatus', () => {
   let component: FlightStatus;
   let fixture: ComponentFixture<FlightStatus>;
-  let socketService: FlightStatus;
+  let mockSubject: Subject<any>;
+  let nextSpy: ReturnType<typeof vi.fn>;
 
   beforeEach(async () => {
+    mockSubject = new Subject<any>();
+    nextSpy = vi.fn();
 
-    const mockSubjectObj = {
-      subscribe: (next: any, error: any) => {
-        return cold('---a-b', { a: 'Wet', b: testStatus }).subscribe({ next, error });
-      },
-      next: jasmine.createSpy('next')
+    const mockFlightStatusService = {
+      connect: vi.fn().mockReturnValue({
+        subscribe: (next: any, error: any) => mockSubject.subscribe({ next, error }),
+        asObservable: () => mockSubject.asObservable(),
+        next: nextSpy
+      })
     };
-
-    const mockFlightStatus = new MockFlightStatus(mockSubjectObj);
-
-
 
     await TestBed.configureTestingModule({
       imports: [FlightStatus],
-      providers: [{ provide: FlightStatus, useValue: mockFlightStatus }]
-    })
-      .compileComponents();
+      providers: [{ provide: FlightStatusService, useValue: mockFlightStatusService }]
+    }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(FlightStatus);
     component = fixture.componentInstance;
-    socketService = TestBed.inject(FlightStatus);
     fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
@@ -70,33 +43,27 @@ describe('FlightStatus', () => {
   });
 
   it('should have loaded flight status from the server', () => {
-    getTestScheduler().flush();
-    fixture.detectChanges();
-    expect(component.flightStatus).toEqual(testStatus);
+    mockSubject.next(testStatus);
+    expect(component.flightStatus()).toEqual(testStatus);
   });
 
-  it('should display an initial flight status', fakeAsync(() => {
-    const response = 'All flights are currently on time';
-    fixture.detectChanges();
-    expect(component.flightStatus).toEqual(response);
-  }));
+  it('should display an initial flight status', () => {
+    expect(component.flightStatus()).toEqual('All flights are currently on time');
+  });
 
-  it('should display value from the an initial flight status', fakeAsync(() => {
-    const response = 'All flights are currently on time';
+  it('should display value from initial flight status', () => {
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
-    expect(ele.innerHTML).toEqual(response);
-  }));
+    expect(ele.innerHTML).toEqual('All flights are currently on time');
+  });
 
-  it('should display value from the service when the observables are flushed', fakeAsync(() => {
-    getTestScheduler().flush();
+  it('should display value from the service when the observables emit', () => {
+    mockSubject.next(testStatus);
     fixture.detectChanges();
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
     expect(ele.innerHTML).toEqual(testStatus);
-  }));
-
-  it('should have called next to set the airport code', () => {
-    const mockFlightStatusServce = socketService as unknown as MockFlightStatus;
-    expect(mockFlightStatusServce.mockSubject.next).toHaveBeenCalledWith({ airport: 'JFK' });
   });
 
+  it('should have called next to set the airport code', () => {
+    expect(nextSpy).toHaveBeenCalledWith({ airport: 'JFK' });
+  });
 });

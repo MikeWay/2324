@@ -10,11 +10,9 @@ import { FlightStatusService } from '../flight-status-service/flight-status.serv
   styleUrls: ['./flight-status.css']
 })
 export class FlightStatus implements OnInit {
-
   private flightStatusService = inject(FlightStatusService);
   private socket: WebSocketSubject<any> = this.flightStatusService.connect('ws://localhost:8081');
   flightStatus = toSignal(this.socket.asObservable(), { initialValue: 'All flights are currently on time' });
-
 
   ngOnInit(): void {
     this.socket.next({ airport: 'JFK' });

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Subject } from 'rxjs';
+
 import { FlightStatus } from './flight-status';
 import { FlightStatusService } from '../flight-status-service/flight-status.service';
 import { By } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
 
 const testStatus = 'Too windy to fly';
 
