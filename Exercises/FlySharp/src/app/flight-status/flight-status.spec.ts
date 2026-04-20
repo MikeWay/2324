@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FlightStatus } from './flight-status';
-import { FlightStatusService } from './flight-status.service';
+import { FlightStatusService } from '../flight-status-service/flight-status.service';
 import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
@@ -19,6 +19,7 @@ describe('FlightStatus', () => {
     const mockFlightStatusService = {
       connect: vi.fn().mockReturnValue({
         subscribe: (next: any, error: any) => mockSubject.subscribe({ next, error }),
+        asObservable: () => mockSubject.asObservable(),
         next: nextSpy
       })
     };
@@ -42,11 +43,11 @@ describe('FlightStatus', () => {
 
   it('should have loaded flight status from the server', () => {
     mockSubject.next(testStatus);
-    expect(component.flightStatus).toEqual(testStatus);
+    expect(component.flightStatus()).toEqual(testStatus);
   });
 
   it('should display an initial flight status', () => {
-    expect(component.flightStatus).toEqual('All flights are currently on time');
+    expect(component.flightStatus()).toEqual('All flights are currently on time');
   });
 
   it('should display value from initial flight status', () => {
@@ -56,7 +57,7 @@ describe('FlightStatus', () => {
 
   it('should display value from the service when the observables emit', () => {
     mockSubject.next(testStatus);
-    fixture.componentRef.changeDetectorRef.detectChanges();
+    fixture.detectChanges();
     const ele = fixture.debugElement.query(By.css('span')).nativeElement as HTMLElement;
     expect(ele.innerHTML).toEqual(testStatus);
   });

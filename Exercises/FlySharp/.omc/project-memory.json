@@ -145,8 +145,8 @@
   "hotPaths": [
     {
       "path": "src/app/flight-status/flight-status.spec.ts",
-      "accessCount": 13,
-      "lastAccessed": 1776673697494,
+      "accessCount": 17,
+      "lastAccessed": 1776685364469,
       "type": "file"
     },
     {
@@ -159,6 +159,12 @@
       "path": "src/app/application-state/application-state.spec.ts",
       "accessCount": 10,
       "lastAccessed": 1776670629874,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.ts",
+      "accessCount": 9,
+      "lastAccessed": 1776685360075,
       "type": "file"
     },
     {
@@ -210,9 +216,15 @@
       "type": "file"
     },
     {
-      "path": "src/app/flight-status/flight-status.ts",
+      "path": "src/app/home/home.ts",
       "accessCount": 3,
-      "lastAccessed": 1776673006401,
+      "lastAccessed": 1776678794658,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status/flight-status.html",
+      "accessCount": 2,
+      "lastAccessed": 1776680181349,
       "type": "file"
     },
     {
@@ -228,21 +240,9 @@
       "type": "file"
     },
     {
-      "path": "src/app/flight-status/flight-status.html",
-      "accessCount": 1,
-      "lastAccessed": 1776669821692,
-      "type": "file"
-    },
-    {
       "path": "src/app/app.html",
       "accessCount": 1,
       "lastAccessed": 1776669822876,
-      "type": "file"
-    },
-    {
-      "path": "src/app/home/home.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776672653458,
       "type": "file"
     },
     {
@@ -255,6 +255,12 @@
       "path": "src/app/flight-status/flight-status.service.spec.ts",
       "accessCount": 1,
       "lastAccessed": 1776673006571,
+      "type": "file"
+    },
+    {
+      "path": "src/app/flight-status-service/flight-status.service.ts",
+      "accessCount": 1,
+      "lastAccessed": 1776678666244,
       "type": "file"
     }
   ],

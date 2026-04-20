@@ -607,34 +607,49 @@ npx cypress install
 
 ### Steps Completed
 
-- Step 2: `cpAddIns Ex8.2` — brings in `flight-status` component skeleton and service spec
-- Steps 3–4: Created `FlightStatusService` manually as `flight-status.service.ts` (Angular 21 would name `ng g s FlightStatus` as `FlightStatus`, conflicting with the existing component; manual file avoids the clash)
-- Step 5: `FlightStatusService.connect(url)` returns `webSocket(url)` — import `webSocket` from `rxjs/webSocket`
-- Steps 6–7: `FlightStatus` component (already scaffolded): inject `FlightStatusService`, `flightStatus = 'All flights are currently on time'`, `ngOnInit` calls `connect()`, subscribes, calls `socket.next({ airport: 'JFK' })`
-- Steps 8–9: Uncommented tests in `flight-status.spec.ts` and `flight-status.service.spec.ts`; rewrote spec from Jasmine to Vitest (see Issues below)
-- Steps 10: Add `FlightStatus` to app routes / home page — added to `app.routes.ts` (`Home` not `HomeComponent`), imported in `home.html`
+- Step 1: `exStart Ex8.2` — starts from `Solutions/Ex8.1_Bonus_2`
+- Step 2: `cpAddIns Ex8.2` — copies `flight-status/` component skeleton, `flight-status-service/` spec, and `home/` component
+- Step 3: Skip `npm install jasmine-marbles` — Jasmine-only package, incompatible with Vitest
+- Step 4: Generate service — `ng g s --flat=false FlightStatusService` would generate `flight-status-service.ts` (wrong name for the spec); instead manually create `flight-status-service/flight-status.service.ts` with class `FlightStatusService` that returns `webSocket(url)` from `rxjs/webSocket`
+- Step 5: Rename service spec `.tsx` → `.ts` (see Issues); no auto-generated spec to delete since we skipped `ng generate`
+- Steps 6/8: `ng test` — service spec passes after rename
+- Step 7: Implement `FlightStatusService.connect(url)` returning `webSocket(url)` as `WebSocketSubject<any>`
+- Step 9: Fix `flight-status.ts`: remove circular self-import and incomplete constructor; inject `FlightStatusService`; implement `ngOnInit` to call `connect()`, subscribe with `next`/`error` handlers, and send `socket.next({ airport: 'JFK' })`
+- Step 10: Update `home.ts` to import and use `FlightStatus` component (AddIn provides old-style `HomeComponent` — must be replaced)
 - Step 11: Run app — manual step
 
 ### Issues / Differences
 
-1. **`cpAddIns Ex8.2` overwrites `app.ts` with old NgModule `AppModule` style**
-   - Fix: restore standalone `App` component (same as Ex8.1 state): `readonly title = signal('Fly Sharp')`, `navbarOpen`, `toggleNavbar()`
-   - Also fix `AddIns/Ex8.2/src/app/app.ts` so future `cpAddIns` doesn't repeat this
+1. **`cpAddIns Ex8.2` drops three stale files that must be deleted:**
+   - `src/app/app.module.ts` — old NgModule pattern, causes build error; delete it
+   - `src/app/home/home.component.ts` — old `HomeComponent` importing `FlightStatusComponent`; delete it (the exercise uses `home.ts`/`Home`)
+   - Fix both in AddIns too so future runs are clean
 
-2. **Service naming conflict**
-   - `ng g s FlightStatus` in Angular 21 would generate class `FlightStatus`, clashing with the existing component
-   - Fix: manually create `flight-status.service.ts` with class `FlightStatusService`
+2. **Service spec has `.tsx` extension — not picked up by vitest**
+   - `AddIns/Ex8.2/src/app/flight-status-service/flight-status.service.spec.tsx` must be renamed to `.spec.ts`
+   - Fixed in AddIns so `cpAddIns` delivers the correct extension going forward
 
-3. **`app.routes.ts` used `HomeComponent`** (old naming) — fix all occurrences to `Home`
+3. **`ng g s --flat=false FlightStatusService` creates wrong filename**
+   - Angular 21 generates `flight-status-service.ts` (class `FlightStatusService`) but the provided spec imports from `'./flight-status.service'`
+   - Fix: create `flight-status.service.ts` manually, skip `ng generate`
 
-4. **`flight-status.spec.ts` — Jasmine → Vitest migration**
-   - Replace `jasmine.createSpy()` with `vi.fn()`
-   - Remove `jasmine-marbles` (Jasmine-only); replace `cold()`/`getTestScheduler()` with plain `Subject<any>`
-   - Mock structure: `{ connect: vi.fn().mockReturnValue({ subscribe: (next, error) => mockSubject.subscribe({ next, error }), next: nextSpy }) }`
+4. **`flight-status.ts` has circular self-import** (AddIn artefact)
+   - `import { FlightStatus } from './flight-status'` — remove; replace with `FlightStatusService` import from `'../flight-status-service/flight-status.service'`
 
-5. **NG0100: ExpressionChangedAfterItHasBeenCheckedError** — Angular 21 dev-mode throws this when external data arrives via a mock Subject outside the zone
-   - For property-only tests: remove the `fixture.detectChanges()` call after emitting — just emit and assert the property directly
-   - For DOM tests: use `fixture.componentRef.changeDetectorRef.detectChanges()` (raw CDR) instead of `fixture.detectChanges()` — bypasses Angular's double-check verification pass
+5. **Component spec uses Jasmine marbles and `jasmine.createSpy`** — Vitest incompatible
+   - Replace `cold()`/`getTestScheduler()` with a plain `Subject<any>`; `vi.fn()` for spies
+   - Mock provides wrong token (`FlightStatus` instead of `FlightStatusService`) — fix to `{ provide: FlightStatusService, useValue: mockFlightStatusService }`
+   - `mockFlightStatusService.connect` returns `{ subscribe: (next, error) => mockSubject.subscribe({ next, error }), next: nextSpy }`
+
+6. **NG0100: ExpressionChangedAfterItHasBeenCheckedError** in Angular 21 dev mode
+   - Triggered when a `Subject` emits outside the Angular zone and `fixture.detectChanges()` is then called
+   - For property-only tests: remove `fixture.detectChanges()` after emitting — assert the property directly
+   - For DOM tests: use `fixture.componentRef.changeDetectorRef.detectChanges()` — bypasses the double-check verification pass
+
+7. **Service spec: Jasmine → Vitest**
+   - `jasmine.createSpy('x')` → `vi.fn()`
+   - `.and.callFake(fn)` → `.mockImplementation(fn)`
+   - `spy.calls.count()` → `spy.mock.calls.length`
 
 ### Verified Working
 
