@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Exercise Check&colon; Constructor Injection &amp; Old Naming Conventions</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="exercise-check-constructor-injection--old-naming-conventions">Exercise Check: Constructor Injection &amp; Old Naming Conventions</h1>
+<p>Checked against: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/index.html">https://adaptalearn.learningtree.com/Output/2324f1dev/index.html</a></p>
+<p><strong>Criteria:</strong></p>
+<ul>
+<li><strong>A</strong> — Constructor injection: <code>constructor(private x: SomeType)</code></li>
+<li><strong>B</strong> — Old naming: <code>xxxComponent</code> / <code>xxxService</code> class names, or <code>.component.ts</code> / <code>.service.ts</code> / <code>.component.html</code> file extensions</li>
+</ul>
+<hr>
+<h2 id="practice-22-multiple-components">Practice 2.2: Multiple Components</h2>
+<p><strong>B</strong> — Step 4: references <code>app.component.html</code><br>
+<strong>B</strong> — Step 6: instructs adding <code>ForecastComponent</code> to <code>imports</code>; references <code>ForecastComponent</code> class<br>
+<strong>B</strong> — Step 7: import path shown as <code>'./forecast/forecast.component'</code> (<code>.component</code> file extension)<br>
+<strong>B</strong> — Step 10: references <code>ForecastComponent</code> output</p>
+<hr>
+<h2 id="ex-21-creating-an-angular-component">Ex 2.1: Creating an Angular Component</h2>
+<p><strong>B</strong> — Step 7 (hint): shows <code>export class HomeComponent {</code> — old <code>Component</code> suffix<br>
+<strong>B</strong> — Step 12 (hint): shows <code>HomeComponent</code> in <code>declarations</code> array with <code>@NgModule</code> pattern; references <code>AppComponent</code></p>
+<hr>
+<h2 id="ex-31-injecting-a-service">Ex 3.1: Injecting a Service</h2>
+<p><strong>A</strong> — Step 16: <code>constructor(private stateService: ApplicationState){}</code></p>
+<hr>
+<h2 id="ex-42-event-handling">Ex 4.2: Event Handling</h2>
+<p><strong>B</strong> — Step 13: instructs editing <code>buy-flight.component.ts</code> (<code>.component.ts</code> extension)<br>
+<strong>B</strong> — Step 16: instructs editing <code>buy-flight.component.ts</code> (<code>.component.ts</code> extension)<br>
+<strong>B</strong> — Step 17: references <code>BuyFlightsComponent</code> class name</p>
+<hr>
+<h2 id="ex-53-creating-a-custom-pipe">Ex 5.3: Creating a Custom Pipe</h2>
+<p><strong>A</strong> — Step 16: <code>constructor(public state: ApplicationStateService){}</code><br>
+<strong>B</strong> — Step 16: references <code>CurrencySelectorComponent</code> and <code>AppComponent</code></p>
+<hr>
+<h2 id="ex-61-unit-testing">Ex 6.1: Unit Testing</h2>
+<p><strong>B</strong> — Step 37: instructs adding a test to <code>buy-flight.component.spec.ts</code> (<code>.component.spec.ts</code> extension); note earlier steps use <code>buy-flight.spec.ts</code> — inconsistency in the exercise</p>
+<hr>
+<h2 id="practice-71-form-bindings">Practice 7.1: Form Bindings</h2>
+<p><strong>B</strong> — Step 2: references <code>preferences-form\preferences-form.component.html</code> (<code>.component.html</code>)</p>
+<hr>
+<h2 id="practice-72-css-validation-feedback">Practice 7.2: CSS Validation Feedback</h2>
+<p><strong>B</strong> — Step 7: references <code>preferences-form.component.scss</code> (<code>.component.scss</code>)</p>
+<hr>
+<h2 id="ex-71-implementing-a-template-driven-form">Ex 7.1: Implementing a Template-Driven Form</h2>
+<p><strong>B</strong> — Step 18: instructs editing <code>payment.component.ts</code> (<code>.component.ts</code> extension)</p>
+<hr>
+<h2 id="ex-81-communicating-with-a-rest-server">Ex 8.1: Communicating With a REST Server</h2>
+<p><strong>A</strong> — Step 9: <code>private http: HttpClient</code> added to <code>FlightsService</code> constructor<br>
+<strong>A</strong> — Step 19: <code>private flightsService: FlightsService</code> added to <code>ApplicationStateService</code> constructor<br>
+<strong>B</strong> — Step 7: references <code>flights.service.spec.ts</code> (<code>.service.spec.ts</code> extension)<br>
+<strong>B</strong> — Steps 9, 19, 34–43: multiple references to <code>FlightsService</code> class (xxxService suffix)<br>
+<strong>B</strong> — Step 42: references <code>application-state.service.ts</code> (<code>.service.ts</code> extension)</p>
+<hr>
+<h2 id="ex-82-communicating-with-a-socket-server">Ex 8.2: Communicating With a Socket Server</h2>
+<p><strong>A</strong> — Step 9: instructs replacing constructor injection with <code>inject()</code> — implies original used <code>constructor(private flightStatusService: FlightStatusService)</code></p>
+<hr>
+<h2 id="ex-91-creating-an-attribute-directive">Ex 9.1: Creating an Attribute Directive</h2>
+<p><strong>A</strong> — Step 5: <code>constructor(private el: ElementRef)</code> — constructor injection of <code>ElementRef</code><br>
+<strong>B</strong> — Step 9: instructs editing <code>app.component.ts</code> (<code>.component.ts</code> extension)<br>
+<strong>B</strong> — Step 10: instructs editing <code>app.component.html</code> (<code>.component.html</code> extension)</p>
+<hr>
+<h2 id="ex-92-migrating-to-angular-material">Ex 9.2: Migrating to Angular Material</h2>
+<p><strong>B</strong> — Step 6: instructs editing <code>app.component.ts</code><br>
+<strong>B</strong> — Steps 9, 11, 14, 15, 16, 18: instructs editing <code>app.component.html</code><br>
+<strong>B</strong> — Steps 19–20: instructs creating/editing <code>home.component.ts</code>, <code>home.component.html</code>, <code>home.component.scss</code><br>
+<strong>B</strong> — Steps 21, 24: references <code>OrgDestSelectorComponent</code> class name</p>
+<hr>
+<h2 id="summary-table">Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Exercise</th>
+<th>Constructor Injection (A)</th>
+<th>Old Naming (B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Practice 2.2</td>
+<td>—</td>
+<td>Steps 4, 6, 7, 10</td>
+</tr>
+<tr>
+<td>Ex 2.1</td>
+<td>—</td>
+<td>Steps 7, 12 (hints)</td>
+</tr>
+<tr>
+<td>Ex 3.1</td>
+<td>Step 16</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Ex 4.2</td>
+<td>—</td>
+<td>Steps 13, 16, 17</td>
+</tr>
+<tr>
+<td>Ex 5.3</td>
+<td>Step 16</td>
+<td>Step 16</td>
+</tr>
+<tr>
+<td>Ex 6.1</td>
+<td>—</td>
+<td>Step 37</td>
+</tr>
+<tr>
+<td>Practice 7.1</td>
+<td>—</td>
+<td>Step 2</td>
+</tr>
+<tr>
+<td>Practice 7.2</td>
+<td>—</td>
+<td>Step 7</td>
+</tr>
+<tr>
+<td>Ex 7.1</td>
+<td>—</td>
+<td>Step 18</td>
+</tr>
+<tr>
+<td>Ex 8.1</td>
+<td>Steps 9, 19</td>
+<td>Steps 7, 9, 19, 34–43, 42</td>
+</tr>
+<tr>
+<td>Ex 8.2</td>
+<td>Step 9 (implied)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Ex 9.1</td>
+<td>Step 5</td>
+<td>Steps 9, 10</td>
+</tr>
+<tr>
+<td>Ex 9.2</td>
+<td>—</td>
+<td>Steps 6, 9–18, 19–20, 21, 24</td>
+</tr>
+</tbody>
+</table>
+
+            
+            
+        </body>
+        </html>

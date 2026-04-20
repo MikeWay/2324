@@ -608,44 +608,31 @@ npx cypress install
 ### Steps Completed
 
 - Step 1: `exStart Ex8.2` — starts from `Solutions/Ex8.1_Bonus_2`
-- Step 2: `cpAddIns Ex8.2` — copies `flight-status/` component files, `flight-status-service/` spec (`.tsx`), and updated `home/home.ts`
-- Step 3: `npm install jasmine-marbles` — installs OK but jasmine-marbles is incompatible with Vitest (see Issues #4)
-- Step 4: `ng g s --flat=false FlightStatusService` — generates `flight-status-service.ts` (wrong name; see Issue #1); also delete the generated spec
-- Step 5: Rename `flight-status.service.spec.tsx` → `flight-status.service.spec.ts` (see Issue #2); create `flight-status.service.ts` manually (see Issue #1)
-- Step 6: `ng test` — compilation errors confirm missing `connect` method plus several other issues (see below)
-- Step 7: Implement `FlightStatusService.connect(url)` in `flight-status.service.ts` returning `webSocket(url)` as `WebSocketSubject<any>`
-- Step 9: Rewrite `flight-status.ts` — inject `FlightStatusService`, use `toSignal()` to convert socket observable to a signal (see Issue #5); `ngOnInit` sends `socket.next({ airport: 'JFK' })`; update template to `{{flightStatus()}}`
-- Step 10: Rewrite component spec — replace jasmine-marbles + jasmine.createSpy with plain `Subject<any>` + `vi.fn()` (see Issues #3, #4)
+- Step 2: `cpAddIns Ex8.2` — copies `flight-status/` component skeleton, `flight-status-service/` spec (`.tsx`), and updated `home/home.ts`
+- Step 3: `ng g s --flat=false FlightStatusService` — generates `flight-status-service.ts` + `flight-status-service.spec.ts`
+- Step 4: Delete generated spec; rename `flight-status-service.spec.tsx` → `flight-status-service.spec.ts` (see Issue #1 for exercise wording discrepancy)
+- Step 5: `ng test` — one compilation error: `Property 'connect' does not exist on type 'FlightStatusService'` ✓ (expected)
+- Step 6: Implement `connect(url)` in `flight-status-service.ts` — returns `webSocket(url)` as `WebSocketSubject<any>`; import `{ webSocket, WebSocketSubject } from 'rxjs/webSocket'`
+- Step 7: Remove the `// TODO remove the comment` comments from `flight-status.spec.ts` to re-enable the two signal assertions
+- Step 8: `ng test` — service spec passes; component spec has 2 failures (DOM update and `next` not called — component not yet implemented, expected)
+- Step 9: Implement `flight-status.ts` — inject `FlightStatusService` as constructor arg; in `ngOnInit` call `connect('ws://localhost:8081')` and assign to `this.socket`; redefine `flightStatus` as `toSignal()` signal (see Issue #2); call `socket.next({ airport: 'JFK' })`; update `flight-status.html` to `{{flightStatus()}}` (see Issue #3)
+- Step 10: `ng test` — 32/32 pass ✓
 - Step 11: Run app — manual step
 
 ### Issues / Differences
 
-1. **`ng g s --flat=false FlightStatusService` generates wrong filename**
-   - Angular 21 generates `flight-status-service.ts` but the provided spec imports from `'./flight-status.service'`
-   - Fix: delete the generated file; manually create `flight-status.service.ts` with `FlightStatusService` class
+1. **Step 4 rename destination in exercise is wrong**
+   - Exercise says rename to `src\app\flight-status\flights-status-service.spec.ts` — wrong directory (`flight-status` not `flight-status-service`) and typo (`flights-status`)
+   - Correct target: `src/app/flight-status-service/flight-status-service.spec.ts`
 
-2. **Service spec has `.tsx` extension — not picked up by Vitest**
-   - `cpAddIns` delivers `flight-status.service.spec.tsx`; Vitest ignores it
-   - Fix: rename to `flight-status.service.spec.ts` (Step 5)
+2. **`flight-status.ts` requires `toSignal()` — exercise says "redefine as a signal" without specifying how**
+   - Plain property binding doesn't update when WebSocket data arrives outside Angular zone
+   - Use `toSignal(this.socket.asObservable(), { initialValue: '...' })` — must be a field initialiser (not inside `ngOnInit`) to stay in injection context
+   - `socket` must also be a field initialiser for the same reason; `ngOnInit` only calls `socket.next()`
 
-3. **Component spec (`flight-status.spec.ts`) has multiple problems:**
-   - Duplicate `import { FlightStatus } from './flight-status'` (lines 5–6) — causes TS2300/TS2440 errors
-   - `jasmine.createSpy('next')` — Jasmine API, not available in Vitest; replace with `vi.fn()`
-   - Wrong DI token: `provide: FlightStatus` instead of `provide: FlightStatusService`
-   - Missing `asObservable()` on mock — needed by `toSignal(this.socket.asObservable(), ...)`
-   - `component.flightStatus` referenced as plain property — must be `component.flightStatus()` after signals refactor
-
-4. **`flight-status.spec.ts` uses `jasmine-marbles` — incompatible with Vitest**
-   - `cold()` / `getTestScheduler()` from `jasmine-marbles` do not work under Vitest
-   - Fix: replace `MockSubject` with `new Subject<any>()`; emit test values with `mockSubject.next(value)`
-
-5. **`flight-status.ts` has circular self-import and stale `Subject` field**
-   - AddIn contains `import { FlightStatus } from './flight-status'` — circular, causes TS2395
-   - Also declares `private socket: Subject<any>` which conflicts with exercise requirements
-   - Fix: remove self-import; inject `FlightStatusService`; declare `socket` as `WebSocketSubject<any>` field; use `toSignal()` for reactive DOM updates (plain property binding does not update when socket data arrives outside Angular zone)
-
-6. **Template must use signal call syntax**
-   - AddIn template has `{{flightStatus}}` — must be `{{flightStatus()}}` after converting to signal
+3. **Template must use signal call syntax `{{flightStatus()}}`**
+   - `{{flightStatus}}` renders the signal object's `toString()` instead of its value
+   - Exercise says "update `flight-status.html` to display `flightStatus` as a Signal" without stating the `()` syntax
 
 ### Verified Working
 

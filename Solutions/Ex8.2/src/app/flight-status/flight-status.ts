@@ -18,8 +18,3 @@ export class FlightStatus implements OnInit {
     this.socket.next({ airport: 'JFK' });
   }
 }
-
-export function getFlights(): number {
-  const flightStatusService = inject(FlightStatusService);
-  return flightStatusService.connect('ws://localhost:8081').asObservable().toSignal({ initialValue: 'All flights are currently on time' })();
-}

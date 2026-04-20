@@ -19,7 +19,7 @@ export class ApplicationState {
   ];
 
   displayCurrency: Currency = this.currencies[1];
-  
+
   constructor(private flightsService: Flights) {
     this.loadFlights();
     this.loadMyFlights();

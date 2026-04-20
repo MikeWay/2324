@@ -133,21 +133,27 @@
   },
   "hotPaths": [
     {
+      "path": "src/app/flight-status/flight-status.html",
+      "accessCount": 6,
+      "lastAccessed": 1776694400226,
+      "type": "file"
+    },
+    {
       "path": "src/app/flight-status/flight-status.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776688543078,
+      "accessCount": 4,
+      "lastAccessed": 1776694395967,
       "type": "file"
     },
     {
       "path": "src/app/flight-status/flight-status.spec.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776688553686,
+      "accessCount": 4,
+      "lastAccessed": 1776694433274,
       "type": "file"
     },
     {
-      "path": "src/app/flight-status/flight-status.html",
-      "accessCount": 2,
-      "lastAccessed": 1776688561536,
+      "path": "src/app/flight-status-service/flight-status-service.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776694345192,
       "type": "file"
     },
     {
@@ -160,12 +166,6 @@
       "path": "src/app/home/home.ts",
       "accessCount": 1,
       "lastAccessed": 1776688228397,
-      "type": "file"
-    },
-    {
-      "path": "src/app/flight-status-service/flight-status-service.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776688257033,
       "type": "file"
     },
     {

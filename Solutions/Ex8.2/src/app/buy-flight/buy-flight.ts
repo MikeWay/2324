@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationState } from '../application-state/application-state';
 import { Flight } from '../model/flight';
@@ -21,8 +21,8 @@ export class BuyFlight {
   destinationFilter = '';
   firstDisplayedFlightIndex = 0;
   flightCount = 0;
-  private stateService = inject(ApplicationState);
-  constructor(private route: ActivatedRoute, private router: Router) {
+
+  constructor(private stateService: ApplicationState, private route: ActivatedRoute, private router: Router) {
     const origin = this.route.snapshot.paramMap.get('origin');
     if (origin !== null) {
       this.originFilter = origin;
