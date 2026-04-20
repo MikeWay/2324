@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FlightStatus } from './flight-status';
+
 
 @Component({
   selector: 'app-flight-status',
