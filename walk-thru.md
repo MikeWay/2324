@@ -5,7 +5,8 @@
 - **Angular CLI**: 21.2.7 (global, at `/usr/local/bin/ng` → symlinked to `/home/mjrw/n/bin/ng`)
 - **Node.js**: v24.0.0
 - **OS**: Linux (Ubuntu)
-- TYPESCRIPT
+- TYPESCRIPT version
+- Make sure that the code from the end of ex5.2 (npx serve actually works)
 
 MUST UPDATE the Node Scripts on the server
 

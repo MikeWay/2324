@@ -145,7 +145,8 @@
 <li><strong>Angular CLI</strong>: 21.2.7 (global, at <code>/usr/local/bin/ng</code> → symlinked to <code>/home/mjrw/n/bin/ng</code>)</li>
 <li><strong>Node.js</strong>: v24.0.0</li>
 <li><strong>OS</strong>: Linux (Ubuntu)</li>
-<li>TYPESCRIPT</li>
+<li>TYPESCRIPT version</li>
+<li>Make sure that the code from the end of ex5.2 (npx serve actually works)</li>
 </ul>
 <p>MUST UPDATE the Node Scripts on the server</p>
 <p>No version of Cypress is installed in: /home/mjrw/.cache/Cypress/15.14.0/Cypress</p>
@@ -900,14 +901,61 @@
 <li>Steps 42–43: <code>ApplicationState.addMyFlight()</code> pushes to <code>_myFlights</code> then calls <code>flightsService.addMyFlight().subscribe({})</code>; <code>loadMyFlights()</code> called from constructor</li>
 <li>Step 44: Updated <code>application-state.spec.ts</code> mock to include <code>getMyFlights</code> and <code>addMyFlight</code> stubs</li>
 </ul>
-<p><strong>AddIns (<code>Ex8.1_b1</code>) — updated for Vitest:</strong></p>
+<p><strong>AddIns (<code>Ex8.1_b1</code>) — issues:</strong></p>
 <ul>
-<li><code>cpAddIns Ex8.1_b1</code> spec files were updated in <code>AddIns/Ex8.1_b1</code> to use Vitest: <code>jasmine.createSpyObj</code> → plain object mocks with <code>vi.fn()</code>; old <code>.component.spec.ts</code> naming fixed; <code>app.spec.ts</code> <code>app.title</code> → <code>app.title()</code> (Angular 21 signal)</li>
+<li><code>cpAddIns Ex8.1_b1</code> overwrites <code>application-state.spec.ts</code> with old <code>FlightsService</code>/<code>flights.service</code> references — fix both the import and the <code>provide:</code> token to use <code>Flights</code> from <code>'../flights/flights'</code></li>
+<li><code>cpAddIns Ex8.1_b1</code> places an <code>app.spec.ts</code> that calls <code>app.title()</code> directly — this fails if <code>title</code> is declared <code>protected</code> in <code>app.ts</code>; fix by removing <code>protected</code> from <code>readonly title = signal('Fly Sharp')</code></li>
 </ul>
 <p><strong>Verified Working (full exercise including bonus):</strong></p>
 <ul>
 <li><code>ng build</code> → no errors ✓</li>
-<li><code>ng test --watch=false</code> → 27 tests pass across 11 files ✓</li>
+<li><code>ng test --watch=false</code> → 24 tests pass across 11 files ✓</li>
+</ul>
+<h2 id="ex82-websocket-communication">Ex8.2: WebSocket Communication</h2>
+<p><strong>Exercise URL</strong>: <a href="https://adaptalearn.learningtree.com/Output/2324f1dev/087%20Ex%208.2.html">https://adaptalearn.learningtree.com/Output/2324f1dev/087 Ex 8.2.html</a></p>
+<h3 id="steps-completed-4">Steps Completed</h3>
+<ul>
+<li>Step 1: <code>exStart Ex8.2</code> — starts from <code>Solutions/Ex8.1_Bonus_2</code></li>
+<li>Step 2: <code>cpAddIns Ex8.2</code> — copies <code>flight-status/</code> component skeleton, <code>flight-status-service/</code> spec (<code>.tsx</code>), and updated <code>home/home.ts</code></li>
+<li>Step 3: <code>ng g s --flat=false FlightStatusService</code> — generates <code>flight-status-service.ts</code> + <code>flight-status-service.spec.ts</code></li>
+<li>Step 4: Delete generated spec; rename <code>flight-status-service.spec.tsx</code> → <code>flight-status-service.spec.ts</code> (see Issue #1 for exercise wording discrepancy)</li>
+<li>Step 5: <code>ng test</code> — one compilation error: <code>Property 'connect' does not exist on type 'FlightStatusService'</code> ✓ (expected)</li>
+<li>Step 6: Implement <code>connect(url)</code> in <code>flight-status-service.ts</code> — returns <code>webSocket(url)</code> as <code>WebSocketSubject&lt;any&gt;</code>; import <code>{ webSocket, WebSocketSubject } from 'rxjs/webSocket'</code></li>
+<li>Step 7: Remove the <code>// TODO remove the comment</code> comments from <code>flight-status.spec.ts</code> to re-enable the two signal assertions</li>
+<li>Step 8: <code>ng test</code> — service spec passes; component spec has 2 failures (DOM update and <code>next</code> not called — component not yet implemented, expected)</li>
+<li>Step 9: Implement <code>flight-status.ts</code> — inject <code>FlightStatusService</code> as constructor arg; in <code>ngOnInit</code> call <code>connect('ws://localhost:8081')</code> and assign to <code>this.socket</code>; redefine <code>flightStatus</code> as <code>toSignal()</code> signal (see Issue #2); call <code>socket.next({ airport: 'JFK' })</code>; update <code>flight-status.html</code> to <code>{{flightStatus()}}</code> (see Issue #3)</li>
+<li>Step 10: <code>ng test</code> — 32/32 pass ✓</li>
+<li>Step 11: Run app — manual step</li>
+</ul>
+<h3 id="issues--differences-16">Issues / Differences</h3>
+<ol>
+<li>
+<p><strong>Step 4 rename destination in exercise is wrong</strong></p>
+<ul>
+<li>Exercise says rename to <code>src\app\flight-status\flights-status-service.spec.ts</code> — wrong directory (<code>flight-status</code> not <code>flight-status-service</code>) and typo (<code>flights-status</code>)</li>
+<li>Correct target: <code>src/app/flight-status-service/flight-status-service.spec.ts</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>flight-status.ts</code> requires <code>toSignal()</code> — exercise says &quot;redefine as a signal&quot; without specifying how</strong></p>
+<ul>
+<li>Plain property binding doesn't update when WebSocket data arrives outside Angular zone</li>
+<li>Use <code>toSignal(this.socket.asObservable(), { initialValue: '...' })</code> — must be a field initialiser (not inside <code>ngOnInit</code>) to stay in injection context</li>
+<li><code>socket</code> must also be a field initialiser for the same reason; <code>ngOnInit</code> only calls <code>socket.next()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Template must use signal call syntax <code>{{flightStatus()}}</code></strong></p>
+<ul>
+<li><code>{{flightStatus}}</code> renders the signal object's <code>toString()</code> instead of its value</li>
+<li>Exercise says &quot;update <code>flight-status.html</code> to display <code>flightStatus</code> as a Signal&quot; without stating the <code>()</code> syntax</li>
+</ul>
+</li>
+</ol>
+<h3 id="verified-working-15">Verified Working</h3>
+<ul>
+<li><code>ng test --watch=false</code> → 32 tests pass across 13 files ✓</li>
+<li>Step 11 (run app) is a manual step</li>
 </ul>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>

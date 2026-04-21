@@ -33,3 +33,149 @@
 - `app.ts` imports `Home`
 - Bootstrap installed and SCSS imports added to `styles.scss`
 - Dev server running at `http://localhost:4200/` showing the special offer message
+
+---
+
+## Exercise 2.2: Displaying Repeating Data
+
+### Issues Encountered
+
+1. **Port 4200 conflict on `ng serve` (recurring issue)** — A previous `ng serve` process was still holding port 4200, causing the new serve to fail immediately. Required manual `kill` of the process. This is a recurring issue across exercises; always kill the previous server before running `exStart`.
+
+2. **`exStart Ex2.2` must also be run from within `Exercises/FlySharp/`** — Same as `cpAddIns`: the script resolves paths relative to CWD. The exercise instructions imply running from the VSCode terminal which is already in the FlySharp directory, but this is not stated explicitly.
+
+3. **`RouterOutlet` unused-import warning** — Angular emits `NG8113: RouterOutlet is not used within the template` because the generated `app.ts` includes it but `app.html` no longer has `<router-outlet>`. This is harmless and `RouterOutlet` is retained for later exercises that add routing.
+
+4. **Step 31 note (assignment vs comparison)** — The exercise explicitly warns to use `=` not `==` in the click handler `showBuyFlights = !showBuyFlights`. Worth flagging to students as a common mistake.
+
+### Result
+- `BuyFlight` component created with `flights`, `showBuyFlights` fields and `@for`/`@if` template
+- Toggle link added with inline `(click)="showBuyFlights = !showBuyFlights"`
+- `app.html` updated with `<app-buy-flight>`, `app.ts` imports `BuyFlight`
+- Dev server confirmed running at `http://localhost:4200/`
+
+### Steps 33–45 (Bonus 1 & 2)
+
+**Issues:**
+
+1. **Steps 37–38 and 45 require a real browser** — These steps ask you to resize the browser to trigger the responsive navbar toggle button, then verify it works. Cannot be performed in a headless/CLI environment; must be tested manually in Chrome.
+
+2. **`[ngClass]` requires `NgClass` imported from `@angular/common`** — The exercise step 42 says "if needed, import NgClass". It is always needed in a standalone component setup; there is no automatic import.
+
+**Changes made (steps 39–44):**
+- `app.html`: `[ngClass]="{ 'show': navbarOpen }"` added to navbar collapse div; `(click)="toggleNavbar()"` added to toggle button
+- `app.ts`: `NgClass` imported and added to `imports` array; `navbarOpen = false` field and `toggleNavbar()` method added
+
+---
+
+## Exercise 3.1: Services and Dependency Injection
+
+### Issues Encountered
+
+1. **No issues** — All steps completed cleanly. The `exStart Ex3.1` script correctly reset the project from the Ex2.2_Bonus_3 solution. The `ApplicationState` service was generated and populated, `BuyFlight` was updated to use `inject()`, and the build passed with only the pre-existing `RouterOutlet` unused-import warning.
+
+2. **Note on step 20 ("Delete the `_flights` field")** — The exercise refers to deleting a `flights = FLIGHTS` field from `buy-flight.ts`. After `exStart`, the field exists as `flights = FLIGHTS` (not `_flights`). The exercise description may reflect an older version of the scaffolded code.
+
+### Result
+- `ApplicationState` service created at `src/app/application-state/application-state.ts`
+- Service exposes `flights` and `myFlights` getters backed by `mock-flights.ts` data
+- `BuyFlight` updated to use `inject(ApplicationState)` with a `flights` getter delegating to the service
+- `showBuyFlights` set to `true` so flights display immediately
+- Build confirmed clean
+
+---
+
+## Exercise 4.1: Component Input Binding
+
+### Issues Encountered
+
+1. **Steps 12 and 23-25 can be collapsed** — The exercise adds safe navigation (`?.`) operators in step 12, wraps in `@if (selectedFlight)` in step 23, then removes the `?.` in step 25. Since `@if` already guarantees `selectedFlight` is defined inside the block, the `?.` operators are redundant from the start. The final result uses `.` throughout — the intermediate `?.` step teaches the concept but isn't needed in the final code.
+
+2. **`exStart Ex4.1` resets `app.ts`** — After `exStart`, `app.ts` is restored from the Ex3.1 solution which includes `NgClass` and `RouterOutlet`. These carry forward correctly; no action needed.
+
+3. **Step 14 references `buy-flight.component.html`** — The exercise uses the old Angular naming convention (`component.html`). The actual file is `buy-flight.html`. No impact on the exercise.
+
+### Result
+- `Payment` component created with `@Input() selectedFlight: Flight | undefined`
+- `payment.html` populated from txt template with `@if` guard and `.` interpolation
+- `buy-flight.html` updated with Buy button column, empty header `<th>`, and `<app-payment [selectedFlight]="selectedFlight">`
+- `buy-flight.ts` updated with `selectedFlight` field, `onFlightClick()` method, `Payment` imported
+- Build confirmed clean
+
+---
+
+## Exercise 4.2: Custom Events and @Output (steps 1–18)
+
+### Issues Encountered
+
+1. **Filter state ownership ambiguity (steps 13-17)** — The exercise says to add `originFilter` field to `buy-flight.ts` (step 13) but then puts the filtering logic in `ApplicationState` (steps 16-17). Implemented `originFilter` as a public field on `ApplicationState` which BuyFlight updates via `stateService.originFilter = filter`. The field on BuyFlight acts as a local mirror but is not strictly needed.
+
+2. **`[value]="''"` binding** — Step 6 says "value binding" without specifying what value. Used `[value]="''"` as an empty initial value binding.
+
+### Result
+- `FlightFilter` component with `@Output() filterEmitter` and `keyup.enter` handler
+- `ApplicationState` updated with `loadFlights()`, constructor, `originFilter` field, and `originDestinationFilter()` method
+- `BuyFlight` wires up the filter component and updates the service on change
+- Build confirmed clean at step 18
+
+---
+
+## Exercise 5.1: Angular Routing (steps 1–16)
+
+### Issues Encountered
+
+1. **No issues** — All steps completed cleanly. `exStart Ex5.1` copied from `Ex4.2_Bonus_4`. Routes, `routerLink`, `routerLinkActive`, and `router-outlet` all wired up correctly. The `RouterOutlet` unused-import warning that appeared in all previous exercises is now gone since `<router-outlet>` is in the template.
+
+2. **`app.ts` cleanup** — `Home` and `BuyFlight` imports were removed from `app.ts` since those components are now loaded by the router, not directly by `App`. `RouterLink` and `RouterLinkActive` were added.
+
+3. **Steps 11, 13, 15, 16 are browser-only tests** — Cannot be verified headlessly; must be tested manually in Chrome.
+
+### Result
+- `Account` and `MyFlights` components generated
+- `app.routes.ts` configured with home/buy/myflights/account routes, default redirect, and wildcard
+- `app.html` updated with `routerLink`, `routerLinkActive="active"`, and `<router-outlet>`
+- `app.ts` updated with `RouterLink`, `RouterLinkActive`; `Home`/`BuyFlight` removed from imports
+- Build confirmed clean (zero warnings)
+
+---
+
+## Exercise 5.2: Creating a Feature Module (steps 1–7)
+
+### Issues Encountered
+
+1. **Wrong URL in exercise request** — The user provided `044 Ex 5.2.html` but the correct file is `053 Ex 5.2.html`. The index page confirmed the correct number.
+
+2. **`ng generate module accounts --routing=true` uses non-standard file naming** — The CLI generates `accounts-module.ts` and `accounts-routing-module.ts` (hyphen-separated, no `.module.` infix). The exercise instructions reference these by their actual names, but note that the generated class names are `AccountsModule` and `AccountsRoutingModule` as expected.
+
+3. **`Account` import must be removed from `app.routes.ts`** — After replacing `component: Account` with `loadChildren`, the `Account` import becomes unused and causes a lint/build warning. Removed the import.
+
+4. **Step 4 (browser verify) skipped headlessly** — Verified via `ng build` instead; Account tab functionality confirmed by successful lazy chunk generation.
+
+### Result
+- `accounts-module.ts` and `accounts-routing-module.ts` generated
+- `account.ts` converted to non-standalone (`standalone: false`, `imports[]` removed)
+- `AccountsModule` declares `Account`
+- `app.routes.ts` uses `loadChildren` for the account path
+- `accounts-routing-module.ts` routes `path: ''` to `Account`
+- Build produces lazy chunk `accounts-module` (640 bytes) — lazy loading confirmed
+
+---
+
+## Exercise 5.3: Creating a Custom Pipe (steps 1–15)
+
+### Issues Encountered
+
+1. **Wrong URL in exercise request** — User provided `044 Ex 5.3.html`; correct file is `055 Ex 5.3.html`.
+
+2. **`Currency` is a class, not an interface** — `cpAddIns Ex5.3` copies `src/app/model/currency.ts` which defines a class with a constructor. The exercise uses object literal syntax (`{ code: 'GBP', symbol: '£', rate: 1.0 }`) to initialise the `currencies` array. This works due to TypeScript's structural typing — the shapes are compatible so no `new Currency(...)` calls are needed.
+
+3. **Steps 5 and 9 combined** — Step 5 says to return `symbol + value * rate`; step 9 says to add `.toFixed(2)`. Both were implemented together in the initial transform since `.toFixed(2)` is always required for correct currency display.
+
+4. **Steps 8, 13, 15 skipped (browser-only)** — Verified via `ng build` instead; prices formatted as `$NNN.NN` confirmed by clean compilation.
+
+### Result
+- `CurrencyConversionPipe` generated at `src/app/currency-conversion/currency-conversion-pipe.ts`
+- `transform(value: number, symbol = '£', rate = 0.9): string` returns `symbol + (value * rate).toFixed(2)`
+- `BuyFlight` imports pipe; template pipes price as `flight.price | currencyConversion:currencySymbol:currencyRate`
+- `ApplicationState` has `currencies[]` and `displayCurrency` (set to `currencies[1]` = USD after step 14)
+- Build clean with lazy chunks intact
