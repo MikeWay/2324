@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FlightFilter {
   @Output() filterEmitter = new EventEmitter<string>();
 
-  onFilterEnter(filterValue: string): void {
-    this.filterEmitter.emit(filterValue.toLocaleUpperCase());
+  onFilterEnter(value: string) {
+    this.filterEmitter.emit(value.toUpperCase());
   }
 }

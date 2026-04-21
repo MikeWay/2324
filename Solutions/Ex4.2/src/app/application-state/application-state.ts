@@ -6,13 +6,14 @@ import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
   providedIn: 'root',
 })
 export class ApplicationState {
-  _flights = new Array<Flight>();
+  private _flights: Flight[] = [];
+  originFilter = '';
 
   constructor() {
     this.loadFlights();
   }
 
-  private loadFlights() {
+  loadFlights() {
     this._flights = FLIGHTS;
   }
 
@@ -23,4 +24,6 @@ export class ApplicationState {
   get myFlights(): Flight[] {
     return MYFLIGHTS;
   }
+
+
 }

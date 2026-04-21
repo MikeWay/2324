@@ -10,12 +10,11 @@ import { Flight } from '../model/flight';
 export class Payment {
   private _selectedFlight: Flight | undefined;
 
-  @Input()
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
+  @Input() set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
   }
 
-  set selectedFlight(value: Flight | undefined) {
-    this._selectedFlight = value;
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
   }
 }

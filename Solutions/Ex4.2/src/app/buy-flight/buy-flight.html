@@ -1,16 +1,16 @@
 @if (showBuyFlights) {
-  <app-flight-filter (filterEmitter)="onOriginFilterChange($event)"></app-flight-filter>
-  <table class="table table-condensed table-responsive">
+  <app-flight-filter (filterEmitter)="onOriginFilterChange($event)"></app-flight-filter>  
+  <table class="table table-sm table-responsive">
     <thead>
-      <tr>
-        <th></th>
-        <th>Flight</th>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Departs</th>
-        <th>Arrives</th>
-        <th>Price</th>
-      </tr>
+    <tr>
+      <th></th>
+      <th>Flight</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Departs</th>
+      <th>Arrives</th>
+      <th>Price</th>
+    </tr>
     </thead>
     @for (flight of flights; track flight.id) {
       <tr>
@@ -26,4 +26,5 @@
   </table>
 }
 <a href='#' (click)="onClickBuyFlights()">Toggle Flights</a>
+
 <app-payment [selectedFlight]="selectedFlight"></app-payment>

@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 import { Home } from './home/home';
 import { BuyFlight } from './buy-flight/buy-flight';
 
