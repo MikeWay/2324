@@ -6,7 +6,7 @@ import { FLIGHTS, MYFLIGHTS } from '../model/mock-flights';
   providedIn: 'root',
 })
 export class ApplicationState {
-  _flights = FLIGHTS;
+  private _flights = FLIGHTS;
 
   get flights(): Flight[] {
     return this._flights;

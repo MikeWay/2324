@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApplicationState } from '../application-state/application-state';
-import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -9,11 +8,10 @@ import { Flight } from '../model/flight';
   styleUrl: './buy-flight.scss',
 })
 export class BuyFlight {
+  private stateService = inject(ApplicationState);
   showBuyFlights = true;
 
-  constructor(private stateService: ApplicationState) {}
-
-  get flights(): Flight[] {
+  get flights() {
     return this.stateService.flights;
   }
 
