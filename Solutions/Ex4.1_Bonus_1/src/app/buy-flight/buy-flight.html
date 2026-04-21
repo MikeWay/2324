@@ -1,15 +1,15 @@
 @if (showBuyFlights) {
-  <table class="table table-condensed table-responsive">
+  <table class="table table-sm table-responsive">
     <thead>
-      <tr>
-        <th></th>
-        <th>Flight</th>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Departs</th>
-        <th>Arrives</th>
-        <th>Price</th>
-      </tr>
+    <tr>
+      <th></th>
+      <th>Flight</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Departs</th>
+      <th>Arrives</th>
+      <th>Price</th>
+    </tr>
     </thead>
     @for (flight of flights; track flight.id) {
       <tr>

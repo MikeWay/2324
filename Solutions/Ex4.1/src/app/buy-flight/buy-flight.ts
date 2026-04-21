@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApplicationState } from '../application-state/application-state';
-import { Flight } from '../model/flight';
 import { Payment } from '../payment/payment';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-buy-flight',
@@ -10,20 +10,19 @@ import { Payment } from '../payment/payment';
   styleUrl: './buy-flight.scss',
 })
 export class BuyFlight {
+  private stateService = inject(ApplicationState);
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
 
-  constructor(private stateService: ApplicationState) {}
-
-  get flights(): Flight[] {
+  get flights() {
     return this.stateService.flights;
-  }
-
-  onFlightClick(flight: Flight): void {
-    this.selectedFlight = flight;
   }
 
   onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
+  }
+
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
   }
 }
