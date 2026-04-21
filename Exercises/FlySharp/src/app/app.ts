@@ -1,19 +1,13 @@
 import { Component, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CurrencySelector } from './currency-selector/currency-selector';
+import { RouterOutlet } from '@angular/router';
+import { Home } from './home/home';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgClass, CurrencySelector],
+  imports: [RouterOutlet, Home],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  readonly title = signal('Fly Sharp');
-  navbarOpen = false;
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-  }
+  protected readonly title = signal('Fly Sharp');
 }

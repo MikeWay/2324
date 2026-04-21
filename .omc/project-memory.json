@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776530770762,
+  "lastScanned": 1776702932539,
   "projectRoot": "/home/mjrw/course2324",
   "techStack": {
     "languages": [],
@@ -36,21 +36,21 @@
       "path": "AddIns",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776530770737,
+      "lastAccessed": 1776702932534,
       "keyFiles": []
     },
     "Backup": {
       "path": "Backup",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776530770739,
+      "lastAccessed": 1776702932534,
       "keyFiles": []
     },
     "Data": {
       "path": "Data",
       "purpose": "Data files",
       "fileCount": 1,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932534,
       "keyFiles": [
         "flights.json"
       ]
@@ -59,7 +59,7 @@
       "path": "DoNows",
       "purpose": null,
       "fileCount": 7,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932535,
       "keyFiles": [
         "README.md",
         "angular.json",
@@ -72,7 +72,7 @@
       "path": "Exercises",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932535,
       "keyFiles": [
         "Notes.txt",
         "package-lock.json",
@@ -83,7 +83,7 @@
       "path": "FlySharpSolution",
       "purpose": null,
       "fileCount": 9,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": [
         "README.md",
         "angular.json",
@@ -96,7 +96,7 @@
       "path": "NodeScripts",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": [
         "README.md",
         "hack.cmd",
@@ -109,14 +109,14 @@
       "path": "Samples",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": []
     },
     "Solutions": {
       "path": "Solutions",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": [
         "sols.txt"
       ]
@@ -125,7 +125,7 @@
       "path": "init_scripts",
       "purpose": null,
       "fileCount": 4,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": [
         "copyIntoSolutions.cmd",
         "dirs.txt",
@@ -137,14 +137,14 @@
       "path": "server",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": []
     },
     "www": {
       "path": "www",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776530770740,
+      "lastAccessed": 1776702932536,
       "keyFiles": [
         "index.html"
       ]
@@ -153,35 +153,35 @@
       "path": "DoNows/dist",
       "purpose": "Distribution/build output",
       "fileCount": 0,
-      "lastAccessed": 1776530770742,
+      "lastAccessed": 1776702932536,
       "keyFiles": []
     },
     "DoNows/node_modules": {
       "path": "DoNows/node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776530770749,
+      "lastAccessed": 1776702932538,
       "keyFiles": []
     },
     "FlySharpSolution/dist": {
       "path": "FlySharpSolution/dist",
       "purpose": "Distribution/build output",
       "fileCount": 0,
-      "lastAccessed": 1776530770751,
+      "lastAccessed": 1776702932538,
       "keyFiles": []
     },
     "FlySharpSolution/node_modules": {
       "path": "FlySharpSolution/node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776530770756,
+      "lastAccessed": 1776702932539,
       "keyFiles": []
     },
     "NodeScripts/dist": {
       "path": "NodeScripts/dist",
       "purpose": "Distribution/build output",
       "fileCount": 14,
-      "lastAccessed": 1776530770758,
+      "lastAccessed": 1776702932539,
       "keyFiles": [
         "copyAddIns.js",
         "copyAddIns.js.map",
@@ -192,65 +192,10 @@
       "path": "NodeScripts/node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776530770761,
+      "lastAccessed": 1776702932539,
       "keyFiles": []
     }
   },
-  "hotPaths": [
-    {
-      "path": "Exercises/FlySharp/src/app/payment/payment.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776531112633,
-      "type": "file"
-    },
-    {
-      "path": "Exercises/FlySharp/src/app/payment/payment.html",
-      "accessCount": 2,
-      "lastAccessed": 1776531195282,
-      "type": "file"
-    },
-    {
-      "path": "AddIns/Ex7.1/src/app/payment/payment.html.txt",
-      "accessCount": 1,
-      "lastAccessed": 1776530861654,
-      "type": "file"
-    },
-    {
-      "path": "AddIns/Ex7.1/src/app/model/payment.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776530861802,
-      "type": "file"
-    },
-    {
-      "path": "FlySharpSolution/src/app/payment/payment.component.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776530876870,
-      "type": "file"
-    },
-    {
-      "path": "AddIns/Ex7.1/src/app/my-flights/my-flights.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776530897485,
-      "type": "file"
-    },
-    {
-      "path": "AddIns/Ex7.1/src/app/application-state/application-state.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776530912851,
-      "type": "file"
-    },
-    {
-      "path": "AddIns/Ex7.1/src/app/my-flights/my-flights.spec.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776530998491,
-      "type": "file"
-    },
-    {
-      "path": "Exercises/FlySharp/src/app/model/payment.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776531094004,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }

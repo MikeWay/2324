@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 /Backup
 /Node
-#/Exercises/FlySharp
+/Exercises/FlySharp
 /Exercises/FS2
 /temp
 /DoNows_Orig
@@ -9,6 +9,7 @@
 **/*.war
 **/*.jar
 **/.angular
+/.omc
 #System Files
 .DS_Store
 Thumbs.db
