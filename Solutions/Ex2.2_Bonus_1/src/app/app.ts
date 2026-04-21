@@ -11,5 +11,4 @@ import { BuyFlight } from './buy-flight/buy-flight';
 })
 export class App {
   protected readonly title = signal('Fly Sharp');
-
 }

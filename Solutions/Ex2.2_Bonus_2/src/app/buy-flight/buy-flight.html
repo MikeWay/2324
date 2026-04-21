@@ -1,15 +1,5 @@
 @if (showBuyFlights) {
-  <table >
-    <thead>
-      <tr>
-        <th>Flight</th>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Departs</th>
-        <th>Arrives</th>
-        <th>Price</th>
-      </tr>
-    </thead>
+  <table>
     @for (flight of flights; track flight.id) {
       <tr>
         <td>{{flight.flightNumber}}</td>
