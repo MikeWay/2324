@@ -1,4 +1,4 @@
-export class Payment {
+export class PaymentModel {
   constructor(
     public name: string = '',
     public address: string = '',

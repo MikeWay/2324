@@ -1,0 +1,59 @@
+import { Injectable, inject } from '@angular/core';
+import { Flight } from '../model/flight';
+import { Currency } from '../model/currency';
+import { Flights } from '../flights/flights';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApplicationState {
+
+  private flightsService = inject(Flights);
+  _flights = new Array<Flight>();
+  _myFlights: Flight[] = new Array<Flight>();
+  error = '';
+  currencies: Currency[] = [
+    { code: 'GBP', symbol: '£', rate: 1.0 },
+    { code: 'USD', symbol: '$', rate: 0.9 },
+    { code: 'EUR', symbol: '€', rate: 0.92 },
+    { code: 'SEK', symbol: 'kr ', rate: 12.0 }
+  ];
+
+  displayCurrency: Currency = this.currencies[1];
+
+  constructor() {
+    this.loadFlights();
+    this.loadMyFlights();
+  }
+
+  public get flights(): Flight[] {
+    return this._flights;
+  }
+
+  public get myFlights(): Flight[] {
+    return this._myFlights;
+  }
+
+  addMyFlight(flight: Flight): number {
+    this.myFlights.push(flight);
+    this.flightsService.addMyFlight(flight).subscribe({});
+    return this.myFlights.length;
+  }
+
+  loadFlights() {
+    this.error = '';
+    this.flightsService.getAllFlights().subscribe({
+      next: (flights: Flight[]) => { this._flights = flights; },
+      error: (e: Error) => { this.error = e.message; },
+      complete: () => {}
+    });
+  }
+
+  loadMyFlights() {
+    this.flightsService.getMyFlights().subscribe({
+      next: (flights: Flight[]) => { this._myFlights = flights; },
+      error: (e: Error) => { this.error = e.message; },
+      complete: () => {}
+    });
+  }
+}
