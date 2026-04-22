@@ -179,3 +179,151 @@
 - `BuyFlight` imports pipe; template pipes price as `flight.price | currencyConversion:currencySymbol:currencyRate`
 - `ApplicationState` has `currencies[]` and `displayCurrency` (set to `currencies[1]` = USD after step 14)
 - Build clean with lazy chunks intact
+---
+
+## Exercise 6.1: Unit Testing (steps 1–28 of 42)
+
+### Issues Encountered
+
+1. **Step 10 ("enable the remaining pending test") is a no-op** — `exStart Ex6.1` copies from `Ex5.3_Bonus_1` where `account.spec.ts` already has an active `it` test. There is no pending or skipped test to enable.
+
+2. **`account.spec.ts` uses `imports` for a non-standalone component** — After `exStart`, `account.ts` has `standalone: false` (set in Ex5.2). The generated spec uses `imports: [Account]` which fails for non-standalone components. Step 11 correctly changes this to `declarations: [Account]`.
+
+3. **`ng test --watch=false` used** — No interactive browser available in this environment; `ng test --watch=false` used throughout in place of the interactive test runner.
+
+4. **Steps 18–20 (TDD demo: comment out / run / undo) followed** — Commented out the toggle line, ran tests to confirm failure, then restored. All done as instructed.
+
+### Result
+- `app.spec.ts`: `provideRouter([])` added; title test updated to check for `router-outlet`
+- `account.spec.ts`: `imports` changed to `declarations`
+- `buy-flight.spec.ts`: `provideRouter([])` added; 5 new tests added (showBuyFlights default, toggle false, toggle twice, click link, hide table skeleton)
+- All 16 tests pass across 10 test files (stopped at step 28 — table visibility test body is incomplete)
+
+---
+
+## Exercise 7.1: Implementing a Template-Driven Form (steps 1–22)
+
+### Issues Encountered
+
+1. **Exercise has 22 steps, not 25** — The user requested stopping at step 25 but the exercise ends at step 22. All steps completed.
+
+2. **`FlightPaymentEvent` constructor uses `Payment` (component) instead of `PaymentModel`** — The exercise shows `public payment: Payment` in the `FlightPaymentEvent` constructor. However `Payment` is the component class, and `this.model` (passed in `onSubmit`) is a `PaymentModel`. Used `PaymentModel` instead to match actual usage. Placed class in `src/app/model/flight-payment-event.ts`.
+
+3. **Browser-only steps skipped** — Steps 11, 14, 17 (run `ng serve` and test) adapted to `ng build` verification.
+
+### Result
+- `payment.ts`: `FormsModule` imported; `model: PaymentModel`, `jsonModel` getter, `paymentConfirmed` output, `onSubmit()` added
+- `payment.html`: form from `payment.html.txt` added inside `@if` block with `#paymentForm="ngForm"`, `[(ngModel)]` bindings, `required`, `[disabled]`, `(ngSubmit)`, and `{{jsonModel}}` debug output
+- `FlightPaymentEvent` model class created at `src/app/model/flight-payment-event.ts`
+- `buy-flight.ts`: `Router` injected; `onPaymentConfirmed()` navigates to `/myflights`
+- `buy-flight.html`: `(paymentConfirmed)="onPaymentConfirmed($event)"` bound on `<app-payment>`
+- Build confirmed clean
+
+---
+ 
+## Exercise 7.2: Creating Reactive Forms (steps 1–24)
+
+### Issues Encountered
+
+1. **Step 20 uses `this.payForm.value as Payment`** — `Payment` is the component class, not the data model. Used `as PaymentModel` instead to match the `FlightPaymentEvent` constructor signature.
+
+2. **Browser test steps adapted** — Steps 14, 19, 22, 24 verified via `ng build` instead of live server.
+
+### Result
+- `payment.ts`: `FormsModule` replaced with `ReactiveFormsModule` + `JsonPipe`; `payForm` `FormGroup` with six `FormControl<string>` fields (all `nonNullable`, `Validators.required`); name also has `Validators.minLength(5)`; `ngOnInit` calls `buildSampleModel()` then `payForm.setValue(this.model)`; `onSubmit` emits `payForm.value as PaymentModel`
+- `payment.html`: `[formGroup]="payForm"`, `formControlName` on all fields, `[disabled]="!payForm.valid"`, email validation `@if` div, `{{ payForm.value | json }}` debug output
+- Build confirmed clean
+
+---
+
+## Exercise 8.1: HTTP Client and Error Handling (steps 1–28)
+
+### Issues Encountered
+
+1. **Steps 8, 25–28 are browser/server-only** — Step 8 opens the REST API URL in a browser; steps 26–27 stop/start a Windows "Flights Service" and observe the error message in the browser. Verified via `ng build` instead.
+
+2. **`application-state.spec.ts` fails after step 19** — Expected by the exercise (step 18 explicitly says "Stop `ng test`. The changes you are about to make will break the tests."). The fix is applied in the bonus steps 34–35 via `cpAddIns Ex8.1_b1`.
+
+3. **`throwError` arrow function syntax** — Step 16 shows `throwError(() => new Error(...))`. Used the RxJS 7+ factory-function form `throwError(() => new Error(...))` rather than the deprecated `throwError(new Error(...))`.
+
+### Result
+- `flights.ts`: `Flights` service with `http = inject(HttpClient)`, `getAllFlights()` returning `Observable<Flight[]>` from `http.get<Flight[]>(url).pipe(catchError(this.handleError))`, and private `handleError(error: HttpErrorResponse)` logging and re-throwing
+- `app.config.ts`: `provideHttpClient()` added to providers
+- `flights.spec.ts`: `'should fetch all flights using GET'` and `'should report an error from getAllFlights'` tests uncommented (both pass)
+- `application-state.ts`: `flightsService = inject(Flights)`, `error = ''` property, `loadFlights()` replaced with HTTP subscription (next/error/complete)
+- `buy-flight.ts`: `errorMessage` getter returning `this.stateService.error`
+- `buy-flight.html`: conditional `@if (errorMessage) { <h2 class="text-danger">{{errorMessage}}</h2> }` before table
+- Build confirmed clean; 22 of 23 tests pass (1 intentional break per step 18)
+
+### Steps 34–44 (Bonus)
+
+**Issues Encountered:**
+
+1. **`cpAddIns Ex8.1_b1` imports `FlightsService` from `flights.service.ts`** — The generated service class is `Flights` (from `flights.ts`), not `FlightsService`. The `application-state.spec.ts` provided by `cpAddIns` had `import { FlightsService } from '../flights/flights.service'` and `provide: FlightsService`. Fixed by changing both references to `Flights` from `flights.ts`.
+
+2. **`app.ts` has `protected readonly title`** — The updated `app.spec.ts` (from `cpAddIns`) accesses `app.title()` directly, which fails for a `protected` member. Fixed by removing the `protected` modifier.
+
+**Changes made:**
+- `flights.ts`: Added `getMyFlights()` (GET to `/myflights`) and `addMyFlight(flight)` (POST with JSON body and `Content-Type: application/json` header), both piped through `catchError(this.handleError)`
+- `flights.spec.ts`: All 4 remaining tests uncommented — `'should add a flight to myFlights'`, `'should report an error from addMyFlight'` (×2), `'should return flights from getMyFlights()'`
+- `application-state.ts`: `addMyFlight()` now calls `this.flightsService.addMyFlight(flight).subscribe({})` after pushing; `loadMyFlights()` added and called from constructor
+- `application-state.spec.ts`: Fixed to use `Flights` token (not `FlightsService`); mock provides `getAllFlights`, `getMyFlights`, `addMyFlight`
+- `app.ts`: `protected` removed from `title` signal
+- All 24 tests pass across 11 files
+
+---
+
+## Exercise 8.2: WebSocket Communication (steps 1–11)
+
+### Issues Encountered
+
+1. **`cpAddIns Ex8.2` provides spec as `.tsx` not `.ts`** — `flight-status-service.spec.tsx` must be renamed to `.ts` after deleting the generated spec (step 4). The `.tsx` extension causes no issues at runtime but is non-standard for Angular.
+
+2. **`app.ts` has `protected readonly title` after every `exStart`** — The solution files use `protected`, but `app.spec.ts` accesses `app.title()` directly (fails for `protected`). Must change to `readonly title` after every `exStart`. This is a recurring issue.
+
+3. **Step 11 (browser verify) skipped headlessly** — Server is already running; WebSocket connection to `ws://localhost:8081` would require a live flight status server.
+
+### Result
+- `flight-status-service.ts`: `FlightStatusService` with `connect(url: string): WebSocketSubject<any>` returning `webSocket<any>(url)`
+- `flight-status.ts`: Injects `FlightStatusService`, socket opened at `ws://localhost:8081` during field initialisation, `flightStatus = signal('All flights are currently on time')`, `ngOnInit()` subscribes to socket updating the signal and sends `{airport: 'JFK'}`
+- `flight-status.html`: `{{flightStatus()}}` (signal call syntax)
+- `app.ts`: `protected` removed from `title` signal
+- All 32 tests pass across 13 files
+
+---
+
+## Exercise 9.1: Attribute Directive (steps 1–11)
+
+### Issues Encountered
+
+1. **No AddIns for Ex9.1** — No `cpAddIns` step; all implementation done from scratch.
+
+2. **Step 11 (browser verify) skipped headlessly** — Live server already running; visual clock display not verifiable in CLI environment.
+
+3. **`protected readonly title` recurring after every `exStart`** — Already fixed in this session; was already correct when Ex9.1 started (carried forward from Ex8.2 fix).
+
+### Result
+- `time.ts`: `Time` directive with `constructor(private el: ElementRef)`, `ngOnInit()` setting font-size 2em / margin 10px / color white, calling `showTime()` and `setInterval(() => this.showTime(), 1000)`; `showTime()` sets `el.nativeElement.innerHTML` to `new Date().toLocaleTimeString()`
+- `time.spec.ts`: Creates `HTMLSpanElement` and `ElementRef` in `beforeEach`, passes to `new Time(elRef)`
+- `app.ts`: `Time` imported and added to `imports[]`
+- `app.html`: `<span class="label label-primary" appTime></span>` added inside the navbar `<div>` alongside `app-currency-selector`
+- All 33 tests pass across 14 files
+
+### Steps 12–13 (Bonus)
+
+**No issues.**
+
+- Step 12 (add directive to other elements) — browser-only, skipped headlessly
+- `time.ts`: `@Input('appTime') color = 'white'` added; `ngOnInit()` uses `this.color || 'white'` for `style.color`, allowing `appTime="red"` syntax to override the default
+
+---
+
+## Exercise 7.2 Bonus
+
+### Steps 25–26 (Bonus)
+
+**No issues.**
+
+**Changes made:**
+- `payment.ts`: `address` gains `Validators.minLength(10)` and `Validators.maxLength(128)`; `cardNum` gains `Validators.minLength(13)`; `email` gains `Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')`
+- Build confirmed clean
