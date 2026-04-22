@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ApplicationState } from '../application-state/application-state';
 import { Currency } from '../model/currency';
 
@@ -9,12 +9,13 @@ import { Currency } from '../model/currency';
   styleUrl: './currency-selector.scss',
 })
 export class CurrencySelector {
-  constructor(public state: ApplicationState) {}
+  public state = inject(ApplicationState);
 
   @Input()
   set currency(currency: Currency) {
     this.state.displayCurrency = currency;
   }
+
   get currency(): Currency {
     return this.state.displayCurrency;
   }

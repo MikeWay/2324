@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CurrencySelector } from './currency-selector/currency-selector';
 
 @Component({
@@ -10,7 +10,7 @@ import { CurrencySelector } from './currency-selector/currency-selector';
   styleUrl: './app.scss'
 })
 export class App {
-  readonly title = signal('Fly Sharp');
+  protected readonly title = signal('Fly Sharp');
   navbarOpen = false;
 
   toggleNavbar() {

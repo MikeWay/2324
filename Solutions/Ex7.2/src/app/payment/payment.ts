@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { formatDate, JsonPipe } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { JsonPipe, formatDate } from '@angular/common';
 import { Flight } from '../model/flight';
 import { PaymentModel } from '../model/payment';
+import { FlightPaymentEvent } from '../model/flight-payment-event';
 
 @Component({
   selector: 'app-payment',
@@ -11,28 +12,25 @@ import { PaymentModel } from '../model/payment';
   styleUrl: './payment.scss',
 })
 export class Payment implements OnInit {
-  private _selectedFlight: Flight | undefined;
   model: PaymentModel = new PaymentModel();
+  @Output() paymentConfirmed = new EventEmitter<FlightPaymentEvent>();
+  private _selectedFlight: Flight | undefined;
 
   payForm = new FormGroup({
     name: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(5)], nonNullable: true }),
-    address: new FormControl<string>('', { validators: [Validators.required, Validators.maxLength(128)], nonNullable: true }),
-    email: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-    cardNum: new FormControl<string>('', { validators: [Validators.required ], nonNullable: true }),
+    address: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
+    email: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
+    cardNum: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
     cardType: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
-    expDate: new FormControl<string>('', { validators: Validators.required, nonNullable: true }),
+    expDate: new FormControl<string>('', { validators: Validators.required, nonNullable: true })
   });
 
-  @Output()
-  paymentConfirmed = new EventEmitter<FlightPaymentEvent>();
-
-  @Input()
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
+  @Input() set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
   }
 
-  set selectedFlight(value: Flight | undefined) {
-    this._selectedFlight = value;
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
   }
 
   ngOnInit(): void {
@@ -50,12 +48,9 @@ export class Payment implements OnInit {
   }
 
   onSubmit(): void {
-    if (this._selectedFlight) {
-      this.paymentConfirmed.emit(new FlightPaymentEvent(this._selectedFlight, this.payForm.value as PaymentModel));
+    if (this.selectedFlight) {
+      const payment = new FlightPaymentEvent(this.selectedFlight, this.payForm.value as PaymentModel);
+      this.paymentConfirmed.emit(payment);
     }
   }
-}
-
-export class FlightPaymentEvent {
-  constructor(public flight: Flight, public payment: PaymentModel) {}
 }

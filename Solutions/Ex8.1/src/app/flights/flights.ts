@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Flight } from '../model/flight';
@@ -8,7 +8,7 @@ import { Flight } from '../model/flight';
   providedIn: 'root',
 })
 export class Flights {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   public getAllFlights(): Observable<Flight[]> {
     const url = 'http://localhost:8080/flightserver/allflights';
@@ -17,10 +17,10 @@ export class Flights {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 0) {
-      console.error('Http communication error:', error.error.message);
+      console.error('Http Communication Error', error.error.message);
     } else {
-      console.error(`Server error: , ${error.status}. Message body: ${error.message}`);
+      console.error('Server Error', error.status, error.error);
     }
-    return throwError(() => Error('Server error - is the REST server running?'));
+    return throwError(() => new Error('Server error - is the REST server running?'));
   }
 }

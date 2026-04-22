@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { MYFLIGHTS } from '../model/mock-flights';
 import { Flight } from '../model/flight';
 import { Currency } from '../model/currency';
 import { Flights } from '../flights/flights';
@@ -8,6 +9,7 @@ import { Flights } from '../flights/flights';
 })
 export class ApplicationState {
 
+  private flightsService = inject(Flights);
   _flights = new Array<Flight>();
   _myFlights: Flight[] = new Array<Flight>();
   error = '';
@@ -20,7 +22,7 @@ export class ApplicationState {
 
   displayCurrency: Currency = this.currencies[1];
 
-  constructor(private flightsService: Flights) {
+  constructor() {
     this.loadFlights();
   }
 
@@ -37,12 +39,12 @@ export class ApplicationState {
     return this.myFlights.length;
   }
 
-  private loadFlights(): void {
+  loadFlights() {
     this.error = '';
     this.flightsService.getAllFlights().subscribe({
-      next: (flights) => this._flights = flights,
-      error: (e) => this.error = e.message,
-      complete: () => this.error = ''
+      next: (flights: Flight[]) => { this._flights = flights; },
+      error: (e: Error) => { this.error = e.message; },
+      complete: () => {}
     });
   }
 }

@@ -16,7 +16,8 @@ describe('Flights', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [
+      ],
       providers: [Flights, provideHttpClient(), provideHttpClientTesting()]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -61,7 +62,7 @@ describe('Flights', () => {
     httpTestingController.verify();
   }));
 
-  it('should report an error from getMyFlights', inject([Flights], (service: Flights) => {
+  it('should report an error from addMyFlight', inject([Flights], (service: Flights) => {
     service.getMyFlights().subscribe({
       next: (flights) => { throw new Error("An error should have been thrown"); },
       error: (e) => {

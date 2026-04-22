@@ -1,33 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { vi } from 'vitest';
+import { provideRouter } from '@angular/router';
 
 import { BuyFlight } from './buy-flight';
 import { ApplicationState } from '../application-state/application-state';
 import { FLIGHTS } from '../model/mock-flights';
 
+const stateServiceStub: Partial<ApplicationState> = {
+  flights: FLIGHTS,
+  displayCurrency: { code: 'USD', symbol: '$', rate: 0.9 }
+};
+
 describe('BuyFlight', () => {
   let component: BuyFlight;
   let fixture: ComponentFixture<BuyFlight>;
   let el: DebugElement;
-  let flightsSpy: any;
-  let stateServiceStub: any;
+  let flightSpy: ReturnType<typeof vi.fn>;
 
   beforeEach(async () => {
-    // Step 41: spy function returning FLIGHTS
-    flightsSpy = vi.fn().mockReturnValue(FLIGHTS);
-    // Step 42: replace flights property with getter that calls the spy
-    stateServiceStub = {
-      get flights() { return flightsSpy(); },
-      displayCurrency: { code: 'USD', symbol: '$', rate: 0.9 }
-    };
+    flightSpy = vi.fn().mockReturnValue(FLIGHTS);
+    Object.defineProperty(stateServiceStub, 'flights', { get: flightSpy as () => any, configurable: true });
 
     await TestBed.configureTestingModule({
       imports: [BuyFlight],
-      providers: [provideRouter([]),
-        { provide: ApplicationState, useValue: stateServiceStub }]
+      providers: [provideRouter([]), { provide: ApplicationState, useValue: stateServiceStub }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BuyFlight);
@@ -60,14 +57,13 @@ describe('BuyFlight', () => {
     expect(component.showBuyFlights).toBeFalsy();
   });
 
-  it('should have a currency symbol of $', () => {
-    expect(component.currencySymbol).toBe('$');
+  it('should return FLIGHTS from the service and call flightSpy', () => {
+    expect(component.flights).toEqual(FLIGHTS);
+    expect(flightSpy).toHaveBeenCalled();
   });
 
-  // Step 43
-  it('should get the correct flights from the state service', () => {
-    expect(component.flights).toEqual(FLIGHTS);
-    expect(flightsSpy).toHaveBeenCalled();
+  it('should have a currency symbol of $', () => {
+    expect(component.currencySymbol).toBe('$');
   });
 
   it('should hide the flights table when the link is clicked', () => {
