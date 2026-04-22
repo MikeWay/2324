@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { ApplicationState } from './application-state';
-import { FlightsService } from '../flights/flights.service';
+import { Flights } from '../flights/flights';
 import { FLIGHTS } from '../model/mock-flights';
 
 describe('ApplicationState', () => {
@@ -22,7 +22,7 @@ describe('ApplicationState', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: FlightsService, useValue: mockFlightsService }
+        { provide: Flights, useValue: mockFlightsService }
       ]
     });
     service = TestBed.inject(ApplicationState);

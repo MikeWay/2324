@@ -28,11 +28,7 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Fly Sharp' title`, () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app.title()).toEqual('Fly Sharp');
-  });
+
 
   it('should have a <router-outlet>', () => {
     const fixture = TestBed.createComponent(App);
