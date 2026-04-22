@@ -10,20 +10,19 @@ import { PaymentModel } from '../model/payment';
   styleUrl: './payment.scss',
 })
 export class Payment {
-  private _selectedFlight: Flight | undefined;
   model: PaymentModel = new PaymentModel();
+  private _selectedFlight: Flight | undefined;
 
-  get jsonModel(): string {
-    return JSON.stringify(this.model);
+  @Input() set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
   }
 
-  @Input()
   get selectedFlight(): Flight | undefined {
     return this._selectedFlight;
   }
 
-  set selectedFlight(value: Flight | undefined) {
-    this._selectedFlight = value;
+  get jsonModel(): string {
+    return JSON.stringify(this.model);
   }
 
   onSubmit(): void {

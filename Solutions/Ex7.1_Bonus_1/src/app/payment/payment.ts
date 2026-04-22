@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight } from '../model/flight';
 import { PaymentModel } from '../model/payment';
+import { FlightPaymentEvent } from '../model/flight-payment-event';
 
 @Component({
   selector: 'app-payment',
@@ -10,32 +11,26 @@ import { PaymentModel } from '../model/payment';
   styleUrl: './payment.scss',
 })
 export class Payment {
-  private _selectedFlight: Flight | undefined;
   model: PaymentModel = new PaymentModel();
+  @Output() paymentConfirmed = new EventEmitter<FlightPaymentEvent>();
+  private _selectedFlight: Flight | undefined;
 
-  @Output()
-  paymentConfirmed = new EventEmitter<FlightPaymentEvent>();
+  @Input() set selectedFlight(value: Flight | undefined) {
+    this._selectedFlight = value;
+  }
+
+  get selectedFlight(): Flight | undefined {
+    return this._selectedFlight;
+  }
 
   get jsonModel(): string {
     return JSON.stringify(this.model);
   }
 
-  @Input()
-  get selectedFlight(): Flight | undefined {
-    return this._selectedFlight;
-  }
-
-  set selectedFlight(value: Flight | undefined) {
-    this._selectedFlight = value;
-  }
-
   onSubmit(): void {
-    if (this._selectedFlight) {
-      this.paymentConfirmed.emit(new FlightPaymentEvent(this._selectedFlight, this.model));
+    if (this.selectedFlight) {
+      const payment = new FlightPaymentEvent(this.selectedFlight, this.model);
+      this.paymentConfirmed.emit(payment);
     }
   }
-}
-
-export class FlightPaymentEvent {
-  constructor(public flight: Flight, public payment: PaymentModel) {}
 }

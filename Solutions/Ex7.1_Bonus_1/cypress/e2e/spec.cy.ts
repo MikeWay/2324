@@ -7,5 +7,5 @@ describe('Home Page Test', () => {
   it('Displays the Special Offer message in an h1 element', () => {
     cy.visit('/');
     cy.get('h1').contains('Special Offer of the month 10% off all round-the-World flights');
-  });
+  })  
 });
