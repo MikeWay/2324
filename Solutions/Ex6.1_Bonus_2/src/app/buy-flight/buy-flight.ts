@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationState } from '../application-state/application-state';
-import { Flight } from '../model/flight';
 import { Payment } from '../payment/payment';
+import { Flight } from '../model/flight';
 import { FlightFilter } from '../flight-filter/flight-filter';
 import { CurrencyConversionPipe } from '../currency-conversion/currency-conversion-pipe';
 
@@ -12,53 +12,25 @@ import { CurrencyConversionPipe } from '../currency-conversion/currency-conversi
   templateUrl: './buy-flight.html',
   styleUrl: './buy-flight.scss',
 })
-export class BuyFlight {
+export class BuyFlight implements OnInit {
+  private stateService = inject(ApplicationState);
+  private route = inject(ActivatedRoute);
   showBuyFlights = true;
   selectedFlight: Flight | undefined;
   originFilter = '';
   destinationFilter = '';
 
-  constructor(private stateService: ApplicationState, private route: ActivatedRoute) {
-    const origin = this.route.snapshot.paramMap.get('origin');
-    if (origin !== null) {
-      this.originFilter = origin;
-    }
-    const destination = this.route.snapshot.paramMap.get('destination');
-    if (destination !== null) {
-      this.destinationFilter = destination;
-    }
-  }
-
-  get flights(): Flight[] {
-    return this.stateService.flights.filter((flight) =>
-      this.originDestinationFilter(flight)
-    );
-  }
-
-  private originDestinationFilter(flight: Flight): boolean {
-    if (this.originFilter !== '') {
-      if (!flight.origin.startsWith(this.originFilter)) return false;
-    }
-    if (this.destinationFilter !== '') {
-      if (!flight.destination.startsWith(this.destinationFilter)) return false;
-    }
-    return true;
-  }
-
-  onOriginFilterChange(filterValue: string): void {
-    this.originFilter = filterValue;
-  }
-
-  onDestinationFilterChange(filterValue: string): void {
-    this.destinationFilter = filterValue;
-  }
-
-  onFlightClick(flight: Flight): void {
-    this.selectedFlight = flight;
-  }
-
-  onClickBuyFlights() {
-    this.showBuyFlights = !this.showBuyFlights;
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const origin = params.get('origin');
+      if (origin) {
+        this.originFilter = origin.toUpperCase();
+      }
+      const destination = params.get('destination');
+      if (destination) {
+        this.destinationFilter = destination.toUpperCase();
+      }
+    });
   }
 
   get currencySymbol(): string {
@@ -67,5 +39,31 @@ export class BuyFlight {
 
   get currencyRate(): number {
     return this.stateService.displayCurrency.rate;
+  }
+
+  get flights() {
+    return this.stateService.flights.filter((flight: Flight) => this.originDestinationFilter(flight));
+  }
+
+  onClickBuyFlights() {
+    this.showBuyFlights = !this.showBuyFlights;
+  }
+
+  onFlightClick(flight: Flight) {
+    this.selectedFlight = flight;
+  }
+
+  onOriginFilterChange(filter: string) {
+    this.originFilter = filter;
+  }
+
+  onDestinationFilterChange(filter: string) {
+    this.destinationFilter = filter;
+  }
+
+  private originDestinationFilter(flight: Flight): boolean {
+    const matchOrigin = !this.originFilter || flight.origin.includes(this.originFilter);
+    const matchDest = !this.destinationFilter || flight.destination.includes(this.destinationFilter);
+    return matchOrigin && matchDest;
   }
 }

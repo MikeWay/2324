@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
 import { BuyFlight } from './buy-flight';
 
@@ -45,4 +45,6 @@ describe('BuyFlight', () => {
     el.triggerEventHandler('click', null);
     expect(component.showBuyFlights).toBeFalsy();
   });
+
+
 });

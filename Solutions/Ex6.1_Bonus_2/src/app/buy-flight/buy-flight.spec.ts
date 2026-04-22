@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
 import { BuyFlight } from './buy-flight';
 import { ApplicationState } from '../application-state/application-state';
@@ -20,8 +20,7 @@ describe('BuyFlight', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BuyFlight],
-      providers: [provideRouter([]),
-        { provide: ApplicationState, useValue: stateServiceStub }]
+      providers: [provideRouter([]), { provide: ApplicationState, useValue: stateServiceStub }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BuyFlight);
