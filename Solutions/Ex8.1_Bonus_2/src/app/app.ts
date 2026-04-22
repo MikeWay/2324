@@ -10,7 +10,7 @@ import { CurrencySelector } from './currency-selector/currency-selector';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('Fly Sharp');
+  readonly title = signal('Fly Sharp');
   navbarOpen = false;
 
   toggleNavbar() {

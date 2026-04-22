@@ -5,8 +5,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   providedIn: 'root',
 })
 export class FlightStatusService {
-  public connect(url: string): WebSocketSubject<any> {
-    const myWebSocket: WebSocketSubject<any> = webSocket(url);
-    return myWebSocket;
+  connect(url: string): WebSocketSubject<any> {
+    return webSocket<any>(url);
   }
 }
