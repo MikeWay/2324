@@ -16,3 +16,4 @@ Thumbs.db
 /webapps
 gitstatus.txt
 server/course2324-node-server/dist/**
+**/.omc
