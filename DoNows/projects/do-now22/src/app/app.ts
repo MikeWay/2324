@@ -6,8 +6,7 @@ import { Forecast } from './forecast/forecast';
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrls: ['./app.css'],
-  imports: [Forecast]
+  styleUrls: ['./app.css']
 })
 export class App {
   title = 'DoNow22';
