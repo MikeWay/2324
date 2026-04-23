@@ -416,6 +416,137 @@
 <li><code>payment.html</code>: <code>[formGroup]=&quot;payForm&quot;</code>, <code>formControlName</code> on all fields, <code>[disabled]=&quot;!payForm.valid&quot;</code>, email validation <code>@if</code> div, <code>{{ payForm.value | json }}</code> debug output</li>
 <li>Build confirmed clean</li>
 </ul>
+<hr>
+<h2 id="exercise-81-http-client-and-error-handling-steps-128">Exercise 8.1: HTTP Client and Error Handling (steps 1–28)</h2>
+<h3 id="issues-encountered-12">Issues Encountered</h3>
+<ol>
+<li>
+<p><strong>Steps 8, 25–28 are browser/server-only</strong> — Step 8 opens the REST API URL in a browser; steps 26–27 stop/start a Windows &quot;Flights Service&quot; and observe the error message in the browser. Verified via <code>ng build</code> instead.</p>
+</li>
+<li>
+<p><strong><code>application-state.spec.ts</code> fails after step 19</strong> — Expected by the exercise (step 18 explicitly says &quot;Stop <code>ng test</code>. The changes you are about to make will break the tests.&quot;). The fix is applied in the bonus steps 34–35 via <code>cpAddIns Ex8.1_b1</code>.</p>
+</li>
+<li>
+<p><strong><code>throwError</code> arrow function syntax</strong> — Step 16 shows <code>throwError(() =&gt; new Error(...))</code>. Used the RxJS 7+ factory-function form <code>throwError(() =&gt; new Error(...))</code> rather than the deprecated <code>throwError(new Error(...))</code>.</p>
+</li>
+</ol>
+<h3 id="result-12">Result</h3>
+<ul>
+<li><code>flights.ts</code>: <code>Flights</code> service with <code>http = inject(HttpClient)</code>, <code>getAllFlights()</code> returning <code>Observable&lt;Flight[]&gt;</code> from <code>http.get&lt;Flight[]&gt;(url).pipe(catchError(this.handleError))</code>, and private <code>handleError(error: HttpErrorResponse)</code> logging and re-throwing</li>
+<li><code>app.config.ts</code>: <code>provideHttpClient()</code> added to providers</li>
+<li><code>flights.spec.ts</code>: <code>'should fetch all flights using GET'</code> and <code>'should report an error from getAllFlights'</code> tests uncommented (both pass)</li>
+<li><code>application-state.ts</code>: <code>flightsService = inject(Flights)</code>, <code>error = ''</code> property, <code>loadFlights()</code> replaced with HTTP subscription (next/error/complete)</li>
+<li><code>buy-flight.ts</code>: <code>errorMessage</code> getter returning <code>this.stateService.error</code></li>
+<li><code>buy-flight.html</code>: conditional <code>@if (errorMessage) { &lt;h2 class=&quot;text-danger&quot;&gt;{{errorMessage}}&lt;/h2&gt; }</code> before table</li>
+<li>Build confirmed clean; 22 of 23 tests pass (1 intentional break per step 18)</li>
+</ul>
+<h3 id="steps-3444-bonus">Steps 34–44 (Bonus)</h3>
+<p><strong>Issues Encountered:</strong></p>
+<ol>
+<li>
+<p><strong><code>cpAddIns Ex8.1_b1</code> imports <code>FlightsService</code> from <code>flights.service.ts</code></strong> — The generated service class is <code>Flights</code> (from <code>flights.ts</code>), not <code>FlightsService</code>. The <code>application-state.spec.ts</code> provided by <code>cpAddIns</code> had <code>import { FlightsService } from '../flights/flights.service'</code> and <code>provide: FlightsService</code>. Fixed by changing both references to <code>Flights</code> from <code>flights.ts</code>.</p>
+</li>
+<li>
+<p><strong><code>app.ts</code> has <code>protected readonly title</code></strong> — The updated <code>app.spec.ts</code> (from <code>cpAddIns</code>) accesses <code>app.title()</code> directly, which fails for a <code>protected</code> member. Fixed by removing the <code>protected</code> modifier.</p>
+</li>
+</ol>
+<p><strong>Changes made:</strong></p>
+<ul>
+<li><code>flights.ts</code>: Added <code>getMyFlights()</code> (GET to <code>/myflights</code>) and <code>addMyFlight(flight)</code> (POST with JSON body and <code>Content-Type: application/json</code> header), both piped through <code>catchError(this.handleError)</code></li>
+<li><code>flights.spec.ts</code>: All 4 remaining tests uncommented — <code>'should add a flight to myFlights'</code>, <code>'should report an error from addMyFlight'</code> (×2), <code>'should return flights from getMyFlights()'</code></li>
+<li><code>application-state.ts</code>: <code>addMyFlight()</code> now calls <code>this.flightsService.addMyFlight(flight).subscribe({})</code> after pushing; <code>loadMyFlights()</code> added and called from constructor</li>
+<li><code>application-state.spec.ts</code>: Fixed to use <code>Flights</code> token (not <code>FlightsService</code>); mock provides <code>getAllFlights</code>, <code>getMyFlights</code>, <code>addMyFlight</code></li>
+<li><code>app.ts</code>: <code>protected</code> removed from <code>title</code> signal</li>
+<li>All 24 tests pass across 11 files</li>
+</ul>
+<hr>
+<h2 id="exercise-82-websocket-communication-steps-111">Exercise 8.2: WebSocket Communication (steps 1–11)</h2>
+<h3 id="issues-encountered-13">Issues Encountered</h3>
+<ol>
+<li>
+<p><strong><code>cpAddIns Ex8.2</code> provides spec as <code>.tsx</code> not <code>.ts</code></strong> — <code>flight-status-service.spec.tsx</code> must be renamed to <code>.ts</code> after deleting the generated spec (step 4). The <code>.tsx</code> extension causes no issues at runtime but is non-standard for Angular.</p>
+</li>
+<li>
+<p><strong><code>app.ts</code> has <code>protected readonly title</code> after every <code>exStart</code></strong> — The solution files use <code>protected</code>, but <code>app.spec.ts</code> accesses <code>app.title()</code> directly (fails for <code>protected</code>). Must change to <code>readonly title</code> after every <code>exStart</code>. This is a recurring issue.</p>
+</li>
+<li>
+<p><strong>Step 11 (browser verify) skipped headlessly</strong> — Server is already running; WebSocket connection to <code>ws://localhost:8081</code> would require a live flight status server.</p>
+</li>
+</ol>
+<h3 id="result-13">Result</h3>
+<ul>
+<li><code>flight-status-service.ts</code>: <code>FlightStatusService</code> with <code>connect(url: string): WebSocketSubject&lt;any&gt;</code> returning <code>webSocket&lt;any&gt;(url)</code></li>
+<li><code>flight-status.ts</code>: Injects <code>FlightStatusService</code>, socket opened at <code>ws://localhost:8081</code> during field initialisation, <code>flightStatus = signal('All flights are currently on time')</code>, <code>ngOnInit()</code> subscribes to socket updating the signal and sends <code>{airport: 'JFK'}</code></li>
+<li><code>flight-status.html</code>: <code>{{flightStatus()}}</code> (signal call syntax)</li>
+<li><code>app.ts</code>: <code>protected</code> removed from <code>title</code> signal</li>
+<li>All 32 tests pass across 13 files</li>
+</ul>
+<hr>
+<h2 id="exercise-91-attribute-directive-steps-111">Exercise 9.1: Attribute Directive (steps 1–11)</h2>
+<h3 id="issues-encountered-14">Issues Encountered</h3>
+<ol>
+<li>
+<p><strong>No AddIns for Ex9.1</strong> — No <code>cpAddIns</code> step; all implementation done from scratch.</p>
+</li>
+<li>
+<p><strong>Step 11 (browser verify) skipped headlessly</strong> — Live server already running; visual clock display not verifiable in CLI environment.</p>
+</li>
+<li>
+<p><strong><code>protected readonly title</code> recurring after every <code>exStart</code></strong> — Already fixed in this session; was already correct when Ex9.1 started (carried forward from Ex8.2 fix).</p>
+</li>
+</ol>
+<h3 id="result-14">Result</h3>
+<ul>
+<li><code>time.ts</code>: <code>Time</code> directive with <code>constructor(private el: ElementRef)</code>, <code>ngOnInit()</code> setting font-size 2em / margin 10px / color white, calling <code>showTime()</code> and <code>setInterval(() =&gt; this.showTime(), 1000)</code>; <code>showTime()</code> sets <code>el.nativeElement.innerHTML</code> to <code>new Date().toLocaleTimeString()</code></li>
+<li><code>time.spec.ts</code>: Creates <code>HTMLSpanElement</code> and <code>ElementRef</code> in <code>beforeEach</code>, passes to <code>new Time(elRef)</code></li>
+<li><code>app.ts</code>: <code>Time</code> imported and added to <code>imports[]</code></li>
+<li><code>app.html</code>: <code>&lt;span class=&quot;label label-primary&quot; appTime&gt;&lt;/span&gt;</code> added inside the navbar <code>&lt;div&gt;</code> alongside <code>app-currency-selector</code></li>
+<li>All 33 tests pass across 14 files</li>
+</ul>
+<h3 id="steps-1213-bonus">Steps 12–13 (Bonus)</h3>
+<p><strong>No issues.</strong></p>
+<ul>
+<li>Step 12 (add directive to other elements) — browser-only, skipped headlessly</li>
+<li><code>time.ts</code>: <code>@Input('appTime') color = 'white'</code> added; <code>ngOnInit()</code> uses <code>this.color || 'white'</code> for <code>style.color</code>, allowing <code>appTime=&quot;red&quot;</code> syntax to override the default</li>
+</ul>
+<hr>
+<h2 id="exercise-92-angular-material-sidenav-steps-118">Exercise 9.2: Angular Material Sidenav (steps 1–18)</h2>
+<h3 id="issues-encountered-15">Issues Encountered</h3>
+<ol>
+<li>
+<p><strong>Angular Material 21 installed (<code>ng add</code> already ran from a prior attempt)</strong> — Package was already present so <code>ng add</code> skipped download but still ran schematics to update <code>styles.scss</code> and <code>index.html</code>. No manual theming needed.</p>
+</li>
+<li>
+<p><strong><code>Time</code> unused-import warning</strong> — <code>appTime</code> is no longer in the new template; kept in imports to avoid breaking other specs.</p>
+</li>
+<li>
+<p><strong>Bundle budget exceeded warning</strong> — Angular Material adds ~123 kB over the 500 kB budget. Expected; ignored for course purposes.</p>
+</li>
+<li>
+<p><strong>Browser verify steps skipped headlessly</strong> — Live server already running.</p>
+</li>
+<li>
+<p><strong>Step 18 uses <code>home.component.html</code> / <code>home.component.scss</code> naming</strong> — Exercise uses old Angular naming convention. Used <code>home.html</code> / <code>home.scss</code> to match the Angular 19 convention used throughout the project.</p>
+</li>
+</ol>
+<h3 id="result-15">Result</h3>
+<ul>
+<li><code>ng add @angular/material</code> v21.2.7 with azure-blue theme configured in <code>styles.scss</code></li>
+<li><code>app.ts</code>: <code>MatSidenavModule</code>, <code>MatToolbarModule</code>, <code>MatListModule</code>, <code>MatIconModule</code> imported and added to <code>imports[]</code></li>
+<li><code>app.html</code>: Old Bootstrap navbar commented out; new Material layout with <code>&lt;mat-toolbar&gt;</code> (menu icon + title + currency selector), <code>&lt;mat-sidenav #nav&gt;</code> with <code>mat-list-item</code> links and <code>(click)=&quot;nav.toggle()&quot;</code>, <code>&lt;mat-sidenav-content&gt;</code> with <code>&lt;router-outlet&gt;</code></li>
+<li><code>home.ts</code>: <code>template</code> replaced with <code>templateUrl: './home.html'</code> and <code>styleUrls: ['./home.scss']</code></li>
+<li><code>home.html</code> and <code>home.scss</code> created (step 19 stub — content preserved from inline template)</li>
+<li>All 34 tests pass across 15 files</li>
+</ul>
+<hr>
+<h2 id="exercise-72-bonus">Exercise 7.2 Bonus</h2>
+<h3 id="steps-2526-bonus">Steps 25–26 (Bonus)</h3>
+<p><strong>No issues.</strong></p>
+<p><strong>Changes made:</strong></p>
+<ul>
+<li><code>payment.ts</code>: <code>address</code> gains <code>Validators.minLength(10)</code> and <code>Validators.maxLength(128)</code>; <code>cardNum</code> gains <code>Validators.minLength(13)</code>; <code>email</code> gains <code>Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')</code></li>
+<li>Build confirmed clean</li>
+</ul>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             

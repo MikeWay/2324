@@ -1,5 +1,4 @@
 # Practice 1.2 Walk-Through Notes
-
 ## Exercise: Creating an Angular Application (FlySharp)
 
 ### Issues Encountered
@@ -315,6 +314,32 @@
 
 - Step 12 (add directive to other elements) — browser-only, skipped headlessly
 - `time.ts`: `@Input('appTime') color = 'white'` added; `ngOnInit()` uses `this.color || 'white'` for `style.color`, allowing `appTime="red"` syntax to override the default
+
+---
+
+## Exercise 9.2: Angular Material Sidenav (steps 1–18)
+
+### Issues Encountered
+
+1. **Angular Material 21 installed (`ng add` already ran from a prior attempt)** — Package was already present so `ng add` skipped download but still ran schematics to update `styles.scss` and `index.html`. No manual theming needed.
+
+2. **`Time` unused-import warning** — `appTime` is no longer in the new template; kept in imports to avoid breaking other specs.
+
+3. **Bundle budget exceeded warning** — Angular Material adds ~123 kB over the 500 kB budget. Expected; ignored for course purposes.
+
+4. **Browser verify steps skipped headlessly** — Live server already running.
+
+5. **Step 18 uses `home.component.html` / `home.component.scss` naming** — Exercise uses old Angular naming convention. Used `home.html` / `home.scss` to match the Angular 19 convention used throughout the project.
+
+### Result
+- `ng add @angular/material` v21.2.7 with azure-blue theme configured in `styles.scss`
+- `app.ts`: `MatSidenavModule`, `MatToolbarModule`, `MatListModule`, `MatIconModule` imported and added to `imports[]`
+- `app.html`: Old Bootstrap navbar commented out; new Material layout with `<mat-toolbar>` (menu icon + title + currency selector), `<mat-sidenav #nav>` with `mat-list-item` links and `(click)="nav.toggle()"`, `<mat-sidenav-content>` with `<router-outlet>`
+- `home.ts`: `template` replaced with `templateUrl: './home.html'` and `styleUrls: ['./home.scss']`
+- `home.ts`: `template` replaced with `templateUrl: './home.html'` / `styleUrls: ['./home.scss']`; `MatGridListModule`, `MatCardModule`, `OrgDestSelectorComponent` added to imports; `FlightStatusComponent` import corrected to `FlightStatus` from `flight-status.ts`
+- `home.html`: `<mat-grid-list rowHeight="240px" cols="2">` with 3 `<mat-grid-tile>` cells, each containing `<mat-card class="home_card" appearance="outlined">` with `<mat-card-content>` holding `<app-flight-status>`, special offer `<h2>`, and `<app-org-dest-selector>` respectively
+- `home.scss`: `.home_card { width: 90%; height: 90%; }`
+- All 34 tests pass across 15 files
 
 ---
 

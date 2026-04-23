@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776409679843,
+  "lastScanned": 1776933381881,
   "projectRoot": "/home/mjrw/course2324/DoNows",
   "techStack": {
     "languages": [
@@ -24,8 +24,13 @@
     "frameworks": [
       {
         "name": "@angular/core",
-        "version": "19.2.21",
+        "version": "21.2.9",
         "category": "frontend"
+      },
+      {
+        "name": "vitest",
+        "version": "3.2.4",
+        "category": "testing"
       }
     ],
     "packageManager": "npm",
@@ -61,45 +66,21 @@
   },
   "customNotes": [],
   "directoryMap": {
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 0,
+      "lastAccessed": 1776933381875,
+      "keyFiles": []
+    },
     "projects": {
       "path": "projects",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776409679833,
+      "lastAccessed": 1776933381875,
       "keyFiles": []
     }
   },
-  "hotPaths": [
-    {
-      "path": "angular.json",
-      "accessCount": 13,
-      "lastAccessed": 1776413707541,
-      "type": "file"
-    },
-    {
-      "path": "projects/do-now61/src/app/current-weather/current-weather.component.spec.ts",
-      "accessCount": 5,
-      "lastAccessed": 1776417392997,
-      "type": "file"
-    },
-    {
-      "path": "projects/do-now61/tsconfig.spec.json",
-      "accessCount": 4,
-      "lastAccessed": 1776416923549,
-      "type": "file"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1776409711714,
-      "type": "file"
-    },
-    {
-      "path": "projects/do-now22/tsconfig.spec.json",
-      "accessCount": 1,
-      "lastAccessed": 1776413636910,
-      "type": "file"
-    }
-  ],
+  "hotPaths": [],
   "userDirectives": []
 }

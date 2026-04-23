@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Forecast } from './forecast/forecast';
 
 
 @Component({
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
+  imports: [Forecast]
 })
 export class App {
   title = 'DoNow22';

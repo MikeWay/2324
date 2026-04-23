@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776702932539,
+  "lastScanned": 1776933500653,
   "projectRoot": "/home/mjrw/course2324",
   "techStack": {
     "languages": [],
@@ -36,21 +36,21 @@
       "path": "AddIns",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776702932534,
+      "lastAccessed": 1776933500645,
       "keyFiles": []
     },
     "Backup": {
       "path": "Backup",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776702932534,
+      "lastAccessed": 1776933500647,
       "keyFiles": []
     },
     "Data": {
       "path": "Data",
       "purpose": "Data files",
       "fileCount": 1,
-      "lastAccessed": 1776702932534,
+      "lastAccessed": 1776933500647,
       "keyFiles": [
         "flights.json"
       ]
@@ -59,7 +59,7 @@
       "path": "DoNows",
       "purpose": null,
       "fileCount": 7,
-      "lastAccessed": 1776702932535,
+      "lastAccessed": 1776933500648,
       "keyFiles": [
         "README.md",
         "angular.json",
@@ -72,7 +72,7 @@
       "path": "Exercises",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1776702932535,
+      "lastAccessed": 1776933500648,
       "keyFiles": [
         "Notes.txt",
         "package-lock.json",
@@ -82,21 +82,21 @@
     "FlySharpSolution": {
       "path": "FlySharpSolution",
       "purpose": null,
-      "fileCount": 9,
-      "lastAccessed": 1776702932536,
+      "fileCount": 12,
+      "lastAccessed": 1776933500648,
       "keyFiles": [
         "README.md",
         "angular.json",
-        "package-lock.json",
-        "package.json",
-        "tsconfig.app.json"
+        "cypress.config.ts",
+        "eslint.config.js",
+        "package-lock.json"
       ]
     },
     "NodeScripts": {
       "path": "NodeScripts",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500648,
       "keyFiles": [
         "README.md",
         "hack.cmd",
@@ -109,14 +109,14 @@
       "path": "Samples",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500648,
       "keyFiles": []
     },
     "Solutions": {
       "path": "Solutions",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500648,
       "keyFiles": [
         "sols.txt"
       ]
@@ -125,7 +125,7 @@
       "path": "init_scripts",
       "purpose": null,
       "fileCount": 4,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500649,
       "keyFiles": [
         "copyIntoSolutions.cmd",
         "dirs.txt",
@@ -137,14 +137,14 @@
       "path": "server",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500650,
       "keyFiles": []
     },
     "www": {
       "path": "www",
       "purpose": null,
       "fileCount": 1,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500650,
       "keyFiles": [
         "index.html"
       ]
@@ -153,35 +153,21 @@
       "path": "DoNows/dist",
       "purpose": "Distribution/build output",
       "fileCount": 0,
-      "lastAccessed": 1776702932536,
+      "lastAccessed": 1776933500650,
       "keyFiles": []
     },
     "DoNows/node_modules": {
       "path": "DoNows/node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776702932538,
-      "keyFiles": []
-    },
-    "FlySharpSolution/dist": {
-      "path": "FlySharpSolution/dist",
-      "purpose": "Distribution/build output",
-      "fileCount": 0,
-      "lastAccessed": 1776702932538,
-      "keyFiles": []
-    },
-    "FlySharpSolution/node_modules": {
-      "path": "FlySharpSolution/node_modules",
-      "purpose": "Dependencies",
-      "fileCount": 1,
-      "lastAccessed": 1776702932539,
+      "lastAccessed": 1776933500651,
       "keyFiles": []
     },
     "NodeScripts/dist": {
       "path": "NodeScripts/dist",
       "purpose": "Distribution/build output",
       "fileCount": 14,
-      "lastAccessed": 1776702932539,
+      "lastAccessed": 1776933500652,
       "keyFiles": [
         "copyAddIns.js",
         "copyAddIns.js.map",
@@ -192,7 +178,7 @@
       "path": "NodeScripts/node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776702932539,
+      "lastAccessed": 1776933500652,
       "keyFiles": []
     }
   },
