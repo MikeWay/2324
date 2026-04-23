@@ -1,5 +1,6 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FlightStatusService } from '../flight-status-service/flight-status-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-flight-status',
@@ -11,13 +12,9 @@ export class FlightStatus implements OnInit {
   private flightStatusService = inject(FlightStatusService);
   private socket = this.flightStatusService.connect('ws://localhost:8081');
 
-  public flightStatus = signal('All flights are currently on time');
+  public flightStatus = toSignal(this.socket.asObservable(), { initialValue: 'All flights are currently on time' });
 
   ngOnInit(): void {
-    this.socket.subscribe(
-      (status: any) => { this.flightStatus.set(status); },
-      (error: any) => { console.error('WebSocket error', error); }
-    );
     this.socket.next({ airport: 'JFK' });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { FlightStatus } from '../flight-status/flight-status';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -23,13 +23,4 @@ export class Home implements OnInit {
       this.cols.set(result.matches ? 1 : 2);
     });
   }
-
-
-  // constructor(private breakpointObserver: BreakpointObserver){
-  //   this.breakpointObserver
-  //     .observe(['(max-width:750px)'])
-  //     .subscribe((state: BreakpointState)=> {
-  //       this.isSmallScreen = state.matches;
-  //     })
-  // }  
 }

@@ -1,7 +1,12 @@
 .spacer {
-    flex: 1 1 auto;
-  }
-  .mat-toolbar {
-    justify-content: space-between;
-  }
-  mat-sidenav-content { padding: 1rem; }
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: #1565c0;
+  color: white;
+}
+
+mat-sidenav-content {
+  padding: 1rem;
+}
